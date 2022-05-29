@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_customer_srcs" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="donor_code" />
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="budget_info" string="Budget Information">
+                    <group>
+                        <group>
+                        <field name="unit_m" />
+                        <field name="quantity" />
+                        <field name="frequent" />
+                        <field name="unit_cost" />
+                        </group>
+                        <group>
+                            <field name="site" />
+                            <field name="situation" />
+                            <field name="goal" />
+                        </group>
+                    </group>  
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!-- <record id="inherit_view_id_src_res_users" model="ir.ui.view">
+        <field name="name">res.users.view.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <label for="branch"/>
+                <h1><field name="branch" placeholder="e.g user branch"/></h1>
+            </xpath>
+        </field>
+    </record> -->
+    <record model="ir.actions.act_window" id="account.res_partner_action_customer">
+        <field name='name'>Donors</field>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_finance_receivables">
+        <field name='name'>Revenues</field>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_account_customer">
+        <field name='name'>Donors</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_view_id_src_budget" model="ir.ui.view">
+        <field name="name">crossovered.budget.view.form.inherit</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button " type="object" name="get_currnecy_conversion">
+                        <field string="Conversions " name="conversion_count" widget="statinfo"/>
+                    </button>
+                </div> 
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,confirm,finance_manager,validate,done" />
+            </xpath>
+             <xpath expr="//field[@name='user_id']" position="after">
+                <field name="unit_cost_boolean" invisible="1" />
+                <field name="frequency_boolean" invisible="1" />
+                <field name="quantity_boolean" invisible="1" />
+                <field name="unit_of_measure_boolean" invisible="1" />
+                <field name="budget_type" />
+                <field name="currency_id" required="1"/>
+                <field name="site" attrs="{'invisible':[('site_boolean','!=',True)]}"/>
+                <field name="situation" attrs="{'invisible':[('situation_boolean','!=',True)]}"/>
+            </xpath>
+            <xpath expr="//group/group/div" position="after">
+                <field name="donor_id" />
+                <field name="project_id" attrs="{'required':[('budget_type','=','project')]}"/>
+                <field name="goal" attrs="{'invisible':[('goal_boolean','!=',True)]}"/>
+                <field name="site_boolean" invisible="1"/>
+                <field name="situation_boolean" invisible="1"/>
+                <field name="goal_boolean" invisible="1"/>
+            </xpath>
+           
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='planned_amount']" position="attributes">
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='theoritical_amount']" position="attributes">
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']" position="replace">
+                <field name="analytic_account_id" string="Project" domain="[('type','=','project')]" invisible="1" groups="analytic.group_analytic_accounting"/>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='paid_date']" position="attributes">
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']" position="after">
+                <field name="analytic_activity_id" string="output" domain="[('type','=','activity')]"/>
+                <field name="description" />
+                <field name="location_id" />
+                <field name="unit_of_measure" attrs="{'column_invisible':[('parent.unit_of_measure_boolean','!=',True)]}"/>
+                <field name="quantity" attrs="{'column_invisible':[('parent.quantity_boolean','!=',True)]}"/>
+                <field name="frequency" attrs="{'column_invisible':[('parent.frequency_boolean','!=',True)]}"/>
+                <field name="unit_cost" attrs="{'column_invisible':[('parent.unit_cost_boolean','!=',True)]}"/>
+                <field name="currency_budget_line" invisible="1"/>
+                <field name="total_budget" />
+                <field name="total_budget_SDG" />
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']" position="replace">
+                <field name="practical_amount" string="Practical Amount SDG"/>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']" position="after">
+                <field name="practical_amount_bu_currency" />
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='percentage']" position="after">
+                <field name="balance_SDG" />
+                <field name="balance_budget_currency" />
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_view_id_srcs_analytic_account" model="ir.ui.view">
+        <field name="name">account.analytic.account.view.form.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="account_budget.view_account_analytic_account_form_inherit_budget"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="before">
+                <field name="type" />
+            </xpath>
+            <xpath expr="//page[@name='budget_items']" position="after">
+                <page name="Description" string="Description">
+                    <field name="description" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_view_id_src_currency" model="ir.ui.view">
+        <field name="name">res.currency.view.form.inherit</field>
+        <field name="model">res.currency</field>
+        <field name="inherit_id" ref="base.view_currency_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_unit_label']" position="before">
+                <field name="bank_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_view_id_src_account_account" model="ir.ui.view">
+        <field name="name">account.account.view.form.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='accounting']" position="after">
+                <page string="Budget Information">
+                    <group>
+                        <!-- <field name="account" /> -->
+                        <field name="project" />
+                        <field name="activity" />
+                        <field name="donor" />
+                        <field name="location" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_crossovered_budget_line_srcs_form">
+        <field name="name">crossovered.budget.line.src.form</field>
+        <field name="model">crossovered.budget.lines</field>
+        <field name="inherit_id" ref="account_budget.view_crossovered_budget_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="replace">
+                <group col="4">
+                    <field name="currency_id" invisible="1"/>
+                    <field name="crossovered_budget_state" invisible="1"/>
+                    <field name="crossovered_budget_id"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="analytic_account_id" string='Project' domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="general_budget_id"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="date_from"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="date_to"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="paid_date"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="planned_amount"  invisible="1"/>
+                    <field name="practical_amount" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="practical_amount_bu_currency" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="balance_SDG" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="balance_budget_currency" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="theoritical_amount" invisible="1"/>
+                    <field name="percentage"  widget="percentage" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="analytic.action_account_analytic_account_form">
+        <field name='name'>Output/Activity</field>
+        <field name="context">{'default_type':'activity'}</field>
+        <field name="domain">[('type','=', 'activity')]</field>
+    </record>
+    <record model="ir.ui.menu" id="account.account_analytic_def_account">
+        <field name='name'>Output/Activity</field>
+        <field name='sequence'>2</field>
+    </record>
+    <record model="ir.ui.menu" id="account.account_analytic_group_menu">
+        <field name='sequence'>4</field>
+    </record>
+
+    <record id="account_src_project_action" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_type':'project'}</field>
+        <field name="domain">[('type','=', 'project')]</field>
+    </record>
+    <menuitem
+        id="srcs_project_menu"
+        name="Project"
+        parent="account.menu_analytic_accounting"
+        action="account_src_project_action"
+        sequence="1"
+        groups="analytic.group_analytic_accounting"/>
+
+    <record id="account_src_location_action" model="ir.actions.act_window">
+        <field name="name">Location</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_type':'location'}</field>
+        <field name="domain">[('type','=', 'location')]</field>
+    </record>
+    <menuitem
+        id="srcs_location_menu"
+        name="Location"
+        parent="account.menu_analytic_accounting"
+        action="account_src_location_action"
+        sequence="3"
+        groups="analytic.group_analytic_accounting"/>
+    
+
+</odoo>

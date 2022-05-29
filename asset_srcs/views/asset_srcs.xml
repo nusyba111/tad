@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_view_id_account_asset_srcs" model="ir.ui.view">
+        <field name="name">account.asset.view.form.inherit</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('oe_title')]" position="before">
+            <field name="photo" widget="image" class="oe_avatar" attrs="{'invisible':[('state','=','model')]}"/>
+        </xpath>
+            <xpath expr="//group/group[1]" position="before">
+                <group>
+                    <field name="owner" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="donor_id" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="project_id" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="location_id" attrs="{'invisible':[('state','=','model')]}"/>
+                </group>
+                <group>
+                    <field name="office" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="mark" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="serial_num" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="code" attrs="{'invisible':[('state','=','model')]}"/>
+                </group> 
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_asset_srcs_search" model="ir.ui.view">
+        <field name="name">account.asset.search</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search//field[@name='model_id']" position="after">
+                <field name="office"/>
+                <filter string="Office" name="office"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="asset_opertaion_src_view_form" model="ir.ui.view">
+        <field name="name">asset.opertaion.view.form</field>
+        <field name="model">asset.opertaion</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Confirm Project" name="confirm" type="object" class="oe_highlight" states="darft"/>
+                    <button string="Submit Manager" name="submit_manager" type="object" class="oe_highlight" states="project"/>
+                    <button string="Approve Director" name="approve_director" type="object" class="oe_highlight" states="asset_manager"/>
+                    <button string="Approve Secratry" name="done_secratry" type="object" class="oe_highlight" states="finance_director"/>
+                    <button string="Reset To Draft" name="reset_draft" type="object"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                         <group>
+                            <field name="donor_id" />
+                            <field name="project_id" />
+                            <field name="location_id" />
+                        </group>
+                        <group>
+                            <field name="type" />
+                            <field name="acquistion_date" />
+                        </group>
+                      
+                    </group>
+                    <group col="4">
+                        <field name="asset_id" />
+                        <field name="asset_type_id" />
+                        <field name="net_value" />
+                    </group>
+                   <notebook>
+                       <page string="Accounting">
+                            <group>
+                                <group>
+                                    <field name="debit" />
+                                    <field name="credit" />
+                                </group>
+                            </group>
+                       </page>
+                   </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="asset_operation_action" model="ir.actions.act_window">
+        <field name="name">Asset Operations</field>
+        <field name="res_model">asset.opertaion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="asset_operation_menu"
+        name="Asset Operations"
+        action="asset_operation_action"
+        parent="account.menu_finance_entries_management"
+        />
+</odoo>
