@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- inherit fleet contract form -->
+    <record id="view_fleet_contract_form_inherited" model="ir.ui.view">
+        <field name="name">fleet.contract.form.inherited</field>
+        <field name="model">fleet.vehicle.log.contract</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Adding fields-->
+            <xpath expr="//group/field[@name='service_ids']" position="after">
+                <br/>
+                <group string="Finance codes">
+                    <field name="activity"/>
+                    <field name="m_code"/>
+                </group>
+                <br/>
+                <group>
+                    <field name="account"/>
+                    <field name="project"/>
+                </group>
+            </xpath>
+            <xpath expr="//header/button[@name='action_draft']" position="after">
+                <!-- adding shortcut button -->
+                <button name="btn_create_invoice" type="object" class="oe_highlight" string="Create invoice"
+                        attrs="{'invisible' : [('is_check', '=', True)]}"
+                />
+            </xpath>
+            <xpath expr="//group" position="before">
+                <div class="oe_button_box">
+                    <button name="open_invoice" type="object" class="oe_stat_button" string="Invoice"
+                            icon="fa-usd" widget="statinfo">
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//group/field[@name='purchaser_id']" position="after">
+                <field name="is_check" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

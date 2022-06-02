@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--inherit fleet_vehicle_assignation_log_view_list-->
+    <record id="view_fleet_attachment_list_inherited" model="ir.ui.view">
+        <field name="name">fleet.attachment.inherited</field>
+        <field name="model">fleet.vehicle.assignation.log</field>
+        <field name="inherit_id" ref="hr_fleet.fleet_vehicle_assignation_log_view_list"/>
+        <field name="arch" type="xml">
+            <!-- Adding fields-->
+            <xpath expr="//button[@name='action_get_attachment_view']" position="replace">
+                <field name="attach"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- inherit fleet vehicle form -->
+    <record id="view_fleet_vehicle_form_inherited" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherited</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Adding fields-->
+            <xpath expr="//group/field[@name='driver_id']" position="before">
+                <field name="owner"/>
+                <field name="project"/>
+                <field name="base_location"/>
+            </xpath>
+            <xpath expr="//page[3]" position="before">
+                <page string="Services">
+                    <field name="services_list" widget="one2many">
+                        <tree string="Services List" editable="bottom">
+                            <field name="service"/>
+                            <field name="minimum_odometer"/>
+                            <field name="maximum_odometer"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//group/group" position="attributes">
+                <attribute name="string"> </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
