@@ -8,7 +8,7 @@
         'security/ir.model.access.csv',
         'security/branch_security.xml',
         'wizard/user_branch_wizard_view.xml',
-        'views/res_branch.xml',
+        'views/repair_maintainance.xml',
        
 
     ],

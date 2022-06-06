@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="action_maintainance" model="ir.actions.act_window">
+            <field name="name">Repair And Maintainance</field>
+            <field name="res_model">repair</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record id="action_picking_repair_tree" model="ir.actions.act_window">
+            <field name="name">Repair Transfers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+             <field name="domain">[('repair_id', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new transfer
+              </p>
+            </field>
+        </record>
+
+
+        <record id="seq_repair" model="ir.sequence">
+            <field name="name">Repair No.</field>
+            <field name="code">repair.no</field>
+            <field name="prefix">Repair/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <record id="res_repair_view_tree" model="ir.ui.view">
+            <field name="name">repair.view.tree</field>
+            <field name="model">repair</field>
+            <field name="arch" type="xml">
+                <tree string="Repair" class="" sample="1">
+                    <field name="date"/>
+                    <field name="licence_plate"/>
+                    <field name="complain"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_branch_view_form" model="ir.ui.view">
+            <field name="name">repair.view.form</field>
+            <field name="model">repair</field>
+            <field name="arch" type="xml">
+                <form string="Repair Orders">
+                    <header>
+                    <button
+                            name="to_admin"
+                            states="draft"
+                            string="Send to Workshop Admin"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_stock"
+                            states="repair"
+                            string="Request Stock"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="generate_purchase_requsition"
+                            states="repair,stock"
+                            string="Create Purchase Requisition"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            attrs="{'visible':[('state','in',['draft','repair'])]}"/>
+                     <button
+                            name="action_done"
+                            string="Done"
+                            type="object"
+                            attrs="{'invisible':[('state','in',['draft','cancel','done','requisition'])]}"/>
+                      <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,repair,stock,requisition,cancel,done" optional="show"
+                    />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                        <button type="action"
+                            name="%(fleet_srcs.action_picking_repair_tree)d"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('transfer_count', '=', 0)]}">
+                        <field name="transfer_count" widget="statinfo" string="Stock Transfers"/>
+                         </button>
+                        </div>
+                        <group col="4" colspan="4">
+                                <field name="repair_no"/>
+                                <field name="date"/>
+                                <field name="licence_plate"/>
+                                <field name="shassis_no"/>
+                                <field name="complain"/>
+                                <field name="purchase_req_id"/>
+
+                        </group>
+                        <notebook>
+                             <page string="Services" name="services">
+                                     <field name="service_id">
+                                         <tree editable="bottom">
+                                            <field name="service" width="50%"/>
+                                            <field name="hour" width="50%"/>
+                                         </tree>
+                                     </field>
+                             </page>
+                             <page string="Spare parts" name="spares">
+                                  <group>
+                                      <group>
+                                        <field name="source_warehouse_id" attrs="{'invisible':[('state','=','draft')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="dest_warehouse_id" attrs="{'invisible':[('state','=','draft')]}"/>
+                                    </group>
+                                </group>
+                                     <field name="spare_id">
+                                         <tree editable="bottom">
+                                             <field name="spare"/>
+                                             <field name="ordered_qty"/>
+                                             <field name="delivered_qty"/>
+                                             <field name="uom"/>
+                                             <field name="picking_id" invisible="1"/>
+                                         </tree>
+                                     </field>
+                                 <button name="generate_picking" type="object"
+                                        string="Picking" confirm="Are you sure?"
+                                        class="oe_highlight"
+                                      />
+
+                             </page>
+
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <menuitem
+                id="repair"
+                name="Repair And Maintainance"
+                sequence="20"
+                parent="fleet.menu_root"
+                action='action_maintainance'
+        />
+        <record id="picking_view_form_inherited" model="ir.ui.view">
+            <field name="name">Stock Picking</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="repair_id"/>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

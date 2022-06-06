@@ -14,13 +14,15 @@
     'category': 'Human Resource',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'fleet', 'hr_fleet'],
+    'depends': ['base', 'fleet', 'hr_fleet','stock','purchase_requisition'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'views/fleet_vehicle_view_form_inherit.xml',
         'views/view_attach_inherit.xml',
+        'views/repair_maintainance.xml',
+        'views/fueling_view.xml',
 
     ],
 
