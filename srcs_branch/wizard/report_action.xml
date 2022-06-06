@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_project" model="ir.actions.report">
+        <field name="name">Expenditure Excel Report</field>
+        <field name="model">project.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">srcs_branch.project_report_excel_template</field>
+        <field name="report_file">srcs_branch.project_report_excel_template</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

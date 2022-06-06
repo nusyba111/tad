@@ -13,6 +13,7 @@
     'category': 'Accounting/Common',
     'depends': ['account','account_budget','account_accountant'],
     'data': [
+        'security/srcs_security_groups.xml',
         'security/ir.model.access.csv',
         'data/data.xml',
         'views/account_voucher_view.xml',

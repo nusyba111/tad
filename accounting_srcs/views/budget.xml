@@ -6,6 +6,11 @@
         <field name="model">crossovered.budget</field>
         <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_budget_validate']" position="replace">
+            <button string="Confirm Manager" name="confirm_manager" type="object" class="oe_highlight" states="confirm"/>
+                <button string="Approve" name="action_budget_validate" type="object" class="oe_highlight" states="finance_manager"/>
+                
+            </xpath>
             <xpath expr="//div[hasclass('oe_title')]" position="before">
                 <div class="oe_button_box" name="button_box">
                     <button class="oe_stat_button " type="object" name="get_currnecy_conversion">
@@ -34,13 +39,19 @@
                 <field name="situation_boolean" invisible="1"/>
                 <field name="goal_boolean" invisible="1"/>
             </xpath>
+           <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='date_from']" position="replace">
+               <field name="date_from" optional="hide"/>
+           </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='date_to']" position="replace">
+               <field name="date_to" optional="hide"/>
+           </xpath>
            
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='planned_amount']" position="attributes">
                 <attribute name="invisible" >1</attribute>
             </xpath>
-            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='theoritical_amount']" position="attributes">
+            <!-- <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='theoritical_amount']" position="attributes">
                 <attribute name="invisible" >1</attribute>
-            </xpath>
+            </xpath> -->
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']" position="replace">
                 <field name="analytic_account_id" string="Project" domain="[('type','=','project')]" invisible="1" groups="analytic.group_analytic_accounting"/>
             </xpath>
@@ -56,16 +67,49 @@
                 <field name="frequency" attrs="{'column_invisible':[('parent.frequency_boolean','!=',True)]}"/>
                 <field name="unit_cost" attrs="{'column_invisible':[('parent.unit_cost_boolean','!=',True)]}"/>
                 <field name="currency_budget_line" invisible="1"/>
-                <field name="total_budget" />
-                <field name="total_budget_SDG" />
+                <field name="total_budget" sum='total_budget'/>
+                <field name="planned_amount" sum='planned_amount' optional="hide"/>
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']" position="replace">
-                <field name="practical_amount" string="Practical Amount SDG"/>
+                <field name="practical_amount" string="Practical Amount SDG" sum='practical_amount' optional="hide"/>
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']" position="after">
-                <field name="practical_amount_bu_currency" />
+                <field name="practical_amount_bu_currency" sum='practical_amount_bu_currency'/>
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='percentage']" position="after">
+                <field name="balance_SDG" sum='balance_SDG' optional="hide"/>
+                <field name="balance_budget_currency"  sum='balance_budget_currency'/>
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_crossovered_budget_tree" model="ir.ui.view">
+        <field name="name">crossovered.budget.view.tree.inherit</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="donor_id" />
+                <field name="project_id" />
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="currency_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_view_id_crossovered_budget_lines" model="ir.ui.view">
+        <field name="name">crossovered.budget.lines.view.form.inherit</field>
+        <field name="model">crossovered.budget.lines</field>
+        <field name="inherit_id" ref="account_budget.view_crossovered_budget_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='analytic_account_id']" position="replace">
+                <field name="currency_budget_line" invisible='1' />
+                <field name="analytic_account_id" string="Project" groups="analytic.group_analytic_accounting"/>
+            </xpath>
+            <xpath expr="//field[@name='planned_amount']" position="after">
+                <field name="total_budget" />
+            </xpath>
+            <xpath expr="//field[@name='practical_amount']" position="after">
+                <field name="practical_amount_bu_currency" />
                 <field name="balance_SDG" />
                 <field name="balance_budget_currency" />
             </xpath>
@@ -120,23 +164,35 @@
         <field name="inherit_id" ref="account_budget.view_crossovered_budget_line_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group" position="replace">
-                <group col="4">
-                    <field name="currency_id" invisible="1"/>
-                    <field name="crossovered_budget_state" invisible="1"/>
-                    <field name="crossovered_budget_id"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="analytic_account_id" string='Project' domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="general_budget_id"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="date_from"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="date_to"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="paid_date"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="planned_amount"  invisible="1"/>
-                    <field name="practical_amount" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="practical_amount_bu_currency" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="balance_SDG" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="balance_budget_currency" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="theoritical_amount" invisible="1"/>
-                    <field name="percentage"  widget="percentage" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
-                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                <group>
+                    <group >
+                        <field name="currency_id" invisible="1"/>
+                        <field name="currency_budget_line" invisible="1"/>
+                        <field name="crossovered_budget_state" invisible="1"/>
+                        <field name="crossovered_budget_id"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="analytic_account_id" string='Project' domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="general_budget_id"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="planned_amount" />
+                    </group>
+                     <group >
+                        <field name="date_from"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="date_to"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="paid_date"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    </group>
+                    <group>
+                        <field name="practical_amount" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="practical_amount_bu_currency" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="balance_SDG" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                        <field name="balance_budget_currency" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    </group>
+                    <group>
+            
+                        <field name="theoritical_amount" />
+                        <field name="percentage"  widget="percentage" attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}" optional="hide"/>
+                        <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"  attrs="{'readonly':[('crossovered_budget_state','!=','draft')]}"/>
+                    </group>
+                    
+                    
                 </group>
             </xpath>
         </field>

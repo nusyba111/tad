@@ -5,7 +5,7 @@
         <field name="name">Rule Account Journal Inherit</field>
         <field ref="srcs_branch.model_account_journal" name="model_id"/>
         <field name="domain_force">['|',('branch_id', '=', False),
-            ('branch_id','=',user.current_branch.id ),]
+            ('branch_id','=',user.current_branch.id )]
         </field>
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>

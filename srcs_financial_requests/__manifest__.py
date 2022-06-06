@@ -14,5 +14,6 @@
     'data': [
         'security/ir.model.access.csv',
         'views/cash_request.xml',
+        'reports/cash_report.xml',
     ],
 }

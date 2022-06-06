@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_account_payment" model="ir.actions.report">
+        <field name="name">Check Delivery</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ii_simple_check_management.check_delivary_template</field>
+        <field name="report_file">ii_simple_check_management.check_delivary_template</field>
+        <field name="binding_model_id" ref="model_account_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="check_delivary_template" >
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div style="text-align:center;">
+                            <h5>بسم الله الرحمن الرحيم</h5>
+                            <br/>
+                            <div style="background-color:gray;">
+                                <h4>ادارة الشئون الماليه</h4>
+                            </div>
+                            <br/>
+                            <u><h4>استمارة التسليم</h4></u>
+                        </div>
+                        <u><h4 style="text-align:right;">شيكات</h4></u>
+                    </div>
+                    <table class="table table-bordered" style="text-align:right;">
+                        <tr>
+                            <td colspan="5"> <span t-esc="o.journal_id.bank_id.name"/> <b>:اسم البنك </b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> <span t-esc="o.journal_id.bank_account_id.acc_number"/><b>:رقم الحساب / Acc No </b></td>
+                            <td colspan="2"> <span t-esc="o.Check_no"/><b>:رقم الشيك / Check No</b> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">  <span t-esc="o.partner_id.name"/><b>:مدفوع الى / Paid To</b> </td> 
+                        </tr>
+                        <tr>
+                            <td colspan="5"> 
+                                <span style="float:left;"><b>اجمالي مبلغ الشيك</b></span>
+                                <span t-esc="o.check_amount_in_words" style="float:right;"/>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="text-center" style="background-color:gray;border:2px solid black;" scope="col" rowspan="2" >البيان</td>
+                            <td class="text-center" style="background-color:gray;border:2px solid black;" rowspan="2"  > بند الخصم</td>
+                            <td class="text-center" style="background-color:gray;border:2px solid black;" colspan="2" >
+                                الجمله
+                            </td>
+                            <td class="text-center" style="background-color:gray;border:2px solid black;" rowspan="2" >المشروع</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" style="background-color:gray;border:2px solid black;" scope="col">قرش</td>
+                            <td class="text-center" style="background-color:gray;border:2px solid black;" scope="col">جنيه</td>
+                        </tr>
+                        <tr>
+                            <td style="border:2px solid black;">
+                                <span t-esc="o.ref"/>
+                            
+                            </td>
+                            <td style="border:2px solid black;">
+                                <!-- <span t-esc=""/> -->
+                            
+                            </td>
+                            
+                            <td style="border:2px solid black;">
+                                <!-- <span t-esc=""/> -->
+                            
+                            </td>
+                            <td style="border:2px solid black;">
+                                <span t-esc="o.amount_sdg"/>
+                            
+                            </td>
+                            <td style="border:2px solid black;">
+                                <span t-esc="o.project_id.name"/>
+                            
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+                    <div>
+                        <h5 style="float:right;">.................:اعد بواسطة </h5>
+                        <h5 style="float:left;">..........................:التاريخ </h5>
+                        <br/>
+                        <br/>
+                        <h5 style="float:right;">.................:روجع بواسطة </h5>
+                        <h5 style="float:left;">..........................:التاريخ </h5>
+                        <br/>
+                        <br/>
+                        <h5 style="float:right;">.................:المراجع الداخلي </h5>
+                        <h5 style="float:left;">..........................:التاريخ </h5>
+                        <br/>
+                        <br/>
+                        <h5 style="float:right;">.............................:تصديق </h5>
+                        <h5 style="float:left;">..........................:التاريخ </h5>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

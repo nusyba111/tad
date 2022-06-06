@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_cash_request" model="ir.actions.report">
+        <field name="name">Cash Request</field>
+        <field name="model">cash.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">srcs_financial_requests.cash_report_template</field>
+        <field name="report_file">srcs_financial_requests.cash_report_template</field>
+        <!-- <field name="print_report_name">'%s' % object.name</field> -->
+        <field name="binding_model_id" ref="model_cash_request"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="cash_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div>
+                            <div style="text-align:right;">
+                                <h5>Date: <span t-esc="o.date"/></h5>
+                                <h5>Sudanese Red Crescent Society</h5>
+                                <h5><span t-esc="o.branch_id.name"/> Branch</h5>
+                                <h5>Email:<span t-esc="o.user_id.login"/></h5>
+                            </div>
+                            <div>
+                                <br/>
+                                <center>
+                                    <h1>Cash Request</h1>
+                                </center>
+                                <br/>
+                                <br/>
+
+                            </div>
+                            <div >
+                                <span t-esc="o.description"/>
+                                <br/>
+                                
+                                
+                                <h5> <span t-esc="o.amount_in_words"/> (<span t-esc="o.requested_amount"/> <span t-esc="o.budget_currency.name"/>),which equivelent to <span t-esc="o.amount_in_words_sdg"/> (<span t-esc="o.requested_amount_sdg"/> <span t-esc="o.currency_id.name"/>) </h5>
+                                <br/>
+                                
+                                <h6>Prefered method of payment is transfer to the following Bank account:</h6>
+                                <table class="table table-bordered" style="border:2px solid black;">
+                                   
+                                    <tr><td class="text-center" style="border:2px solid black;font-weight:bold;" scope="col" width="30%">Bank Name</td>
+                                        <td style="border:2px solid black;">
+                                            <span t-esc="o.dest_bank.bank_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr> <td class="text-center" style="border:2px solid black;font-weight:bold;" scope="col" width="30%">Account Title </td>
+                                        <td style="border:2px solid black;">
+                                            <span t-esc="o.dest_bank.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="text-center" style="border:2px solid black;font-weight:bold;" scope="col" width="30%">Account Number</td>
+                                        <td style="border:2px solid black;">
+                                            <span t-esc="o.dest_bank.bank_account_id.acc_number"/>
+                                        </td>
+                                    </tr>
+                                    <tr> <td class="text-center" style="border:2px solid black;font-weight:bold;" scope="col" width="30%">Currency</td>
+                                        <td style="border:2px solid black;">
+                                            <span t-esc="o.currency_id.name"/>
+                                        </td>
+                                    </tr>
+                                   
+                                </table>
+                                <br/>
+                                <br/>
+                                <h5>Signed:</h5>
+                                <br/>
+                                <h5>Branch Director</h5>
+                                <br/>
+                                <h5>SRCS/<span t-esc="o.branch_id.name"/></h5>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+
+</odoo>

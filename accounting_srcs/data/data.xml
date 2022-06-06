@@ -4,7 +4,7 @@
     <record id="sequence_conversion_seq" model="ir.sequence">
         <field name="name">Currency Conversion</field>
         <field name="code">currency.conversion</field>
-        <field name="prefix">conversion</field>
+        <field name="prefix">conversion/</field>
         <field name="padding">3</field>
         <field eval="False" name="company_id"/>
     </record>

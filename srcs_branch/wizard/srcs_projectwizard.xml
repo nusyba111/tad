@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">project.report.wizard.view.form</field>
+        <field name="model">project.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <group>
+                    <group>
+                        <field name="branch_id" />
+                        <field name="project_id" />
+                    </group>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                    </group>
+                </group>
+                <footer>
+                    <button string="Print Excel" name="print_excel_project" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="project_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Expenditure Report</field>
+        <field name="res_model">project.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="project_report_menu"
+        name="Expenditure report"
+        action="project_report_wizard_action"
+        parent="account.menu_finance_reports"
+        />
+
+</odoo>

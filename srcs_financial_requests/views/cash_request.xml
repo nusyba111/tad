@@ -8,14 +8,14 @@
             <form string="">
                 <header>
                     <button string="Reset To Draft" name="reset_to_draft" type="object" />
-                    <button string="Confirm Branch Finance" name="confrim_finance" type="object" class="oe_highlight" states="draft"/>
-                    <button string="Confirm Branch Director" name="confirm_branch_dir" type="object" class="oe_highlight" states="branch_finance"/>
-                    <button string="Approve Secretary" name="approve_secratry" type="object" class="oe_highlight" states="branch_director"/>
-                    <button string="Confirm Finance Department" name="confirm_finance_department" type="object" class="oe_highlight" states="secratry_general"/>
-                    <button string="Approve Program Department" name="approve_program_department" type="object" class="oe_highlight" states="finance_department"/>
-                    <button string="Confirm Internal Auditor" name="confirm_internal_auditor" type="object" class="oe_highlight" states="program_department"/>
-                    <button string="Submit Payment" name="submit_payment" type="object" class="oe_highlight" states="secratry_general_two"/>
-                    <button string="Second Secretary Approval" name="second_approve_secretary" type="object" class="oe_highlight" states="internal_auditor"/>
+                    <button string="Confirm Branch Finance" name="confrim_finance" type="object" class="oe_highlight" states="draft" groups="accounting_srcs.group_finance_director"/>
+                    <button string="Confirm Branch Director" name="confirm_branch_dir" type="object" class="oe_highlight" states="branch_finance" groups="accounting_srcs.group_branch_director"/>
+                    <button string="Approve Secretary" name="approve_secratry" type="object" class="oe_highlight" states="branch_director" groups="accounting_srcs.group_secretary_general"/>
+                    <button string="Confirm Finance Department" name="confirm_finance_department" type="object" class="oe_highlight" states="secratry_general" groups="accounting_srcs.group_finance_department"/>
+                    <button string="Approve Program Department" name="approve_program_department" type="object" class="oe_highlight" states="finance_department" groups="accounting_srcs.group_program_department"/>
+                    <button string="Confirm Internal Auditor" name="confirm_internal_auditor" type="object" class="oe_highlight" states="program_department" groups="accounting_srcs.group_internal_auditor"/>
+                    <button string="Submit Payment" name="submit_payment" type="object" class="oe_highlight" states="secratry_general_two" groups="accounting_srcs.group_payment"/>
+                    <button string="Second Secretary Approval" name="second_approve_secretary" type="object" class="oe_highlight" states="internal_auditor" groups="accounting_srcs.group_secretary_general"/>
                     <button string="End" name="end" type="object" class="oe_highlight" states="payment"/>
                     <field name="state" widget="statusbar" statusbar_visible="darft,payment,end"/>
                 </header>
@@ -28,21 +28,30 @@
                     </div>
                     <group>
                        <group>
-                           <field name="user_id" />
-                           <field name="project_id" />
-                           <field name="currency_id" /> 
-                           <!-- <field name="budget_currency"/> -->
-                           <field name="requested_amount" />
+                            <field name="user_id" />
+                            <field name="currency_id" invisible='1' />
+                            <field name="user_lang_id" invisible='1'/>
+                            <field name="project_id" />
+                            <field name="budget_line_id" domain="[('analytic_account_id','=',project_id)]" />
                        </group> 
                        <group>
                             <field name="date" />
                             <field name="donor_id" />
-                            <field name="budget_line_id" domain="[('analytic_account_id','=',project_id)]" />
+                            <field name="budget_currency"/>
                             <field name="residual_amount" />
-                            
-                       </group> 
-                       
+                       </group>  
                     </group>
+                    <group>
+                        <group>
+                            <field name="requested_amount" />
+                            <field name="amount_in_words" />
+                        </group>
+                        <group>
+                            <field name="requested_amount_sdg" />
+                            <field name="amount_in_words_sdg" />
+                        </group>
+                    </group>
+                    
                     <notebook>
                         <page string="Accounting">
                             <group>
@@ -51,6 +60,9 @@
                                     <field name="dest_bank" domain="[('type', 'in', ('bank', 'cash'))]"/>
                                 </group>
                             </group>
+                        </page>
+                        <page string="Description">
+                            <field name="description" />
                         </page>
                     </notebook>
                 </sheet>
@@ -61,13 +73,17 @@
         <field name="name">Cash Request</field>
         <field name="res_model">cash.request</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_branch_loans','=',False)]</field>
+        <!-- <field name="context">{'default_is_branch_loans':False}</field> -->
     </record>
     <record id="branch_loans_action" model="ir.actions.act_window">
         <field name="name">Branch Loans</field>
         <field name="res_model">cash.request</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_branch_loans','=',True)]</field>
         <field name="context">{'default_is_branch_loans':True}</field>
     </record>
+   
     <menuitem
         id="finacial_request_menu"
         name="Finance Requests"

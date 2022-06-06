@@ -39,7 +39,7 @@ class ResBranch(models.Model):
         project = self.env['account.analytic.account'].create(
             {
                 'name': res.name,
-                'type': 'project',
+                'type': 'location',
                 'branch_id':res.id,
             }
         )
@@ -85,6 +85,7 @@ class accountPaymentInherit(models.Model):
                                 string="Branch",
                                 default=lambda self: self.env.user.current_branch,
                                 )
+    transfer_to = fields.Many2one('res.branch', string='Destination Branch')
 
 # class ProductTemplate(models.Model):
 #     _inherit = 'product.template'

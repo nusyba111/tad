@@ -7,3 +7,4 @@
 ###############################################################################
 
 from . import user_branch_wizard
+from . import srcs_project_wizard
