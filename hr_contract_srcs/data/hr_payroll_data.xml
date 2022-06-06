@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+
+        <!-- Salary Permanent Contracts Structure -->
+        <record id="structure_permanent_contracts" model="hr.payroll.structure">
+            <field name="name">Permanent Contracts</field>
+            <field name="type_id" ref="hr_contract.structure_type_employee"/>
+            <field name="unpaid_work_entry_type_ids" eval="[(4, ref('hr_work_entry_contract.work_entry_type_unpaid_leave'))]"/>
+            <field name="country_id" eval="False"/>
+        </record>
+        
+        <!-- Salary Rules for Permanent Contracts-->
+
+        <record id="permanent_contracts_basic_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="name">Permanent Basic</field>
+            <field name="code">Pre.Basic</field>
+            <field name="sequence">1</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.6
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record>
+
+        <record id="permanent_contracts_cost_of_living_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Cost Of Living</field>
+            <field name="code">cost.liv</field>
+            <field name="sequence">2</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.2
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record>
+
+        <record id="permanent_contracts_house_allowance_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">House Allowance</field>
+            <field name="code">house.allow</field>
+            <field name="sequence">3</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.1
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record>
+
+        <record id="permanent_contracts_transport_allowance_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Transportation Allowance</field>
+            <field name="code">trans.allow</field>
+            <field name="sequence">4</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.1
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record>
+
+        <record id="permanent_contracts_social_insurance_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="name">Employee Social Insurance</field>
+            <field name="code">soi</field>
+            <field name="sequence">5</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.08
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record>
+
+        <record id="permanent_contracts_wage_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="name">Wage</field>
+            <field name="code">wage</field>
+            <field name="sequence">6</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record>
+
+        <!-- Salary Temporary Contracts Structure -->
+        <record id="structure_temporary_contracts" model="hr.payroll.structure">
+            <field name="name">Temporary Contracts</field>
+            <field name="type_id" ref="hr_contract.structure_type_employee"/>
+            <field name="unpaid_work_entry_type_ids" eval="[(4, ref('hr_work_entry_contract.work_entry_type_unpaid_leave'))]"/>
+            <field name="country_id" eval="False"/>
+        </record>
+
+        <!--Temporary Contracts ruels-->
+        <record id="temporary_contracts_basic_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="name">Temporary Basic</field>
+            <field name="code">Temp.Basic</field>
+            <field name="sequence">1</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.36
+            </field>
+            <field name="struct_id" ref="structure_temporary_contracts"/>
+        </record>
+
+        <record id="temporary_contracts_cost_of_living_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Cost Of Living</field>
+            <field name="code">cost.liv.temp</field>
+            <field name="sequence">2</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.24
+            </field>
+            <field name="struct_id" ref="structure_temporary_contracts"/>
+        </record>
+
+        <record id="temporary_contracts_house_allowance_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">House Allowance</field>
+            <field name="code">house.allow.temp</field>
+            <field name="sequence">3</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.19
+            </field>
+            <field name="struct_id" ref="structure_temporary_contracts"/>
+        </record>
+
+        <record id="temporary_contracts_transport_allowance_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Transportation Allowance</field>
+            <field name="code">trans.allow.temp</field>
+            <field name="sequence">4</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage * 0.21
+            </field>
+            <field name="struct_id" ref="structure_temporary_contracts"/>
+        </record>
+
+        <record id="temporary_contracts_wage_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="name">Wage</field>
+            <field name="code">temp.wage</field>
+            <field name="sequence">6</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = categories.BASIC + categories.ALW
+            </field>
+            <field name="struct_id" ref="structure_temporary_contracts"/>
+        </record>
+
+        <!-- Salary Temporary Contracts Structure -->
+        <record id="structure_consultancy_contracts" model="hr.payroll.structure">
+            <field name="name">Consultancy Contracts</field>
+            <field name="type_id" ref="hr_contract.structure_type_employee"/>
+            <field name="unpaid_work_entry_type_ids" eval="[(4, ref('hr_work_entry_contract.work_entry_type_unpaid_leave'))]"/>
+            <field name="country_id" eval="False"/>
+        </record>
+
+        <record id="consultancy_contracts_wage_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.GROSS"/>
+            <field name="name">Wage</field>
+            <field name="code">consul.wage</field>
+            <field name="sequence">1</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = contract.wage
+            </field>
+            <field name="struct_id" ref="structure_consultancy_contracts"/>
+        </record>
+
+        
+</odoo>
