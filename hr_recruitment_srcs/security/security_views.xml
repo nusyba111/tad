@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+
+    <!-- Record Right-->
+
+    <record id="group_hr_department_manager" model="res.groups">
+            <field name="name">Department Manager</field>
+            <field name="category_id" ref="base.module_category_human_resources_employees"/>
+        </record>
+
+   
+
+
+</odoo>
