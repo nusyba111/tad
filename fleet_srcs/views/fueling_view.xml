@@ -4,8 +4,7 @@
 
         <record id="action_fuel" model="ir.actions.act_window">
             <field name="name">Fueling</field>
-            <field name="res_model">fleet.vehicle.log.services</field>
-            <field name="domain">[('service_type_id','=','fuel')]</field>
+            <field name="res_model">fuel.service</field>
             <field name="view_mode">tree,form</field>
         </record>
         <record id="action_picking_fuel_tree" model="ir.actions.act_window">
@@ -21,30 +20,43 @@
             </field>
         </record>
 
+         <record id="action_invoice_fuel_tree" model="ir.actions.act_window">
+            <field name="name"> Fuel Invoices</field>
+            <field name="res_model">account.move</field>
+            <field name="type">ir.actions.act_window</field>
+             <field name="domain">[('fuel_id', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new transfer
+              </p>
+            </field>
+        </record>
+
         <record id="fuel_service_view_tree" model="ir.ui.view">
             <field name="name">fuel.view.tree</field>
-            <field name="model">fleet.vehicle.log.services</field>
-            <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_tree"/>
+            <field name="model">fuel.service</field>
             <field name="arch" type="xml">
+                <tree>
+                <field name="vehicle"/>
+                <field name="date"/>
+                <field name="request_type"/>
+                <field name="vehicle"/>
+                </tree>
 
-               <xpath expr="//field[@name='notes']" position="after">
-                <field name="quantity"/>
-            </xpath>
             </field>
         </record>
 
         <record id="fuel_service_view_form" model="ir.ui.view">
             <field name="name">fuel.view.form</field>
-            <field name="model">fleet.vehicle.log.services</field>
-            <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_form"/>
+            <field name="model">fuel.service</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='state']" position="replace">
+                <form string="Fuel Requests">
+                    <header>
                   <field name="state"
                            widget="statusbar"
                            statusbar_visible="requester,fleet_user,fleet_manager,finance,cancel" optional="show"
                     />
-                </xpath>
-               <xpath expr="//header" position="inside">
                    <button
                             name="to_user"
                             states="requester"
@@ -61,11 +73,12 @@
                     />
                      <button
                             name="stock_request"
-                            states="fleet_manager"
+                            states="finance"
                             string="Stock Request"
                             type="object"
                             class="oe_highlight"
                     />
+
                     <button
                             name="to_finance"
                             states="fleet_manager"
@@ -78,8 +91,8 @@
                             string="Cancel"
                             type="object"
                             attrs="{'visible':[('state','in',['draft','fleet_user'])]}"/>
-               </xpath>
-                <xpath expr="//sheet" position="inside">
+                    </header>
+                    <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="action"
                             name="%(fleet_srcs.action_picking_fuel_tree)d"
@@ -88,13 +101,45 @@
                             attrs="{'invisible': [('transfer_count', '=', 0)]}">
                         <field name="transfer_count" widget="statinfo" string="Stock Transfers"/>
                          </button>
+                         <button type="action"
+                            name="%(fleet_srcs.action_invoice_fuel_tree)d"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('state', '!=', 'finance')]}">
+                        <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                         </button>
                         </div>
-                </xpath>
-                <xpath expr="//group/field[@name='date']" position="after">
-                    <field name="fuel_type"/>
-                    <field name="quantity"/>
-                    <field name="uom"/>
-                </xpath>
+                        <group col="4" colspan="4">
+                            <field name="description"/>
+                            <field name="branch"/>
+                            <field name="date"/>
+                            <field name="request_type"/>
+                            <field name="employee" attrs="{'required':[('request_type','in',['employee','internal'])],'invisible':[('request_type','=','partner')]}"/>
+                            <field name="partner" attrs="{'required':[('request_type','=','partner')],'invisible':[('request_type','in',['employee','internal','hq'])]}"/>
+                            <field name="department" attrs="{'required':[('request_type','=','employee')],'invisible':[('request_type','in',['employee','internal'])]}"/>
+                            <field name="vehicle"/>
+                            <field name="driver"/>
+                            <field name="odo_meter"/>
+                            <field name="location" attrs="{'invisible':[('state','=','draft')]}"/>
+                        </group>
+                        <group>
+                        <field name="fuel_id">
+                                <tree editable="bottom">
+                                    <field name="fuel_type"/>
+                                    <field name="onhand"/>
+                                    <field name="qty"/>
+                                    <field name="uom"/>
+                                    <field name="price"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
 
 
             </field>
@@ -116,6 +161,16 @@
                <xpath expr="//field[@name='driver_id']" position="after">
                 <field name="fuel_quantity"/>
                 <field name="fuel_uom"/>
+            </xpath>
+            </field>
+        </record>
+        <record id="fuel_odometer_view_tree" model="ir.ui.view">
+            <field name="name">fleet.service.type.tree</field>
+            <field name="model">fleet.service.type</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_service_types_view_tree"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='category']" position="before">
+                <field name="fuel"/>
             </xpath>
             </field>
         </record>

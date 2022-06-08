@@ -14,7 +14,7 @@
     'category': 'Human Resource',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'fleet', 'hr_fleet','stock','purchase_requisition'],
+    'depends': ['base', 'fleet', 'hr_fleet','stock','purchase_requisition','srcs_branch'],
 
     # always loaded
     'data': [
@@ -23,6 +23,9 @@
         'views/view_attach_inherit.xml',
         'views/repair_maintainance.xml',
         'views/fueling_view.xml',
+        'views/insurance_view.xml',
+        'views/vehicle_request_view.xml',
+        'views/vehicle_rent_view.xml'
 
     ],
 

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="action_request" model="ir.actions.act_window">
+            <field name="name">Vehicle Request</field>
+            <field name="res_model">fleet.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <record id="seq_request" model="ir.sequence">
+            <field name="name">Request No.</field>
+            <field name="code">request.no</field>
+            <field name="prefix">Request/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <record id="request_view_tree" model="ir.ui.view">
+            <field name="name">request.view.tree</field>
+            <field name="model">fleet.request</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicle Request" class="" sample="1">
+                    <field name="request_no"/>
+                    <field name="employee"/>
+                    <field name="department"/>
+                    <field name="car"/>
+                    <field name="fund"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="request_view_form" model="ir.ui.view">
+            <field name="name">request.view.form</field>
+            <field name="model">fleet.request</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle Request">
+                    <header>
+                    <button
+                            name="to_direct_manager"
+                            states="draft"
+                            string="Direct Manager"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_hr_manager"
+                            states="direct_manager"
+                            string="HR Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_fleet"
+                            states="direct_manager"
+                            string="Fleet Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            attrs="{'visible':[('state','in',['draft','direct_manager'])]}"/>
+                     <button
+                            name="action_done"
+                            string="Done"
+                            type="object"
+                            attrs="{'invisible':[('state','in',['fleet'])]}"/>
+                      <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,direct_manager,hr_manager,fleet,cancel,done" optional="show"
+                    />
+                    </header>
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="request_no"/>
+                            <field name="branch"/>
+                            <field name="employee"/>
+                            <field name="department"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="purpose"/>
+                            <field name="mission"/>
+                            <field name="fund"/>
+                        </group>
+                         <notebook>
+                             <page string="Fleet Manager" name="services">
+                                 <group col="4" colspan="4">
+                                 <field name="car"/>
+                                 <field name="licence_plate"/>
+                                 <field name="driver"/>
+                                 <field name="recommndation"/>
+                                 </group>
+                             </page>
+                         </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <menuitem
+                id="request"
+                name="Vehicle Request"
+                sequence="5"
+                parent="fleet.menu_root"
+                action='action_request'
+        />
+    </data>
+</odoo>
