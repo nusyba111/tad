@@ -7,26 +7,21 @@
 ###############################################################################
 
 {
-    'name': "Fleet SRCS",
+    'name': "Application SRCS",
 
     'author': "IATL Intellisoft International",
     'website': "http://www.iatl-intellisoft.com",
     'category': 'Human Resource',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'fleet', 'hr_fleet','stock','purchase_requisition','srcs_branch'],
+    'depends': ['base', 'hr_recruitment'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/fleet_vehicle_view_form_inherit.xml',
-        'views/view_attach_inherit.xml',
-        'views/repair_maintainance.xml',
-        'views/fueling_view.xml',
-        'views/insurance_view.xml',
-        'views/vehicle_request_view.xml',
-        'views/vehicle_rent_view.xml'
-
+        'views/view_application_inherit.xml',
+        'report/application_report.xml',
+        'report/application _srcs_template.xml'
     ],
 
 }

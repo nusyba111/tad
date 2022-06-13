@@ -3,5 +3,10 @@ access_fleet_service,access.fleet.service,model_fleet_service,,1,1,1,1
 access_repair,repair,model_repair,fleet.fleet_group_manager,1,1,1,0
 access_services,services,model_services,fleet.fleet_group_manager,1,1,1,0
 access_spare_parts,spare.parts,model_spare_parts,fleet.fleet_group_manager,1,1,1,0
+access_fuel_service,fuel.service,model_fuel_service,fleet.fleet_group_manager,1,1,1,1
+access_insurance_service,insurance.service,model_insurance_service,fleet.fleet_group_manager,1,1,1,1
+access_fleet_request,fleet.request,model_fleet_request,fleet.fleet_group_manager,1,1,1,1
+access_fleet_rent_request,fleet.rent.request,model_fleet_rent_request,fleet.fleet_group_manager,1,1,1,1
+access_fuel_type,fuel.type,model_fuel_type,fleet.fleet_group_manager,1,1,1,1
 
 
