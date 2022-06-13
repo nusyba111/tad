@@ -7,5 +7,13 @@
             <field name="prefix">HRD</field>
             <field name="padding">4</field>
         </record>
+
+        <record id="sequence_recruitment_general_plan" model="ir.sequence">
+            <field name="name">Recruitment General Plan sequence</field>
+            <field name="code">hr.recruitment.general.plan</field>
+            <field name="prefix">HRD</field>
+            <field name="padding">4</field>
+        </record>
+
     </data>
 </odoo>

@@ -13,7 +13,12 @@ class EmployeeRecruitmentGeneralPlan(models.Model):
     date_to = fields.Date(string="Date To")
     general_plan_ids = fields.One2many('hr.recruitment.general.plan.line','general_plan_id')
 
-
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env['ir.sequence'].next_by_code(
+            'hr.recruitment.general.plan') or 'New'
+        result = super(EmployeeRecruitmentGeneralPlan, self).create(vals)
+        return result
 
 
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models
+from odoo.fields import datetime
 
 
 class EmployeeRecruitmentPlan(models.Model):
@@ -9,8 +10,8 @@ class EmployeeRecruitmentPlan(models.Model):
     _description = 'Recruitment Plan Details'
 
     name = fields.Char(string="Name",readonly=True)
-    date_from = fields.Date(string="Date From",required=True)
-    date_to = fields.Date(string="Date To",required=True)
+    date_from = fields.Date(string="Date From",required=True,default=lambda self: datetime.now().date().replace(month=1, day=1),store=True)
+    date_to = fields.Date(string="Date To",required=True,default=lambda self: datetime.now().date().replace(month=12, day=31),store=True)
     department_id = fields.Many2one('hr.department',string="Department",
         default=lambda self: self.env.user.employee_id.department_id,required=True)
     plan_ids = fields.One2many('hr.recruitment.plan.line','plan_id')
@@ -44,7 +45,7 @@ class EmployeeRecruitmentPlan(models.Model):
         if not general_plan:
             # general = []
             general_plan_new = self.env['hr.recruitment.general.plan'].create({
-                'name':'General Plan',
+                # 'name':'General Plan',
                 'date_from':self.date_from,
                 'date_to':self.date_to,
                 # 'general_plan_ids':general
