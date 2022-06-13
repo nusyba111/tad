@@ -24,7 +24,15 @@ class HRContract(models.Model):
     struct_id = fields.Many2one('hr.payroll.structure',string="Structure")
     rule_ids = fields.One2many('hr.salary.rule',related="struct_id.rule_ids")
     forgin_currency_id = fields.Many2one('res.currency',string="Currency",readonly=False)
+    wage_per_hour = fields.Float(compute="_get_wage_per_hour",store=True)
 
+
+    @api.depends('wage')
+    def _get_wage_per_hour(self):
+        for rec in self:
+            rec.wage_per_hour = 0.0
+            if rec.resource_calendar_id:
+                rec.wage_per_hour = (rec.wage / 30) / rec.resource_calendar_id.hours_per_day
 
 class SalaryPlan(models.Model):
     _name = 'salary.plan'

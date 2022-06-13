@@ -17,6 +17,7 @@
         <xpath expr="//group[@name='salary']" position="after">
           <group>
           <field name="forgin_currency_id"/>
+          <field name="wage_per_hour" invisible="1"/>
         </group>
         </xpath>
 
