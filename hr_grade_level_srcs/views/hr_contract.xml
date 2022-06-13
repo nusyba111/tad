@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <!-- applications-->
+        <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+            <field name="name">contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <group name="salary_info" position='before'>
+                    <group string='Salary Scale'>
+                        <field name='grade_id'/>
+                        <field name='level_id'/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <!-- <record id="view_hr_contract_srpaical_form_inherit" model="ir.ui.view">
+            <field name="name">contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract_speacial_allowance.view_hr_contract_srpaical_view_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree" position="inside">
+                    <field name='grade_related' invisible="1"/>
+                </xpath>
+            </field>
+        </record> -->
+        
+    </data>
+</odoo>

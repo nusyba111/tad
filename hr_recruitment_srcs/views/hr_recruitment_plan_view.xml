@@ -45,6 +45,9 @@
                             <field name="date_to"/>
                           </group>
                         </group>
+                        <group>
+                            <field name="department_id"/>
+                        </group>
                         <notebook>
                             <page string="Details">
                                 <field name="plan_ids">

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  START TUNJANGAN LAIN-LAIN -->
+        <record id="tree_hr_wage_process_batch_view" model="ir.ui.view">
+            <field name="name">hr.wage.process.batch</field>
+            <field name="model">hr.wage.process.batch</field>
+            <field name="arch" type="xml">
+                <tree string="Wage Process Batch">
+                    <field name="name"/>
+                    <field name="batch_type"/>
+                    <field name="type"/>
+                    <field name="state"/>
+                    <field name="red_line_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="form_wage_process_batch_view" model="ir.ui.view">
+            <field name="name">hr.wage.process.batch</field>
+            <field name="model">hr.wage.process.batch</field>
+            <field name="arch" type="xml">
+                <form string="Wage Process Batch">
+                    <header>
+                        <button name="action_set_to_confirm" class="oe_highlight" type="object" string="Confirm"
+                                states="draft"/>
+                        <button name="action_set_to_draft" type="object" string="Set To Draft"
+                                states="confirm,refused"/>
+                        <button name="action_set_to_approve" type="object" class="oe_highlight" string="Approve"
+                                states="confirm"/>
+                        <button name="action_set_to_refused" type="object" string="Refuse" states="confirm,draft"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly='1'/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string=" ">
+                                <field name="batch_type"
+                                       attrs="{'readonly':[('state', '!=', 'draft')],'required':True}"/>
+                                <field name="employee_id"
+                                       attrs="{'invisible':[('batch_type', '!=', 'employee')] ,'readonly':[('state', '!=', 'draft')],'required':[('batch_type', '=', 'employee')]}"/>
+                                <field name="employee_ids"
+                                       attrs="{'invisible':[('batch_type', '!=', 'selected_employee')] ,'readonly':[('state', '!=', 'draft')],'required':[('batch_type', '=', 'selected_employee')]}"
+                                       widget="many2many_tags"/>
+                                <field name="type" readonly="1"/>
+                                <field name="contract_id"
+                                       attrs="{'invisible':[('batch_type', '!=', 'employee')] ,'readonly':True}"/>
+                                <field name="red_line_type"/>
+                                <field name="percentages"
+                                       attrs="{'invisible':['|',('type','!=','redLine'),('red_line_type','!=','percentage')],'required': 1,'readonly':[('state','!=','draft')]}"/>
+                                <field name="wage"
+                                       attrs="{'invisible':[('type','=','redLine'),('red_line_type','=','percentage')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Batches">
+                                <group>
+                                    <field name="wage_process_ids" nolabel="1" readonly="1">
+                                        <tree editable="bottom">
+                                            <field name="employee_id"/>
+                                            <field name="contract_id"/>
+                                            <field name="current_grade"/>
+                                            <field name="current_level"/>
+                                            <field name="current_wage"/>
+                                            <field name="type"/>
+                                            <field name="red_line_type"/>
+                                            <field name="batch_id" invisible="1"/>
+                                            <field name="percentages"
+                                                   attrs="{'column_invisible':[('parent.red_line_type','!=','percentage')]}"/>
+                                            <field name="wage"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="wage_process__batch_action1">
+            <field name="name">Wage process Batch</field>
+            <field name="res_model">hr.wage.process.batch</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--    START MENU ITEM    -->
+        <menuitem id="wage_process_batch_menu" name="Wage process Batch"
+                  parent="menu_hr_wage_process"
+                  action="wage_process__batch_action1" sequence="3"/>
+    </data>
+</odoo>

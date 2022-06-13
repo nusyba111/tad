@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+      <!--General Manager-->
+     <record id="group_hr_general_manager" model="res.groups">
+         <field name="name">General Manager</field>
+         <field name="category_id" ref="base.module_category_human_resources_employees"/>
+         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     </record>
+
+     
+		<record id="loan_multi_company" model="ir.rule">
+	         <field name="name">Loan Multi Company</field>
+	         <field name="model_id" ref="model_hr_loan"/>
+	         <field name="global" eval="True"/>
+	         <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+	      </record>
+	      <record id="loan_type_multi_company" model="ir.rule">
+            <field name="name">Loan Type Multi Company</field>
+            <field name="model_id" ref="model_loan_type"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+         <record id="loan_payment_multi_company" model="ir.rule">
+            <field name="name">Loan Payment Multi Company</field>
+            <field name="model_id" ref="model_loan_payment"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+         <record id="loan_postpone_multi_company" model="ir.rule">
+            <field name="name">Loan Postpone Multi Company</field>
+            <field name="model_id" ref="model_hr_loan_postpone"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+         <record id="loan_line_multi_company" model="ir.rule">
+            <field name="name">Loan Line Multi Company</field>
+            <field name="model_id" ref="model_hr_loan_line"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+
+</odoo>

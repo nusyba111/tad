@@ -1,0 +1,315 @@
+<odoo>
+    <data>
+
+
+        <record id="hr_leave_view_form_manager_inherit" model="ir.ui.view">
+            <field name="name">hr.leave.view.form.manager.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+            <field name="arch" type="xml">
+                <!--                <xpath expr="//field[@name='holiday_status_id']" position="after">-->
+                <!--                    <field name="linked_leave_planning"/>-->
+
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state',
+                        'in',['cancel','refuse','validate1','validate','planned'])]}
+                    </attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='holiday_status_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state',
+                        'in',['cancel','refuse','validate1','validate','planned'])]}
+                    </attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state',
+                        'in',['cancel','refuse','validate1','validate','planned'])]}
+                    </attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state',
+                        '=','planned')]}
+                    </attribute>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="hr_leave_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr.leave.view.form.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">planned,confirm,validate</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state',
+                        'not in',['draft','planned'])]}
+                    </attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="before">
+                    <field name="is_plan" invisible="1"/>
+                    <field name="linked_leave_planning" invisible="1" />
+                    <field name="holiday_status_id" invisible="1" />
+                    <button string="Replan" name="action_replan" type="object" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('is_plan', '=', False), ('state', '!=', 'planned')]}"/>
+                    <!--                                        <button string="Set as Plan" name="action_set_as_plan" type="object" class="oe_highlight"/>-->
+                    <!--                                        <button string="Set as Draft" name="action_set_as_draft" type="object" class="oe_highlight"/>-->
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_hr_leave_report_calendar_filter" model="ir.ui.view">
+            <field name="name">hr.leave.report.calendar.filter</field>
+            <field name="model">hr.leave.report.calendar</field>
+            <field name="arch" type="xml">
+                <search string="Search Time Off">
+                    <field name="holiday_status_id"/>
+                    <filter domain="[('holiday_status_id.annual_leave','=',True)]" string="Annual Leave"
+                            name="annual_leave"/>
+                    <separator/>
+                    <filter domain="[('state','=','planned')]" string="Planned Leave" name="planned_leave"/>
+                    <separator/>
+                    <filter string="Current Year Leave" name="current_year_leave"
+                            domain="[('start_datetime','&lt;',(context_today()+relativedelta(years=1)).strftime('%Y-01-01')), ('start_datetime','&gt;=',time.strftime('%Y-01-01'))]"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_holidays.action_hr_holidays_dashboard" model="ir.actions.act_window">
+            <field name="context">{'hide_employee_name':
+                1,'search_default_current_year_leave':1,'search_default_planned_leave':1,'search_default_annual_leave':1}
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="hr_leave_planning_form">
+            <field name="name">hr.leave.planning.form</field>
+            <field name="model">hr.leave.planning</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                        <button name="action_set_to_confirmed" string="Confirm" type="object" states="draft"
+                                class="oe_highlight" groups="base.group_user"/>
+                        <button name="action_set_to_approved" string="Approve" type="object"
+                                states="confirmed" class="oe_highlight"
+                                groups="hr_recruitment_srcs.group_hr_department_manager"/>
+
+                        <button name="action_set_to_validated" string="Validate" type="object"
+                                states="approved" class="oe_highlight"
+                                groups="hr.group_hr_manager"/>
+                        <button name="action_set_to_draft" string="Set to Draft" type="object"
+                                groups="base.group_user"
+                                attrs="{'invisible': [('state', '!=', 'canceled')]}"
+                        />
+                        <button name="action_set_to_canceled" string="Cancel" type="object"
+                                groups="base.group_user"
+                                attrs="{'invisible': [('state', 'in', ['draft','canceled'])]}"
+                        />
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,confirmed,approved,validated"
+                               readonly="1"/>
+                    </header>
+                    <sheet>
+                        <group>
+                        <div class="oe_title" name="title">
+                            <h2>
+                                <field name="leave_type" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       domain="[('annual_leave','=',True)]" required="1" placeholder="Leave Type"/>
+                            </h2>
+
+                        </div>
+                        </group>
+
+                        <field name="employee_id" readonly="1" required="1" placeholder="Employee"/>
+
+                        <group>
+                            <div class="o_row">
+                                    <field name="date_from" widget="daterange" nolabel="1" class="oe_inline"
+                                           options="{'related_end_date': 'date_to'}" required="1"
+                                           attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                                    <field name="date_to" widget="daterange" nolabel="1" class="oe_inline"
+                                           options="{'related_start_date': 'date_from'}" required="1"
+                                           attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </div>
+<!--                            <field name="date_from" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1"/>-->
+<!--                            <field name="date_to" attrs="{'readonly': [('state', '!=', 'draft')]}" required="1"/>-->
+                        </group>
+
+
+                        <notebook>
+                            <!--                            <page string="Leaves Lines" name="leaves_lines">-->
+                            <!--                                <field name="order_line"-->
+                            <!--                                       widget="section_and_note_one2many"-->
+                            <!--                                       options="{'no_open': True}"-->
+                            <!--                                       mode="tree,kanban">-->
+                            <!--                                    <tree string="Hr Planning Order Lines" editable="bottom">-->
+
+
+                            <!--                                        <field name="name" widget="section_and_note_text"/>-->
+                            <!--                                        <field name="date_from"/>-->
+                            <!--                                        <field name="date_to"/>-->
+                            <!--                                        <field name="number_of_days"/>-->
+                            <!--                                        <button name="action_show_leave" class="oe_highlight" string="View Leave"-->
+                            <!--                                                type="object"/>-->
+                            <!--                                    </tree>-->
+
+
+                            <!--                                </field>-->
+                            <!--                            </page>-->
+
+                            <page string="Leaves" name="leaves_page">
+
+                                <field name="leaves" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       context="{'default_is_plan':1,'default_state':'planned','default_holiday_status_id':leave_type,'default_employee_id':employee_id}">
+<!--                                       context="{'default_is_plan':1,'default_state':'planned','default_request_date_from':date_from,'default_request_date_to':date_to}">-->
+
+                                    <tree editable="bottom">
+
+
+                                        <field name="holiday_status_id" invisible="1"/>
+                                        <field name="holiday_type" invisible="1"/>
+                                        <field name="employee_id" invisible="1"/>
+                                        <field name="date_from" invisible="1"/>
+                                        <field name="date_to" invisible="1"/>
+                                        <field name="request_date_from" width="1%"/>
+                                        <field name="request_date_to" width="1%"/>
+                                        <field name="number_of_days" sum="Number_of_days" readonly="1" width="1%"/>
+                                        <field name="state" invisible="0" readonly="1" width="1%"/>
+                                        <field name="is_plan" invisible="1"/>
+                                        <button name="action_show_leave" class="oe_highlight" string="View Leave"
+                                                type="object"/>
+                                    </tree>
+
+
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_leave_planning_tree">
+            <field name="name">hr.leave.planning.tree</field>
+            <field name="model">hr.leave.planning</field>
+            <field name="arch" type="xml">
+                <tree string="Leave Planning">
+                    <field name="name"/>
+                    <field name="leave_type"/>
+                    <field name="employee_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="hr_leave_planning_action_window2">
+            <field name="name">Leave Action</field>
+            <field name="res_model">hr.leave</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_leave_planning_action_window21">
+            <field name="name">Leave Action</field>
+            <field name="res_model">hr.leave</field>
+            <field name="view_mode">form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="hr_manager_leave_action_window">
+            <field name="name">Manager Planned Leaves</field>
+            <field name="res_model">hr.leave</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_plan','=',True)]
+            </field>
+            <field name="context">{'group_by': ['employee_id']}</field>
+
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_manager_leave_planning_action_window">
+            <field name="name">Leaves Planning</field>
+            <field name="res_model">hr.leave.planning</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[(1, '=', 1)]</field>
+<!--            <field name="domain">[('employee_id.leave_manager_id', '=', uid)]</field>-->
+
+            <!--            <field name="domain">[('employee_id','child_of', [uid.employee_id.id])]</field>-->
+            <!--            <field name="domain">[('employee_id','=', user.employee_id.id)]</field>-->
+            <!--            <field name="domain">[('employee_id','=', user.employee_id.id)]</field>-->
+            <!--            <field name="domain">[('employee_id.id','child_of', [user.employee_id.id])]</field>-->
+
+        </record>
+
+        <record id="edit_holiday_status_form_inherit" model="ir.ui.view">
+            <field name="name">edit.holiday.status.form.inherit</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='request_unit']" position="after">
+                    
+                    <field name="annual_leave"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="hr_employee_leave_planning_action_window">
+            <field name="name">Employee Leave Planning</field>
+            <field name="res_model">hr.leave.planning</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('employee_id.user_id.id','=', uid)]</field>
+
+        </record>
+        <record model="ir.actions.act_window" id="hr_employee_leave_action_window">
+            <field name="name">Employee Planned Leaves</field>
+            <field name="res_model">hr.leave</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('linked_leave_planning.employee_id.user_id.id','=', uid),('is_plan','=',True)]
+            </field>
+            <field name="context">{'group_by': ['employee_id']}</field>
+
+
+        </record>
+
+        <record id="notify_before_leave_cron" model="ir.cron">
+            <field name="name">Notification Days Before Leave Cron</field>
+            <!--            <field name="user_id" ref="base.user_root"/>-->
+            <field name="type">ir.actions.server</field>
+
+            <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall"
+                   eval="(DateTime.now().replace(hour=0, minute=0,second=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="code">model.notify_before_leave()</field>
+            <field name="state">code</field>
+        </record>
+
+        <!--        <menuitem name="Leave Planning" id="hr_leave_planning_menu_item" parent="hr_holidays.menu_hr_holidays_root"-->
+        <!--        />-->
+        <menuitem name="Leaves Planning" id="hr_manager_leaves_planning_menu"
+                  parent="hr_holidays.menu_hr_holidays_approvals"
+                  action="hr_manager_leave_planning_action_window"/>
+        <menuitem name="Leave Planning Details" id="hr_manager_planned_leaves_menu"
+                  parent="hr_holidays.menu_hr_holidays_approvals"
+                  action="hr_manager_leave_action_window"/>
+
+
+        <menuitem name="My Leaves planning" id="hr_my_leaves_planning_menu"
+                  parent="hr_holidays.menu_hr_holidays_my_leaves"
+                  action="hr_employee_leave_planning_action_window"/>
+        <menuitem name="My Leaves Planning Details" id="hr_my_planned_leaves_menu"
+                  parent="hr_holidays.menu_hr_holidays_my_leaves"
+                  action="hr_employee_leave_action_window"/>
+
+
+    </data>
+</odoo>

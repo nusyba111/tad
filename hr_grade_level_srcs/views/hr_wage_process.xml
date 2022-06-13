@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  START TUNJANGAN LAIN-LAIN -->
+        <record id="tree_hr_wage_process_view" model="ir.ui.view">
+            <field name="name">hr.wage.process</field>
+            <field name="model">hr.wage.process</field>
+            <field name="arch" type="xml">
+                <tree string="wage Process">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="type"/>
+                    <field name="state"/>
+                    <field name="red_line_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="form_wage_process_view" model="ir.ui.view">
+            <field name="name">hr.wage.process</field>
+            <field name="model">hr.wage.process</field>
+            <field name="arch" type="xml">
+                <form string="Grade">
+                    <header>
+                        <button name="action_set_to_confirm" class="oe_highlight" type="object" string="Confirm"
+                                states="draft"/>
+                        <button name="action_set_to_draft" type="object" string="Set To Draft"
+                                states="confirm,refused"/>
+                        <button name="action_set_to_approve" type="object" class="oe_highlight" string="Approve"
+                                states="confirm"/>
+                        <button name="action_set_to_refused" type="object" string="Refuse" states="confirm,draft"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly='1'/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string=" ">
+                                <field name="employee_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="contract_id" readonly='1'/>
+                                <field name="type" widget="radio" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="grade_sequence" invisible='1'/>
+                                <field name="level_sequence" invisible='1'/>
+                            </group>
+
+                            <group string="New Salary Information">
+                                <field name="grade_id"
+                                       attrs="{'invisible':[('type','=','redLine')],'required':[('type','=','promotion')],'readonly':['|',('type','=','increment'),('state','!=','draft')]}"
+                                       domain="[('sequence','>=',grade_sequence)]"/>
+                                <field name="level_id"
+                                       attrs="{ 'invisible':[('type','=','redLine')],'required':['|',('type','=','promotion'),('type','=','increment')] ,'readonly':[('state','!=','draft')]}"
+                                       domain="[('grade_id','=', grade_id),('sequence','>',level_sequence)]"/>
+                                <field name="red_line_type" widget="radio"
+                                       attrs="{'invisible':[('type','!=','redLine')],'required':[('type','=','redLine')],'readonly':[('state','!=','draft')]}"/>
+                                <field name="percentages"
+                                       attrs="{'invisible':['|',('type','!=','redLine'),('red_line_type','!=','percentage')],'required': 1,'readonly':[('state','!=','draft')]}"/>
+                                <field name="wage"
+                                       attrs="{'invisible':[('type','!=','redLine')],'readonly':[('red_line_type','=','percentage')]}"/>
+                            </group>
+                            <group name="Old Salary Information" string="Old Salary Information">
+                                <field name="current_grade" readonly='1'/>
+                                <field name="current_level" readonly='1'/>
+                                <field name="current_wage" readonly='1'/>
+                            </group>
+                        </group>
+
+                        <separator string='Notes'/>
+
+                        <field name="note" attrs="{'readonly':[('state','!=','draft')]}"/>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="wage_process_pivot">
+            <field name="name">wage.process.pivot</field>
+            <field name="model">hr.wage.process</field>
+            <field name="arch" type="xml">
+                <pivot string="Wage Process Pivot" display_quantity="True">
+                    <field name="employee_id" type="row"/>
+                    <field name="type" type="col"/>
+                    <field name="state" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="wage_process_action">
+            <field name="name">Wage process</field>
+            <field name="res_model">hr.wage.process</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <!--    START MENU ITEM    -->
+        <menuitem
+                id="menu_hr_wage_process"
+                name="Wage Process"
+                parent="hr.menu_hr_employee_payroll"
+                sequence="4"
+                groups="hr.group_hr_manager,hr.group_hr_user"/>
+
+        <menuitem id="wage_process_menu" name="Wage process" parent="menu_hr_wage_process"
+                  action="wage_process_action" sequence="2"/>
+    </data>
+</odoo>

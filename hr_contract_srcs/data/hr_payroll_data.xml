@@ -20,7 +20,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.6
+            <field name="amount_python_compute">result = (contract.wage * 0.6 ) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_permanent_contracts"/>
         </record>
@@ -33,7 +33,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.2
+            <field name="amount_python_compute">result = (contract.wage * 0.2 ) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_permanent_contracts"/>
         </record>
@@ -46,7 +46,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.1
+            <field name="amount_python_compute">result = (contract.wage * 0.1 ) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_permanent_contracts"/>
         </record>
@@ -59,7 +59,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.1
+            <field name="amount_python_compute">result = (contract.wage * 0.1) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_permanent_contracts"/>
         </record>
@@ -72,7 +72,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.08
+            <field name="amount_python_compute">result = (contract.wage * 0.08 ) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_permanent_contracts"/>
         </record>
@@ -107,7 +107,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.36
+            <field name="amount_python_compute">result = (contract.wage * 0.36) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_temporary_contracts"/>
         </record>
@@ -120,7 +120,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.24
+            <field name="amount_python_compute">result = (contract.wage * 0.24) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_temporary_contracts"/>
         </record>
@@ -133,7 +133,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.19
+            <field name="amount_python_compute">result = (contract.wage * 0.19) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_temporary_contracts"/>
         </record>
@@ -146,7 +146,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage * 0.21
+            <field name="amount_python_compute">result = (contract.wage * 0.21) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_temporary_contracts"/>
         </record>
@@ -180,7 +180,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="appears_on_payslip" eval="True"/>
-            <field name="amount_python_compute">result = contract.wage
+            <field name="amount_python_compute">result = (contract.wage) * payslip.rate
             </field>
             <field name="struct_id" ref="structure_consultancy_contracts"/>
         </record>

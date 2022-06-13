@@ -10,6 +10,25 @@
         <xpath expr="//field[@name='hr_responsible_id']" position="after">
           <field name="contract_type"/>
         </xpath>
+        <xpath expr="//field[@name='structure_type_id']" position="after">
+           <field name="struct_id"/>
+        </xpath>
+
+        <xpath expr="//group[@name='salary']" position="after">
+          <group>
+          <field name="forgin_currency_id"/>
+        </group>
+        </xpath>
+
+        <xpath expr="//page[@name='information']" position="inside">
+          <field name="rule_ids">
+            <tree>
+              <field name="name"/>
+              <field name="code"/>
+              <field name="amount_python_compute"/>
+            </tree>
+          </field>
+        </xpath>
 
         <xpath expr="//page[@name='information']" position="after">
           <page string="Salary Plan" name="plan">
