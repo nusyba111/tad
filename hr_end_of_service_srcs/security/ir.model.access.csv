@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_indemnity_config,indemnity.config,model_indemnity_config,base.group_user,1,1,1,1
+access_indemnity_config_line,indemnity.config.line,model_indemnity_config_line,base.group_user,1,1,1,1
+access_reasons_end_of_service,reasons.end_of.service,model_reasons_end_of_service,base.group_user,1,1,1,1
+access_end_of_service,end_of.service,model_end_of_service,base.group_user,1,1,1,1
+access_financial_dues,financial.dues,model_financial_dues,base.group_user,1,1,1,1

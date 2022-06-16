@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+
+    <record id="view_reasons_end_of_service_form" model="ir.ui.view">
+        <field name="name">view.reasons.end_of.service.form</field>
+        <field name="model">reasons.end_of.service</field>
+        <field name="arch" type="xml">
+            <form string="Reasons End of Service">
+                <sheet>
+
+                    <group>
+                        <field name="reason"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="pay_for_working_days"/>
+                            <field name="leave_transportation_allowance"/>
+                            <field name="extra_pay"/>
+                            <field name="other"/>
+                            <field name="compensation"/>
+                        </group>
+                        <group>
+                            <field name="month_of_warning"/>
+                            <field name="leave_entitlement"/>
+                            <field name="end_of_service_gratuity"/>
+                            <field name="grants_and_incentives"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_reasons_end_of_service_tree" model="ir.ui.view">
+        <field name="name">view.reasons.end_of.service.tree</field>
+        <field name="model">reasons.end_of.service</field>
+        <field name="arch" type="xml">
+            <tree string="Reasons End of Service">
+                <field name="reason"/>
+                <field name="pay_for_working_days"/>
+                <field name="leave_transportation_allowance"/>
+                <field name="extra_pay"/>
+                <field name="other"/>
+                <field name="compensation"/>
+                <field name="month_of_warning"/>
+                <field name="leave_entitlement"/>
+                <field name="end_of_service_gratuity"/>
+                <field name="grants_and_incentives"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_reasons_end_of_service_view" model="ir.actions.act_window">
+        <field name="name">Reasons End of Service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">reasons.end_of.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+
+
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_reasons_end_of_service_view"
+              name="Reasons End of Service"
+              parent="menu_end_of_service_categ"
+              action="action_reasons_end_of_service_view"/>
+
+</odoo>

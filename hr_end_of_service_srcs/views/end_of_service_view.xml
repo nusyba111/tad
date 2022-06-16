@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <record id="view_end_of_service_form" model="ir.ui.view">
+        <field name="name">view.end_of.service.form</field>
+        <field name="model">end_of.service</field>
+        <field name="arch" type="xml">
+            <form string="End of Service">
+                <header>
+                    <button name="action_compute"
+                            class="oe_highlight"
+                            type="object"
+                            string="Compute"/>
+                </header>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="date"/>
+                            <field name="start_training_date"/>
+                            <field name="end_training_date"/>
+                            <field name="training_period"/>
+                            <field name="comprehensive_wage"/>
+                            <field name="basic_salary"/>
+                        </group>
+
+                        <group>
+                            <field name="employee_number"/>
+                            <field name="job_position_id"/>
+                            <field name="date_of_hiring_date"/>
+                            <field name="end_of_service_date"/>
+                            <field name="working_years"/>
+
+                        </group>
+                    </group>
+                    <group>
+                        <field name="reason"/>
+                    </group>
+
+                    <group>
+                        <field name="pay_for_working_days_boolean" invisible="1"/>
+                        <field name="month_of_warning_boolean" invisible="1"/>
+                        <field name="leave_entitlement_boolean" invisible="1"/>
+                        <field name="leave_transportation_allowance_boolean" invisible="1"/>
+                        <field name="end_of_service_gratuity_boolean" invisible="1"/>
+                        <field name="extra_pay_boolean" invisible="1"/>
+                        <field name="grants_and_incentives_boolean" invisible="1"/>
+                        <field name="other_boolean" invisible="1"/>
+                        <field name="compensation_boolean" invisible="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Benefits">
+                            <group>
+                                <field name="pay_for_working_days"
+                                       attrs="{'invisible': [('pay_for_working_days_boolean', '=', False)]}"/>
+                                <field name="month_of_warning"
+                                       attrs="{'invisible': [('month_of_warning_boolean', '=', False)]}"/>
+                                <field name="leave_entitlement"
+                                       attrs="{'invisible': [('leave_entitlement_boolean', '=', False)]}"/>
+                                <field name="leave_transportation_allowance"
+                                       attrs="{'invisible': [('leave_transportation_allowance_boolean', '=', False)]}"/>
+                                <field name="end_of_service_gratuity"
+                                       attrs="{'invisible': [('end_of_service_gratuity_boolean', '=', False)]}"/>
+                                <field name="extra_pay"
+                                       attrs="{'invisible': [('extra_pay_boolean', '=', False)]}"/>
+                                <field name="grants_and_incentives"
+                                       attrs="{'invisible': [('grants_and_incentives_boolean', '=', False)]}"/>
+                                <field name="other"
+                                       attrs="{'invisible': [('other_boolean', '=', False)]}"/>
+                                <field name="compensation"
+                                       attrs="{'invisible': [('compensation_boolean', '=', False)]}"/>
+                            </group>
+                            <group col="2">
+                                <field name="total_benefits"/>
+                            </group>
+                        </page>
+                        <page string="Deduction">
+
+                            <group col="4">
+                                <field name="month_of_warning_deduction"/>
+                                <field name="absence_deduction"/>
+                                <field name="loan_deduction"/>
+                                <field name="work_days_paid_with_salary_deduction"/>
+                                <field name="violations_and_fines_deduction"/>
+                                <field name="grants_and_incentives_deduction"/>
+                            </group>
+                            <group col="2">
+                                <field name="total_deduction"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_end_of_service_tree" model="ir.ui.view">
+        <field name="name">view.end_of.service.tree</field>
+        <field name="model">end_of.service</field>
+        <field name="arch" type="xml">
+            <tree string="End of Service">
+                <field name="date"/>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="end_training_date"/>
+                <field name="end_of_service_date"/>
+                <field name="comprehensive_wage"/>
+                <field name="employee_number"/>
+                <field name="job_position_id"/>
+                <field name="start_training_date"/>
+                <field name="date_of_hiring_date"/>
+                <field name="basic_salary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_end_of_service_view" model="ir.actions.act_window">
+        <field name="name">End of Service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">end_of.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+
+
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_end_of_service_categ"
+              name="End Of Service"
+              parent="hr.menu_hr_root"
+    />
+
+    <menuitem id="menu_end_of_service_view"
+              name="End of Service"
+              parent="menu_end_of_service_categ"
+              sequence="1"
+              action="action_end_of_service_view"/>
+
+</odoo>

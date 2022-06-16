@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_update_process_manager,employee_update_process.employee_update_process,model_hr_update_process,hr.group_hr_manager,1,1,1,1
+access_employee_update_process_line_manager,employee_update_process.employee_update_process_line,model_hr_update_line,hr.group_hr_manager,1,1,1,1

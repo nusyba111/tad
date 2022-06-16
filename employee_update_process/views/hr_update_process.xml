@@ -1,0 +1,114 @@
+<odoo>
+    <data>
+        <record id="hr_update_process_form_view" model="ir.ui.view">
+            <field name="name">hr.update.process.form.view</field>
+            <field name="model">hr.update.process</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                       <!--  <button name="confirm" type="object" string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="approve" type="object" string="Approve" class="oe_highlight"
+                                states="confirm"/>
+                        <button name="set_to_draft" type="object" string="Set To Draft" class="oe_highlight"
+                                states="confirm"/>
+                        <button name="cancel" type="object" string="CANCEL" states="confirm"/> -->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="type" string="Staff Update Scope" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_id"
+                                       attrs="{'required':[('type','=','employee')],'invisible': [('type', '!=', 'employee')],'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_ids" widget="many2many_tags"
+                                       attrs="{'required':[('type','=','select_employees')],'invisible': [('type', '!=', 'select_employees')],'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+
+                            <group>
+                                <field name="update_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="wage"
+                                       attrs="{'required':[('update_type','=','salary')],'invisible': [('update_type', '!=', 'salary')],'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="department_id"
+                                       attrs="{'required':[('update_type','=','department')],'invisible': [('update_type', '!=', 'department')],'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="job_id"
+                                       attrs="{'required':[('update_type','=','job_position')],'invisible': [('update_type', '!=', 'job_position')],'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="company_id" readonly="1"/>
+
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Update Line">
+                                <field name="update_lines">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="contract_id"/>
+                                        <field name="old_salary" attrs="{'column_invisible': [('parent.update_type', '!=', 'salary')]}"/>
+                                        <field name="old_department_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'department')]}"/>
+                                        <field name="old_job_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'job_position')]}"/>
+                                        <field name="salary" attrs="{'column_invisible': [('parent.update_type', '!=', 'salary')]}"/>
+                                        <field name="department_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'department')]}"/>
+                                        <field name="job_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'job_position')]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Reason">
+                                <group>
+                                    <field name="update_reason" nolabel="1" placeholder="Add Reason For Update ..." attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="hr_update_process_tree_view">
+            <field name="name">Employee Update Process</field>
+            <field name="model">hr.update.process</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="type"/>
+                    <field name="update_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="hr_update_process_action_window" model="ir.actions.act_window">
+            <field name="name">Employee Update Process</field>
+            <field name="res_model">hr.update.process</field>
+            <field name="view_mode">tree,form</field>
+            <!--      <field name="view_type">form</field>-->
+        </record>
+
+        <!--    START MENU ITEM    -->
+        <menuitem
+                id="menu_employee_update_process"
+                name="Update Process"
+                parent="hr_employee_srcs.menu_hr_employee_process"
+                sequence="1"
+                groups="hr.group_hr_manager,hr.group_hr_user"/>
+
+
+        <menuitem name="Employee Update Process"
+                  id="hr_update_process_menuitem"
+                  parent="menu_employee_update_process"
+                  action="hr_update_process_action_window"/>
+    </data>
+</odoo>
