@@ -148,8 +148,8 @@ class SrcBudgetLine(models.Model):
     practical_amount_bu_currency = fields.Monetary(compute='_compute_practical_budget_currency', currency_field='currency_budget_line',string='Practical Amount(Budget Currency)')
     balance_SDG = fields.Monetary(compute='_compute_balance_SDG', string='Balance SDG',currency_field='currency_id')
     balance_budget_currency = fields.Monetary(compute='_compute_balance_budegt_currency', string='Balance budget currency',currency_field='currency_budget_line')
-    total_budget = fields.Monetary(compute='_compute_total_budget', string='Total budget (Budget Currency)',currency_field='currency_budget_line',store=True)
-    planned_amount = fields.Monetary(compute='_compute_total_budget', string='Total budget ',currency_field='currency_id',store=True)
+    total_budget = fields.Monetary(compute='_compute_total_budget', string='Total budget (Budget Currency)',currency_field='currency_budget_line',store=True, readonly=False)
+    planned_amount = fields.Monetary(string='Total budget ',currency_field='currency_id',store=True)
     # rate = fields.Float(related='currency_budget_line.rate',digits=(12,6))
     
     
@@ -159,13 +159,18 @@ class SrcBudgetLine(models.Model):
             if rec.unit_of_measure and rec.quantity and rec.frequency and rec.unit_cost:
                 rec.total_budget = rec.quantity * rec.frequency * rec.unit_cost
                 print('__________________________________________','\n',rec.currency_budget_line.rate)
-            
+    
     @api.onchange('total_budget','currency_budget_line')
     def _onchange_planned_amount(self):
         if self.currency_budget_line:
-            self.planned_amount = self.total_budget / self.currency_budget_line.rate
-            print('__________________________________________','\n',self.planned_amount)
-        
+            if self.currency_budget_line == self.company_id.currency_id.id:
+                print('__________________________________________','\n',self.currency_budget_line)
+                self.planned_amount = self.total_budget
+            else:
+                self.planned_amount = self.total_budget / self.currency_budget_line.rate
+                print('__________________________________________','\n',self.planned_amount)
+        else:
+            self.planned_amount = 0
             
     
     def _compute_practical_amount(self):
