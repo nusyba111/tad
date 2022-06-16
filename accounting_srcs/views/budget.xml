@@ -32,7 +32,7 @@
                 <field name="situation" attrs="{'invisible':[('situation_boolean','!=',True)]}"/>
             </xpath>
             <xpath expr="//group/group/div" position="after">
-                <field name="donor_id" />
+                <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
                 <field name="project_id" attrs="{'required':[('budget_type','=','project')]}"/>
                 <field name="goal" attrs="{'invisible':[('goal_boolean','!=',True)]}"/>
                 <field name="site_boolean" invisible="1"/>
@@ -46,8 +46,10 @@
                <field name="date_to" optional="hide"/>
            </xpath>
            
-            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='planned_amount']" position="attributes">
-                <attribute name="invisible" >1</attribute>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='planned_amount']" position="replace">
+                <field name="planned_amount" sum='planned_amount' optional="hide"/>
+                
+                <!-- <attribute name="invisible" >1</attribute> -->
             </xpath>
             <!-- <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='theoritical_amount']" position="attributes">
                 <attribute name="invisible" >1</attribute>
@@ -67,8 +69,8 @@
                 <field name="frequency" attrs="{'column_invisible':[('parent.frequency_boolean','!=',True)]}"/>
                 <field name="unit_cost" attrs="{'column_invisible':[('parent.unit_cost_boolean','!=',True)]}"/>
                 <field name="currency_budget_line" invisible="1"/>
-                <field name="total_budget" sum='total_budget'/>
-                <field name="planned_amount" sum='planned_amount' optional="hide"/>
+                <field name="total_budget" sum='total_budget' force_save="1"/>
+               
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='practical_amount']" position="replace">
                 <field name="practical_amount" string="Practical Amount SDG" sum='practical_amount' optional="hide"/>
@@ -88,7 +90,7 @@
         <field name="inherit_id" ref="account_budget.crossovered_budget_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="donor_id" />
+                <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
                 <field name="project_id" />
             </xpath>
             <xpath expr="//field[@name='user_id']" position="after">

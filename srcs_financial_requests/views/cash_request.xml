@@ -36,7 +36,7 @@
                        </group> 
                        <group>
                             <field name="date" />
-                            <field name="donor_id" />
+                            <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
                             <field name="budget_currency"/>
                             <field name="residual_amount" />
                        </group>  

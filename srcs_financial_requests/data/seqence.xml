@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_request_sequence" model="ir.sequence">
+        <field name="name">Payment Request Sequence</field>
+        <field name="code">payment.request</field>
+        <field name="prefix">payment/%(year)s/%(month)s/</field>
+        <field name="padding">4</field>
+    </record>   
+
+</odoo>
