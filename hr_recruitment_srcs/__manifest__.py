@@ -20,5 +20,7 @@
         'data/plan_sequense.xml',
         'views/hr_recruitment_plan_view.xml',
         'views/hr_recruitment_general_plan_view.xml',
+        'report/recruitment _plan_template.xml',
+        'report/report.xml',
     ],
 }

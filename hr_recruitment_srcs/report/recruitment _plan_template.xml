@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_recruitment_plan">
+        <t t-call='web.html_container'>
+            <t t-foreach="docs" t-as="o">
+                <t t-call='web.basic_layout'>
+                    <div class="pages">
+                        <div class="oe_structure"/>
+                        <!--                        <div class="row">-->
+                        <div class="col-xs-0">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <table style="border:2px double black" class="center">
+                                <tr>
+                                    <th>إدارة الموارد البشرية
+                                        <hr style="background-color: black;"/>
+                                        Employement Application
+                                    </th>
+                                    
+                                    <th></th>
+                                    <th>النموذج السنوي للاحتياجات من الموظفين
+                                        <hr style="background-color: black;"/>
+                                        Manpower Requirement Annal Form
+                                    </th>
+                                    <th>رقم الوثيقة
+                                        <br/>
+                                        <span t-field="o.name"/>
+                                    </th>
+                                </tr>
+                                <br/>
+                                <style>
+                                    table {
+                                    font-family: arial, sans-serif;
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                    border: 1px solid black;
+                                    }
+
+                                    th{
+                                    border: 1px solid black;
+                                    text-align: left;
+                                    padding:20px;
+                                    background-color: #666600;
+                                    }
+                                    td{
+                                    background-color: #C9BE62;
+
+                                    }
+                                    div{
+                                     text-align: right;
+                                    }
+
+                                    tr:nth-child(even) {
+
+                                    
+                                    }
+                                </style>
+
+
+                            </table>
+                            <br/>
+                            <br/>
+                            <!-- seconed -->
+                            <table>
+                              <div>
+                                <tr>
+                                    <td>
+
+                                    <span t-field="o.manger_user"/>
+
+                                         من
+                                        ------------------------
+                                    مدير الادارة
+
+
+
+
+                                    </td>
+                                 </tr>  
+                                <tr>
+                                 <td>
+
+                                    <span t-field="o.hr_manger"/>
+                                      إلى
+                                     ---------------------
+                                 مدير إدرارة الموارد البشرية والشوؤن الإدراية
+
+                                  </td>  
+                                 </tr>
+                                                     
+                                 
+                                 <tr>
+                                 <td>
+                                     <span t-field="o.date_from"/>
+                                    التاريخ
+                                    
+
+                                 </td>
+                                  </tr>
+
+                                  <tr>  
+                                  <th >From:
+                                       
+                                      <hr style="background-color:black;width:5%;"/>
+                                Division Director:
+                               <span t-field="o.manger_user"/>
+                                 </th>
+                                  </tr> </div>
+                                <!--
+                                 <tr>
+                                 <th>
+                                     <hr style="background-color:black"/>
+                                Division Director:
+                               <span t-field="o.manger_user"/>
+                                </th>
+                             </tr>-->
+                                
+                                <tr>                               
+                                <th>To:
+                                   <hr style="background-color:black;width:5%;margin-right:0"/>
+
+                                    Hr Admin Director:
+                                    <span t-field="o.hr_manger"/>
+                                        </th>
+                                    </tr>
+                                    <tr>
+
+                                    <th>
+                                        Date:
+                                        <span t-field="o.date_from"/>
+
+                                    </th>
+                                 </tr>
+
+                            </table>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                              <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/><br/>
+                            <br/>
+
+                            <!-- table three-->
+                            <table>
+                              
+                           
+                           <tr>         
+                              
+                              
+                            <!--<td colspan="2"> 
+                            <td colspan="3">-->
+                                <th>
+                                 
+                                  الواجبات والمسؤوليات<br/>
+                                        Duites and Responsibilities</th>
+                                          
+                                <th>
+                                  المؤهل العلمي المطلوب<br/>
+                                        Required Qulifications</th>
+                           <th>
+                                  سنوات الخبرة المطلوبة<br/>
+                                        Required Years of Experince</th>
+                           <!-- </td> --> 
+
+                               <th >
+
+                                 الموعد الأنسب للتعيين<br/>
+                                        Best Beriod for hiring</th> 
+
+                               <th>الوحدة<br/>
+                                        Unit</th>
+                              <th>القسم <br/>Section</th>
+                               
+                               <th> الدائرة  <br/>
+                                        Department</th>
+                              <th>
+                                 <center>الموقع الوظيفي
+                                              <br/>
+                                              <hr  style="width:200px8"/>
+                                        Orignizational Entity</center>
+                                 الادراة <br/>
+                                        Division</th>
+
+                              
+                              
+                             <!--</td>-->
+                             
+                             <th>
+                                العدد اللازم للتعيين
+                                        <br/>
+                                        Required number to be hired
+                             </th>
+                            <th>
+                                العدد الحالي
+                                        <br/>
+                                        Current Number
+                             </th>
+                             <th>
+                             المسمى الوظيفي الفرعي
+                                        <br/>
+                                        Sub Job Task
+                             </th>
+                             <th>#</th>    
+                             
+                        </tr>
+                        <t t-foreach ="o.plan_ids" t-as="line">
+                           
+                              <tr>
+                              <td>
+                                   <span t-field="line.duites_and_spec"/>
+                                </td>
+                              <td>
+                                   <span t-field="line.required_qualification"/>
+                                </td>
+                              <td>
+                                   <span t-field="line.required_year"/>
+                                </td>
+                               <td>
+                                   <span t-field="line.best_period_hring"/>
+                                </td>
+                               <td>
+                                   <span t-field="line.unit"/>
+                                </td>
+                                <td>
+                                   <span t-field="line.section"/>
+                                </td>
+                                 <td>
+                                       <span t-field="line.department"/>
+                                 </td>
+                              
+
+                                 <td>
+                                       <span t-field="line.division"/>
+                                 </td>
+                                 <td>
+                                       <span t-field="line.required_number"/>
+                                 </td>
+                                 <td>
+                                       <span t-field="line.current_number"/>
+                                 </td>
+                                 <td>
+                                       <span t-field="line.job_id"/>
+                                 </td>
+                                 <td></td>
+                        </tr>
+                        </t>
+                        <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <span t-field="o.general_manger"/></th>
+
+
+
+                        <th>
+                           :توقيع مدير إدارة الموارد البشرية والشون الادارية 
+                                     <br/>
+                                        Hr and admin's Signture:
+                        </th>
+                             <th> <span t-field="o.hr_manger"/></th>
+                        
+                        <th>
+                           :توقيع الامين العام
+                                        <br/>
+                                        Hr and Admin's Director:
+                                        <br/> Signture
+                        </th>
+                        <th>
+                             <span t-field="o.manger_user"/>
+                        </th>
+                        <th>
+                           توقيع مدير الادراة المعني:
+                                        <br/>
+                                        Conserned Director's:
+                                        <br/> Signture
+
+                        </th>
+                        <th>
+                             <span t-field="o.total_number"/>
+                        </th>
+                            <th>
+                           العدد الإجمالي الازم للتعين
+                                        <br/>
+                                        :Total Number of Employees oo be hired
+
+
+                        </th>
+                        </tr>
+
+
+
+                     </table>
+
+
+                        </div>
+                    </div>
+           <!--                    </div>-->
+                </t>
+
+            </t>
+        </t>
+    </template>
+</odoo>
