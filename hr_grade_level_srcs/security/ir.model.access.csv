@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_grade_config,hr.grade.config,hr_grade_level_srcs.model_hr_grade,hr.group_hr_manager,1,1,1,1
+access_hr_level_config,hr.level,hr_grade_level_srcs.model_hr_level,hr.group_hr_manager,1,1,1,1
+access_hr_grade_process,hr.level,hr_grade_level_srcs.model_hr_wage_process,hr.group_hr_manager,1,1,1,1
+access_hr_grade_process_batch,hr.level,hr_grade_level_srcs.model_hr_wage_process_batch,hr.group_hr_manager,1,1,1,1
+access_grade_allow_deduct,grade.allow.deduct,model_grade_allow_deduct,,1,1,1,1

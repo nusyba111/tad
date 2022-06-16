@@ -1,0 +1,18 @@
+
+<odoo>
+	<data>
+         <!-- Inherit Employee Form -->
+		<record id="hr_employee_form_view_inherit_update_process" model="ir.ui.view">
+            <field name="name">Hr Employee Contract</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='department_id']" position="before">
+                     <field name="contract_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+	</data>
+</odoo>

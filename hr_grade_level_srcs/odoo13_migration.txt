@@ -1,0 +1,4 @@
+odoo13
+1- dont have api.one.
+2- dont have api.multi.
+3- view_type has been removed.

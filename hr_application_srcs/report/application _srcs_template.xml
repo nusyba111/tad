@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_applicatoin_srcs">
+   <t t-call='web.html_container'>
+   	  <t t-foreach="docs" t-as="o">
+   	  	 <t t-call='web.basic_layout'>
+   	  	 	<div class="pages">
+   	  	 	     <div class="oe_structure"/>
+   	  	 	      <div class="row">
+   	  	 	      	  <div class="col-xs-0">
+                           <table style="border:2px double black" class="center">
+                               <tr>  
+                                  <th>Employement Application</th>
+                                  <th>Employement Application</th>
+                                  <th>Humen Resource Department</th> 
+                                  <th> رقم الوثيقة<br/>HRD-02-05</th> 
+                                 </tr>
+                           </table>
+                           <br/>
+                           
+   	  	 	      	      <table class="center">
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td>
+   	  	 	      	      	   	   	<p>
+                                          Apllication NO.
+                                       <span t-field="o.applicaition_no"/>
+                                          </p>
+                                          <br/>
+                                        </td>
+                                 </tr>
+                           </table>
+                           <br/>
+                           <br/>
+                           <p>
+                           <br/>
+                           <span t-field="o.application_type"/>
+
+                           </p>
+                           <style>
+                           table,th,td {
+                             border:1px solid black;
+                                 }
+
+                           caption {
+                             background-color:lightgrey; 
+                             display: table-caption;
+                             text-align: center;
+                             }
+                           </style>
+                                          
+
+
+                           
+                           <!-- frist one-->
+                           <caption >1.Personal Information  1.المعلومات الشخصية</caption>   
+                           <table  class="center">
+                               <tr>  
+                                 <!--<th> الاسم الاول</th>-->
+                                 <th>Frist Name</th>
+                                 <!--<th>  اسم الاب</th>-->
+                                 <th>Father's Name</th>
+                                 <!--<th> اسم الجد</th>-->
+                                 <th>Grandfather's Name </th>
+                                 <!--<th> اسم العائلة</th>-->
+                                 <th> Family Name</th>     
+                                 </tr>
+                                 <tr>
+                                    
+                                    <td>
+                                       <span  t-field="o.frist_name"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.father_name"/></td>
+                                    <td>
+                                       <span t-field="o.grand_father_name"/></td>
+                                    <td>
+                                       <span  t-field="o.family_name"/></td>
+                                    <td></td>
+
+                                 </tr>
+                                 <tr>  
+                                 <!--<th> الجنسية</th>-->
+                                 <th>Nationality</th>
+                                 <!--<th>  الديانة</th>-->
+                                 <th>Religion</th>
+                                 <!--<th colspan='3'> رقم التامينات الاجتماعية</th>--> 
+                                 <th>Gosi No</th> 
+                                 <th></th>  
+                                 </tr>
+                                 <tr>
+                                    
+                                    <td>
+                                       <span  t-field="o.nationality"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.religion"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.gosi_no"/></td>
+                                    <td>
+                                    </td>
+
+                                 </tr>
+
+                                 <tr>  
+                                 <!--<th> الجنسية</th>-->
+                                 <th>Date of Birth</th>
+                                 <!--<th>  الديانة</th>-->
+                                 <th>Place of Birth</th>
+                                 <!--<th colspan='3'> رقم التامينات الاجتماعية</th> -->
+                                 <th>Marital Status</th> 
+                                 <th>Number of Childern</th>   
+                                 </tr>
+                                 <tr>
+                                    
+                                    <td>
+                                       <span  t-field="o.birth_date"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.place_of_birth"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.marital_status"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.no_of_childern"/>
+                                    </td>
+
+                                 </tr>
+                                 <tr>  
+                                 <!--<th> العنوان الحالي</th>-->
+                                 <th >Current Address</th>
+                                 <th></th>
+                                 <th> </th>
+                                 <th></th>
+                                    
+                                 </tr>
+                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                       <span t-field="o.current_address"/>
+                                    </td>
+                                 </tr> 
+                                 <tr> 
+                                 <!--<th> رقم الهاتف</th>-->
+                                 <th>#Tel</th>
+                                 <!--<th> رقم الجوال</th>-->
+                                 <th>#Mobile</th> 
+                                 <!--<th> رقم الفاكس</th>-->
+                                 <th>#Fax</th> 
+                                 <!--<th> البريد الالكتروني</th>-->
+                                 <th>E-maile</th>   
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       <span t-field="o.partner_phone"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.partner_mobile"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.fax"/>
+                                    </td>
+                                    <td>
+                                       <span t-field="o.email_from"/>
+                                    </td>
+                                 </tr>
+
+                           </table> 
+                              <br/>
+
+                           <!-- seconed one-->
+                           <caption>1.Education Background  1. المؤهلات العلمية</caption>
+                           <table  class="center">
+                                <tr>  
+                                 <!--<th> الؤهمل العلمي</th>-->
+                                 <th>Academic Qualification</th>
+                                 <!--<th>  االتخصص</th>-->
+                                 <th>major</th>
+                                 <!--<th> اسم المدرسة المعهد او الجامعة</th>-->
+                                 <th>Name of School ,Institue,University</th>
+                                 <!--<th> المكان</th>-->
+                                 <th>Location</th>
+                                 <!--<th> مدة الدراسة</th>-->
+                                 <th> Number of Years</th>  
+                                 <!--<th> المعدل التراكمي</th>-->
+                                 <th>GPA</th> 
+                                 <!--<th> سنة التخرج</th>-->
+                                 <th>Graduation Year</th>     
+                              </tr>
+                              <t t-foreach ="o.ed_experince" t-as="line">
+                              <tr> 
+                                 <td>
+                                       <span t-field="line.academic_qualification"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.major"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.name_of_school"/>
+                                 </td>
+                                 <td>
+                                    <span  t-field="line.location"/>
+                                 </td>
+                                 <td>
+                                    <span  t-field="line.no_of_years"/>
+                                 </td>
+                                 <td>
+                                    <span  t-field="line.gpa"/>
+                                 </td>
+                                 <td>
+                                    <span  t-field="line.Graduation_year"/>
+                                 </td> 
+
+                              </tr>
+                              </t>
+                           </table> 
+                           <!--languages-->
+                           <caption>1.Languages  1. اللغات</caption>
+                           <table  class="center">
+                                <tr>  
+                                 <!--<th> العربية</th>-->
+                                 <th>Arabic</th>
+                                 <!--<th>  الانجليزية</th>-->
+                                 <th>major</th>
+                                 <!--<th> لغات اخرى</th>-->
+                                 <th>Other Languages</th>    
+                              </tr>
+                              <t t-foreach ="o.ed_language" t-as="line">
+                              <tr> 
+                                 
+                                 <td>
+                                       <span t-field="line.arabic"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.english"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.other_languages"/>
+                                 </td>
+                              </tr>
+                              </t>
+                              
+                           </table> 
+                           <br/>
+                           <!--course-->
+                           <caption style="text-align: center;">1.Training Courses  </caption>
+                           <table  class="center">
+                                <tr>  
+                                 <th>Course Title</th>
+                                 <th>  Course Duration</th>
+                                 <th>Orgaination By</th>
+                                 <th> Course Date</th>
+                                 <th>Course Location</th>    
+                              </tr>
+                              <t t-foreach ="o.ed_course" t-as="line">
+                              <tr> 
+                                 
+                                 <td>
+                                       <span t-field="line.course_title"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.course_duration"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.org_by"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.date_of_course"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.course_location"/>
+                                 </td>
+                              </tr>
+                              </t>
+   
+                           </table> 
+                           
+
+                           <br/>
+                           <!--Previous Employement-->
+                           <caption>1.Previous Employement  </caption>
+                           <table class="center">
+                                <tr>  
+                                 <th>Employer Name</th>
+                                 <th>Position</th>
+                                 <th>Employer Started Date</th>
+                                 <th>Employer Ended Date</th>
+                                 <th>Monthly Salary</th>
+                                 <th>Reason for Leaving</th>    
+                              </tr>
+                              <t t-foreach ="o.ed_experince" t-as="line">
+                              <tr> 
+                                 <td>
+                                       <span t-field="line.employer_name"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.position"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.date_of_employer_start"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.date_of_employer_end"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.monthly_salary"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.reason_for_leaving"/>
+                                 </td>
+
+                              </tr>
+                              </t>
+                           </table> 
+
+                           <br/>
+                           <!--Other Information-->
+                           <br/>
+                           <caption>1.Other Information  </caption>
+                           <table class="center">
+                              <tr>  
+                                 <th>Do you have any chorinc disease?</th>
+                                 <th>NO</th>
+                                 <th>Yes</th>
+                                 <th>هل تعاني من اي مرض او إعاقة?</th>    
+                              </tr>
+                              <tr>
+                              <td>
+                              <span t-field="o.disease_note"/>
+                                 </td>
+                              <td>
+                                    <span t-field="o.disease"/></td>
+                              <td>
+                                   
+                              </td>
+                                 
+                              <td>إذا كان الجواب نعم حدد نوع المرض
+                              </td>
+                              </tr>
+                              <!--driving license-->
+                              <tr>  
+                                 <th>Do you have a valid Sudanese driving license?</th>
+                                 <th>NO</th>
+                                 <th>Yes</th>
+                                 <th>هل لديك رخصة قيادة سودانية?</th>    
+                              </tr>
+                              <tr>
+                              <td>
+                              </td>
+                              <td>
+                                 <span t-field="o.driving_license"/>
+                              </td>
+                              <td>
+                              </td>
+                              <td>     
+                              </td>
+                              <td>
+                                 
+                              </td>
+                              </tr>
+                              <!--crime-->
+                              <tr>  
+                                 <th>have you committed any crime or been in prison?</th>
+                                 <th>NO</th>
+                                 <th>Yes</th>
+                                 <th>هل تم الحكم عليك بقضايا شرعية او أخلاقية او غيرها</th>    
+                              </tr>
+                           <tr>
+                              <td>
+                              </td>
+                              <td>
+                                 <span t-field="o.crime"/>
+                              </td>
+                              <td>
+                              </td>
+                              <td>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 Before?if yes,please specfiy
+                              </td>
+                              <td>
+                                 <span t-field="o.crime_note"/>
+                              </td>
+                              <td>
+                              </td>
+                              <td>إذا كان الجواب نعم حدد نوعها 
+                              </td>
+                           </tr>
+                           </table> 
+                           <br/>
+                           <!--refernce-->
+                           <table class="center">
+                              <tr>  
+                                 <th>Please provide names of three persons whom we may refer for any information about you</th>
+                                 <th></th>
+                                 <th></th>
+                                 <th></th>
+                                 <th>الرجاء ذكر اسم لثلاثة اشخاص يمكن الرجوع إليهما للحصول على معلومات عنك</th>
+                              </tr>
+                              <tr>
+                                 <th>البريد الالكتروني<br/> E-mail</th>
+                                 <th>رقم الهاتف<br/> Tel No.</th> 
+                                 <th>الوظيفة<br/> Position</th>
+                                 <th>العنوان<br/> address</th> 
+                                 <th>الاسم<br/> Name</th>
+                                   
+                              </tr>
+                              <t t-foreach ="o.reference_info" t-as="line">
+                              <tr> 
+                                 <td>
+                                    <span t-field="line.reference_email"/>
+                                 </td>
+                                 <td>
+                                       <span t-field="line.reference_phone"/>
+                                 </td>
+                                 
+                                 <td>
+                                    <span t-field="line.reference_position"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.reference_address"/>
+                                 </td>
+                                 <td>
+                                    <span t-field="line.reference_name"/>
+                                 </td>
+                           </tr>
+                           </t>
+                           </table>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <!--eqrar-->
+                           <table class="center">
+                              <tr>  
+                                 <th>I ackanwledge that all information contained in this request is true and therfore i agree to verfiy that I'm aware  that any difference  in the crediblitiy of that information exposes me to terminate my services.</th>
+                                 <th></th>
+                                 <th></th>
+                                 <th>اقر أنا الموقع أدناه بأن جميع المعلومات الوارد في هذا الطلب صحيحة وحقيقية وبهذا أوافق على ان تتحقوا من صحتهاوأنا مدرك بأن أي اختلاففي مصداقية هذه المعلومات يعرضني لإنهاء خدماتي.</th>
+                              </tr>
+                           <tr>
+                              <td>Signature</td>
+                              <td>Date</td>
+                              <td>التاريخ</td>
+                              <td>
+                                 التوقيع
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <!-- add signature to report -->
+                                 <img t-att-src=" 'data:image/png;base64,%s' % to_text(o.signature)"/>
+                              </td>
+                              <td>
+                                 <span t-field="o.date"/>
+                              </td>
+                              <td></td>
+                              <td></td>
+                              
+                           </tr>
+                           </table>
+                           <br/> 
+                           <!-- last one -->
+                        <table class="center">
+                             <tr>
+                                 <th>Necessary Documents to Be Submitted with Empolyment Application .</th> 
+                                 <th></th>         
+                                 <th>المستندات المطلوب تقديمها مع طلب التوظيف.</th>
+         
+                                 
+                             </tr>
+                             <tr>
+                              <td>1.(4)recent colored photograhps(4*6)
+                                 <br/>
+                               2.copy of your ID card
+                              <br/>3.copy of your married certificate <br/> 4.updated CV
+                              <br/>
+                              5.original and copies of your qulaification certificaits
+                              <br/>
+                               6.copies of training certificaits
+                               <br/>
+                               7.copies of service certificaits
+                               <br/>
+                               8.salary certificaite from your current employer
+                              </td>
+                              <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                              <td>
+                                 عدد صور ملونة حديثة(4)( 4* 6) .1 <br/>
+                                 
+                        
+                                 2. صورة من بطاقة الهوية الخاصة بك 
+                                 
+                              <br/>
+                              3. نسخة من شهادة الزواج
+                            <br/>
+                              4. سيرة ذاتية محدثة
+
+                                  <br/>                                 
+                              5.أصل ونسخ من شهادات التأهيل الخاصة بك
+                                                               
+                              <br/>
+                                 6. نسخ من شهادات التدريب
+                                 
+                              <br/>
+                              
+                                 7. نسخ من شهادات الخدمة
+                                 
+                              <br/>
+                               8. شهادة راتب من صاحب العمل الحالي                                 
+                           </td>
+                            </tr>
+                            
+                            
+                            
+                            
+
+                           
+                     </table>  
+   	  	 	      	  </div>
+   	  	 	     </div>
+   	  	 	</div>
+   	  	 </t>
+
+   	  </t>
+   </t>
+</template>
+</odoo>

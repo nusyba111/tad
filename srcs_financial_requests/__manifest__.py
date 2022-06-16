@@ -13,7 +13,9 @@
     'depends': ['accounting_srcs'],
     'data': [
         'security/ir.model.access.csv',
+        'data/seqence.xml',
         'views/cash_request.xml',
+        'views/payment_request.xml',
         'reports/cash_report.xml',
     ],
 }

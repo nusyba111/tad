@@ -39,7 +39,7 @@ class SrcsCashRequest(models.Model):
     @api.depends('project_id','donor_id','budget_line_id')
     def _compute_description(self):
         for desc in self:
-            if desc.project_id and desc.donor_id and desc.budget_line_id:
+            if desc.project_id and desc.budget_line_id:
                 desc.description = "Khartoum-Sudan" + "\n" + "\n" + "With refrence to the project Agreement that was signed between the Sudanese Red Crescent Society and the" + " " + str(desc.donor_id.name) + " " + "the project" + str('%s' %(desc.project_id.name)) + " " + "as of " +str(desc.budget_line_id.date_from) + "we here by request the following payment for the quartor one in the amount of:"
             else:
                 desc.description = " "
@@ -55,6 +55,7 @@ class SrcsCashRequest(models.Model):
     @api.onchange('budget_line_id')
     def onchange_budget_line(self):
         self.residual_amount = self.budget_line_id.balance_budget_currency
+        self.donor_id = self.budget_line_id.crossovered_budget_id.donor_id.id
        
     def confrim_finance(self):
         self.state = "branch_finance"

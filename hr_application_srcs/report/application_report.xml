@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         
+    <record id="report_applicatoin_srcs" model="ir.actions.report">
+        <field name="name">Application Srcs</field>
+        <field name="model">hr.applicant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_application_srcs.report_applicatoin_srcs</field>
+        <field name="report_file">hr_application_srcs.report_applicatoin_srcs</field>
+        <field name="binding_model_id" ref="model_hr_applicant"/>
+        <field name="binding_type">report</field>
+    </record>     
+
+</odoo>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  START TUNJANGAN LAIN-LAIN -->
+        <record id="tree_hr_grade_view" model="ir.ui.view">
+            <field name="name">hr.grade</field>
+            <field name="model">hr.grade</field>
+            <field name="arch" type="xml">
+                <tree string="Grades">
+                    <field name="name"/>
+                    <!-- <field name="increment"/> -->
+                    <!-- <field name="initial_wage"/> -->
+                    <field name="degrees_no"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="form_hr_grade_view" model="ir.ui.view">
+            <field name="name">hr.grade</field>
+            <field name="model">hr.grade</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="sequence" readonly='1'/>
+                                <field name="job_id" string="Job Position"/>
+                                <!-- <field name="increment" string="Increment %"/> -->
+                            </group>
+                            <group>
+                                <!-- <field name="initial_wage"/> -->
+                                <field name="degrees_no"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Levels">
+                                <field name="degree_ids" >
+                                    <tree string="Degrees" editable="bottom">
+                                        <field name="name" readonly="1"/>
+                                        <field name="sequence" readonly="1"/>
+                                        <field name="wage"/>
+                                        <field name="s_insurance"/>
+                                        <field name="h_insurance"/>
+                                        <field name="a_s_b"/>
+                                        <field name="leave_allowance"/>
+                                        <field name="trans"/>
+                                        <field name="eid_bonus"/>
+                                        <field name="total_job_cost"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Grade Allowances">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="allow_deduct" required="True"/>
+                                        <field name="amount_deduct"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_grade_filter" model="ir.ui.view">
+            <field name="name">hr.grade.search</field>
+            <field name="model">hr.grade</field>
+            <field name="arch" type="xml">
+                <search string="Grade">
+                    <field name="name" string="Grade"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="grade_action">
+            <field name="name">Grades</field>
+            <field name="res_model">hr.grade</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_grade_filter"/>
+        </record>
+
+        <!--    START MENU ITEM    -->
+        <menuitem id="grade_configuration_menu" name="Grades" parent="hr.menu_human_resources_configuration"
+                  action="grade_action" sequence="2" groups="hr.group_hr_manager"/>
+
+        <!--  Levels -->
+        <record id="tree_hr_level_view" model="ir.ui.view">
+            <field name="name">hr.level</field>
+            <field name="model">hr.level</field>
+            <field name="arch" type="xml">
+                <tree string="Levels">
+                    <field name="name"/>
+                    <field name="wage"/>
+                    <field name="grade_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="form_hr_level_view" model="ir.ui.view">
+            <field name="name">hr.level</field>
+            <field name="model">hr.level</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="sequence" readonly='1'/>
+                                <field name="wage"/>
+                            </group>
+                            <group>
+                                <field name="grade_id"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_level_filter" model="ir.ui.view">
+            <field name="name">hr.level.search</field>
+            <field name="model">hr.level</field>
+            <field name="arch" type="xml">
+                <search string="Levels">
+                    <field name="name" string="Level"/>
+                    <field name="grade_id" string="Grade"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Grade" name="grade" domain="[]" context="{'group_by': 'grade_id'}"/>
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="level_action">
+            <field name="name">Levels</field>
+            <field name="res_model">hr.level</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_level_filter"/>
+            <field name="context">{"search_default_grade":1}</field>
+        </record>
+
+        <!--    START MENU ITEM    -->
+        <menuitem id="level_configuration_menu" name="Levels" parent="hr.menu_human_resources_configuration"
+                  action="level_action" sequence="3" groups="hr.group_hr_manager"/>
+    </data>
+</odoo>

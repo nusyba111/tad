@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mission_enrich,mission.enrich.name,model_mission_enrich,,1,1,1,1
+access_mission_line_user,mission.line.name,model_mission_enrish_line,,1,1,1,1
+access_mission_request,mission.request.name,model_hr_mission,,1,1,0,0
+access_mission_request_line,mission.request.line.name,model_hr_mission_line,,1,1,1,1
+access_mission_request_user,mission.request.user,model_hr_mission,hr_mission_srcs.group_hr_mission_users,1,1,1,1
+access_hr_mission_type_line,hr.mission.type.line,model_hr_mission_type_line,hr_mission_srcs.group_hr_mission_manager,1,1,1,1
+access_hr_mission_type,hr.mission.type,model_hr_mission_type,hr_mission_srcs.group_hr_mission_manager,1,1,1,1
+access_wizard_mission,wizard.mission,model_wizard_mission,hr_mission_srcs.group_hr_mission_manager,1,1,1,1
+access_hr_mission_stop,hr_mission_stop,model_hr_mission_stop,hr_mission_srcs.group_hr_mission_manager,1,1,1,1

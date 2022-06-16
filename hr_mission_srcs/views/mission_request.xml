@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  START mission request-tree -->
+        <record id="tree_mission_request_view" model="ir.ui.view">
+            <field name="name">hr.mission</field>
+            <field name="model">hr.mission</field>
+            <field name="arch" type="xml">
+                <tree string="Mission request">
+                    <field name="name"/>
+                    <field name="mission_type"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stop_mission_view_form" model="ir.ui.view">
+            <field name="name">hr.mission.stop.form</field>
+            <field name="model">hr.mission.stop</field>
+            <field name="arch" type="xml">
+                <form string="Stop Mission">
+                    <group col="4">
+                        <field name="stop_date"/>
+                        <field name="mission_id" invisible="1"/>
+                        <field name="stop_reason"/>
+                    </group>
+                    <footer>
+                        <button name="action_stop_apply" string="Stop" type="object" class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="stop_mission_action" model="ir.actions.act_window">
+            <field name="name">Stop Mission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.mission.stop</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_mission_id':active_id}</field>
+            <field name="view_id" ref="stop_mission_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <!--  START mission request-form -->
+        <record id="form_mission_request_view" model="ir.ui.view">
+            <field name="name">hr.mission</field>
+            <field name="model">hr.mission</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_submit" type="object" string="Confirm" states="draft" class="oe_highlight" groups="hr_mission_srcs.group_hr_mission_users"/>
+
+                        <button name="action_confirm" type="object" string="Department Manager Approve" states="submit"
+                                groups="hr_mission_srcs.group_hr_mission_manager" class="oe_highlight"/>
+                        <button name="action_gm_approve" type="object" string="General Manager Approve" class="oe_highlight" groups="hr_loan_srcs.group_hr_general_manager" 
+                                states="dept_approve"/>
+                        <button name="action_approve" type="object" string="Approve" states="gm_approve"
+                                groups="hr_mission_srcs.group_hr_mission_manager" class="oe_highlight"/>
+
+                        <button name="%(hr_mission_srcs.action_mission_wizard)d" type="action" context="{'cancel': True,}"
+                                string="Cancel" states="submit,dept_approve,gm_approve"/>
+
+                        <button name="action_set_to_draft" type="object" 
+                                string="Set To Draft" states="submit,dept_approve,gm_approve,cancel"/>
+
+                        <button string="Stop" name="%(stop_mission_action)d"  type="action" states="approve"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submit,dept_approve,gm_approve,approve"/>
+                    </header>
+                    <sheet>
+                         <group>
+                            <h1 class="mt0">
+                                <field name="name" readonly="True" attrs="{'invisible':[('name', '=', '/')]}"/>
+                            </h1>
+                        </group>
+                        <group>
+                            <group>
+                                <!-- <field name="employee_id" attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                <field name="department_id"/>
+                                <field name="job_id"/> -->
+                                <!-- <field name="employee_category_id" attrs="{'invisible':[('mission_type','!=','external')], 'required':[('mission_type','=','external')],'readonly':[('state', '!=','draft')]}"/>  -->
+
+                                <!-- <field name="project_id" /> -->
+                                <!-- <field name="disipline" attrs="{'invisible':[('mission_type','!=','internal')],
+                                    'required':[('mission_type','=','internal')],'readonly':[('state', '!=','draft')]}"/> -->
+                                <field name="mission_type" attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                 <label for="mission_country" string="Mission Place"/>
+                                    <div class="o_row">
+                                        <field name="mission_country"    attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                        <field name="mission_city"   attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                    </div>
+                                <field name="requestor_id"/>
+                                <field name="travel_by"/>
+                                <field name="currency_id" attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                <field name="move_id" readonly="1" attrs="{'invisible':[('move_id', '=', False)]}"/>
+                                <field name="responsible_id" invisible="1" readonly="1"/>
+
+                                
+                                <field name="stop_date" attrs="{'invisible':[('state', '!=', 'stop')]}"/>
+                                <field name="stop_reason" attrs="{'invisible':[('state', '!=', 'stop')]}"/>
+                                <field name="purpose"/>
+                            </group>
+                            <group>
+
+
+                                <field name="start_date" attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                <field name="end_date" attrs="{'readonly':[('state', '!=','draft')]}"/>
+                                <field name="mission_days"/>
+                                <field name="doner"/>
+                                <field name="project"/>
+                                <field name="activity"/>
+                                <field name="location"/>
+                                <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Employees">
+                                <field name="mission_line_ids"
+                                       context="{'default_start_date': start_date,'default_end_date':end_date}"
+                                       attrs="{'readonly':[('state', '=','approve')]}">
+                                    <tree editable="bottom">
+                                        <field name="employee_id"/>
+                                         <field name="name"/>
+                                        <field name="department_id"/>
+                                        <field name="job_id" optional="hide"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="mission_days"/>
+                                        <field name="allowance_amount"/>
+                                        <field name="total_amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Description">
+                                <field name="description"/>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--  START mission request-action -->
+        <record model="ir.actions.act_window" id="mission_request_action">
+            <field name="name">Mission Request</field>
+            <field name="res_model">hr.mission</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--    START MENU ITEM    -->
+        <menuitem id="mission_request_menu"
+                  name="Mission Request"
+                  parent="mission_menu_root"
+                  action="mission_request_action" sequence="2"/>
+    </data>
+</odoo>

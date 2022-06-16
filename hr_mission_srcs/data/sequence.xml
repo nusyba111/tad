@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--  Payment request Sequence-->
+        <record id="mission_request" model="ir.sequence">
+            <field name="name">mission request</field>
+            <field name="code">hr.mission</field>
+            <field name="prefix">Mission/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="active">True</field>
+            <field eval="1" name="number_increment"/>
+        </record>
+
+    </data>
+</odoo>

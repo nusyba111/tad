@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="employee_update_process" model="ir.sequence">
+            <field name="name">Employee Update Process</field>
+            <field name="code">employee.update.process</field>
+            <field name="prefix">EUP/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="active">True</field>
+            <field eval="1" name="number_increment"/>
+        </record>
+    </data>
+</odoo>

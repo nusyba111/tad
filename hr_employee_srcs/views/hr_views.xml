@@ -10,9 +10,34 @@
         <xpath expr="//field[@name='work_location_id']" position="after">
           <field name="code"/>
           <field name="signature"/>
+          <field name="cv"/>
         </xpath>
+        <xpath expr="//page[@name='hr_settings']//group//group[3]" position="after">
+          <group>
+            <field name="medical_isurance"/>
+          </group>
+
+        </xpath>
+        <xpath expr="//page[@name='hr_settings']" position="after">
+          <page name="attachment" string="Medical Reports">
+            <field name="medical_report">
+              <tree editable="buttom">
+                  <field name="name" string="Description"/>
+                  <field name="datas" string="Medical"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+        
       </field>
     </record>
+
+    <menuitem
+      id="menu_hr_employee_process"
+      name="Employee Process"
+      parent="hr.menu_hr_root"
+      sequence="9"
+      groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"/>
 
   </data>
 </odoo>

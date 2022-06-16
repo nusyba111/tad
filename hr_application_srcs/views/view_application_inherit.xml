@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--inherit fleet_vehicle_assignation_log_view_list-->
+    <record id="view_hr_applicant_list_inherited" model="ir.ui.view">
+        <field name="name">hr.applicant.inherited</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Adding fields-->
+            
+            <xpath expr="//label[@for='name']" position="before">
+                <h5>Applicaition No.</h5>
+                <field name="applicaition_no"/>
+                <h5>Employee Type</h5>
+                <field name="application_type" widget="radio"/>
+                <br/>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="before">
+                <field name="frist_name" widget="Frist Name"/>
+                <field name="father_name" widget="Father's Name"/>
+                <field name="grand_father_name" widget="Grandfather's Name"/>
+                <field name="family_name" widget="Family Name"/>
+                <field name="nationality" widget="Nationality"/>
+                <field name="religion" widget="Religion"/>
+                <field name="gosi_no" widget="Gosi No"/>
+                <field name="birth_date" widget="Date of Birth"/>
+                <field name="place_of_birth" widget="Place of Birth"/>
+                <field name="marital_status" widget="Marital Status"/>
+                <field name="no_of_childern" widget="Number of Childern"/>
+                <field name="current_address" widget="Current Address"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_phone']" position="after">
+                <field name="fax" widget="Fax"/>
+            </xpath>
+            <!-- disease -->
+            <xpath expr="//field[@name='source_id']" position="after">
+                <field name="disease"/>
+                <field name="disease_note" widget="Disease Note" attrs="{'invisible': [('disease', '=', False)]}"/>
+                <!--driving-->
+                <field name="driving_license"/>
+                <field name="date_to_work"/>
+                <!-- crime -->
+                <field name="crime" widget="checkbox"/>
+                <field name="crime_note"/>
+                <field name="signature" widget="signature"/>
+                <field name="date" widget="Date"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="education background">
+                    <field name="ed_background">
+                        <tree editable="bottom">
+                            <field name="academic_qualification" widget="Academic Qualification"/>
+                            <field name="major" widget="major"/>
+                            <field name="name_of_school" widget="Name of School ,Institue,University"/>
+                            <field name="location" widget="Location"/>
+                            <field name="no_of_years" widget="Number of Years"/>
+                            <field name="gpa" widget="GPA"/>
+                            <field name="Graduation_year" widget="Graduation Year"/>
+                        </tree>
+                    </field>
+                </page>
+                <!--Languages-->
+                <page string="Languages">
+                    <field name="ed_language">
+                        <tree editable="bottom">
+                            <field name="arabic" widget="Arabic"/>
+                            <field name="english" widget="English"/>
+                            <field name="other_languages" widget="Other Languages"/>
+                        </tree>
+                    </field>
+                </page>
+                <!--Courses-->
+                <page string="Training Courses">
+                        <field name="ed_course">
+                            <tree editable="bottom">
+                                <field name="course_title" widget="Course Title"/>
+                                <field name="course_duration" widget="Course Duration"/>
+                                <field name="org_by" widget="Orgaination By"/>
+                                <field name="date_of_course" widget="Course Date"/>
+                                <field name="course_location" widget="Course Location"/>
+                            </tree>
+                    </field>
+                </page>
+                <!--experinces-->
+                <page string="Previous Employement">
+                        <field name="ed_experince">
+                            <tree editable="bottom">
+                                <field name="employer_name" widget="Employer Name"/>
+                                <field name="position" widget="Position"/>
+                                <field name="date_of_employer_start" widget="Employer Started Date"/>
+                                <field name="date_of_employer_end" widget="Employer Ended Date"/>
+                                <field name="monthly_salary" widget="Monthly Salary"/>
+                                <field name="reason_for_leaving" widget="Reason for Leaving"/>
+                            </tree>
+                    </field>
+                </page>
+                <!--refernce-->
+                <page string="Refernce Information">
+                        <field name="reference_info">
+                            <tree editable="bottom">
+                                <!--refernce-->
+                                <field name="reference_name" widget="Reference Name"/>
+                                <field name="reference_address" widget="Reference Address"/>
+                                <field name="reference_position" widget="Reference Position"/>
+                                <field name="reference_phone" widget=" Reference Phone"/>
+                                <field name="reference_email" widget=" Reference E-mail"/> 
+                            </tree>
+                    </field>
+                </page>
+            </xpath>  
+        </field>
+    </record>
+</odoo>

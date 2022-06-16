@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        
+        <record id="view_leave_planning_report_form" model="ir.ui.view">
+            <field name="name">leave.planning.report</field>
+            <field name="model">leave.planning.report</field>
+            <field name="arch" type="xml">
+                <form string="Leave Planning Report">
+                    <footer>
+                        <button name = "print_report"  string="Print"  type="object" class="oe_highlight"/> or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_leave_planning_report_excel">
+            <field name="name">view.leave.planning.report.excel</field>
+            <field name="model">leave.planning.report.excel</field>
+            <field name="arch" type="xml">
+                <form string="File to Downloads">
+                    <field name="name" invisible="1"/>
+                    <field name="file_download" filename="name"/>
+                </form>
+            </field>
+        </record>
+
+        <!--Agent Fees Action -->
+         <record id="action_leave_planning_report" model="ir.actions.act_window">
+            <field name="name">Secretary General Office</field>
+            <field name="res_model">leave.planning.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_leave_planning_report_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+        <menuitem 
+            id="menu_leave_planning_report" 
+            name="Secretary General Office Report" 
+            action="action_leave_planning_report"
+            parent="hr_holidays.menu_hr_holidays_report"
+            groups="hr.group_hr_manager"
+            sequence="14"/>
+
+        
+
+    </data>
+</odoo>

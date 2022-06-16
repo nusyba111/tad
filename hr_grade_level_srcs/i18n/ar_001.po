@@ -1,0 +1,699 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_grade_level
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-18 04:54+0000\n"
+"PO-Revision-Date: 2021-03-18 04:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_needaction
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_needaction
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_needaction
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__batch_type__all_staff
+msgid "All Staff"
+msgstr "جميع الموظفين"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__allow_deduct
+msgid "Allowance"
+msgstr "الاستحقاقات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__amount_deduct
+msgid "Amount"
+msgstr "مبلغ"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__state__approve
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__state__approve
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_batch_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "Approve"
+msgstr "تصديق"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_attachment_count
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_attachment_count
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_attachment_count
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__batch_type
+msgid "Batch Type"
+msgstr "النوع"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_batch_view
+msgid "Batches"
+msgstr "دفعات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__company_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__company_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__company_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__company_id
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_grade_filter
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_level_filter
+msgid "Company"
+msgstr "الشركة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__state__confirm
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__state__confirm
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_batch_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__create_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__create_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__create_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__create_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__create_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__create_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__create_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__create_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee__currency_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__currency_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__contract_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__contract_id
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_hr_employee_form_inherit
+msgid "Current Contract"
+msgstr "العقد الحالي"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__current_grade
+msgid "Current Grade"
+msgstr "الدرجة الحالية"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__current_level
+msgid "Current Level"
+msgstr "العلاوة الحالية"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__current_wage
+msgid "Current Wage"
+msgstr "الجر الحالي"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__contract_id
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__contract_id
+msgid "Current contract of the employee"
+msgstr "العقد الحالي"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_contract__level_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee__level_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__level_id
+msgid "Degree"
+msgstr "العلاوة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__degree_ids
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_hr_grade_view
+msgid "Degrees"
+msgstr "العلاوات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_contract_allow_deduct__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_contract__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__display_name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__state__draft
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__state__draft
+msgid "Draft"
+msgstr "مبدئي"
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_hr_employee
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__employee_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__employee_id
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__batch_type__employee
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_hr_contract
+msgid "Employee Contract"
+msgstr "عقد الموظف"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_contract__wage
+msgid "Employee's monthly gross wage."
+msgstr "إجمالي المرتب الشهري للموظف."
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__employee_ids
+msgid "Employees"
+msgstr "الموظفين"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee__wage
+msgid "Expected Wage"
+msgstr "الأجر"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__red_line_type__fix_amount
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__red_line_type__fix_amount
+msgid "Fix Amount"
+msgstr "مبلغ ثابت"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_follower_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_follower_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_follower_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_channel_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_channel_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_channel_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_partner_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_partner_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_partner_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__grade_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_contract__grade_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee__grade_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__grade_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__grade_id
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_grade_filter
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_level_filter
+msgid "Grade"
+msgstr "الدرجة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__line_ids
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_hr_grade_view
+msgid "Grade Allowances"
+msgstr "استحقاقات الدرجة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_contract_allow_deduct__grade_related
+msgid "Grade Related"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.actions.act_window,name:hr_grade_level.grade_action
+#: model:ir.ui.menu,name:hr_grade_level.grade_configuration_menu
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.tree_hr_grade_view
+msgid "Grades"
+msgstr "الدرجات"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_grade_filter
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_level_filter
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_hr_wage_process_batch
+msgid "HR Wage Process Batch"
+msgstr "عمليات الترقية و الزيادات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_contract_allow_deduct__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_contract__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_needaction
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_unread
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_needaction
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_unread
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_needaction
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_unread
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_needaction
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_has_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_has_sms_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_has_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_has_sms_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_has_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_has_sms_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_has_error
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__increment
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__type__increment
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__type__increment
+msgid "Increment"
+msgstr "زيادة"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_hr_grade_view
+msgid "Increment %"
+msgstr "زيادة%"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__initial_wage
+msgid "Initial Wage"
+msgstr "الأجر الإبتدائي"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_is_follower
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_is_follower
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_is_follower
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_contract_allow_deduct____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_contract____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process____last_update
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__write_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__write_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__write_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__write_uid
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_grade_allow_deduct__write_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__write_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__write_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__write_date
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_level_filter
+msgid "Level"
+msgstr "العلاوة"
+
+#. module: hr_grade_level
+#: model:ir.actions.act_window,name:hr_grade_level.level_action
+#: model:ir.ui.menu,name:hr_grade_level.level_configuration_menu
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_hr_grade_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.tree_hr_level_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_level_filter
+msgid "Levels"
+msgstr "العلاوات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_main_attachment_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_main_attachment_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_main_attachment_id
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_has_error
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_has_error
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_has_error
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__name
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "New Salary Information"
+msgstr "معلومات الراتب الجديد"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__wage
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__wage
+msgid "New Wage"
+msgstr "الأجر الجديد"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__degrees_no
+msgid "No of degrees"
+msgstr "عدد العلاوات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__note
+msgid "Note"
+msgstr "ملاحظات"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_needaction_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_needaction_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_needaction_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_has_error_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_has_error_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_has_error_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_needaction_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_needaction_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_needaction_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_has_error_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_has_error_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_has_error_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__message_unread_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__message_unread_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__message_unread_counter
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "Old Salary Information"
+msgstr "معلومات الراتب القديم"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__red_line_type__percentage
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__red_line_type__percentage
+msgid "Percentage"
+msgstr "نسبة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__type__promotion
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__type__promotion
+msgid "Promotion"
+msgstr "ترقية"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__type__redline
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__type__redline
+msgid "Red Line"
+msgstr "زيادة مباشرة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__red_line_type
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__red_line_type
+msgid "Red Line Type"
+msgstr "نوع الزيادة المباشرة"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_batch_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "Refuse"
+msgstr "رفض"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process__state__refused
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__state__refused
+msgid "Refused"
+msgstr "رفض"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_has_sms_error
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_has_sms_error
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_has_sms_error
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.view_hr_contract_form_inherit
+msgid "Salary Scale"
+msgstr "الهيكل الراتبي"
+
+#. module: hr_grade_level
+#: model:ir.model.fields.selection,name:hr_grade_level.selection__hr_wage_process_batch__batch_type__selected_employee
+msgid "Selected Employees"
+msgstr "مجموعة من الموظفين"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__sequence
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__sequence
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__grade_sequence
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__level_sequence
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_batch_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_view
+msgid "Set To Draft"
+msgstr "إرجاع لمبدئي"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__state
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_contract_allow_deduct__grade_related
+msgid "Technical Field"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.constraint,message:hr_grade_level.constraint_hr_grade_sequence_uniq
+msgid "The sequence of grade must be unique per company"
+msgstr "تسلسل الدرجة يجب ان يكون متفرداً"
+
+#. module: hr_grade_level
+#: model:ir.model.constraint,message:hr_grade_level.constraint_hr_level_sequence_uniq
+msgid "The sequence of level must be unique per company"
+msgstr "تسلسل العلاوة يجب ان يكون متفرداً"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__type
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__type
+msgid "Type"
+msgstr "النوع"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_unread
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_unread
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_unread
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__message_unread_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__message_unread_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__message_unread_counter
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_contract__wage
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__wage
+msgid "Wage"
+msgstr "المرتب"
+
+#. module: hr_grade_level
+#: model:ir.ui.menu,name:hr_grade_level.menu_hr_wage_process
+msgid "Wage Process"
+msgstr "عمليات تعديل الأجور"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.form_wage_process_batch_view
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.tree_hr_wage_process_batch_view
+msgid "Wage Process Batch"
+msgstr "عمليات تعديل الأجور بالدفعات"
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.wage_process_pivot
+msgid "Wage Process Pivot"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.actions.act_window,name:hr_grade_level.wage_process_action
+#: model:ir.ui.menu,name:hr_grade_level.wage_process_menu
+msgid "Wage process"
+msgstr "عمليات تعديل الأجور"
+
+#. module: hr_grade_level
+#: model:ir.actions.act_window,name:hr_grade_level.wage_process__batch_action1
+#: model:ir.ui.menu,name:hr_grade_level.wage_process_batch_menu
+msgid "Wage process Batch"
+msgstr "عمليات تعديل الأجور بالدفعات"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_grade__website_message_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_level__website_message_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__website_message_ids
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,help:hr_grade_level.field_hr_grade__website_message_ids
+#: model:ir.model.fields,help:hr_grade_level.field_hr_level__website_message_ids
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process__website_message_ids
+#: model:ir.model.fields,help:hr_grade_level.field_hr_wage_process_batch__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: hr_grade_level
+#: code:addons/hr_grade_level/models/hr_wage_process.py:0
+#, python-format
+msgid "You Can't Delete Record not in draft state"
+msgstr ""
+
+#. module: hr_grade_level
+#: code:addons/hr_grade_level/models/hr_level.py:0
+#, python-format
+msgid "You can not delete level  assigned to employee"
+msgstr ""
+
+#. module: hr_grade_level
+#: code:addons/hr_grade_level/models/hr_wage_process_batch.py:0
+#, python-format
+msgid "You can not delete record not in draft state."
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__batch_id
+msgid "batch"
+msgstr "دفغة"
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_contract_allow_deduct
+msgid "contract.allow.deduct"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_grade_allow_deduct
+msgid "grade.allow.deduct"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_hr_grade
+msgid "hr.grade"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_hr_level
+msgid "hr.level"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model,name:hr_grade_level.model_hr_wage_process
+msgid "hr.wage.process"
+msgstr ""
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process__percentages
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__percentages
+msgid "percentage (%)"
+msgstr "نسبة (%)"
+
+#. module: hr_grade_level
+#: model:ir.model.fields,field_description:hr_grade_level.field_hr_wage_process_batch__wage_process_ids
+msgid "process batch"
+msgstr ""
+
+#. module: hr_grade_level
+#: model_terms:ir.ui.view,arch_db:hr_grade_level.tree_hr_wage_process_view
+msgid "wage Process"
+msgstr "عمليات تعديل الأجور"

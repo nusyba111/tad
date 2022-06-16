@@ -24,6 +24,7 @@
                         <div class="oe_title">
                             <h1>
                                 <field name="name"/>
+
                             </h1>
                         </div>
                         <!--<group>
@@ -39,11 +40,20 @@
                         </group> -->
                         <group>
                           <group>
+
                             <field name="date_from"/>
+
                           </group>
                           <group>
                             <field name="date_to"/>
+                              <field name="manger_user"/>
+                            <field name="hr_manger"/>
+                            <field name="general_manger" />
+
                           </group>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
                         </group>
                         <notebook>
                             <page string="Details">
@@ -60,10 +70,15 @@
                                         <field name="required_year" optional="hide"/>
                                         <field name="required_qualification" optional="hide"/>
                                         <field name="duites_and_spec" optional="hide"/>
+<!--                                        <field name="total_number" />-->
                                     </tree>
                                 </field>
                             </page>
                         </notebook>
+                        <group class="oe_subtotal_footer oe_right" colspan = "2">
+                            <field name="total_number"/>
+                        </group>
+
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
