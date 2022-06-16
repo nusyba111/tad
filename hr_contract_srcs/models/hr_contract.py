@@ -25,6 +25,7 @@ class HRContract(models.Model):
     rule_ids = fields.One2many('hr.salary.rule',related="struct_id.rule_ids")
     forgin_currency_id = fields.Many2one('res.currency',string="Currency",readonly=False)
     wage_per_hour = fields.Float(compute="_get_wage_per_hour",store=True)
+    wage = fields.Monetary('Wage', required=True, tracking=True, help="Employee's monthly gross wage.",currency_field='forgin_currency_id')
 
 
     @api.depends('wage')
