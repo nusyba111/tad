@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <!-- Custom changed -->
+        <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+            <field name="name">employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <group name='identification_group' position='after'>
+                    <group string="Current Contract" name='current_contract'>
+                        <field name='vehicle'/>
+                        <field name='grade_id'/>
+                        <field name='level_id'/>
+                        <field name='wage'/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

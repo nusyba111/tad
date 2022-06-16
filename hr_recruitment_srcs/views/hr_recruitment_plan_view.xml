@@ -1,0 +1,150 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="recruitment_plan_form_view">
+            <field name="name">hr.recruitment.plan.form.view</field>
+            <field name="model">hr.recruitment.plan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Confirm" name="action_confirm" states="draft"
+                                type="object" class="oe_highlight" />
+                        <button string="Department Manager Approve" name="action_dept_approve" states="department_manager"
+                                type="object" class="oe_highlight" groups="hr_recruitment_srcs.group_hr_department_manager"/>
+                        <button string="HR Manager Approve" name="action_hr_manager" states="hr_manager"
+                                type="object" class="oe_highlight" groups="hr.group_hr_manager"/>
+                        <button string="Secretary General Approve" name="action_secretary" states="secretary_general"
+                                type="object" class="oe_highlight"/>
+                        <!--<button string="Set to Draft" name="action_draft" states="confirm,approve,validate,cancel"
+                                type="object" group="hr.group_hr_manager"/>
+                        <button string="Cancel" name="action_cancel" states="confirm,approve,validate,done"
+                                type="object"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,department_manager,hr_manager,secretary_general"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+
+                            </h1>
+                        </div>
+                        <!--<group>
+                            <div class="o_row">
+                                    <field name="date_from" widget="daterange" nolabel="1" class="oe_inline"
+                                           options="{'related_end_date': 'date_to'}" required="1"
+                                           attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                                    <field name="date_to" widget="daterange" nolabel="1" class="oe_inline"
+                                           options="{'related_start_date': 'date_from'}" required="1"
+                                           attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                </div>
+                        </group> -->
+                        <group>
+                          <group>
+
+                            <field name="date_from"/>
+
+                          </group>
+                          <group>
+                            <field name="date_to"/>
+                              <field name="manger_user"/>
+                            <field name="hr_manger"/>
+                            <field name="general_manger" />
+
+                          </group>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="plan_ids">
+                                    <tree  editable="bottom">
+                                        <field name="job_id" optional="show"/>
+                                        <field name="current_number" optional="show"/>
+                                        <field name="required_number" optional="show"/>
+                                        <field name="division" optional="show"/>
+                                        <field name="department" optional="hide"/>
+                                        <field name="section" optional="hide"/>
+                                        <field name="unit" optional="hide"/>
+                                        <field name="best_period_hring" optional="hide"/>
+                                        <field name="required_year" optional="hide"/>
+                                        <field name="required_qualification" optional="hide"/>
+                                        <field name="duites_and_spec" optional="hide"/>
+<!--                                        <field name="total_number" />-->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer oe_right" colspan = "2">
+                            <field name="total_number"/>
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="recruitment_plan_tree_view">
+            <field name="name">hr.recruitment.plan.tree.view</field>
+            <field name="model">hr.recruitment.plan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!-- <record model="ir.ui.view" id="recruitment_plan_search_view">
+            <field name="name">hr.recruitment.plan.search</field>
+            <field name="model">hr.recruitment.plan</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="current_year" string="Current Year"
+                                domain="[('date_from','&lt;=',(context_today() + relativedelta(years=1)).strftime('%Y-%m-%d')), ('date_from','&gt;=',time.strftime('%Y-01-01'))]"/>
+                        <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
+                        <filter name="group_by_department" string="Department" context="{'group_by':'department_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record> -->
+        <record model="ir.actions.act_window" id="recruitment_plan_action">
+            <field name="name">Recruitment Plan</field>
+            <field name="res_model">hr.recruitment.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Recruitment Plan
+                </p>
+            </field>
+        </record>
+
+       
+        <menuitem 
+            id="plan_menu" 
+            name="Plan" 
+            parent="hr_recruitment.menu_hr_recruitment_root"
+            sequence="2"
+        />
+
+        <menuitem 
+            id="recruitment_plan_menu" 
+            name="Recruitment Plan" 
+            parent="plan_menu"
+            action="recruitment_plan_action"
+            sequence="1"
+        />
+
+             
+
+    </data>
+</odoo>

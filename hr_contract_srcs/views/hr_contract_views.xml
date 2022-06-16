@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it Employee -->
+    <record id="view_contract_form_inherit" model="ir.ui.view">
+      <field name="name">view.contract.form.inherit</field>
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+      <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='hr_responsible_id']" position="after">
+          <field name="contract_type"/>
+        </xpath>
+        <xpath expr="//field[@name='structure_type_id']" position="after">
+           <field name="struct_id"/>
+        </xpath>
+
+        <xpath expr="//group[@name='salary']" position="after">
+          <group>
+          <field name="forgin_currency_id"/>
+          <field name="wage_per_hour" invisible="1"/>
+        </group>
+        </xpath>
+
+        <xpath expr="//page[@name='information']" position="inside">
+          <field name="rule_ids">
+            <tree>
+              <field name="name"/>
+              <field name="code"/>
+              <field name="amount_python_compute"/>
+            </tree>
+          </field>
+        </xpath>
+
+        <xpath expr="//page[@name='information']" position="after">
+          <page string="Salary Plan" name="plan">
+            <field name="salary_plan">
+                <tree editable="bottom">
+                  <field name="covered_by"/>
+                  <field name="percentage_of_covering"/>
+                  <field name="coverage_in_usd"/>
+                </tree>
+              </field>
+
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

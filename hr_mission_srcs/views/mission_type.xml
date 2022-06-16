@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--  START mission Type-tree -->
+        <record id="tree_mission_type_view" model="ir.ui.view">
+            <field name="name">hr.mission.type</field>
+            <field name="model">hr.mission.type</field>
+            <field name="arch" type="xml">
+                <tree string="Mission Type">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="currency_id"/>
+                    <field name="Per_Dem"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!--  START mission Type-form -->
+        <record id="form_mission_type_view" model="ir.ui.view">
+            <field name="name">hr.mission.type</field>
+            <field name="model">hr.mission.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Mission Type">
+
+                                <field name="name"/>
+                                <field name="type" widget="radio"/>
+                                <field name="currency_id"/>
+                                <field name="Per_Dem"/>
+                                <field name="amount" attrs="{'invisible':[('Per_Dem','!=','fix_amount')]}"/>
+                                <field name="formula" attrs="{'invisible':[('Per_Dem','!=','formula')]}"/>
+                            </group>
+
+                        <notebook attrs="{'invisible':[('Per_Dem','!=','fix_job')]}">
+                            <page string="Details" >
+                               <field name="amount_job_id">
+                                    <tree editable="top">
+                                        <field name="amount"/>
+                                        <field name="job_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>            
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+       <!--  START mission enrich-action -->
+        <record model="ir.actions.act_window" id="mission_type_action">
+            <field name="name">Mission Type</field>
+            <field name="res_model">hr.mission.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--    Mission Type MENU ITEM    -->
+
+        <menuitem id="mission_type_menu"
+                  name="Mission Type"
+                  parent="mission_configuration_menu"
+                  action="mission_type_action"
+                  groups="hr_mission_srcs.group_hr_mission_manager"/>
+
+    </data>
+</odoo>

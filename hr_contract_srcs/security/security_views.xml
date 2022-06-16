@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Record Right-->
+
+    <record id="group_account_asset_manager" model="res.groups">
+            <field name="name">Asset Manager</field>
+            <field name="category_id" ref="base.module_category_accounting_accounting"/>
+    </record>
+
+
+</odoo>

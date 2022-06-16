@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_recruitment_plan_user,hr_recruitment_plan_user,model_hr_recruitment_plan,,1,1,1,1
+access_hr_recruitment_plan_line_user,hr_recruitment_plan_line_user,model_hr_recruitment_plan_line,,1,1,1,1
+access_hr_recruitment_general_plan_user,hr_recruitment_general_plan_user,model_hr_recruitment_general_plan,,1,1,1,1
+access_hr_recruitment_general_plan_line_user,hr_recruitment_general_plan_line_user,model_hr_recruitment_general_plan_line,,1,1,1,1
+
+
+

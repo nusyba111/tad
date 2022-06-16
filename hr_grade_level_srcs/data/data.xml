@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="grade_seq" model="ir.sequence">
+            <field name="name">grade sequence</field>
+            <field name="code">hr.grade</field>
+        </record>
+
+        <record id="level_seq" model="ir.sequence">
+            <field name="name">level sequence</field>
+            <field name="code">hr.level</field>
+        </record>
+
+        <record id="promotion_seq" model="ir.sequence">
+            <field name="name">promotion sequence</field>
+            <field name="code">wage.process.promotion</field>
+            <field name="prefix">Promotion/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="active">True</field>
+            <field eval="1" name="number_increment"/>
+        </record>
+
+        <record id="increment_seq" model="ir.sequence">
+            <field name="name">increment sequence</field>
+            <field name="code">wage.process.increment</field>
+            <field name="prefix">Increment/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="active">True</field>
+            <field eval="1" name="number_increment"/>
+        </record>
+
+        <record id="redLine_seq" model="ir.sequence">
+            <field name="name">red line sequence</field>
+            <field name="code">wage.process.redLine</field>
+            <field name="prefix">RedLine/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="active">True</field>
+            <field eval="1" name="number_increment"/>
+        </record>
+
+        <record id="redLine_seq_batch" model="ir.sequence">
+            <field name="name">red line sequence batch</field>
+            <field name="code">wage.process.redLine.batch</field>
+            <field name="prefix">BATCH/REDLINE/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="active">True</field>
+            <field eval="1" name="number_increment"/>
+        </record>
+    </data>
+</odoo>

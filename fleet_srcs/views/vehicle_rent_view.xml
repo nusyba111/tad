@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="action_rent_request" model="ir.actions.act_window">
+            <field name="name">Vehicle Rent Request</field>
+            <field name="res_model">fleet.rent.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_contract_tree" model="ir.actions.act_window">
+            <field name="name">Contract</field>
+            <field name="res_model">fleet.vehicle.log.contract</field>
+            <field name="type">ir.actions.act_window</field>
+             <field name="domain">[('rent_id', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Contract
+              </p>
+            </field>
+        </record>
+
+        <record id="seq_rent" model="ir.sequence">
+            <field name="name">Request No.</field>
+            <field name="code">rent.no</field>
+            <field name="prefix">Request/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <record id="rent_view_tree" model="ir.ui.view">
+            <field name="name">rent.view.tree</field>
+            <field name="model">fleet.rent.request</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicle Rent Request" class="" sample="1">
+                    <field name="request_no"/>
+                    <field name="branch"/>
+                    <field name="date"/>
+                    <field name="department"/>
+                    <field name="destination"/>
+                    <field name="model"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="rent_view_form" model="ir.ui.view">
+            <field name="name">rent.view.form</field>
+            <field name="model">fleet.rent.request</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle Rent Request">
+                    <header>
+                    <button
+                            name="to_fleet_manager"
+                            states="draft"
+                            string="Fleet Manager"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_admin_manager"
+                            states="fleet_manager"
+                            string="Admin Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_manager"
+                            states="admin_manager"
+                            string="Admin Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_operation_manager"
+                            states="manager"
+                            string="Admin Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            attrs="{'visible':[('state','in',['draft','direct_manager'])]}"/>
+                     <button
+                            name="action_done"
+                            string="Done"
+                            type="object"
+                            attrs="{'invisible':[('state','in',['fleet'])]}"/>
+                      <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,fleet_manager,admin_manager,manager,operation,cancel,done" optional="show"
+                    />
+                    </header>
+                    <sheet>
+                         <div class="oe_button_box" name="button_box">
+                        <button type="action"
+                            name="%(fleet_srcs.action_rent_request)d"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('contract_count', '=', 0)]}">
+                        <field name="contract_count" widget="statinfo" string="Contract"/>
+                         </button>
+                        </div>
+                        <group col="4" colspan="4">
+                            <field name="request_no"/>
+                            <field name="branch"/>
+                            <field name="date"/>
+                            <field name="department"/>
+                            <field name="model"/>
+                            <field name="destination"/>
+                            <field name="purpose"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="end_date"/>
+                        </group>
+                         <notebook>
+                             <page string="Approvals" name="approve">
+                                 <group col="4" colspan="4">
+                                 <field name="dept_approve"/>
+                                 <field name="date"/>
+                                 <field name="admin_approve"/>
+                                 <field name="date_approve"/>
+                                 </group>
+                             </page>
+                             <page string="Car Information" name="info">
+                                 <group col="4" colspan="4">
+                                 <field name="partner"/>
+                                 <field name="contract_no"/>
+                                 </group>
+                                 <group col="4" colspan="4">
+                                 <field name="address"/>
+                                 <field name="add_phone"/>
+                                 </group>
+                                 <group col="6" colspan="6">
+                                     <field name="car_model"/>
+                                     <field name="plate"/>
+                                     <field name="date_make"/>
+                                     <field name="fuel_type"/>
+                                     <field name="fuel_amount"/>
+                                     <field name="leave_date"/>
+                                     <field name="back_date"/>
+                                     <field name="days_no"/>
+                                     <field name="lease_amount"/>
+                                     <field name="invoice_no"/>
+                                     <field name="invoice_amount"/>
+                                     <field name="driver"/>
+                                     <field name="phone"/>
+                                     <field name="employee"/>
+                                     <field name="date_sig"/>
+                                 </group>
+                             </page>
+                             <page string="After Mission" name="after_mission">
+                                 <group>
+                                     <field name="requested_days"/>
+                                     <field name="actual_days"/>
+                                     <field name="actual_amount"/>
+                                 </group>
+                             </page>
+                         </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
+            </field>
+        </record>
+        <record id="fleet_contract_inherited" model="ir.ui.view">
+            <field name="name">contract</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+            <field name="arch" type="xml">
+                <field name="cost_generated" position="after">
+                    <field name="rent_id"/>
+                </field>
+
+            </field>
+        </record>
+
+        <menuitem
+                id="rent_request"
+                name="Vehicle Rent Request"
+                sequence="6"
+                parent="fleet.menu_root"
+                action='action_rent_request'
+        />
+    </data>
+</odoo>

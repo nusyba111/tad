@@ -24,16 +24,17 @@ class Repair(models.Model):
     _order = "date,state desc"
 
     repair_no=fields.Char('Repair No:',readonly=True)
+    fleet=fields.Many2one('fleet.vehicle',string='vehicle',required=True, tracking=True)
+    branch=fields.Many2one('res.branch',string='Branch')
     date=fields.Date(string='Request Date',required=True, tracking=True)
-    licence_plate=fields.Char(string='Licence Plate',required=True,tracking=True)
-    shassis_no=fields.Char(string='Shassis No',required=True,tracking=True)
+    licence_plate=fields.Char(string='Licence Plate',related='fleet.license_plate',required=True,tracking=True)
+    shassis_no=fields.Char(string='Shassis No',related='fleet.vin_sn',required=True,tracking=True)
     complain=fields.Text(string='Complain',required=True,tracking=True)
     service_id=fields.One2many('services','repair_id')
     hour=fields.Float(string='Working Hour')
     warehouse=fields.Many2one('stock.warehouse',string='Warehouse')
     spare_id=fields.One2many('spare.parts','repairid')
     source_warehouse_id = fields.Many2one('stock.warehouse', 'From Warehouse')
-    dest_warehouse_id = fields.Many2one('stock.warehouse', 'TO Warehouse')
     backorder_count = fields.Integer(string='Back Order', compute='_compute_backorder_ids')
     picking_id = fields.Many2many('stock.picking', 'job_pickind_ids', string='Picking Reference')
     return_picking_id = fields.Many2one('stock.picking', 'Return Picking Reference', readonly=True)
@@ -64,9 +65,6 @@ class Repair(models.Model):
 
     def to_admin(self):
         self.write({'state': 'repair'})
-    def to_stock(self):
-        self.write({'state': 'stock'})
-
 
     def action_cancel(self):
         self.write({'state': 'cancel'})
@@ -119,9 +117,9 @@ class Repair(models.Model):
             # Stock Picking order entry
             stock_picking_vals = {'partner_id': self.create_uid.partner_id.id,
                                   'location_id': self.source_warehouse_id.lot_stock_id.id,
-                                  'location_dest_id': self.dest_warehouse_id.lot_stock_id.id,
+                                  'location_dest_id': self.source_warehouse_id.wh_output_stock_loc_id.id,
                                   'scheduled_date': self.date,
-                                  'picking_type_id': self.source_warehouse_id.int_type_id.id,
+                                  'picking_type_id': self.source_warehouse_id.out_type_id.id,
                                   'repair_id': self.id,
                                   }
             picking = self.env['stock.picking'].create(stock_picking_vals)
@@ -135,12 +133,13 @@ class Repair(models.Model):
                         'product_uom': line.spare.product_tmpl_id.uom_id.id,
                         'location_id': self.source_warehouse_id.lot_stock_id.id,
                         'name': line.spare.name,
-                        'location_dest_id': self.dest_warehouse_id.lot_stock_id.id,
+                        'location_dest_id': self.source_warehouse_id.wh_output_stock_loc_id.id,
                         'picking_id': picking.id,
                         'spare_line_id': line.id,
                     }
                     move = self.env['stock.move'].create(stock_move_vals)
                     line.picking_id = picking
+                    self.write({'state': 'stock'})
 
 class Service(models.Model):
     _name = 'services'
@@ -160,6 +159,18 @@ class SpareParts(models.Model):
     return_picking_id = fields.Many2one('stock.picking', 'Return Picking Reference', readonly=True)
     back_picking_ids = fields.Many2many('stock.picking', 'stock_picking_rel', copy=False, string='Back Order Pickings',
                                         compute='_compute_supply')
+    available_qty=fields.Float(string='Available Qty', compute='compute_qty')
+
+    @api.depends('spare')
+    def compute_qty(self):
+        self.available_qty = 0.0
+        qty = 0
+        for rec in self:
+            quant_ids = self.env['stock.quant'].search(
+                [('location_id', '=', rec.repairid.source_warehouse_id.lot_stock_id.id), ('product_id', '=', rec.spare.id)])
+            for quantity in quant_ids:
+                qty += quantity.quantity
+                rec.available_qty = qty
 
     def _compute_supply(self):
         self.delivered_qty = 0
@@ -175,9 +186,9 @@ class SpareParts(models.Model):
             print('delivered',delivered)
 
             if rec.repairid.backorder_count > 0:
-                location_id =  self.repairid.source_warehouse_id.int_type_id.id
+                location_id =  self.repairid.source_warehouse_id.out_type_id.id
                 print(location_id, 'location_id')
-                location_dest_id =  self.repairid.dest_warehouse_id.lot_stock_id.id
+                location_dest_id =  self.repairid.source_warehouse_id.wh_output_stock_loc_i.id
                 print(location_dest_id,'location_dest_id')
                 back_order_ids = self.env['stock.move'].search(
                     [('picking_id.backorder_id', '!=', False), ('picking_id.location_id', '=', location_id),

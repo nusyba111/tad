@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_holiday_planning_hr_holiday_planning,hr_holiday_planning_srcs.hr_holiday_planning,hr_holiday_planning_srcs.model_hr_leave_planning,base.group_user,1,1,1,1
+access_leave_planning_report,leave.planning.report,model_leave_planning_report,hr.group_hr_manager,1,1,1,1
+access_leave_planning_report_excel,leave.planning.report.excel,model_leave_planning_report_excel,hr.group_hr_manager,1,1,1,1
