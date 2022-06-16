@@ -75,7 +75,7 @@
                             <field name="emp_salary" readonly='1'/>
                         </group>
                         <group col="4">
-                            <field name="loan_type" attrs="{'readonly':[('state','!=','draft')]}" domain="[('for_batch','!=',True)]"/>
+                            <field name="loan_type" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="loan_amount" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="no_month" attrs="{'readonly':[('state','not in',['draft','wait_dept_approve','wait_hr_approve,wait_finance_approve'])]}" required='1'/>
                             <field name="payment_start_date" attrs="{'readonly':[('state','!=','draft')]}"/>
@@ -190,7 +190,7 @@
             <field name="view_mode">tree,form,pivot</field>
         </record>
 
-        <!-- loan batches tree view -->
+        <!-- loan tree view -->
         <record id="tree_hr_loan_line_view" model="ir.ui.view">
             <field name="name">hr.loa.line.tree</field>
             <field name="model">hr.loan.line</field>
@@ -201,7 +201,6 @@
                     <field name="paid_amount"/>
                     <field name="payslip_id"/>
                     <field name="loan_id"/>
-                    <field name="loan_batch_id"/>
                     <field name="paid"/>
                 </tree>
             </field>
@@ -227,9 +226,8 @@
                         <group col="4">
                             <field name="paid_date" readonly='1'/>
                             <field name="paid_amount" readonly='1'/>
-                            <field name="loan_id" readonly='1' attrs="{'invisible':[('loan_batch_id','!=',False)]}"/>
+                            <field name="loan_id" readonly='1'/>
                             <field name="payslip_id" readonly='1'/>
-                            <field name="loan_batch_id" readonly='1' attrs="{'invisible':[('loan_id','!=',False)]}"/>
                             <field name="paid" readonly='1'/>
                             <field name="company_id" readonly="1"/>
                         </group>
@@ -329,17 +327,15 @@
                         <group>
                             <group>
                                 <field name="code" required="1"/>
-                                <field name="for_batch"/>
-                                <field name="installment_type" attrs="{'invisible':[('for_batch','=',True)]}"/>
-                                <field name="max_loan_amount" attrs="{'invisible':[('for_batch','=',True)]}"/>
-                                <field name="no_unpaid" attrs="{'invisible':[('for_batch','=',True)]}"/>
-				                <field name="number_incerment" attrs="{'invisible':[('for_batch','=',True)]}"/>
-                                <!-- <field name="need_gm_approve"/> -->
+                                <field name="installment_type"/>
+                                <field name="max_loan_amount"/>
+                                <field name="no_unpaid"/>
+				                <field name="number_incerment"/>
                             </group>
                             <group>
                                 
-                                <field name="no_month" attrs="{'invisible':[('for_batch','=',True)]}"/>
-                                <field name="need_reason" attrs="{'invisible':[('for_batch','=',True)]}"/>
+                                <field name="no_month"/>
+                                <field name="need_reason"/>
                                 <field name="amount"
                                         attrs="{'invisible':[('installment_type','=','depends_on_payroll')],
                                         'required' : [('installment_type','=','fixed')]}"/>
@@ -409,7 +405,7 @@
 
         <menuitem name="Loans Details"
                   parent="menu_hr_loans"
-                  id="menu_hr_loan_batches"
+                  id="menu_hr_loan_bat"
                   action="action_hr_loan_line"
                   groups="hr.group_hr_manager,hr_loan_srcs.group_hr_general_manager"/>
 

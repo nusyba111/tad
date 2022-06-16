@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--  START mission enrich-tree -->
+        <record id="tree_mission_enrich_view" model="ir.ui.view">
+            <field name="name">mission.enrich</field>
+            <field name="model">mission.enrich</field>
+            <field name="arch" type="xml">
+                <tree string="Mission Enrich">
+                    <field name="mission_location"/> 
+                    <field name="disipline"/>
+                    <field name="currency_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  START mission enrich-form -->
+        <record id="form_mission_enrich_view" model="ir.ui.view">
+            <field name="name">mission.enrich</field>
+            <field name="model">mission.enrich</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Mission Enrich">
+                            <group>
+                                <field name="mission_location"/> 
+                                   <field name="disipline" attrs="{'invisible':[('mission_location','!=','internal')],
+                                    'required':[('mission_location','=','internal')]}"/>
+                                         
+                            </group>
+                            <group>
+                                 <field name="amount" attrs="{'invisible':[('mission_location','!=','internal')],
+                                    'required':[('mission_location','=','internal')]}"/>
+                              <field name="currency_id" attrs="{'invisible':[('mission_location','!=','external')],
+                                        'required':[('mission_location','=','external')]}"/>
+                            </group>
+                        </group>
+                        <notebook attrs="{'invisible':[('mission_location','!=','external')]}"> 
+                            <page string="Enrish Line" >
+                               <field name="enrish_line"
+                                      attrs="{'invisible':[('mission_location','!=','external')], 'required':[('mission_location','=','external')]}" >
+                                    <tree editable="top">
+                                        <!-- <field name="employee_category_id"/> -->
+                                        <field name="zone"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>            
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+       <!--  START mission enrich-action -->
+        <record model="ir.actions.act_window" id="mission_enrich_action">
+            <field name="name">Mission Enrich</field>
+            <field name="res_model">mission.enrich</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--    START MENU ITEM    -->
+        <menuitem id="mission_menu_root" name="Mission" groups="hr_mission_srcs.group_hr_mission_users" web_icon="hr_mission_srcs,static/description/Mission.png"/>
+
+        <menuitem id="mission_configuration_menu"
+                  name="Configuration"
+                  parent="mission_menu_root"
+                  action="mission_enrich_action"
+                  groups="hr_mission_srcs.group_hr_mission_manager"/>
+
+    </data>
+</odoo>

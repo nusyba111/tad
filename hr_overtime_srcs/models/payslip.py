@@ -63,8 +63,7 @@ class HrSalaryRule(models.Model):
     _inherit = 'hr.salary.rule'
 
     use_type = fields.Selection(
-        string=u'Use Type',
-        selection_add=[('over_time', 'Over Time')])
+        [('over_time', 'Over Time')],string=u'Use Type')
 
     def _satisfy_condition(self, localdict):
         """"""

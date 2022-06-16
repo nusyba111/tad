@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_mission_wizard" model="ir.ui.view">
+            <field name="name">set to draft</field>
+            <field name="model">wizard.mission</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <footer>
+                        <button name="wizard_mission" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_mission_wizard" model="ir.actions.act_window">
+            <field name="name">Refuse</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.mission</field>
+            <field name="view_id" ref="hr_mission_srcs.view_mission_wizard"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

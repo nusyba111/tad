@@ -111,7 +111,7 @@ class HrLeave(models.Model):
     _inherit = 'hr.leave'
     is_plan = fields.Boolean("Is Plan")
     # is_plan = fields.Boolean("Is Plan",compute='_compute_is_plan')
-    state = fields.Selection(selection_add=[('planned', 'Planned')])
+    state = fields.Selection(selection_add=[('planned', 'Planned'),('cancel','Cancel')])
     linked_leave_planning = fields.Many2one('hr.leave.planning', 'Linked Leave Planning')
 
     @api.constrains('request_date_from', 'request_date_to')
@@ -277,7 +277,7 @@ class HrLeave(models.Model):
         self.state = 'draft'
 
     def action_replan(self):
-        action = self.env.ref('hr_holiday_planning.hr_leave_planning_action_window21').read()[0]
+        action = self.env.ref('hr_holiday_planning_srcs.hr_leave_planning_action_window21').read()[0]
         # action['domain'] = [('id', '=', self.leave.id)]
         # print(self.date_from, '################df')
         # linked_line = self.env['hr.leave.planning.line'].search([('leave.id', '=', self.id)])

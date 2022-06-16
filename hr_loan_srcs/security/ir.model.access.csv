@@ -14,8 +14,3 @@ access_hr_loan_line_gm,hr.loan.line.gm,model_hr_loan_line,hr_loan_srcs.group_hr_
 access_loan_type_gm,loan.type.gm,model_loan_type,hr_loan_srcs.group_hr_general_manager,1,1,1,1
 access_loan.payment_gm,loan.payment.gm,model_loan_payment,hr_loan_srcs.group_hr_general_manager,1,1,1,1
 access_loan.postpone_gm,loan.postpone.gm,model_hr_loan_postpone,hr_loan_srcs.group_hr_general_manager,1,1,1,1
-
-access_hr_loan_batch_user,hr.loan.batch.user,model_hr_loan_batch,base.group_user,1,1,1,0
-access_loan_batch_line_user,loan.batch.line.user,model_loan_batch_line,base.group_user,1,1,1,0
-access_hr_loan_batch_gm,hr.loan.batch.gm,model_hr_loan_batch,hr_loan_srcs.group_hr_general_manager,1,1,1,1
-access_loan_batch_line_gm,loan.batch.line.gm,model_loan_batch_line,hr_loan_srcs.group_hr_general_manager,1,1,1,1

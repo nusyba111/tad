@@ -387,8 +387,6 @@ class HrLoan(models.Model):
 		"""
 		A method to compute loan amount ber record using number of month.
 		"""
-		if self.loan_amount > self.emp_salary:
-			raise ValidationError(_('The Loan amount cannot exceed twice the salary.'))
 		dates = []
 		diff = 0.0
 		total = 0.0
@@ -438,8 +436,6 @@ class HrLoan(models.Model):
 		"""
 		A method to confirm loan request.
 		"""
-		if self.loan_amount > self.emp_salary:
-			raise ValidationError(_('The Loan amount cannot exceed twice the salary.'))
 		if not self.loan_line_ids:
 			raise ValidationError(_('Please compute Loan firstly.'))
 		self.write({'state': 'confirm'})
@@ -508,15 +504,13 @@ class HrLoanLine(models.Model):
 								 ondelete='set null')
 	payment_date = fields.Date(string="Installment Date", required=False, )
 	company_id = fields.Many2one('res.company', 'Company', required=False, default=lambda self: self.env.company)
-	loan_batch_id = fields.Many2one('hr.loan.batch')
+	
 
-	@api.depends('loan_id','loan_batch_id')
+	@api.depends('loan_id')
 	def _get_type(self):
 		for rec in self:
 			if rec.loan_id:
 				rec.loan_type = rec.loan_id.loan_type
-			if rec.loan_batch_id:
-				rec.loan_type = rec.loan_batch_id.loan_type
 
 	@api.depends('employee_id.name', 'loan_id.loan_type.name', 'paid_date')
 	def _name_get(self):
@@ -596,7 +590,6 @@ class LoanType(models.Model):
 	need_reason = fields.Boolean(string='Need Reason')
 	company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env.company)
 	number_incerment = fields.Integer(string="Month Number Incerment", default=1)
-	for_batch = fields.Boolean(default=False)
 
 
 	@api.constrains('code')
@@ -615,10 +608,7 @@ class LoanType(models.Model):
 	def create(self,vals):
 		res = super(LoanType, self).create(vals)
 		python_code = ''
-		if vals['for_batch']:
-			python_code = str((("result = sum(payslip.env['hr.loan.line'].search([('payslip_id','=',payslip.id),('loan_type.code','=','%s')]).mapped('paid_amount'))") % str(res.code)))
-		else:
-			python_code = str((("result = sum(payslip.env['hr.loan.line'].search([('payslip_id','=',payslip.id),('loan_id.loan_type.code','=','%s')]).mapped('paid_amount'))") % str(res.code)))
+		python_code = str((("result = sum(payslip.env['hr.loan.line'].search([('payslip_id','=',payslip.id),('loan_id.loan_type.code','=','%s')]).mapped('paid_amount'))") % str(res.code)))
 		values = {
 		'name':str(res.name) + ' Loan /Salary rule',
 		'category_id':self.env.ref('hr_payroll.DED').id,

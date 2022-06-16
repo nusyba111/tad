@@ -13,6 +13,5 @@ from . import res_config_settings
 from . import loan_payment
 from . import loan_postpone
 from . import account_move
-from . import loan_batch
 from . import amount_to_ar
 

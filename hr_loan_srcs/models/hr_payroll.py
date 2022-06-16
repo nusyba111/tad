@@ -41,19 +41,11 @@ class HrPayslip(models.Model):
 														('loan_id.move_id.state', '=', 'posted'),
 														('loan_id.state','=','approve')
 														])
-
-			loan_ids2 = self.env['hr.loan.line'].search([('employee_id', '=', rec.employee_id.id),
-														('paid', '=', False), ('paid_date', '>=', rec.date_from),
-														('paid_date', '<=', rec.date_to),
-														('loan_batch_id','!=',False),
-														('loan_batch_id.state','=','approve')
-														])
-			# for loan in loan_ids:
-			#     if loan.loan_id.state == 'approve':
-			#         array.append(loan.id)
-			# rec.loan_ids = loan_ids.ids if loan_ids or []
+			for loan in loan_ids:
+			    if loan.loan_id.state == 'approve':
+			        array.append(loan.id)
+			rec.loan_ids = array
 			loan_ids.write({'payslip_id': rec.id})
-			loan_ids2.write({'payslip_id': rec.id})
 		return True
 
 	def compute_sheet(self):
