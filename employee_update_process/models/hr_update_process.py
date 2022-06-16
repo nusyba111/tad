@@ -12,9 +12,9 @@ class HrUpdateProcess(models.Model):
 
     state = fields.Selection(
         [('draft', 'Draft'),
-         ('confirm', 'Department Manager Approve'),
-         ('hr_approve', 'HR Manager Approve'),
-         ('finance_approve', 'Finance Manager Approve'),
+         ('confirm', 'Department Manager Approved'),
+         ('hr_approve', 'HR Manager Approved'),
+         ('finance_approve', 'Finance Manager Approved'),
          ('approve','Approved'),
          ('cancel', 'Cancel')], readonly=True, default='draft', copy=False, string="Status", track_visibility='onchange')
     name = fields.Char(readonly=True, default=lambda self: _('New'))
@@ -29,13 +29,16 @@ class HrUpdateProcess(models.Model):
                                     ('position_and_salary','Job Position & Salary')], string="Update Type")
     grade_id = fields.Many2one('hr.grade',string="Grade")
     level_id = fields.Many2one('hr.level',string="Level")
-    wage = fields.Float(string="Wage")
+    wage = fields.Float(string="Wage",compute="_compute_level_wage")
     department_id = fields.Many2one('hr.department', string="Department")
     job_id = fields.Many2one('hr.job', string="Jop Position")
     update_reason = fields.Text(string="Update Reason", required=True)
     update_lines = fields.One2many('hr.update.line', 'update_process_id', string="Update Line", readonly=True)
     company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env.company)
 
+    @api.depends('level_id')
+    def _compute_level_wage(self):
+        self.wage = self.level_id.wage
 
     @api.model
     def create(self, vals):
@@ -47,67 +50,79 @@ class HrUpdateProcess(models.Model):
         self.state = 'confirm'
         self.update_line()
 
-    # def approve(self):
-    #     self.state = 'approve'
-    #     self.approve_date = datetime.now()
-    #     if self.type == 'employee':
-    #         self.update_employees(self.employee_id)
-    #     if self.type == 'select_employees':
-    #         self.update_employees(self.employee_ids)
-    #     if self.type == 'all':
-    #         self.update_employees(self.get_employees())
+    def hr_approve(self):
+        self.state = 'hr_approve'
 
-    # def cancel(self):
-    #     self.state = 'cancel'
 
-    # def set_to_draft(self):
-    #     self.write({'state': 'draft'})
+    def finance_approve(self):
+        self.state = 'finance_approve'        
 
-    # def update_line(self):
-    #     if self.type == 'employee':
-    #         self.create_update_line(self.employee_id)
-    #     if self.type == 'select_employees' or self.type == 'all':
-    #         employees = self.get_employees()
-    #         for employee_id in employees:
-    #             self.create_update_line(employee_id)
 
-    # def create_update_line(self, employee_id):
-    #     x = self.env['hr.update.line'].create({
-    #         'employee_id': employee_id.id,
-    #         'contract_id': employee_id.contract_id.id,
-    #         'update_process_id': self.id,
-    #         'old_salary': employee_id.contract_id.wage,
-    #         'old_department_id': employee_id.contract_id.department_id.id,
-    #         'old_job_id': employee_id.contract_id.job_id.id,
-    #         'salary': self.wage,
-    #         'department_id': self.department_id.id,
-    #         'job_id': self.job_id.id,
-    #     })
 
-    # def update_employees(self, employees):
-    #     for rec in employees:
-    #         if self.wage:
-    #             rec.contract_id.wage = self.wage
-    #         if self.department_id:
-    #             rec.contract_id.department_id = self.department_id.id
-    #             rec.department_id = self.department_id.id 
-    #         if self.job_id:
-    #             rec.contract_id.job_id = self.job_id.id
-    #             rec.job_id = self.job_id.id
+    def approve(self):
+        self.state = 'approve'
+        self.approve_date = datetime.now()
+        if self.type == 'employee':
+            self.update_employees(self.employee_id)
+        if self.type == 'select_employees':
+            self.update_employees(self.employee_ids)
+        if self.type == 'all':
+            self.update_employees(self.get_employees())
 
-    # def get_employees(self):
-    #     if self.type == 'select_employees':
-    #         return self.env['hr.employee'].search([('id', 'in', self.employee_ids.ids)])
-    #     return self.env['hr.employee'].search([])
+    def cancel(self):
+        self.state = 'cancel'
 
-    # def unlink(self):
-    #     """
-    #     A method to delete update process record.
-    #     """
-    #     for record in self:
-    #         if record.state not in ('draft',):
-    #             raise UserError(_('You can not delete record not in draft state.'))
-    #     return super(HrUpdateProcess, self).unlink()
+    def set_to_draft(self):
+        self.write({'state': 'draft'})
+
+    def update_line(self):
+        if self.type == 'employee':
+            self.create_update_line(self.employee_id)
+        if self.type == 'select_employees' or self.type == 'all':
+            employees = self.get_employees()
+            for employee_id in employees:
+                self.create_update_line(employee_id)
+
+    def create_update_line(self, employee_id):
+        x = self.env['hr.update.line'].create({
+            'employee_id': employee_id.id,
+            'contract_id': employee_id.contract_id.id,
+            'update_process_id': self.id,
+            'old_grade':employee_id.contract_id.grade_id.id,
+            'old_level':employee_id.contract_id.level_id.id,
+            'old_salary': employee_id.contract_id.wage,
+            'old_department_id': employee_id.contract_id.department_id.id,
+            'old_job_id': employee_id.contract_id.job_id.id,
+            'salary': self.wage,
+            'department_id': self.department_id.id,
+            'job_id': self.job_id.id,
+        })
+
+    def update_employees(self, employees):
+        for rec in employees:
+            if self.grade_id and self.level_id and self.wage:
+                rec.contract_id.grade_id = self.grade_id.id
+                rec.contract_id.level_id = self.level_id.id
+            if self.department_id:
+                rec.contract_id.department_id = self.department_id.id
+                rec.department_id = self.department_id.id 
+            if self.job_id:
+                rec.contract_id.job_id = self.job_id.id
+                rec.job_id = self.job_id.id
+
+    def get_employees(self):
+        if self.type == 'select_employees':
+            return self.env['hr.employee'].search([('id', 'in', self.employee_ids.ids)])
+        return self.env['hr.employee'].search([])
+
+    def unlink(self):
+        """
+        A method to delete update process record.
+        """
+        for record in self:
+            if record.state not in ('draft',):
+                raise UserError(_('You can not delete record not in draft state.'))
+        return super(HrUpdateProcess, self).unlink()
 
 
 class HrUpdateLine(models.Model):

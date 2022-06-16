@@ -6,13 +6,20 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                       <!--  <button name="confirm" type="object" string="Confirm" states="draft"
+                         <button name="confirm" type="object" string="Confirm" states="draft"
                                 class="oe_highlight"/>
-                        <button name="approve" type="object" string="Approve" class="oe_highlight"
+
+                        <button name="hr_approve" type="object" string="HR Approve" class="oe_highlight"
                                 states="confirm"/>
+
+                        <button name="finance_approve" type="object" string="Finance Approve" class="oe_highlight"
+                                states="hr_approve"/>        
+
+                        <button name="approve" type="object" string="Approve" class="oe_highlight"
+                                states="finance_approve"/>
                         <button name="set_to_draft" type="object" string="Set To Draft" class="oe_highlight"
                                 states="confirm"/>
-                        <button name="cancel" type="object" string="CANCEL" states="confirm"/> -->
+                        <button name="cancel" type="object" string="CANCEL" states="confirm"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -32,12 +39,16 @@
 
                             <group>
                                 <field name="update_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="grade_id"
+                                       attrs="{'required':[('update_type','in',('salary','position_and_salary'))],'invisible': [('update_type', 'not in', ('salary','position_and_salary'))],'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="level_id"
+                                       attrs="{'required':[('update_type','in',('salary','position_and_salary'))],'invisible': [('update_type', 'not in', ('salary','position_and_salary'))],'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="wage"
-                                       attrs="{'required':[('update_type','=','salary')],'invisible': [('update_type', '!=', 'salary')],'readonly': [('state', '!=', 'draft')]}"/>
+                                       attrs="{'required':[('update_type','in',('salary','position_and_salary'))],'invisible': [('update_type', 'not in', ('salary','position_and_salary'))]}" readonly="1" />              
                                 <field name="department_id"
                                        attrs="{'required':[('update_type','=','department')],'invisible': [('update_type', '!=', 'department')],'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="job_id"
-                                       attrs="{'required':[('update_type','=','job_position')],'invisible': [('update_type', '!=', 'job_position')],'readonly': [('state', '!=', 'draft')]}"/>
+                                       attrs="{'required':[('update_type','in',('job_position','position_and_salary'))],'invisible': [('update_type', 'not in', ('job_position','position_and_salary'))],'readonly': [('state', '!=', 'draft')]}"/>
                                 <field name="company_id" readonly="1"/>
 
                             </group>
@@ -49,12 +60,14 @@
                                     <tree>
                                         <field name="employee_id"/>
                                         <field name="contract_id"/>
-                                        <field name="old_salary" attrs="{'column_invisible': [('parent.update_type', '!=', 'salary')]}"/>
+                                        <field name="old_grade" attrs="{'column_invisible': [('parent.update_type', 'not in', ('salary','position_and_salary'))]}"/>
+                                        <field name="old_level" attrs="{'column_invisible': [('parent.update_type', 'not in', ('salary','position_and_salary'))]}"/>
+                                        <field name="old_salary" attrs="{'column_invisible': [('parent.update_type', 'not in', ('salary','position_and_salary'))]}"/>
                                         <field name="old_department_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'department')]}"/>
-                                        <field name="old_job_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'job_position')]}"/>
-                                        <field name="salary" attrs="{'column_invisible': [('parent.update_type', '!=', 'salary')]}"/>
+                                        <field name="old_job_id" attrs="{'column_invisible': [('parent.update_type', 'not in', ('job_position','position_and_salary'))]}"/>
+                                        <field name="salary" attrs="{'column_invisible': [('parent.update_type', 'not in', ('salary','position_and_salary'))]}"/>
                                         <field name="department_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'department')]}"/>
-                                        <field name="job_id" attrs="{'column_invisible': [('parent.update_type', '!=', 'job_position')]}"/>
+                                        <field name="job_id" attrs="{'column_invisible': [('parent.update_type', 'not in', ('job_position','position_and_salary'))]}"/>
                                     </tree>
                                 </field>
                             </page>
