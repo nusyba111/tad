@@ -39,6 +39,7 @@ class SrcsPaymentLines(models.Model):
     @api.depends('donor_id','project_id','account_id','analytic_activity_id')
     def _compute_buget_balance(self):
         for rec in self:
+            rec.budget_balance = 0
             if rec.donor_id and rec.project_id and rec.account_id and rec.analytic_activity_id:
                 budget_line = self.env['crossovered.budget.lines'].search([('crossovered_budget_id.donor_id','=', rec.donor_id.id),
                                                                             ('analytic_activity_id','=',rec.analytic_activity_id.id),
