@@ -8,7 +8,7 @@
             <field name="category_id" ref="hr_payroll.ALW"/>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="struct_id" ref="hr_payroll_custom.structure_employee_cu"></field>
+            <!-- <field name="struct_id" ref="hr_payroll_custom.structure_employee_cu"></field> -->
             <field name="amount_python_compute">result=payslip.total_incentive_amount</field>
         </record>
 

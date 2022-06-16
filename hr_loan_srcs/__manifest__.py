@@ -28,13 +28,13 @@
         'report/loan_contract_report.xml',
         'views/hr_loan_view.xml',
         'views/hr_payroll_view.xml',
-        'views/res_config_settings.xml',
+        # 'views/res_config_settings.xml',
         'views/loan_payment_view.xml',
         'views/loan_postpone_views.xml',
         'views/account_move_views.xml',
-        'data/loan_template.xml',
-        'data/salary_advance_template.xml',
-        'data/loan_contract_template.xml',
+        # 'data/loan_template.xml',
+        # 'data/salary_advance_template.xml',
+        # 'data/loan_contract_template.xml',
 
     ],
 

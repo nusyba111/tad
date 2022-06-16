@@ -112,7 +112,7 @@
                                             options="{'currency_field': 'currency_id'}"/>
                                 </group>
                             </page>
-                            <page string='Loan Request Template'>
+                            <!-- <page string='Loan Request Template'>
                                 <field name='loan_request_website_description'/>
                             </page>
                             <page string='Loan Contract Template'>
@@ -120,7 +120,7 @@
                             </page>
                             <page string='Salary Advance Report Template'>
                                 <field name='salary_advance_website_description'/>
-                            </page>
+                            </page> -->
                             <page string="Other Information">
                                 <group col="2">
                                     <field name="loan_old_amount" readonly='1'/>
