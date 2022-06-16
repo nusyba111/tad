@@ -10,16 +10,10 @@ class EmployeeRecruitmentPlan(models.Model):
     _description = 'Recruitment Plan Details'
 
     name = fields.Char(string="Name",readonly=True)
-<<<<<<< HEAD
-
-    date_from = fields.Date(string="Date From")
-    date_to = fields.Date(string="Date To")
-=======
     date_from = fields.Date(string="Date From",required=True,default=lambda self: datetime.now().date().replace(month=1, day=1),store=True)
     date_to = fields.Date(string="Date To",required=True,default=lambda self: datetime.now().date().replace(month=12, day=31),store=True)
     department_id = fields.Many2one('hr.department',string="Department",
         default=lambda self: self.env.user.employee_id.department_id,required=True)
->>>>>>> 90c4a502cd1f79d4607eced77f221f2a70c96f78
     plan_ids = fields.One2many('hr.recruitment.plan.line','plan_id')
     state = fields.Selection([('draft','Draft'),
         ('department_manager','Department Manager'),

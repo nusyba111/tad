@@ -32,5 +32,12 @@
       </field>
     </record>
 
+    <menuitem
+      id="menu_hr_employee_process"
+      name="Employee Process"
+      parent="hr.menu_hr_root"
+      sequence="9"
+      groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"/>
+
   </data>
 </odoo>

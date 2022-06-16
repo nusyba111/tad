@@ -384,16 +384,9 @@
 
         <!-- loan menu -->
 
-        <menuitem
-            id="menu_hr_employee_process"
-            name="Employee Process"
-            parent="hr.menu_hr_root"
-            sequence="9"
-            groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"/>
-
 
         <menuitem name="Loans"
-                  parent="menu_hr_employee_process"
+                  parent="hr_employee_srcs.menu_hr_employee_process"
                   id="menu_hr_loans"
                   sequence="2"/>
 
