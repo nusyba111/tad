@@ -150,6 +150,8 @@ class SrcBudgetLine(models.Model):
     balance_budget_currency = fields.Monetary(compute='_compute_balance_budegt_currency', string='Balance budget currency',currency_field='currency_budget_line')
     total_budget = fields.Monetary(compute='_compute_total_budget', string='Total budget (Budget Currency)',currency_field='currency_budget_line',store=True)
     planned_amount = fields.Monetary(compute='_compute_total_budget', string='Total budget ',currency_field='currency_id',store=True)
+    # rate = fields.Float(related='currency_budget_line.rate',digits=(12,6))
+    
     
     @api.depends('unit_of_measure','quantity','frequency','unit_cost')
     def _compute_total_budget(self):
@@ -158,9 +160,12 @@ class SrcBudgetLine(models.Model):
                 rec.total_budget = rec.quantity * rec.frequency * rec.unit_cost
                 print('__________________________________________','\n',rec.currency_budget_line.rate)
             
-            if rec.total_budget:
-                rec.planned_amount = rec.total_budget / rec.currency_budget_line.rate
-                print('__________________________________________','\n',rec.planned_amount)
+    @api.onchange('total_budget','currency_budget_line')
+    def _onchange_planned_amount(self):
+        if self.currency_budget_line:
+            self.planned_amount = self.total_budget / self.currency_budget_line.rate
+            print('__________________________________________','\n',self.planned_amount)
+        
             
     
     def _compute_practical_amount(self):
@@ -256,8 +261,8 @@ class SrcBudgetLine(models.Model):
                 #                     print('___+++++++++++++++++practical',res.practical_amount_bu_currency)
                 # else:
                 #     res.practical_amount_bu_currency = 0
-                # else:
-                #     res.practical_amount_bu_currency = res.practical_amount
+                else:
+                    res.practical_amount_bu_currency = res.practical_amount
             else:
                 res.practical_amount_bu_currency = 0
         

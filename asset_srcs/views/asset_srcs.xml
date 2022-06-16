@@ -12,7 +12,7 @@
             <xpath expr="//group/group[1]" position="before">
                 <group>
                     <field name="owner" attrs="{'invisible':[('state','=','model')]}"/>
-                    <field name="donor_id" attrs="{'invisible':[('state','=','model')]}"/>
+                    <field name="donor_id" attrs="{'invisible':[('state','=','model')]}" domain="[('customer_rank','=', 1)]"/>
                     <field name="project_id" attrs="{'invisible':[('state','=','model')]}"/>
                     <field name="location_id" attrs="{'invisible':[('state','=','model')]}"/>
                 </group>
@@ -60,8 +60,8 @@
                         </h1>
                     </div>
                     <group>
-                         <group>
-                            <field name="donor_id" />
+                        <group>
+                            <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
                             <field name="project_id" />
                             <field name="location_id" />
                         </group>

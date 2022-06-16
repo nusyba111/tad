@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_cash_request,access_access_cash_request,model_cash_request,base.group_user,1,1,1,1
+access_payment_request,access_access_payment_request,model_payment_request,base.group_user,1,1,1,1
+payment_request_lines,access_access_payment_request_lines,model_payment_request_lines,base.group_user,1,1,1,1
