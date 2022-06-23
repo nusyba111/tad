@@ -81,6 +81,8 @@ class HrTrainingExecution(models.Model):
                         'analytic_account_id': self.account_analytic_id.id if self.account_analytic_id.id else self.env.company.training_account_analytic_id.id,
                     }),
                 ]})
+            print("\n\n\n\n\n\n\n\n")
+            print("*************************************",move.invoice_line_ids)
             self.send_notification_move_created(move)
             self.voucher = move
             self.state = 'done'
@@ -118,6 +120,7 @@ class HrTrainingExecution(models.Model):
         trainings = self.env['hr.training'].search(
             [('date_from', '>=', self.start_date), ('date_to', '<=', self.end_date), ('course', '=', self.course.id),
              ('state', '=', 'confirmed'),('training_execution','=',False)])
+        best_train = self.env['hr.training'].search([])
         self.write({'line_ids': trainings.ids})
 
     def send_employee_survey(self):

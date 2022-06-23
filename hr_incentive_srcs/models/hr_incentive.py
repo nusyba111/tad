@@ -81,6 +81,11 @@ class HrIncentive(models.Model):
                                             related='company_id.incentive_template_id',
                                             store=True
                                             )
+    project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
+    activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
+    payment_method = fields.Many2one('account.payment.method',string="Payment Method")
+
 
     def action_get_move_ids(self):
         return {

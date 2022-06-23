@@ -26,7 +26,7 @@ class HRContract(models.Model):
     forgin_currency_id = fields.Many2one('res.currency',string="Currency",readonly=False)
     wage_per_hour = fields.Float(compute="_get_wage_per_hour",store=True)
     wage = fields.Monetary('Wage', required=True, tracking=True, help="Employee's monthly gross wage.",currency_field='forgin_currency_id')
-
+    coverage = fields.Many2one('account.account.tag',string="Account Tag")
 
     @api.depends('wage')
     def _get_wage_per_hour(self):

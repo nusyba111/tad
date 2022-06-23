@@ -23,8 +23,9 @@ class HrLevel(models.Model):
     company_id = fields.Many2one('res.company', string='Company', related='grade_id.company_id', store=True)
     currency_id = fields.Many2one('res.currency', readonly=True,
                                   default=lambda self: self.env.user.company_id.currency_id)
+    branch_id = fields.Many2one('res.branch',related="grade_id.branch_id",store=True)
 
-    
+
     def _compute_social_insurance(self):
         for rec in self:
             rec.s_insurance = rec.wage * 0.17

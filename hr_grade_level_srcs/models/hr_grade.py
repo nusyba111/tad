@@ -19,6 +19,7 @@ class HrGrade(models.Model):#
     degree_ids = fields.One2many('hr.level', 'grade_id', string='Degrees')
     line_ids = fields.One2many('grade.allow.deduct', 'grade_id', string='Grade Allowances', copy=False)
     job_id = fields.Many2one('hr.job',string="Job Position")
+    branch_id = fields.Many2one("res.branch",string="Branch",readonly=True,default=lambda self: self.env.user.current_branch)
 
     @api.constrains('degrees_no', 'sequence')
     def _check_degrees_sequence(self):
