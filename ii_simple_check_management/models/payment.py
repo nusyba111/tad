@@ -91,7 +91,7 @@ class Move(models.Model):
 class MoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    check_no = fields.Char(string='Check No.', redonly=False, store=True)
+    Check_no = fields.Char(string='Check No', redonly=False, store=True)
 
     # def create(self, vals):
     #     res = super(MoveLine, self).create(vals)
@@ -211,6 +211,10 @@ class AccountPayment(models.Model):
         res = super(AccountPayment, self)._prepare_move_line_default_vals(write_off_line_vals=write_off_line_vals)
         if self.check_type != 'indirect' or not self.check_type:
             res[0].update({'account_id': self.journal_id.default_account_id.id})
+        if self.check_type:
+            res[0].update({'Check_no':self.Check_no})
+            res[1].update({'Check_no':self.Check_no})
+            print('________________check',self.Check_no)
         return res
 
     # Modify move when check_type change
@@ -312,13 +316,6 @@ class AccountPayment(models.Model):
                     # return
             else:
                 super(AccountPayment, r).action_post()
-
-    # Modify indirecting account to be direct
-    def _prepare_move_line_default_vals(self, write_off_line_vals=None):
-        res = super(AccountPayment, self)._prepare_move_line_default_vals(write_off_line_vals=write_off_line_vals)
-        if self.check_type != 'indirect' or not self.check_type:
-            res[0].update({'account_id': self.journal_id.default_account_id.id})
-        return res
 
     def action_cancel(self):
         for record in self:

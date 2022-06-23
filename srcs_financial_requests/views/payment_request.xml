@@ -6,33 +6,63 @@
         <field name="model">payment.request</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                    <button string="Department" name="action_department" type="object" class="oe_highlight" states="draft"/>
+                    <button string="Finance" name="action_finance" type="object" class="oe_highlight" states="department"/>
+                    <button string="Confirm" name="action_internal" type="object" class="oe_highlight" states="finance"/>
+                    <button string="Secretary Genaeral" name="action_secretary" type="object" class="oe_highlight" states="internal"/>
+                    <button string="Payment" name="action_payment" type="object" class="oe_highlight" states="secretary"/>
+                    <button string="Reset To Draft" name="reset_to_draft" type="object" class="oe_highlight" states="department,finance,secretary,internal"/>
+                    <button string="Cancel" name="cancel_button" type="object" class="oe_highlight" states="payment"/>
+                    <!-- <button string="Create Move Entry" name="move" type="object" class="oe_highlight" states="payment"/> -->
+                    <field name="state" statusbar_visible="draft,department,finance" widget="statusbar"/>
+                
+                </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="user_id" />
-                            <field name="pay_to" />
                             <field name="payment_method" />
+                            <field name="Check_no" attrs="{'invisible':[('payment_method','!=','check')],'required':[('payment_method','=','check')]}"/>
+                            <field name="check_date" attrs="{'invisible':[('payment_method','!=','check')],'required':[('payment_method','=','check')]}"/>
+                            <field name="fn_req_sg_dp_approval_amount" />
                         </group>
                         <group>
                             <field name="date" />
-                            <field name="journal_id" />
+                            <field name="request_currency" />
+                            <field name="journal_id"/>
                             <field name="total_amount" />
                         </group>
                     </group>
                     <notebook>
-                        <page string="Buget Lines">
+                        <page string="Budget Lines">
                             <field name="budget_line_ids" >
                                 <tree editable="bottom">
                                     <field name="account_id" />
+                                    <field name="payment_currency" invisible="1"/>
                                     <field name="project_id" />
                                     <field name="analytic_activity_id" />
-                                    <field name="donor_id" />
+                                    <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
                                     <field name="currency_id" />
                                     <field name="budget_balance" />
                                     <field name="request_amount" />
                                 </tree>
                             </field> 
                         </page>
+                        <page string="More Information">
+                            <group>
+                                <group>
+                                    <field name="is_working_addvance" />
+                                    <field name="pay_to" attrs="{'invisible':[('is_working_addvance','=',False)],'required':[('is_working_addvance','=',True)]}"/>
+                                    <field name="debit_account_id" attrs="{'invisible':[('is_working_addvance','=',True)],'required':[('is_working_addvance','=',False)]}"/>
+                                </group>
+                                <group>
+                                    <field name="move_id" />
+                                    <field name="reason" />
+                                </group> 
+                            </group>
+                        </page>
+
                     </notebook>
                 </sheet>
             </form>
@@ -49,4 +79,56 @@
         action="payment_request_action"
         parent="srcs_financial_requests.finacial_request_menu"
         sequence="10"/>
+
+    <!-- Financial Approval -->
+    <record id="inherit_view_id_res_config_settings" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key=('account')]/div[@name=('default_taxes_setting_container')]" position="after">
+
+                <h2>Finance Approval</h2>
+                <div class="row mt16 o_settings_container" name="finance_approval_setting_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="fn_req_sg_approval">
+                        <div class="o_setting_left_pane">
+                            <field name="fn_req_sg_approval"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="fn_req_sg_approval"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."
+                                    aria-label="Values set here are company-specific."
+                                    groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Request SG to approve requests above a maximum amount
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container" name="finance_approval_setting_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="internal_auditor_approval">
+                        
+                        <div class="o_setting_left_pane">
+                            <field name="internal_auditor_approval"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="internal_auditor_approval"/>
+                            <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."
+                                    aria-label="Values set here are company-specific."
+                                    groups="base.group_multi_company" role="img"/>
+                            <div class="text-muted">
+                                Internal Auditor to approve requests above a maximum amount
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="fn_req_sg_dp_approval_amount" class="col-lg-4 o_light_label"/>
+                                    <field name="fn_req_sg_dp_approval_amount"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
 </odoo>

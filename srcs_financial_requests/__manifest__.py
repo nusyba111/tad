@@ -10,7 +10,7 @@
     'author': "IATL International",
     'website': "http://www.iatl-sd.com",
     'category': 'Accounting/Common',
-    'depends': ['accounting_srcs'],
+    'depends': ['accounting_srcs','ii_simple_check_management'],
     'data': [
         'security/ir.model.access.csv',
         'data/seqence.xml',

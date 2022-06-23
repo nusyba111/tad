@@ -33,7 +33,7 @@ class SrcsCashRequest(models.Model):
         ('internal_auditor','Internal Auditor'),
         ('secratry_general_two','Secretary General '),
         ('payment','Payment'),
-        ('end','End'),
+        # ('end','End'),
     ],default="draft", string='field_name')
 
     @api.depends('project_id','donor_id','budget_line_id')
@@ -99,8 +99,8 @@ class SrcsCashRequest(models.Model):
             if internal_transfer:
                 self.state = "payment"
 
-    def end(self):
-        self.state = "end"
+    # def end(self):
+    #     self.state = "end"
 
     def reset_to_draft(self):
         self.state = "draft"
