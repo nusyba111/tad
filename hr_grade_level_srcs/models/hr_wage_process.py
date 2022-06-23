@@ -14,7 +14,7 @@ class HrWageProcess(models.Model):
     name = fields.Char(default="Draft")
     employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
     type = fields.Selection([('promotion', 'Promotion'),
-                             ('increment', 'Increment'), ('redLine', 'Red Line')],
+                             ('increment', 'Increment')],
                             default="promotion", required=True)
     contract_id = fields.Many2one(related='employee_id.contract_id', readonly=True, store=True)
     grade_sequence = fields.Integer(related='employee_id.grade_id.sequence')
@@ -25,7 +25,9 @@ class HrWageProcess(models.Model):
     note = fields.Text()
     state = fields.Selection([('draft', 'Draft'),
                               ('confirm', 'Confirm'),
-                              ('approve', 'Approve'),
+                              ('approve', 'HR Approve'),
+                              ('finance_approve','Finance Approve'),
+                              ('hr_approve','HR Approve'),
                               ('refused', 'Refused')], default='draft', track_visibility='onchange')
 
     current_grade = fields.Many2one('hr.grade', string="Current Grade")
@@ -34,11 +36,16 @@ class HrWageProcess(models.Model):
     currency_id = fields.Many2one('res.currency', string="Currency", readonly=True,
                                   default=lambda self: self.env.user.company_id.currency_id.id)
     percentages = fields.Integer(string="percentage (%)", default=1)
-    red_line_type = fields.Selection([('fix_amount', 'Fix Amount'),
-                                      ('percentage', 'Percentage'), ],
-                                     default="fix_amount", required=True)
+    # red_line_type = fields.Selection([('fix_amount', 'Fix Amount'),
+    #                                   ('percentage', 'Percentage'), ],
+    #                                  default="fix_amount", required=True)
     batch_id = fields.Many2one('hr.wage.process.batch', string='batch', ondelete='set null', )
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
+    project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
+    activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
+    payment_method = fields.Many2one('account.payment.method',string="Payment Method")
+
 
     def action_set_to_confirm(self):
         """
@@ -51,13 +58,13 @@ class HrWageProcess(models.Model):
         A method to approve wage.
         """
         seq = '/'
-        if self.type == 'redLine':
+        # if self.type == 'redLine':
 
-            seq = self.env['ir.sequence'].next_by_code('wage.process.redLine')
-            self.employee_id.write({'wage': self.wage})
-            self.contract_id.write({'wage': self.wage})
+        #     seq = self.env['ir.sequence'].next_by_code('wage.process.redLine')
+        #     self.employee_id.write({'wage': self.wage})
+        #     self.contract_id.write({'wage': self.wage})
 
-        elif self.type == 'promotion':
+        if self.type == 'promotion':
 
             seq = self.env['ir.sequence'].next_by_code('wage.process.promotion')
             self.employee_id.write({'grade_id': self.grade_id.id, 'level_id': self.level_id.id})
@@ -83,14 +90,14 @@ class HrWageProcess(models.Model):
         """
         self.state = 'draft'
 
-    @api.constrains('wage')
-    def _check_new_amount(self):
-        """
-        A method to check new wage for employee.
-        """
-        for record in self:
-            if record.type == 'redLine' and record.wage < record.employee_id.wage:
-                raise ValidationError("New wage must be more than current wage ")
+    # @api.constrains('wage')
+    # def _check_new_amount(self):
+    #     """
+    #     A method to check new wage for employee.
+    #     """
+    #     for record in self:
+    #         if record.type == 'redLine' and record.wage < record.employee_id.wage:
+    #             raise ValidationError("New wage must be more than current wage ")
 
     def unlink(self):
         """Deny unlink when record not in draft state"""
@@ -109,21 +116,21 @@ class HrWageProcess(models.Model):
         res.current_wage = res.contract_id.wage
         res.current_grade = res.contract_id.grade_id
         res.current_level = res.contract_id.level_id
-        if vals.get('type', False) == 'redLine' and vals.get('red_line_type', False) == 'percentage':
-            increase_amount = res.current_wage * res.percentages / 100
-            res.wage = res.current_wage + increase_amount
+        # if vals.get('type', False) == 'redLine' and vals.get('red_line_type', False) == 'percentage':
+        #     increase_amount = res.current_wage * res.percentages / 100
+        #     res.wage = res.current_wage + increase_amount
         if vals.get('type', False) == 'increment':
             res.grade_id = res.current_grade
         return res
 
-    def write(self, vals):
-        """
-        Inherit method to update wage in case increase type percentage.
-        """
-        if vals.get('redLine', False) == 'redLine' or vals.get('red_line_type', False) == 'percentage':
-            increase_amount = self.current_wage * self.percentages / 100
-            vals['wage'] = self.current_wage + increase_amount
-        return super(HrWageProcess, self).write(vals)
+    # def write(self, vals):
+    #     """
+    #     Inherit method to update wage in case increase type percentage.
+    #     """
+    #     if vals.get('redLine', False) == 'redLine' or vals.get('red_line_type', False) == 'percentage':
+    #         increase_amount = self.current_wage * self.percentages / 100
+    #         vals['wage'] = self.current_wage + increase_amount
+    #     return super(HrWageProcess, self).write(vals)
 
     @api.onchange('contract_id')
     def _onchange_contract_id(self):
@@ -143,11 +150,11 @@ class HrWageProcess(models.Model):
         if self.type == 'increment':
             self.grade_id = self.current_grade
 
-    @api.onchange('percentages')
-    def _onchange_type_wage(self):
-        """
-        A method to change wage in case increase type was change.
-        """
-        if self.red_line_type == 'percentage':
-            increase_amount = self.current_wage * self.percentages / 100
-            self.wage = self.current_wage + increase_amount
+    # @api.onchange('percentages')
+    # def _onchange_type_wage(self):
+    #     """
+    #     A method to change wage in case increase type was change.
+    #     """
+    #     if self.red_line_type == 'percentage':
+    #         increase_amount = self.current_wage * self.percentages / 100
+    #         self.wage = self.current_wage + increase_amount

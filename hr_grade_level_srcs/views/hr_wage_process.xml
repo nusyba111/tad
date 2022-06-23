@@ -12,7 +12,7 @@
                     <field name="employee_id"/>
                     <field name="type"/>
                     <field name="state"/>
-                    <field name="red_line_type"/>
+                    <!-- <field name="red_line_type"/> -->
                 </tree>
             </field>
         </record>
@@ -49,17 +49,16 @@
 
                             <group string="New Salary Information">
                                 <field name="grade_id"
-                                       attrs="{'invisible':[('type','=','redLine')],'required':[('type','=','promotion')],'readonly':['|',('type','=','increment'),('state','!=','draft')]}"
+                                       attrs="{'required':[('type','=','promotion')],'readonly':['|',('type','=','increment'),('state','!=','draft')]}"
                                        domain="[('sequence','>=',grade_sequence)]"/>
                                 <field name="level_id"
-                                       attrs="{ 'invisible':[('type','=','redLine')],'required':['|',('type','=','promotion'),('type','=','increment')] ,'readonly':[('state','!=','draft')]}"
+                                       attrs="{'required':['|',('type','=','promotion'),('type','=','increment')] ,'readonly':[('state','!=','draft')]}"
                                        domain="[('grade_id','=', grade_id),('sequence','>',level_sequence)]"/>
-                                <field name="red_line_type" widget="radio"
-                                       attrs="{'invisible':[('type','!=','redLine')],'required':[('type','=','redLine')],'readonly':[('state','!=','draft')]}"/>
-                                <field name="percentages"
-                                       attrs="{'invisible':['|',('type','!=','redLine'),('red_line_type','!=','percentage')],'required': 1,'readonly':[('state','!=','draft')]}"/>
-                                <field name="wage"
-                                       attrs="{'invisible':[('type','!=','redLine')],'readonly':[('red_line_type','=','percentage')]}"/>
+                                <!-- <field name="red_line_type" widget="radio"
+                                       attrs="{'readonly':[('state','!=','draft')]}"/> -->
+                                <!-- <field name="percentages"
+                                       attrs="{'required': 1,'readonly':[('state','!=','draft')]}"/>
+                                <field name="wage"/> -->
                             </group>
                             <group name="Old Salary Information" string="Old Salary Information">
                                 <field name="current_grade" readonly='1'/>
@@ -94,7 +93,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="wage_process_action">
-            <field name="name">Wage process</field>
+            <field name="name">Promotion process</field>
             <field name="res_model">hr.wage.process</field>
             <field name="view_mode">tree,form,pivot</field>
         </record>
@@ -102,12 +101,12 @@
         <!--    START MENU ITEM    -->
         <menuitem
                 id="menu_hr_wage_process"
-                name="Wage Process"
+                name="Promotion Process"
                 parent="hr.menu_hr_employee_payroll"
                 sequence="4"
                 groups="hr.group_hr_manager,hr.group_hr_user"/>
 
-        <menuitem id="wage_process_menu" name="Wage process" parent="menu_hr_wage_process"
+        <menuitem id="wage_process_menu" name="Promotion Process" parent="menu_hr_wage_process"
                   action="wage_process_action" sequence="2"/>
     </data>
 </odoo>

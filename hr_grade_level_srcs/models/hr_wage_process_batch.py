@@ -19,9 +19,9 @@ class HrWageProcessBatch(models.Model):
     type = fields.Selection([('promotion', 'Promotion'),
                              ('increment', 'Increment'), ('redLine', 'Red Line')],
                             default="redLine")
-    red_line_type = fields.Selection([('fix_amount', 'Fix Amount'),
-                                      ('percentage', 'Percentage'), ],
-                                     default="fix_amount", required=True)
+    # red_line_type = fields.Selection([('fix_amount', 'Fix Amount'),
+    #                                   ('percentage', 'Percentage'), ],
+    #                                  default="fix_amount", required=True)
     wage = fields.Float(string='New Wage', store=True)
     percentages = fields.Integer(string="percentage (%)", default=1)
     wage_process_ids = fields.One2many('hr.wage.process','batch_id',string='process batch')
@@ -56,15 +56,15 @@ class HrWageProcessBatch(models.Model):
         values['name'] = self.env['ir.sequence'].get('wage.process.redLine.batch') or 'NEW'
         res = super(HrWageProcessBatch, self).create(values)
         wage_batch = self.search([('id', '=', res.id)])
-        if self.red_line_type == 'percentage':
-            increase_amount = wage_batch.current_wage * self.percentages / 100
-            self.wage = wage_batch.current_wage + increase_amount
+        # if self.red_line_type == 'percentage':
+        #     increase_amount = wage_batch.current_wage * self.percentages / 100
+        #     self.wage = wage_batch.current_wage + increase_amount
         if wage_batch.batch_type == 'employee':
 
             self.env['hr.wage.process'].create({'batch_id': wage_batch.id, 'employee_id': wage_batch.employee_id.id, 'contract_id': wage_batch.contract_id.id,
                     'current_grade': wage_batch.contract_id.grade_id.id, 'current_level': wage_batch.contract_id.level_id.id,
                     'current_wage': wage_batch.contract_id.wage,
-                    'type': wage_batch.type, 'red_line_type': wage_batch.red_line_type,
+                    'type': wage_batch.type,
                     'percentages': wage_batch.percentages,
                     'wage': wage_batch.wage,
                     })
@@ -76,7 +76,7 @@ class HrWageProcessBatch(models.Model):
                                                     'current_grade': emp.contract_id.grade_id.id,
                                                     'current_level': emp.contract_id.level_id.id,
                                                     'current_wage': emp.contract_id.wage,
-                                                    'type': wage_batch.type, 'red_line_type': wage_batch.red_line_type,
+                                                    'type': wage_batch.type,
                                                     'percentages': wage_batch.percentages,
                                                     'wage': wage_batch.wage,
                                                     })
@@ -88,7 +88,7 @@ class HrWageProcessBatch(models.Model):
                                                     'current_grade': rec.contract_id.grade_id.id,
                                                     'current_level': rec.contract_id.level_id.id,
                                                     'current_wage': rec.contract_id.wage,
-                                                    'type': wage_batch.type, 'red_line_type': wage_batch.red_line_type,
+                                                    'type': wage_batch.type,
                                                     'percentages': wage_batch.percentages,
                                                     'wage': wage_batch.wage,
                                                     })
