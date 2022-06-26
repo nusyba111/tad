@@ -15,15 +15,16 @@ class SrcsCashRequest(models.Model):
     budget_line_id = fields.Many2one('crossovered.budget.lines', string='Budget Line', required=True)
     budget_currency = fields.Many2one(related='budget_line_id.currency_budget_line')
     residual_amount = fields.Monetary('Residual amount ', currency_field='budget_currency')
+    company_currency_id = fields.Many2one('res.currency', string='Company Currency', default=lambda self: self.env.company.currency_id.id)
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id.id)
     requested_amount = fields.Monetary('Requested Amount', currency_field='currency_id')
-    requested_amount_sdg = fields.Monetary(compute='_compute_requested_amount_sdg', string='Requested Amount SDG', currency_field='currency_id', store=True )
+    requested_amount_sdg = fields.Monetary(compute='_compute_requested_amount_sdg', string='Requested Amount SDG', currency_field='company_currency_id', store=True )
     description = fields.Html('Description',compute='_compute_description')
     amount_in_words = fields.Char('Amount In Words')
     amount_in_words_sdg = fields.Char('Amount In Words SDG')
     user_lang_id = fields.Selection(related='user_id.lang', string='Lang')
     is_branch_loans = fields.Boolean('Is Branch Loans')
-    company_currency_id = fields.Many2one('res.currency', string='Company Currency', default=lambda self: self.env.company.currency_id.id)
+   
     
     state = fields.Selection([
         ('draft','Draft'),
@@ -52,7 +53,7 @@ class SrcsCashRequest(models.Model):
                 if self.currency_id == self.company_currency_id:
                     rec.requested_amount_sdg = rec.requested_amount
                 else:
-                    rec.requested_amount_sdg = rec.requested_amount / rec.budget_currency.rate
+                    rec.requested_amount_sdg = rec.requested_amount / rec.currency_id.rate
             else:
                 rec.requested_amount_sdg = 0
 
