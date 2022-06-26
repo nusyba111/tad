@@ -12,7 +12,7 @@
                     <field name="batch_type"/>
                     <field name="type"/>
                     <field name="state"/>
-                    <field name="red_line_type"/>
+                    <!-- <field name="red_line_type"/> -->
                 </tree>
             </field>
         </record>
@@ -51,11 +51,11 @@
                                 <field name="type" readonly="1"/>
                                 <field name="contract_id"
                                        attrs="{'invisible':[('batch_type', '!=', 'employee')] ,'readonly':True}"/>
-                                <field name="red_line_type"/>
-                                <field name="percentages"
-                                       attrs="{'invisible':['|',('type','!=','redLine'),('red_line_type','!=','percentage')],'required': 1,'readonly':[('state','!=','draft')]}"/>
+                                <!-- <field name="red_line_type"/> -->
+                                <!-- <field name="percentages"
+                                       attrs="{'invisible':[('type','!=','redLine')],'required': 1,'readonly':[('state','!=','draft')]}"/>
                                 <field name="wage"
-                                       attrs="{'invisible':[('type','=','redLine'),('red_line_type','=','percentage')]}"/>
+                                       attrs="{'invisible':[('type','=','redLine')]}"/> -->
                             </group>
                         </group>
                         <notebook>
@@ -69,10 +69,9 @@
                                             <field name="current_level"/>
                                             <field name="current_wage"/>
                                             <field name="type"/>
-                                            <field name="red_line_type"/>
+                                            <!-- <field name="red_line_type"/> -->
                                             <field name="batch_id" invisible="1"/>
-                                            <field name="percentages"
-                                                   attrs="{'column_invisible':[('parent.red_line_type','!=','percentage')]}"/>
+                                            <field name="percentages"/>
                                             <field name="wage"/>
                                         </tree>
                                     </field>
@@ -95,7 +94,7 @@
         </record>
 
         <!--    START MENU ITEM    -->
-        <menuitem id="wage_process_batch_menu" name="Wage process Batch"
+        <menuitem id="wage_process_batch_menu" name="Promotion process Batch"
                   parent="menu_hr_wage_process"
                   action="wage_process__batch_action1" sequence="3"/>
     </data>
