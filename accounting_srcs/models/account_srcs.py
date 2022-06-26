@@ -150,8 +150,6 @@ class SrcBudgetLine(models.Model):
     balance_budget_currency = fields.Monetary(compute='_compute_balance_budegt_currency', string='Balance budget currency',currency_field='currency_budget_line')
     total_budget = fields.Monetary(compute='_compute_total_budget', string='Total budget (Budget Currency)',currency_field='currency_budget_line',store=True, readonly=False)
     planned_amount = fields.Monetary(string='Total budget ',currency_field='currency_id',store=True)
-    # rate = fields.Float(related='currency_budget_line.rate',digits=(12,6))
-    
     
     @api.depends('unit_of_measure','quantity','frequency','unit_cost')
     def _compute_total_budget(self):

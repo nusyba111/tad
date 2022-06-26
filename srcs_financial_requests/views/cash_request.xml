@@ -16,8 +16,8 @@
                     <button string="Confirm Internal Auditor" name="confirm_internal_auditor" type="object" class="oe_highlight" states="program_department" groups="accounting_srcs.group_internal_auditor"/>
                     <button string="Submit Payment" name="submit_payment" type="object" class="oe_highlight" states="secratry_general_two" groups="accounting_srcs.group_payment"/>
                     <button string="Second Secretary Approval" name="second_approve_secretary" type="object" class="oe_highlight" states="internal_auditor" groups="accounting_srcs.group_secretary_general"/>
-                    <button string="End" name="end" type="object" class="oe_highlight" states="payment"/>
-                    <field name="state" widget="statusbar" statusbar_visible="darft,payment,end"/>
+                    <!-- <button string="End" name="end" type="object" class="oe_highlight" states="payment"/> -->
+                    <field name="state" widget="statusbar" statusbar_visible="darft,payment"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
