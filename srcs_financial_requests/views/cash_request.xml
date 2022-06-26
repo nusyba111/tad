@@ -29,7 +29,7 @@
                     <group>
                        <group>
                             <field name="user_id" />
-                            <field name="currency_id" invisible='1' />
+                            <field name="company_currency_id" invisible='1'/>
                             <field name="user_lang_id" invisible='1'/>
                             <field name="project_id" />
                             <field name="budget_line_id" domain="[('analytic_account_id','=',project_id)]" />
@@ -37,12 +37,13 @@
                        <group>
                             <field name="date" />
                             <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
-                            <field name="budget_currency"/>
+                            <field name="budget_currency" invisible='1'/>
                             <field name="residual_amount" />
                        </group>  
                     </group>
                     <group>
                         <group>
+                            <field name="currency_id" />
                             <field name="requested_amount" />
                             <field name="amount_in_words" />
                         </group>

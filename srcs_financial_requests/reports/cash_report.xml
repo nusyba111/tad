@@ -38,7 +38,7 @@
                                 <br/>
                                 
                                 
-                                <h5> <span t-esc="o.amount_in_words"/> (<span t-esc="o.requested_amount"/> <span t-esc="o.budget_currency.name"/>),which equivelent to <span t-esc="o.amount_in_words_sdg"/> (<span t-esc="o.requested_amount_sdg"/> <span t-esc="o.currency_id.name"/>) </h5>
+                                <h5> <span t-esc="o.amount_in_words"/> (<span t-esc="o.requested_amount"/> <span t-esc="o.currency_id.name"/>),which equivelent to <span t-esc="o.amount_in_words_sdg"/> (<span t-esc="o.requested_amount_sdg"/> <span t-esc="o.company_currency_id.name"/>) </h5>
                                 <br/>
                                 
                                 <h6>Prefered method of payment is transfer to the following Bank account:</h6>

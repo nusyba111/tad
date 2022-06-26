@@ -12,7 +12,7 @@ class SrcsPaymentRequest(models.Model):
     journal_id = fields.Many2one('account.journal', string='Journal', required=True)
     move_id = fields.Many2one('account.move', 'Journal Entry', readonly=True)
     pay_to = fields.Many2one('res.partner', string='Pay To')
-    is_working_addvance = fields.Boolean('Is Working Addvance')
+    is_working_addvance = fields.Boolean('Is Working Advance')
     payment_method = fields.Selection([
         ('cash', 'Cash'),('bank','Bank Transfer'),('check','Check'),
     ], string='Payment Method', required=True)
@@ -21,12 +21,7 @@ class SrcsPaymentRequest(models.Model):
     request_currency = fields.Many2one('res.currency', 'Currency', default=lambda self: self.env.user.company_id.currency_id)
     total_amount = fields.Float('Total Amount', compute="_compute_total_amount")
     reason = fields.Char('Request Reason', required=True)
-    #financial_approval
-    fn_req_sg_approval = fields.Boolean(string="SG Approval", )
-    internal_auditor_approval = fields.Boolean(string="Internal Auditor Approval", )
     fn_req_sg_dp_approval_amount = fields.Float(string="Maximum Amount", required=False, readonly=False)
-
-    # approved_amount = fields.Float(string="Approved Amount", required=False, compute='get_approved_amount', store=True, readonly=False)
     budget_line_ids = fields.One2many('payment.request.lines', 'payment_request_id', string='Budget Lines')
     debit_account_id = fields.Many2one('account.account', string='Expensses Account')
     state = fields.Selection([
@@ -34,23 +29,11 @@ class SrcsPaymentRequest(models.Model):
         ('secretary','Secretary General'),('payment','Payment'),('cleared', 'Cleared'),
     ], default='draft', string='State')
 
-    # @api.constrains('total_amount')
-    # def total_amount_validation(self):
-    #     if self.total_amount == 0:
-    #         raise ValidationError(_("Request Amount Must be greater than zero!"))
+    @api.constrains('total_amount','budget_line_ids')
+    def total_amount_validation(self):
+        if self.total_amount == 0:
+            raise ValidationError(_("Request Amount Must be greater than zero!"))
 
-    @api.model
-    def default_get(self, fields):
-        res = super(SrcsPaymentRequest, self).default_get(fields)
-        res['fn_req_sg_approval'] = self.env['ir.config_parameter'].sudo().get_param(
-            'srcs_financial_requests.fn_req_sg_approval')
-        res['internal_auditor_approval'] = self.env['ir.config_parameter'].sudo().get_param(
-            'srcs_financial_requests.internal_auditor_approval')
-        res['fn_req_sg_dp_approval_amount'] = float(
-            self.env['ir.config_parameter'].sudo().get_param('srcs_financial_requests.fn_req_sg_dp_approval_amount'))
-        print('_________________get defualt',res)
-        return res
-    
     @api.model
     def create(self, vals):
         if vals.get('sequence', 'NEW') == 'NEW':
@@ -78,6 +61,13 @@ class SrcsPaymentRequest(models.Model):
             return{'domain':{'journal_id':[('type','in',['cash','bank'])]}}
 
     def action_department(self):
+        approval_amount = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_dp_approval_amount')
+        print('_______________approval_amount',approval_amount)
+        if approval_amount:
+            self.fn_req_sg_dp_approval_amount = float(approval_amount)
+            print('__________',float(approval_amount))
+        else:
+            self.fn_req_sg_dp_approval_amount = 0
         self.state = 'department'
 
     def action_finance(self):
@@ -146,22 +136,29 @@ class SrcsPaymentRequest(models.Model):
         return vals
 
     def action_internal(self):
-        if self.total_amount > self.fn_req_sg_dp_approval_amount:
-            if self.internal_auditor_approval == True:
+        approval_amount = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_dp_approval_amount')
+        print('_______________approval_amount',approval_amount)
+        if self.total_amount > float(approval_amount):
+            internal_auditor_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.internal_auditor_approval')
+            print('_______________internal_auditor_approval',internal_auditor_approval)
+            if internal_auditor_approval:
                 self.state = 'internal'
                 print('___________________________________internal',self.state)
             else:
                 print('___________________notinternal')
-                raise ValidationError(_('Internal Auditor Approval Required'))
-            
+                raise ValidationError(_('Internal Auditor Approval Required')) 
         else:
             self.move()
             self.state = 'payment'
             print('___________________________________paymentsss',self.state)
        
     def action_secretary(self):
-        if self.total_amount > self.fn_req_sg_dp_approval_amount:
-            if self.fn_req_sg_approval == True:
+        approval_amount = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_dp_approval_amount')
+        print('_______________approval_amount',approval_amount)
+        if self.total_amount > float(approval_amount):
+            secerteray_general_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_approval')
+            print('_______________secerteray_general_approval',secerteray_general_approval)
+            if secerteray_general_approval:
                 self.state = 'secretary'
                 print('___________________________________secretary',self.state)
             else:
@@ -172,9 +169,10 @@ class SrcsPaymentRequest(models.Model):
             self.state = 'payment'
             print('___________________________________paymentpppp',self.state)
         
-
     def action_payment(self):
-        if self.fn_req_sg_approval == True:
+        secerteray_general_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_approval')
+        print('_______________secerteray_general_approval',secerteray_general_approval)
+        if secerteray_general_approval:
             self.move()
             self.state = 'payment'
             print('___________________________________paymentoooo',self.state)
@@ -189,8 +187,6 @@ class SrcsPaymentRequest(models.Model):
 
     def reset_to_draft(self):
         self.state = 'draft'
-
-    
 
     
 class SrcsPaymentLines(models.Model):
@@ -221,7 +217,7 @@ class SrcsPaymentLines(models.Model):
                     rec.budget_balance = budget_line.balance_budget_currency
                     rec.currency_id = budget_line.currency_budget_line.id
                 else:
-                    raise ValidationError(_('There is No Budget for this Activity'))
+                    raise ValidationError(_('There is No Budget for this %s and %s and %s and %s')%(rec.account_id.name,rec.project_id.name,rec.analytic_activity_id.name,rec.donor_id.name))
             else:
                 rec.budget_balance = 0
 
