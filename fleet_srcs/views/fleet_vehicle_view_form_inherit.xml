@@ -1,17 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+      <record id="fuel_type_view_tree" model="ir.ui.view">
+            <field name="name">fuel.type.tree</field>
+            <field name="model">fuel.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                <field name="fuel_type"/>
+                <field name="qty"/>
+                <field name="price"/>
+                </tree>
+
+            </field>
+        </record>
+    <record id="action_fuel_service_tree" model="ir.actions.act_window">
+            <field name="name">Fuel Service</field>
+            <field name="res_model">fuel.type</field>
+            <field name="type">ir.actions.act_window</field>
+             <field name="domain">[('service_id.vehicle', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new fuel
+              </p>
+            </field>
+        </record>
+        <record id="action_repair_service_tree" model="ir.actions.act_window">
+            <field name="name">Repair Service</field>
+            <field name="res_model">repair</field>
+            <field name="type">ir.actions.act_window</field>
+             <field name="domain">[('fleet', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Repair
+              </p>
+            </field>
+        </record>
+
     <!-- inherit fleet vehicle form -->
     <record id="view_fleet_vehicle_form_inherited" model="ir.ui.view">
         <field name="name">fleet.vehicle.form.inherited</field>
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[5]" position="replace">
+                <button  type="action"
+                            name="%(fleet_srcs.action_fuel_service_tree)d"
+                            class="oe_stat_button"
+                            icon="fa-wrench"
+                            attrs="{'invisible': [('fuel_count', '=', 0)]}">
+                            <field name="fuel_count" widget="statinfo" string="Services"/>
+                        </button>
+                <button type="action"
+                            name="%(fleet_srcs.action_repair_service_tree)d"
+                            class="oe_stat_button"
+                            icon="fa-wrench"
+                            attrs="{'invisible': [('repair_count', '=', 0)]}">
+                            <field name="repair_count" widget="statinfo" string="Repair"/>
+                </button>
+            </xpath>
             <!-- Adding fields-->
             <xpath expr="//group/field[@name='driver_id']" position="before">
                 <field name="owner"/>
                 <field name="project"/>
                 <field name="base_location"/>
             </xpath>
+            <xpath expr="//group/field[@name='vin_sn']" position="after">
+                <field name="engine_no"/>
+                <field name="vrp_user"/>
+            </xpath>
+
             <xpath expr="//page[3]" position="before">
                 <page string="Services">
                     <field name="services_list" widget="one2many">
@@ -26,6 +84,31 @@
             <xpath expr="//group/group" position="attributes">
                 <attribute name="string"> </attribute>
             </xpath>
+            <xpath expr="//group/group" position="attributes">
+                <attribute name="string"> </attribute>
+            </xpath>
+            <xpath expr="//page[2]" position="inside">
+                <group><field name="engine_type"/></group>
+            </xpath>
+            <xpath expr="//page[3]" position="before">
+                <page string="Local Info">
+                    <from>
+                        <group colspan="4" col="4">
+                            <field name="federation_vehicle_code"/>
+<!--                            <field name="model_model_id"/>-->
+                            <field name="registration_start"/>
+                            <field name="registration_end"/>
+                            <field name="local_insurance_policy_number"/>
+                            <field name="cost_third_party_local"/>
+                            <field name="registration_plate_type"/>
+                            <field name="insurance_start"/>
+                            <field name="insurance_end"/>
+                    </group>
+                    </from>
+                </page>
+            </xpath>
         </field>
     </record>
+
+
 </odoo>

@@ -14,6 +14,7 @@ from odoo.osv.expression import AND, NEGATIVE_TERM_OPERATORS
 class Fueling(models.Model):
     _name='fuel.service'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name='description'
 
     description=fields.Char(string="Description")
     branch=fields.Many2one('res.branch',string='Branch')
@@ -37,7 +38,28 @@ class Fueling(models.Model):
     ], default='requester', string='State',readonly=True)
     transfer_count=fields.Integer(string='Stock Transfers', compute='_compute_transfers_ids',tracking=True)
     invoice_count=fields.Integer(string='Invoices', compute='_compute_invoices_ids',tracking=True)
+    # new fields
+    approve_name_id = fields.Many2one('res.users', string='Manager', readonly=True)
+    fleet_user_id = fields.Many2one('res.users', string='HR Admin', readonly=True)
+    total_amount = fields.Float(string="Total")
 
+    @api.onchange('fuel_id')
+    def call_total(self):
+        sum = 0.0
+        for rec in self.fuel_id:
+            sum += rec.total
+            self.total_amount = sum
+
+    # @api.depends('qty', 'price')
+    # def compute_total(self):
+    #     for line in self:
+    #         line.total = line.qty * line.price
+
+
+    @api.constrains('odo_meter')
+    def odometer_constrains(self):
+        if self.vehicle.odometer > self.odo_meter:
+            raise ValidationError(_('Odometer value should be bigger than last odometer entered'))
 
     def _compute_transfers_ids(self):
         for rec in self:
@@ -50,10 +72,13 @@ class Fueling(models.Model):
             rec.invoice_count = len(invoice_ids)
 
     def to_user(self):
+        self.vehicle.write({'odometer': self.odo_meter})
         self.write({'state': 'fleet_user'})
+        self.fleet_user_id = self.env.user.id
 
     def to_manager(self):
         self.write({'state': 'fleet_manager'})
+        self.approve_name_id = self.env.user.id
 
     def to_finance(self):
         if self.request_type == 'hq':
@@ -78,45 +103,30 @@ class Fueling(models.Model):
         self.write({'state': 'cancel'})
 
     def stock_request(self):
-        if not self.fuel_id:
-            raise ValidationError(_('Spare part details must be added'))
-        else:
-            spares_list = duplicated_list = []
-            for item in self.fuel_id:
-                if item.picking_id.id == False:
-                    spares_list.append(item.spare.id)
-            duplicated_list = [x for n, x in enumerate(spares_list) if x in spares_list[:n]]
-            if duplicated_list:
-                for item in duplicated_list:
-                    product = self.env['product.product'].search([('id', '=', item)])
-                    raise ValidationError(
-                        _('Item %s ordered twice you can change the ordered quantity') % (product.default_code))
 
-            # Stock Picking order entry
-            stock_picking_vals = {'partner_id': self.create_uid.partner_id.id,
-                                  'location_id': self.location.id,
-                                  'location_dest_id': self.location.warehouse_id.wh_output_stock_loc_id.id,
-                                  'scheduled_date': self.date,
-                                  'picking_type_id': self.location.warehouse_id.out_type_id.id,
-                                  'fuel_id': self.id,
-                                  }
-            picking = self.env['stock.picking'].create(stock_picking_vals)
+        stock_picking_vals = {'partner_id': self.create_uid.partner_id.id,
+                              'location_id': self.location.id,
+                              'location_dest_id': self.location.warehouse_id.wh_output_stock_loc_id.id,
+                              'scheduled_date': self.date,
+                              'picking_type_id': self.location.warehouse_id.out_type_id.id,
+                              'fuel_id': self.id,
+                              }
+        picking = self.env['stock.picking'].create(stock_picking_vals)
 
-            # Stock Move
-            for line in self.fuel_id:
-                if line.picking_id.id == False:
-                    stock_move_vals = {
-                        'product_id': line.fuel_type.id,
-                        'product_uom_qty': line.qty,
-                        'product_uom': line.fuel_type.product_tmpl_id.uom_id.id,
-                        'location_id': self.location.id,
-                        'name': line.spare.name,
-                        'location_dest_id': self.location.warehouse_id.wh_output_stock_loc_id.id,
-                        'picking_id': picking.id,
-                        'spare_line_id': line.id,
-                    }
-                    move = self.env['stock.move'].create(stock_move_vals)
-                    line.picking_id = picking
+
+        # Stock Move
+        for line in self.fuel_id:
+            stock_move_vals = {
+                'product_id': line.fuel_type.id,
+                'product_uom_qty': line.qty,
+                'product_uom': line.fuel_type.product_tmpl_id.uom_id.id,
+                'location_id': self.location.id,
+                'name': line.fuel_type.name,
+                'location_dest_id': self.location.warehouse_id.wh_output_stock_loc_id.id,
+                'picking_id': picking.id,
+                'spare_line_id': line.id,
+            }
+            move = self.env['stock.move'].create(stock_move_vals)
 
 
 
@@ -129,6 +139,12 @@ class FuelType(models.Model):
     qty = fields.Float(string='Quantity')
     uom = fields.Many2one('uom.uom', string='UoM', related='fuel_type.uom_id')
     price=fields.Float(string="Price",related='fuel_type.list_price',required=True)
+    total = fields.Float(string='Total', compute='compute_total')
+
+    @api.depends('qty','price')
+    def compute_total(self):
+        for line in self:
+            line.total=line.qty*line.price
 
     @api.depends('fuel_type')
     def compute_qty(self):

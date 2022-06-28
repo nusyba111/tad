@@ -16,7 +16,36 @@ class FleetSrcsCustom(models.Model):
     owner = fields.Many2one('res.partner', 'Owner/Donor')
     project = fields.Many2one('account.analytic.account', 'Project')
     base_location = fields.Many2one('account.analytic.account', 'Base location')
-    driver_id = fields.Many2one('res.partner', compute='compute_default', store=False)  # compute to come auto
+    driver_id = fields.Many2one('res.partner', compute='compute_default', store=False)# compute to come auto
+    engine_no=fields.Integer('Engine No')
+    # insurance_start=fields.Date('Insurance Start Date',Tracking=True)
+    # insurance_end = fields.Date('Insurance End Date', Tracking=True)
+    on_rent=fields.Boolean(string='On Rent',readonly=True)
+    insurance_start = fields.Datetime('Insurance Start Date', Tracking=True)
+    insurance_end = fields.Datetime('Insurance End Date', Tracking=True)
+    # new fields
+    vrp_user=fields.Many2one('res.partner',string='VRP USER?')
+    federation_vehicle_code = fields.Char(string='Federation Vehicle Code')
+    model_model_id = fields.Many2one('fleet.vehicle', string='Car Model')
+    engine_type = fields.Char(string='Engine Type/Model')
+    registration_start = fields.Date('Registration Start')
+    registration_end = fields.Date('Registration End')
+    local_insurance_policy_number = fields.Char('Local Insurance Policy Number')
+    cost_third_party_local = fields.Float(string='Cost Third Party Local(Country Currency Sudan Pound SDG)')
+    registration_plate_type = fields.Selection([('diplomatic','Diplomatic'),
+                                                ('civilian','Civilian')],string='Registration Plate Type')
+    fuel_count=fields.Integer(string='Fuel', compute='_compute_fuel_ids',tracking=True)
+    repair_count=fields.Integer(string='Fuel', compute='_compute_repair_ids',tracking=True)
+
+    def _compute_fuel_ids(self):
+        for rec in self:
+            fuel = self.env['fuel.type'].search([('service_id.vehicle', '=', self.id)])
+            rec.fuel_count = len(fuel)
+
+    def _compute_repair_ids(self):
+            for rec in self:
+                repair = self.env['repair'].search([('fleet', '=', self.id)])
+                rec.repair_count = len(repair)
 
     def compute_default(self):
         for record in self:
@@ -45,3 +74,5 @@ class FleetServices(models.Model):
     service = fields.Many2one('product.template', domain=[('detailed_type', '=', 'service')], string='Service')
     minimum_odometer = fields.Float('Minimum odometer', required=True)
     maximum_odometer = fields.Float('Maximum odometer', required=True)
+
+

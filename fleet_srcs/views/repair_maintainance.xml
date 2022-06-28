@@ -95,9 +95,13 @@
                             <field name="branch"/>
                             <field name="fleet"/>
                             <field name="date"/>
+                            <field name="workshop_id"/>
+                            <field name="odometer"/>
                             <field name="licence_plate"/>
                             <field name="shassis_no"/>
                             <field name="complain"/>
+                            <field name="start_maintainance" attrs="{'invisible':[('state','=','draft')]}"/>
+                            <field name="end_maintainance" attrs="{'invisible':[('state','=','draft')]}"/>
                             <field name="purchase_req_id"/>
 
                         </group>
@@ -105,8 +109,11 @@
                              <page string="Services" name="services" attrs="{'invisible':[('state','=','draft')]}">
                                      <field name="service_id">
                                          <tree editable="bottom">
-                                            <field name="service" width="50%"/>
-                                            <field name="hour" width="50%"/>
+                                            <field name="service" width="20%"/>
+                                            <field name="technition_name" width="20%"/>
+                                            <field name="hour" width="20%"/>
+                                             <field name="hour_price" width="20%"/>
+                                            <field name="service_price" width="20%"/>
                                          </tree>
                                      </field>
                              </page>
@@ -119,10 +126,13 @@
                                      <field name="spare_id">
                                          <tree editable="bottom">
                                              <field name="spare"/>
+                                             <field name="type"/>
                                              <field name="available_qty"/>
                                              <field name="ordered_qty"/>
+                                             <field name="price"/>
                                              <field name="delivered_qty"/>
                                              <field name="uom"/>
+                                             <field name="total"/>
                                              <field name="picking_id" invisible="1"/>
                                          </tree>
                                      </field>
