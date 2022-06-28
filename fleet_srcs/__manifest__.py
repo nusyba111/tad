@@ -39,6 +39,7 @@
         'wizard/maintainance_report_view.xml',
         'wizard/new_vehicle.xml',
         'wizard/fuel_tracking_view.xml',
+        'wizard/insurance_price_change_view.xml',
 
     ],
     'installable': True,

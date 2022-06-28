@@ -52,6 +52,11 @@
                            widget="statusbar"
                            statusbar_visible="requester,finance,cancel" optional="show"
                     />
+                        <button type="action"
+                            name="%(fleet_srcs.action_change_insurance)d"
+                            string="New Insurance Price"
+                            attrs="{'invisible': [('state','in',['requester'])]}">
+                         </button>
                     <button
                             name="to_finance"
                             states="requester"
@@ -63,7 +68,7 @@
                             name="action_cancel"
                             string="Cancel"
                             type="object"
-                            attrs="{'visible':[('state','in',['draft'])]}"/>
+                            attrs="{'visible':[('state','in',['requester'])]}"/>
                     </header>
                     <sheet>
                     <div class="oe_button_box" name="button_box">

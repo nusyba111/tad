@@ -24,9 +24,9 @@
 
 
 
-    <record id="action_view_insurance" model="ir.actions.act_window">
-      <field name="name">Insurance Expiration Date</field>
-      <field name="res_model">insurance.date.report</field>
+    <record id="action_change_insurance" model="ir.actions.act_window">
+      <field name="name">Insurance Change Price</field>
+      <field name="res_model">insurance.price.change</field>
       <field name="view_mode">form</field>
       <field name="view_id" ref="view_wizard_insurance"/>
       <field name="target">new</field>
