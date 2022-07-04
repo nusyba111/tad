@@ -17,6 +17,11 @@
              <field name="implied_ids" eval="[(4, ref('group_hr_mission_users'))]"/>
 		</record>
 
+		<record id="group_mission_public_relattion" model="res.groups">
+		     <field name="name">Public Relattion</field>
+		     <field name="category_id" ref="hr_mission_srcs.mission_management"/>
+		</record>
+
 		<!-- Rules -->
 		<record id="hr_mission_multi_company_rule" model="ir.rule">
             <field name="name">Mission multi-company</field>

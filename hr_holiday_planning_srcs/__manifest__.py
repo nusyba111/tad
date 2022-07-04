@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr_holidays'],
+    'depends': ['base','hr_holidays','accounting_srcs','srcs_financial_requests'],
 
     # always loaded
     'data': [

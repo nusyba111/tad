@@ -35,6 +35,29 @@
                     </attribute>
 
                 </xpath>
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="payment_request_id"/>
+                    <field name="journal_id" attrs="{'invisible':['|',('state','!=','validate'),('annual_leave','=',False)],'required':[('state','=','validate'),('annual_leave','=',True)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_validate']" position="after">
+                    <field name="annual_leave" invisible="1"/>
+                    <button string="Finance Approve" name="action_finance_approval" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|',('annual_leave','=',False),('state', '!=', 'validate')]}"/> 
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook attrs="{'invisible':['|',('state','!=','validate')
+                        ,('annual_leave','=',False)]}">
+                        <page string="coverage">
+                            <field name="coverage_ids">
+                                <tree editable="bottom">
+                                  <field name="project"/>
+                                  <field name="activity" />
+                                  <field name="doner_id" />
+                                </tree> 
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
             </field>
         </record>
         <record id="hr_leave_view_form_inherit" model="ir.ui.view">
@@ -43,7 +66,7 @@
             <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='state']" position="attributes">
-                    <attribute name="statusbar_visible">planned,confirm,validate,cancel</attribute>
+                    <attribute name="statusbar_visible">planned,confirm,validate,finance_approve,cancel</attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_confirm']" position="attributes">
                     <attribute name="attrs">{'invisible': [('state',
@@ -55,10 +78,10 @@
                     <field name="linked_leave_planning" invisible="1" />
                     <field name="holiday_status_id" invisible="1" />
                     <button string="Replan" name="action_replan" type="object" class="oe_highlight"
-                            attrs="{'invisible': ['|', ('is_plan', '=', False), ('state', '!=', 'planned')]}"/>
-                    <!--                                        <button string="Set as Plan" name="action_set_as_plan" type="object" class="oe_highlight"/>-->
-                    <!--                                        <button string="Set as Draft" name="action_set_as_draft" type="object" class="oe_highlight"/>-->
+                        attrs="{'invisible': ['|', ('is_plan', '=', False), ('state', '!=', 'planned')]}"/>
+                       
                 </xpath>
+
             </field>
         </record>
 
@@ -293,6 +316,32 @@
             <field name="state">code</field>
         </record>
 
+
+        <!--Rename timeoff actions into leaves-->
+        <record id="hr_holidays.open_view_holiday_status" model="ir.actions.act_window">
+            <field name="name">Leave Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.leave.type</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+        <record id="hr_holidays.hr_leave_action_my" model="ir.actions.act_window">
+            <field name="name">My Leaves</field>
+        </record>
+
+        <record id="hr_holidays.hr_leave_action_action_approve_department" model="ir.actions.act_window">
+            <field name="name">All Leaves</field>
+        </record>
+
+        <record id="hr_holidays.action_hr_available_holidays_report" model="ir.actions.act_window">
+            <field name="name">Leave Analysis</field>
+        </record>
+
+        <record id="hr_holidays.hr_leave_action_action_department" model="ir.actions.act_window">
+            <field name="name">Leave Analysis</field>
+        </record>
+
+
         <!--        <menuitem name="Leave Planning" id="hr_leave_planning_menu_item" parent="hr_holidays.menu_hr_holidays_root"-->
         <!--        />-->
         <menuitem name="Leaves Planning" id="hr_manager_leaves_planning_menu"
@@ -309,6 +358,44 @@
         <menuitem name="My Leaves Planning Details" id="hr_my_planned_leaves_menu"
                   parent="hr_holidays.menu_hr_holidays_my_leaves"
                   action="hr_employee_leave_action_window"/>
+
+        <!--Rename all time off menus into leaves-->
+        <menuitem
+        name="Leave"
+        id="hr_holidays.menu_hr_holidays_root"
+        sequence="95"
+        web_icon="hr_holidays,static/description/icon.png"
+        groups="base.group_user"/>
+
+        <menuitem
+        id="hr_holidays.menu_hr_holidays_my_leaves"
+        name="My Leave"
+        parent="hr_holidays.menu_hr_holidays_root"
+        sequence="1"/>
+
+        <menuitem
+        id="hr_holidays.menu_open_department_leave_approve"
+        name="Leave"
+        parent="hr_holidays.menu_hr_holidays_approvals"
+        action="hr_holidays.hr_leave_action_action_approve_department"
+        sequence="1"/>
+
+
+        <menuitem
+        id="hr_holidays.hr_holidays_status_menu_configuration"
+        action="hr_holidays.open_view_holiday_status"
+        name="Leave Types"
+        parent="hr_holidays.menu_hr_holidays_configuration"
+        groups="hr_holidays.group_hr_holidays_user"
+        sequence="1"/>
+
+
+         <menuitem
+        id="hr_holidays.hr_leave_menu_my"
+        name="My Leaves"
+        parent="hr_holidays.menu_hr_holidays_my_leaves"
+        action="hr_holidays.hr_leave_action_my"
+        sequence="2"/>          
 
 
     </data>

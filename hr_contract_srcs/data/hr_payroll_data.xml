@@ -77,6 +77,19 @@
             <field name="struct_id" ref="structure_permanent_contracts"/>
         </record>
 
+        <!-- <record id="permanent_contracts_income_tax_rule" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="name">Employee Income Tax</field>
+            <field name="code">tax</field>
+            <field name="sequence">5</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="amount_python_compute">result = ((((contract.wage - soi ) - 27000)*0.2) + 3300) * payslip.rate
+            </field>
+            <field name="struct_id" ref="structure_permanent_contracts"/>
+        </record> -->
+
         <record id="permanent_contracts_wage_rule" model="hr.salary.rule">
             <field name="category_id" ref="hr_payroll.GROSS"/>
             <field name="name">Wage</field>

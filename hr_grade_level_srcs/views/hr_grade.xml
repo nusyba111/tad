@@ -58,14 +58,14 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Grade Allowances">
+                            <!-- <page string="Grade Allowances">
                                 <field name="line_ids">
                                     <tree editable="bottom">
                                         <field name="allow_deduct" required="True"/>
                                         <field name="amount_deduct"/>
                                     </tree>
                                 </field>
-                            </page>
+                            </page> -->
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">
@@ -109,6 +109,13 @@
                 <tree string="Levels">
                     <field name="name"/>
                     <field name="wage"/>
+                    <field name="s_insurance"/>
+                    <field name="h_insurance"/>
+                    <field name="a_s_b"/>
+                    <field name="leave_allowance"/>
+                    <field name="trans"/>
+                    <field name="eid_bonus"/>
+                    <field name="total_job_cost"/>
                     <field name="grade_id"/>
                 </tree>
             </field>
@@ -129,9 +136,17 @@
                             <group>
                                 <field name="sequence" readonly='1'/>
                                 <field name="wage"/>
+                                <field name="s_insurance"/>
+                                <field name="h_insurance"/>
+                                <field name="a_s_b"/>
+                                
                             </group>
                             <group>
                                 <field name="grade_id"/>
+                                <field name="leave_allowance"/>
+                                <field name="trans"/>
+                                <field name="eid_bonus"/>
+                                <field name="total_job_cost"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                         </group>

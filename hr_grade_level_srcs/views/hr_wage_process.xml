@@ -29,6 +29,12 @@
                                 states="confirm,refused"/>
                         <button name="action_set_to_approve" type="object" class="oe_highlight" string="Approve"
                                 states="confirm"/>
+                        <button name="action_hr_approve" type="object" class="oe_highlight" string="HR Approve"
+                                states="approve"/>   
+                        <button name="action_finance_approve" type="object" class="oe_highlight" string="Finance Approve"
+                                states="finance_approve"/>   
+                        <button name="action_another_hr_approve" type="object" class="oe_highlight" string="HR Approve"
+                                states="hr_approve"/>                    
                         <button name="action_set_to_refused" type="object" string="Refuse" states="confirm,draft"/>
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -64,6 +70,11 @@
                                 <field name="current_grade" readonly='1'/>
                                 <field name="current_level" readonly='1'/>
                                 <field name="current_wage" readonly='1'/>
+                            </group>
+                            <group name="Accounting Information">
+                                <field name="project"/>
+                                <field name="activity"/>
+                                <field name="location"/>
                             </group>
                         </group>
 

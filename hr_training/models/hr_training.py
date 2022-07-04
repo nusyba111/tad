@@ -36,7 +36,7 @@ class hrTraining(models.Model):
     state = fields.Selection([
         ('draft', 'Draft'),
         ('planned', 'Planned'),
-        ('confirmed', 'Confirmed'),
+        ('confirmed', 'Wait Secratry Manager Approval'),
         ('executed', 'Executed'),
         ('cancel', 'Cancelled')], string='Status',
         track_visibility='onchange')
@@ -72,8 +72,24 @@ class hrTraining(models.Model):
             raise ValidationError(_('Please add Employees!'))
         self.state = 'confirmed'
 
-    def action_execute(self):
+    def action_sg_execute(self):
+        trainings = self.env['hr.training'].search(
+            [('id', '=', self.id),('course', '=', self.course.id),('training_execution','=',False)])
+
+        execute = self.env['hr.training.execution'].create({
+            'course':self.course.id,
+            'start_date':self.date_from,
+            'end_date':self.date_to,
+            })
+        execute.write({'line_ids':trainings.ids})
         self.state = 'executed'
+        self.training_execution = execute.id
+
+
+    def open_execute(self):
+        action = self.env.ref('hr_training_plan.training_plan_act_window').read()[0]
+        action['domain'] = [('id', '=', self.training_execution.id)]
+        return action    
 
     def action_cancel(self):
         self.state = 'cancel'

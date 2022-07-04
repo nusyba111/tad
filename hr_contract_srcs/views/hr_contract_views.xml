@@ -9,7 +9,7 @@
 
         <xpath expr="//field[@name='hr_responsible_id']" position="after">
           <field name="contract_type"/>
-          <field name="coverage"/>
+          <!-- <field name="coverage"/> -->
         </xpath>
         <xpath expr="//field[@name='structure_type_id']" position="after">
            <field name="struct_id"/>
@@ -36,7 +36,10 @@
           <page string="Salary Plan" name="plan">
             <field name="salary_plan">
                 <tree editable="bottom">
-                  <field name="covered_by"/>
+                  <field name="covered_by" string="Project"/>
+                  <field name="activity" />
+                  <field name="location" />
+                  <field name="doner_id"/>
                   <field name="percentage_of_covering"/>
                   <field name="coverage_in_usd"/>
                 </tree>
@@ -47,10 +50,60 @@
       </field>
     </record>
 
-    <record id="account_analytic_tag_hr_action" model="ir.actions.act_window">
+    <!--Inherit Account Analytic Tag For Coverage-->
+    <!-- <record id="account_analytic_tag_form_view_inherit" model="ir.ui.view">
+      <field name="name">account.analytic.tag.form.inherit</field>
+      <field name="model">account.analytic.tag</field>
+      <field name="inherit_id" ref="analytic.account_analytic_tag_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="is_coverage" invisible="1"/>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="replace">
+          <field name="name" string="Coverage" attrs="{'invisible':[('is_coverage','=',False)]}"></field>
+          <field name="name" string="Analytic Tag" attrs="{'invisible':[('is_coverage','=',True)]}"></field>
+        </xpath>
+        <xpath expr="//field[@name='active_analytic_distribution']" position="replace">
+          <field name="active_analytic_distribution" string="Coverage Distribution"
+            attrs="{'invisible':[('is_coverage','=',False)]}"/> 
+          <field name="active_analytic_distribution" string="Analytic Distribution"
+            attrs="{'invisible':[('is_coverage','=',True)]}"/>
+        </xpath>
+      </field>
+    </record> -->
+
+<!--     <record id="account_analytic_tag_helal_tree_view" model="ir.ui.view">
+        <field name="name">account.analytic.tag.helal.tree</field>
+        <field name="model">account.analytic.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Coverage">
+                <field name="name" string="Coverage"/>
+            </tree>
+        </field>
+    </record> -->
+
+    <!-- <record id="account_analytic_tag_tree_view_inherit" model="ir.ui.view">
+      <field name="name">account.analytic.tag.tree.inherit</field>
+      <field name="model">account.analytic.tag</field>
+      <field name="inherit_id" ref="analytic.account_analytic_tag_tree_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="is_coverage" invisible="1"/>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="replace">
+          <field name="name" string="Coverage" attrs="{'column_invisible':[('is_coverage','=',False)]}"></field>
+          <field name="name" string="Analytic Tag" attrs="{'column_invisible':[('is_coverage','=',True)]}"></field>
+        </xpath>
+      </field>
+    </record> -->
+
+   <!--  <record id="account_analytic_tag_hr_action" model="ir.actions.act_window">
             <field name="name">Coverage</field>
             <field name="res_model">account.analytic.tag</field>
             <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="account_analytic_tag_helal_tree_view"/>
+            <field name="context">{'default_is_coverage':True}</field>
+            <field name="domain">[('is_coverage','=',True)]</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
                 Add a new coverage
@@ -58,13 +111,17 @@
             </field>
         </record>
 
+    <record id="analytic.account_analytic_tag_action" model="ir.actions.act_window">
+            <field name="view_id" ref="analytic.account_analytic_tag_tree_view"/>
+        </record>    
+
     <menuitem 
       id="account_analytic_tag_hr_menu" 
       name="Coverage" 
       action="account_analytic_tag_hr_action" 
       parent="hr.menu_hr_employee_payroll"
 
-      />
+      /> -->
 
   </data>
 </odoo>

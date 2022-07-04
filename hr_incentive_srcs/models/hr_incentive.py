@@ -72,7 +72,7 @@ class HrIncentive(models.Model):
                                      states={'draft': [('readonly', False)], 'submit': [('readonly', False)]},
                                      ondelete='cascade')
     reason = fields.Text(readonly=True,
-                         states={'draft': [('readonly', False)]})
+                         states={'draft': [('readonly', False)]},required=True)
     move_id = fields.Many2many('account.move', string='Receipts', readonly=True,copy=False)
     active = fields.Boolean('active', default=True)
     incentive_website_description = fields.Html('Body Template', sanitize_attributes=False, translate=html_translate,
@@ -84,8 +84,7 @@ class HrIncentive(models.Model):
     project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
     activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
     location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
-    payment_method = fields.Many2one('account.payment.method',string="Payment Method")
-
+    donor_id = fields.Many2one('res.partner', string='Donor',required=True)
 
     def action_get_move_ids(self):
         return {

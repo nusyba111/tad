@@ -127,16 +127,10 @@ class EmployeeRecruitmentPlanLine(models.Model):
     required_year = fields.Float(string="Required Years For Experience")
     required_qualification = fields.Float(string="Required Qualification")
     duites_and_spec = fields.Html(compute="_compute_duites",readonly=False)
-
-
-
-
-
-
-
-            # rec.total_number = sum
-    
-  
+    project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
+    activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
+    doner = fields.Many2one('res.partner',string="Doner")
     
     def _compute_duites(self):
         for rec in self:

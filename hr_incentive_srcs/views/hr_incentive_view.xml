@@ -105,7 +105,6 @@
                                 <div clas="o_row" colspan="2">
                                     <field name="date" class="oe_inline" widget="daterange"  attrs="{'readonly':[('state', '!=', 'draft')],'required':True}" options="{'related_end_date': 'end_date'}"/> TO
                                     <field name="end_date" class="oe_inline" widget="daterange"  attrs="{'readonly':[('state', '!=', 'draft')],'required':True}" options="{'related_start_date': 'date'}"/>
-                                    <field name="payment_method"/>
                                 </div>
 
                                 <field name="approve_date" readonly="1"/>

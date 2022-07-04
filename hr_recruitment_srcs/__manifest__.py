@@ -13,7 +13,7 @@
     'website': "http://www.iatl-sd.com",
     'license': "AGPL-3",
     'category': 'HR',
-    'depends': ['hr_recruitment'],
+    'depends': ['hr_recruitment','accounting_srcs'],
     'data': [
         'security/security_views.xml',
         'security/ir.model.access.csv',

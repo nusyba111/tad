@@ -12,7 +12,7 @@
                 <h5>Applicaition No.</h5>
                 <field name="applicaition_no"/>
                 <h5>Employee Type</h5>
-                <field name="application_type" widget="radio"/>
+                <field name="application_type" widget="radio" options="{'horizontal': true}"/>
                 <br/>
             </xpath>
             <xpath expr="//field[@name='email_from']" position="before">
