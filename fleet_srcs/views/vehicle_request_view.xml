@@ -52,6 +52,7 @@
                             string="HR Manager Approve"
                             type="object"
                             class="oe_highlight"
+                             attrs="{'visible':[('mission','=',True)]}"/>
                     />
                     <button
                             name="to_fleet"

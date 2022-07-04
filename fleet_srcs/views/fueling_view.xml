@@ -73,10 +73,10 @@
                     />
                      <button
                             name="stock_request"
-                            states="finance"
                             string="Stock Request"
                             type="object"
                             class="oe_highlight"
+                            attrs="{'visible':[('state','in',['finance','fleet_manager'])]}"
                     />
 
                     <button
@@ -105,7 +105,7 @@
                             name="%(fleet_srcs.action_invoice_fuel_tree)d"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible': [('state', '!=', 'finance')]}">
+                            attrs="{'invisible': [('invoice_count', '=', 0)]}">
                         <field name="invoice_count" widget="statinfo" string="Invoices"/>
                          </button>
                         </div>
@@ -130,8 +130,14 @@
                                     <field name="qty"/>
                                     <field name="uom"/>
                                     <field name="price"/>
+                                    <field name="total"/>
                                 </tree>
                             </field>
+                        </group>
+                        <group>
+                            <field name="approve_name_id"/>
+                            <field name="fleet_user_id"/>
+                            <field name="total_amount"/>
                         </group>
                     </sheet>
                     <div class="oe_chatter">

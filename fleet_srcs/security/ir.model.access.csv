@@ -1,6 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_fleet_service,access.fleet.service,model_fleet_service,,1,1,1,1
 access_repair,repair,model_repair,fleet.fleet_group_manager,1,1,1,0
+access_workshop,res.workshop,model_res_workshop,fleet.fleet_group_manager,1,1,1,0
 access_services,services,model_services,fleet.fleet_group_manager,1,1,1,0
 access_spare_parts,spare.parts,model_spare_parts,fleet.fleet_group_manager,1,1,1,0
 access_fuel_service,fuel.service,model_fuel_service,fleet.fleet_group_manager,1,1,1,1
@@ -8,5 +9,18 @@ access_insurance_service,insurance.service,model_insurance_service,fleet.fleet_g
 access_fleet_request,fleet.request,model_fleet_request,fleet.fleet_group_manager,1,1,1,1
 access_fleet_rent_request,fleet.rent.request,model_fleet_rent_request,fleet.fleet_group_manager,1,1,1,1
 access_fuel_type,fuel.type,model_fuel_type,fleet.fleet_group_manager,1,1,1,1
-
+preventive_maintainance,preventive.maintainance.report,model_preventive_maintainance_report,fleet.fleet_group_manager,1,1,1,1
+preventive_maintainance_report_excel,preventive.maintainance.report.excel,model_preventive_maintainance_report_excel,fleet.fleet_group_manager,1,1,1,1
+insurance_date,insurance.date.report,model_insurance_date_report,fleet.fleet_group_manager,1,1,1,1
+insurance_date_report_excel,insurance.date.report.excel,model_insurance_date_report_excel,fleet.fleet_group_manager,1,1,1,1
+access_rent_policy,rent.policy,model_rent_policy,fleet.fleet_group_manager,1,1,1,1
+access_handover,handover,model_handover,fleet.fleet_group_manager,1,1,1,1
+access_rent_handover,rent.handover,model_rent_handover,fleet.fleet_group_manager,1,1,1,1
+fuel_mileage,fuel.mileage.report,model_fuel_mileage_report,fleet.fleet_group_manager,1,1,1,1
+fuel_mileage_excel,fuel.mileage.report.excel,model_fuel_mileage_report_excel,fleet.fleet_group_manager,1,1,1,1
+maintainance_report,maintainance.report,model_maintainance_report,fleet.fleet_group_manager,1,1,1,1
+maintainance_report_excel,maintainance.report.excel,model_maintainance_report_excel,fleet.fleet_group_manager,1,1,1,1
+fuel_tracking,fuel.tracking.report,model_fuel_tracking_report,fleet.fleet_group_manager,1,1,1,1
+fuel_tracking_excel,fuel.tracking.report.excel,model_fuel_tracking_report_excel,fleet.fleet_group_manager,1,1,1,1
+insurance_price_change,insurance.price.change,model_insurance_price_change,fleet.fleet_group_manager,1,1,1,1
 

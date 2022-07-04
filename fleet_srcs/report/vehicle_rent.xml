@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="report_vehicle_rent"
+            string=" Vehicle Rent"
+            model="fleet.rent.request"
+            report_type="qweb-pdf"
+            name="fleet_srcs.vehicle_rent_reports"
+            file="fleet_srcs.vehicle_rent_reports"/>
+    <template id="fleet_srcs.vehicle_rent_reports">
+         <t t-call="web.html_container">
+            <div class="article mt0 o_report_layout_standard" dir="rtl">
+                <div style="border:black solid 2px ; margin:10px">
+                 <table class="table table-condensed table-bordered" border="0">
+
+                    <p  style="font-size:20px;text-align:left;width: 70%;" class="col-xs-5 text-left">Vehicle Rent Request Form</p><br/>
+                    <p dir="rtl" style="font-size:15px;text-align:right;width: 50%;" class="col-xs-5 text-right">طلب ايجار عربه لمهمه رسميه</p>
+                 <thead>
+                        <th class="text-center"  style="width: 90%;" colspan="3">For Requesting Dept.Use only </th>
+                         </thead>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                             <tr>
+                                 <td class="text-right">تاريخ تقديم الطلب</td>
+                                 <td class="text-center"><span t-esc="doc.date"/></td>
+                                 <td class="text-left">Date of Requested</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">الجهة الطالبة الخدمة</td>
+                                    <td class="text-center"><span t-esc="doc.department.name"/></td>
+                                    <td class="text-left">Requesting Dep/Project</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">نوع العربة</td>
+                                    <td class="text-center"><span t-esc="doc.model.name"/></td>
+                                    <td class="text-left">Required Car</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">جهة الرحلة</td>
+                                    <td class="text-center"><span t-esc="doc.destination"/></td>
+                                    <td class="text-left">Destination</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">الغرض من الرحلة</td>
+                                    <td class="text-center"><span t-esc="doc.purpose"/></td>
+                                    <td class="text-left">Purpose</td>
+                            </tr>
+                            <tr>
+                                     <td class="text-right">عدداﻷيام</td>
+                                     <td class="text-center"></td>
+<!--                                    <td class="text-center"><span t-esc="doc.duration"/></td>-->
+                                    <td class="text-left">Days Required</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">تاريخ بداية الخدمة</td>
+                                    <td class="text-center"><span t-esc="doc.date_from"/></td>
+                                    <td class="text-left">Required Sevice Date</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">تاريخ نهاية الخدمة</td>
+                                    <td class="text-center"><span t-esc="doc.end_date"/></td>
+                                    <td class="text-left">End of Service Date</td>
+                            </tr>
+
+                        </t>
+                    </tbody>
+                </table>
+<!--           table number2      -->
+            <table class="table table-condensed table-bordered" border="0">
+                 <thead>
+                        <th class="text-center"  style="width: 90%;" colspan="3">Approvals </th>
+                         </thead>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                             <tr>
+                                 <td class="text-right">تصديق مدير اﻹدارة/:</td>
+                                 <td class="text-center"><span t-esc="doc.dept_approve"/></td>
+                                 <td class="text-left">Dept/Project Manager Signature</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">التاريخ:  <span t-esc="doc.date"/></td>
+                                   <td class="text-center"><span t-esc="doc.dept_approve"/></td>
+                                    <td class="text-left">Date</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">موافقة مدير الشؤون اﻹدارية والخدمات: </td>
+                                    <td class="text-center"><span t-esc="doc.admin_approve"/></td>
+                                    <td class="text-left">Admin and Gs Manager Signature</td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">التاريخ:  </td>
+                                    <td class="text-center"><span t-esc="doc.date_approve"/></td>
+                                    <td class="text-left">Date</td>
+                            </tr>
+
+                        </t>
+                    </tbody>
+                </table>
+<!--table no3-->
+                            <table class="table table-condensed table-bordered" border="0">
+                 <thead>
+                        <th class="text-center"  style="width: 90%;" colspan="8">بيانات العربه المستأجرة </th>
+                         </thead>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                             <tr>
+
+                                 <td class="text-right">الجهه المؤجرة</td>
+                                 <td class="text-right" colspan="4"><span t-esc="doc.partner.name"/></td>
+                                 <td class="text-right">رقم التعاقد</td>
+                                 <td class="text-right" colspan="2"><span t-esc="doc.contract_no"/></td>
+                            </tr>
+                            <tr>
+
+                                 <td class="text-right">العنوان</td>
+                                 <td class="text-right" colspan="5"><span t-esc="doc.address"/></td>
+                                 <td class="text-right">رقم التلفون</td>
+                                 <td class="text-right" ><span t-esc="doc.add_phone"/></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">نوع العربة:</td>
+                                    <td class="text-right"><span t-esc="doc.car_model.name"/></td>
+                                    <td class="text-right">رقم اللوحة:</td>
+                                    <td class="text-right"><span t-esc="doc.plate"/></td>
+                                    <td class="text-right">تاريخ الصنع:</td>
+                                    <td class="text-right"><span t-esc="doc.date_make"/></td>
+                                    <td class="text-right">نوع الوقود:</td>
+                                    <td class="text-right"><span t-esc="doc.fuel_type.name"/></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right" colspan="2">الوقود المستلم/لتر:</td>
+                                    <td class="text-right" colspan="6"><span t-esc="doc.fuel_amount"/></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">تاريخ مغادرة الخرطوم:</td>
+                                    <td class="text-right" colspan="2"><span t-esc="doc.leave_date"/></td>
+                                    <td class="text-right" colspan="2">تاريخ العودة:</td>
+                                    <td class="text-right" ><span t-esc="doc.back_date"/></td>
+                                    <td class="text-right">إجمالي اﻷيام :</td>
+                                    <td class="text-right"><span t-esc="doc.days_no"/></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">قيمة اﻹيجار في اليوم:</td>
+                                    <td class="text-right" colspan="2"><span t-esc="doc.lease_amount"/></td>
+                                    <td class="text-right" colspan="2">رقم الفاتورة :</td>
+                                    <td class="text-right" ><span t-esc="doc.invoice_no.name"/></td>
+                                    <td class="text-right">إجمالي اﻹستحقاق :</td>
+                                    <td class="text-right"><span t-esc="doc.invoice_amount"/></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">اسم السائق:</td>
+                                    <td class="text-right" colspan="2"><span t-esc="doc.driver.name"/></td>
+                                    <td class="text-right" colspan="2">تلفون السائق :</td>
+                                    <td class="text-right"><span t-esc="doc.phone"/></td>
+                                    <td class="text-right">توقيع السائق :</td>
+                                    <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right">اسم الموظف اﻹداري: </td>
+                                    <td class="text-right" colspan="2"><span t-esc="doc.employee.name"/></td>
+                                    <td class="text-right" colspan="2">توقيعه: </td>
+                                    <td class="text-right" ></td>
+                                    <td class="text-right">التاريخ: </td>
+                                    <td class="text-right"><span t-esc="doc.date_sig"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+<!--                <h1 style="font-size:18px;text-align:center;width: 38%;" class="col-xs-5 text-center">يتم تعبئة هذا الجزء بعد عودة العربة من المهمة</h1>-->
+                <table class="table table-condensed table-bordered" border="0">
+                    <thead>
+                        <th class="text-center"  style="width: 90%;" colspan="12">يتم تعبئة هذا الجزء بعد عودة العربة من المهمة </th>
+                    </thead>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+<!--                             <tr>-->
+<!--                                 <td class="text-right" colspan="3">اجمالي الايام المطلوبة حسب الطلب:</td>-->
+<!--                                 <td class="text-right" colspan="9"><span t-esc="doc.requested_days"/></td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                    <td class="text-right" colspan="3">عدد الايام الفعلي:</td>-->
+<!--                                    <td class="text-right" colspan="9"><span t-esc="doc.actual_days"/></td>-->
+<!--                            </tr>-->
+<!--                        <tr>-->
+<!--                                 <td class="text-right"  colspan="3">التكلفة النهائية:</td>-->
+<!--                                 <td class="text-right" colspan="9"><span t-esc="doc.actual_amount"/></td>-->
+<!--                            </tr>-->
+                            <tr>
+                                    <td class="text-right" colspan="3">اعتماد وتوقيع الجهه الطالبة:</td>
+                                    <td class="text-right" colspan="9"></td>
+                            </tr>    <tr>
+                                 <td class="text-right" colspan="3">توقيع رئيس قسم العمليات وادارة المشروعات :</td>
+                                 <td class="text-right" colspan="9"></td>
+                            </tr>
+                            <tr>
+                                    <td class="text-right" colspan="3">اعتماد مدير الشئون اﻷدارية والخدمات:</td>
+                                    <td class="text-right" colspan="9"></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+<!--                for last-->
+             <div>  <p class="text-right"  style="width: 100%;" font_color="#FF0000"> توجيهات مهمة</p></div>
+                <br/>
+                  <table>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                             <tr>
+                                 <td> <img t-att-src="'/src_fueling_servises/static/src/img/check.png'" style="height:19pt;" width="39" class="text-right"/> </td>
+                                 <td class="text-right">يسلم اﻷصل بعد اﻷعتماد الي قسم الخدمات ﻷتمام المخلصة المالية</td>
+                            </tr>
+                           <tr>
+                                 <td> <img t-att-src="'/src_fueling_servises/static/src/img/check.png'" style="height:19pt;" width="39" class="text-right"/> </td>
+                                 <td class="text-right">صورة طبق اﻷصل تحفظ في ارشيف الشئون اﻷداريه والخدمات</td>
+                            </tr>
+                            <tr>
+                                 <td> <img t-att-src="'/src_fueling_servises/static/src/img/check.png'" style="height:19pt;" width="39" class="text-right"/> </td>
+                                 <td class="text-right">نبدأ اﻷجار من وقت تحرك العربة الي الجهة الطالبة وتنتهي عند تسليمها للشئون اﻷدارية</td>
+                            </tr>
+                            <tr>
+                                <td> <img t-att-src="'/src_fueling_servises/static/src/img/check.png'" style="height:19pt;" width="39" class="text-right"/> </td>
+                                 <td class="text-right">في حالة طلب تمديد إجار المركبة يملا طلب جديد بتوقيع الجهة الطالبة للخدمه</td>
+                            </tr>
+                            <tr>
+                                 <td> <img t-att-src="'/src_fueling_servises/static/src/img/check.png'" style="height:19pt;" width="39" class="text-right"/> </td>
+                                 <td class="text-right">في حالة استخدام مركبات الشركة يملا هذا الطلب باﻷضافة الي الاتي
+                                     <br/>
+                                 1-خطاب لمدير الشئون اﻹرية والخدمات الفرع الرئيسى من قبل الجهة الطالب وتحديد قيمة اﻹجار
+                                 <br/>
+                                 2-يؤكد الخطاب خصم قيمة اﻹيجار من حساب الجهة الطالبة ليطاف إلي الشئون اﻹدارية والخدمان الفرع الرئيسى</td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+             </div>
+         </t>
+    </template>
+</odoo>

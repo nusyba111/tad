@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="report_fuel_request"
+            string="Fuel Request"
+            model="fuel.service"
+            report_type="qweb-pdf"
+            name="fleet_srcs.fueling_servises_reportrequest"
+            file="fleet_srcs.fueling_servises_reportrequest"
+           />
+<!--    -->
+     <template id="fueling_servises_reportrequest">
+        <t t-call="web.html_container">
+         <t t-foreach="docs" t-as="o">
+            <div class="article mt0 o_report_layout_standard" dir="rtl">
+                <table class="table table-condensed table-bordered" border="0">
+                        <div dir="rtl">
+                    <p style="font-size:20px;text-align:right;"> التاريخ:
+                        <span t-field="o.date"/>
+
+                    </p>
+                    <p style="font-size:20px;text-align:right;" dir="rtl">
+                              طلب وقود بعد دفع المقابل المالي الادارة المالية
+                    </p>
+
+                    <p style="font-size:20px;text-align:left;">
+                        Fuel request after paying the financial administration fees
+                    </p></div>
+                    <thead>
+                        <th class="text-center" style="width: 40%">فرع من فروع الهلال الاحمر السوداني<h1></h1>SRCS  branch</th>
+                        <th class="text-center" style="width: 25%">جمعية وطنية شريكة<h1></h1>Partner National Societies</th>
+                        <th class="text-center" style="width: 15%">موظف<h1></h1>Employee</th>
+                    </thead></table>
+                <h1></h1>
+                       <p style="font-size:18px;text-align:center;">
+                     السيد/ المدير المالي بالهلال الاحمر السوداني _ الامانة العامة
+                    </p><h1></h1>
+
+
+                    <p style="font-size:18px;text-align:center;">
+                     السلام عليكم ورحمة الله وبركاته
+                    </p><h1></h1>
+                 <div dir="rtl">
+                    <p style="font-size:18px;text-align:right;">
+                     ارجو التكرم باستلام مبلغ جنية سوداني (المبلغ بالحروف)................................
+                       <br/>
+                                              التابع للادارة<span t-field="o.department.name"/>رقم العربة<span t-field="o.vehicle"/>
+                    </p><br/></div>
+
+                       <span style="font-size:18px;text-align:left;">
+                           Dear SRCS finance manager would you please proceed with receiveing the amount <span t-field="o.total_amount"/> SDG(In digits)<h1></h1>
+                           .............................................................................................................................SDG(In Letters)<h1></h1>
+                           From the PNS..........................................................................................................
+                       </span><h1></h1>
+
+                <p style="font-size:15px;text-align:right;">و هو عبارة عن قيمة وقود كما هو موضح بالجدول التالي:</p>
+                    <br/><br/>
+
+                <table class="table table-condensed table-bordered" border="0">
+                    <thead>
+                        <th class="text-center" dir="rtl" style="width: 40%"> Type <h1></h1>النوع</th>
+                        <th class="text-center" dir="rtl"  style="width: 25%">Qty per liter<h1></h1>الكمية باللتر</th>
+                          <th class="text-center" dir="rtl" style="width: 15%">Price per liter<h1></h1> سعر اللتر</th>
+                         <th class="text-center" dir="rtl"  style="width: 15%">Total<h1></h1>الاجمالي</th>
+                    </thead>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                                 <t t-foreach="doc.fuel_id" t-as="line">
+                                     <tr>
+                                <td class="text-center"><span t-esc="line['fuel_type'].name"/></td>
+                                <td class="text-center"><span t-esc="line['qty']"/></td>
+                                 <td class="text-center"><span t-esc="line['price']"/></td>
+                                 <td class="text-center"><span t-esc="line['total']"/></td>
+                                </tr> </t>
+                        </t>
+                    </tbody>
+                </table>
+
+                <h1></h1>
+
+                   <p dir="rtl" style="font-size:20px;text-align:center;">
+                     وهذا منا للاعتماد
+                   </p>
+
+                <table class="table table-condensed table-bordered" border="0">
+                 <thead>
+                        <th class="text-center"  style="width: 20%"> </th>
+                        <th class="text-center" style="width: 15%">Nameاﻷسم</th>
+                       <th class="text-center"  style="width: 15%">Signatureالتوقيع</th>
+                     <th class="text-center"  style="width: 45%">ملاحظاتComments </th>
+                    </thead>
+                     <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td class="text-center">مدير المحركات<h1></h1>Fleet Managment Head</td>
+                                <td class="text-center"><span t-field="doc.approve_name_id.name"/></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                            </tr>
+                                  <tr>
+                                    <td class="text-center">مدير الموارد البشرية والشئون الادارية<h1></h1>HR  Admin</td>
+                                    <td class="text-center"><span t-field="doc.fleet_user_id.name"/></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+            </div>
+        </t>
+        </t>
+    </template>
+    </odoo>
+
+
+
+
+
+
+
+
+
+

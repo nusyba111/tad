@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+
+    <record id="view_wizard_maintainance" model="ir.ui.view">
+      <field name="name">wizard.maintainance.report</field>
+      <field name="model">maintainance.report</field>
+      <field name="arch" type="xml">
+        <form string="Maintainance Report">
+
+			<group>
+                <field name="from_date" />
+                <field name="to_date" />
+             </group>
+
+          <footer>
+            <button name = "print_report"  string="Print"  type="object" class="oe_highlight"/> or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="view_maintainance_excel">
+            <field name="name">view.maintainance.report.excel</field>
+            <field name="model">maintainance.report.excel</field>
+            <field name="arch" type="xml">
+                <form string="File to Downloads">
+                        <field name="name" invisible="1"/>
+                        <field name="file_download" filename="name"/>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_view_maintainance" model="ir.actions.act_window">
+      <field name="name">Maintainance Report</field>
+      <field name="res_model">maintainance.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_wizard_maintainance"/>
+      <field name="target">new</field>
+    </record>
+
+     <menuitem action="action_view_maintainance" name="Maintainance Report" id="menu_maintainance_report" parent="fleet.menu_fleet_reporting"/>
+
+
+  </data>
+</openerp>

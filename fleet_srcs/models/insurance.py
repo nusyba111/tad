@@ -6,8 +6,9 @@ from odoo import api, fields, models, _
 class Insurance(models.Model):
     _name='insurance.service'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name='serial_no'
 
-    serial_no=fields.Char(string="Serial NO:")
+    serial_no=fields.Char(string="Serial NO:",readonly=True)
     branch=fields.Many2one('res.branch')
     cust_info=fields.Char('info')
     date=fields.Date(string='Date',tracking=True,required=True)
@@ -17,13 +18,12 @@ class Insurance(models.Model):
     requester=fields.Many2one('hr.employee',string='Requested By')
     department=fields.Many2one('hr.department',string='Department')
     service=fields.Char('test')
-    insurance_request=fields.Boolean(string='1-Third Party Insurance Request طلب تأمين إجباري ')
-    full_insurance=fields.Boolean(string='2-Full Insurance (Comprehensive) request طلب تامين شامل')
-    current_price=fields.Boolean(string='3- Current Market Price Determining طلب تحديد سعر العربة الحالي بالسوق ')
-    price_change=fields.Boolean(string='4- Vehicle Price Change Request طلب تعديل سعر العربة لعرض تأمين')
-    other_service=fields.Text(string='5- Other Services (To Be Mentioned Here)')
-    license_plate=fields.Char(string='Licence Plate',required=True)
-    chassis_no = fields.Char(string='Chassis No', required=True)
+    insurance_request=fields.Boolean(string='1-Third Party Insurance Request ')
+    full_insurance=fields.Boolean(string='2-Full Insurance (Comprehensive) request')
+    vehicle=fields.Many2one('fleet.vehicle',string='Fleet')
+    service=fields.Many2one('product.product',string='Service',required=True,domain="[('detailed_type','=','service')]")
+    license_plate=fields.Char(string='Licence Plate',related='vehicle.license_plate',readonly=True)
+    chassis_no = fields.Char(string='Chassis No',related='vehicle.vin_sn', readonly=True)
     cost=fields.Char('test')
     start=fields.Date(string='Start',required=True)
     finish=fields.Date(string='Finish',required=True)
@@ -33,37 +33,43 @@ class Insurance(models.Model):
         ('finance', 'Finance'),
         ('cancel','Cancel')
     ], default='requester', string='State',readonly=True)
-    invoice_count=fields.Integer(string='Invoices', compute='_compute_invoices_ids',tracking=True)
+    invoice_count = fields.Integer(string='Invoices', compute='_compute_invoices_ids',tracking=True)
     attachment = fields.Binary(string="Attachment", required=True)
 
     @api.model
     def create(self, vals):
         repair = super(Insurance, self).create(vals)
         for x in repair:
-            x.repair_no = self.env['ir.sequence'].next_by_code('insurance.no')
+            x.serial_no = self.env['ir.sequence'].next_by_code('insurance.no')
         return repair
 
     def _compute_invoices_ids(self):
         for rec in self:
-            invoice_ids = self.env['stock.picking'].search([('insurance_id', '=', self.id)])
+            invoice_ids = self.env['account.move'].search([('insurance_id', '=', self.id)])
+            print('ttttt',invoice_ids)
             rec.invoice_count = len(invoice_ids)
 
     def to_finance(self):
         invoice_vals = {
-            'partner_id': self.partner,
-            'state': 'draft',
-            'fuel_id':self.id,
-            'invoice_date': self.date,
-            'move_type':'out_invoice',
-            'invoice_line_ids': [0, 0, {
-                'product_id': self.fuel_type,
-                'quantity': self.quantity,
-                'price_unit': self.cost,
-            }]
-        }
+             'partner_id': self.supplier,
+             'state': 'draft',
+             'insurance_id':self.id,
+             'invoice_date': self.date,
+             'move_type':'in_invoice',
+             'invoice_line_ids': [0, 0, {
+                 'product_id': self.service,
+                 'quantity': 1,
+                 'price_unit': self.cost,
+             }]
+         }
         invoice = self.env['account.move'].sudo().create(invoice_vals)
+        print('iiiiii',invoice)
         self.write({'state': 'finance'})
 
     def action_cancel(self):
         self.write({'state': 'cancel'})
 
+class Invoice(models.Model):
+    _inherit = 'account.move'
+
+    insurance_id = fields.Many2one('insurance.service', 'Insurance Reference', readonly=True)

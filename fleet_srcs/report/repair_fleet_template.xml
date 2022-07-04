@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="report_repair_maintainance">
+   <t t-call='web.html_container'>
+   	  <t t-foreach="docs" t-as="o">
+   	  	 <t t-call='web.basic_layout'>
+   	  	 	<div class="pages">
+   	  	 	     <div class="oe_structure"/>
+   	  	 	      <div class="row">
+   	  	 	      	  <div class="col-xs-0">
+   	  	 	      	      <table class="table table-condensed">
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td>
+   	  	 	      	      	   	   	<p style="text-align:center;">
+   	  	 	      	      	   	   		بسم الله الرحمن الرحيم
+   	  	 	      	      	   	   		<br/>
+   	  	 	      	      	   	   			جمعية الهلال الاحمر
+
+                                        <br/>
+                                        	طلب دخول عربة للصيانة
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	   	   	<p style="text-align:right;">
+   	  	 	      	      	   	   		السيد/ضابط الترحيل والورشة
+   	  	 	      	      	   	   		<br/>
+   	  	 	      	      	   	   		السلام عليكم ورحمة الله وبركاته
+
+                                        <br/>
+                                        الرجاء التكرم باستخراج امر تشغيل لادخال العربة ادناه للصيانة
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	   	   	<p style="text-align:right; padding-top:5px;">
+   	  	 	      	      	   	   		  التاريخ 
+                                        <span t-field="o.date"/>
+   	  	 	      	      	   	   		  رقم اللوحة
+                                         <span t-field="o.licence_plate"/>
+                                           رقم الشاسية
+                                         <span t-field="o.shassis_no"/>
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	   	   	<p style="text-align:right; padding-top:5px;">
+   	  	 	      	      	   	   		    الادارة او المشروع 
+                                        <span t-field="o.date"/>
+   	  	 	      	      	   	   		    وذلك لاجراء الصيانة والفحص للاتي:
+                                         <span t-field="o.complain"/>
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      	   <br/>
+   	  	 	      	      	   <br/>
+   	  	 	      	      	   <br/>
+   	  	 	      	      	   <br/>
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	        <p style="text-align:center; padding-top:10px;">
+   	  	 	      	      	   	    وشكرا
+   	  	 	      	      	        </p>
+   	  	 	      	      	       </td>
+   	  	 	      	      	   </tr>
+
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	   	   	<p style="text-align:center; padding-top:5px;">
+   	  	 	      	      	   	   		  سائق العربة
+                                         <span t-field="o.date"/>
+                                         التوقيع ................
+                                         <span t-field="o.complain"/>
+                                         التاريخ
+                                         <span t-field="o.date"/>
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	   	   	<p style="text-align:right; padding-top:5px;">
+   	  	 	      	      	   	   		    تعليق الورشة
+                                         <span t-field="o.service_id"/>
+                                         <span t-field="o.spare_id"/>
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      	   <tr>
+   	  	 	      	      	   	   <td width="40%">
+   	  	 	      	      	   	   	<p style="text-align:right; padding-top:5px;">
+   	  	 	      	      	   	   		................الاسم
+                                        <!--<span t-field="o.date"/>-->
+                                       التوقيع................
+   	  	 	      	      	   	   	</p>
+   	  	 	      	      	   	   </td>
+   	  	 	      	      	   </tr>
+   	  	 	      	      </table>
+   	  	 	      	  </div>
+   	  	 	     </div>
+   	  	 	</div>
+   	  	 </t>
+
+   	  </t>
+   </t>
+</template>
+</odoo>

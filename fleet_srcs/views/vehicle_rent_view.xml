@@ -79,6 +79,20 @@
                             type="object"
                             class="oe_highlight"
                     />
+                    <button
+                            name="to_rent"
+                            states="operation"
+                            string="Operation Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                         <button
+                            name="handover"
+                            states="on_rent"
+                            string="Operation Manager Approve"
+                            type="object"
+                            class="oe_highlight"
+                    />
                      <button
                             name="action_cancel"
                             string="Cancel"
@@ -87,11 +101,11 @@
                      <button
                             name="action_done"
                             string="Done"
-                            type="object"
-                            attrs="{'invisible':[('state','in',['fleet'])]}"/>
+                            type="object"/>
+
                       <field name="state"
                            widget="statusbar"
-                           statusbar_visible="draft,fleet_manager,admin_manager,manager,operation,cancel,done" optional="show"
+                           statusbar_visible="draft,fleet_manager,manager,operation,on_rent,handover" optional="show"
                     />
                     </header>
                     <sheet>
@@ -110,11 +124,13 @@
                             <field name="date"/>
                             <field name="department"/>
                             <field name="model"/>
+                            <field name="type"/>
+                            <field name="invoice_type"/>
+                            <field name="service"/>
                             <field name="destination"/>
                             <field name="purpose"/>
-                            <field name="date_from"/>
-                            <field name="date_to"/>
                             <field name="end_date"/>
+                            <field name="invoice_reference"/>
                         </group>
                          <notebook>
                              <page string="Approvals" name="approve">
@@ -138,12 +154,13 @@
                                      <field name="car_model"/>
                                      <field name="plate"/>
                                      <field name="date_make"/>
+                                     <field name="odometer"/>
                                      <field name="fuel_type"/>
                                      <field name="fuel_amount"/>
                                      <field name="leave_date"/>
                                      <field name="back_date"/>
-                                     <field name="days_no"/>
-                                     <field name="lease_amount"/>
+                                     <field name="no_days" attrs="{'invisible': [('invoice_type', '!=', 'day')],'required':[('invoice_type', '=', 'day')]}"/>
+                                     <field name="day_price" attrs="{'invisible': [('invoice_type', '!=', 'day')],'required':[('invoice_type', '=', 'day')]}"/>
                                      <field name="invoice_no"/>
                                      <field name="invoice_amount"/>
                                      <field name="driver"/>
@@ -152,13 +169,30 @@
                                      <field name="date_sig"/>
                                  </group>
                              </page>
-                             <page string="After Mission" name="after_mission">
+                             <page string="By Kilo Invoice" name="after_mission" attrs="{'invisible':[('state','!=','handover'),('invoice_type','!=','kilo')]}">
                                  <group>
-                                     <field name="requested_days"/>
-                                     <field name="actual_days"/>
-                                     <field name="actual_amount"/>
+                                     <field name="new_odometer" attrs="{'invisible': [('invoice_type', '!=', 'kilo')],'required':[('state', '=', 'handover')]}"/>
+                                     <field name="kilo_price" attrs="{'invisible': [('invoice_type', '!=', 'kilo')],'required':[('state', '=', 'handover')]}"/>
+                                     <field name="total" attrs="{'invisible': [('invoice_type', '!=', 'kilo')],'required':[('state', '=', 'handover')]}"/>
+                                 </group>
+                                 <group>
+                                      <button
+                                        name="create_invoice"
+                                        string="Create Invoice"
+                                        type="object"/>
                                  </group>
                              </page>
+                             <page string="Hand Over" name="handover" attrs="{'invisible':[('state','!=','handover')]}">
+                                 <group>
+                                     <field name="handover_id">
+                                          <tree editable="bottom">
+                                             <field name="question"/>
+                                             <field name="checked"/>
+                                         </tree>
+                                     </field>
+                                 </group>
+                             </page>
+
                          </notebook>
                     </sheet>
                      <div class="oe_chatter">
@@ -181,11 +215,89 @@
             </field>
         </record>
 
+          <record id="rent_policy_tree" model="ir.ui.view">
+            <field name="name">rent.policy.tree</field>
+            <field name="model">rent.policy</field>
+            <field name="arch" type="xml">
+                <tree string="Rent Policy" class="" sample="1">
+                    <field name="type"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="rent_policy_form" model="ir.ui.view">
+            <field name="name">rent.policy.form</field>
+            <field name="model">rent.policy</field>
+            <field name="arch" type="xml">
+                <form string="Rent Policy">
+                    <sheet>
+                        <group>
+                             <field name="type"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record id="action_rent_policy" model="ir.actions.act_window">
+            <field name="name">Rent Policy</field>
+            <field name="res_model">rent.policy</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+         <record id="rent_handover_tree" model="ir.ui.view">
+            <field name="name">rent.handover.tree</field>
+            <field name="model">rent.handover</field>
+            <field name="arch" type="xml">
+                <tree string="Rent Handover" class="" sample="1">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="rent_handover_form" model="ir.ui.view">
+            <field name="name">rent.handover.form</field>
+            <field name="model">rent.handover</field>
+            <field name="arch" type="xml">
+                <form string="Rent Handover">
+                    <sheet>
+                        <group>
+                             <field name="sequence"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record id="action_rent_handover" model="ir.actions.act_window">
+            <field name="name">Rent Handover</field>
+            <field name="res_model">rent.handover</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+         <menuitem
+                id="rent_handover"
+                name="Rent HandOver"
+                sequence="3"
+                parent="rent"
+                action='action_rent_handover'
+        />
+        <menuitem
+                id="rent_policy"
+                name="Rent Policy"
+                sequence="2"
+                parent="rent"
+                action='action_rent_policy'
+        />
+         <menuitem
+                id="rent"
+                name="Vehicle Rent"
+                sequence="6"
+                parent="fleet.menu_root"
+        />
         <menuitem
                 id="rent_request"
                 name="Vehicle Rent Request"
-                sequence="6"
-                parent="fleet.menu_root"
+                sequence="1"
+                parent="rent"
                 action='action_rent_request'
         />
     </data>

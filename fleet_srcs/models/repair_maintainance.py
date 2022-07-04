@@ -21,6 +21,7 @@ class Repair(models.Model):
     _name = 'repair'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Create a job order'
+    _rec_name='repair_no'
     _order = "date,state desc"
 
     repair_no=fields.Char('Repair No:',readonly=True)
@@ -34,13 +35,15 @@ class Repair(models.Model):
     hour=fields.Float(string='Working Hour')
     warehouse=fields.Many2one('stock.warehouse',string='Warehouse')
     spare_id=fields.One2many('spare.parts','repairid')
+    odometer=fields.Float('Odometer',required=True,tracking=True)
     source_warehouse_id = fields.Many2one('stock.warehouse', 'From Warehouse')
     backorder_count = fields.Integer(string='Back Order', compute='_compute_backorder_ids')
     picking_id = fields.Many2many('stock.picking', 'job_pickind_ids', string='Picking Reference')
     return_picking_id = fields.Many2one('stock.picking', 'Return Picking Reference', readonly=True)
     purchase_req_id = fields.Many2one('purchase.requisition', 'Purchase Requisition Reference', readonly=True)
-
-
+    workshop_id=fields.Many2one('res.workshop',string='Workshop',required=True)
+    start_maintainance=fields.Date('Start Maintainance',readonly=True)
+    end_maintainance=fields.Date('End Maintainance',readonly=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('repair','Workshop Admin'),
@@ -50,6 +53,12 @@ class Repair(models.Model):
         ('done', 'Done')], string='Status', index=True, readonly=True, default='draft',
         track_visibility='onchange', copy=False)
     transfer_count=fields.Integer(string='Stock Transfers', compute='_compute_transfers_ids',tracking=True)
+
+
+    @api.constrains('odometer')
+    def odometer_constrains(self):
+        if self.fleet.odometer > self.odometer:
+            raise ValidationError(_('Odometer value should be bigger than last odometer entered'))
 
     def _compute_transfers_ids(self):
         for rec in self:
@@ -64,12 +73,13 @@ class Repair(models.Model):
         return repair
 
     def to_admin(self):
-        self.write({'state': 'repair'})
+        self.fleet.write({'odometer': self.odometer})
+        self.write({'state': 'repair','start_maintainance':fields.datetime.now()})
 
     def action_cancel(self):
         self.write({'state': 'cancel'})
     def action_done(self):
-        self.write({'state': 'done'})
+        self.write({'state': 'done','end_maintainance':fields.datetime.now()})
 
     def _compute_backorder_ids(self):
         for rec in self:
@@ -144,8 +154,16 @@ class Repair(models.Model):
 class Service(models.Model):
     _name = 'services'
     repair_id=fields.Many2one('repair','Repair', ondelete='cascade')
-    service=fields.Many2one('product.product',string='Service',domain="[('detailed_type','=','service')]")
-    hour=fields.Float(string='Working Hour')
+    service=fields.Many2one('product.product',string='Service',domain="[('detailed_type','=','service')]",required=True)
+    technition_name=fields.Many2one('hr.employee',string='Technition Name',required=True)
+    hour=fields.Float(string='Working Hour',required=True)
+    hour_price=fields.Float(string='Hour Price', required=True)
+    service_price = fields.Float('Price',compute='total_service')
+
+    @api.depends('hour','hour_price')
+    def total_service(self):
+        for rec in self:
+            rec.service_price=rec.hour_price * rec.hour
 
 class SpareParts(models.Model):
     _name = 'spare.parts'
@@ -153,6 +171,7 @@ class SpareParts(models.Model):
     repairid=fields.Many2one('repair','Repair', ondelete='cascade')
     spare=fields.Many2one('product.product',string='Spares',domain="[('detailed_type','=','product')]")
     ordered_qty=fields.Float(string='Ordered Quantity')
+    price=fields.Float(string="Price",related='spare.list_price',required=True)
     delivered_qty=fields.Float(string='Delivered Quantity',compute='_compute_supply')
     uom=fields.Many2one('uom.uom',string='UoM',related='spare.uom_id')
     picking_id = fields.Many2many('stock.picking', 'repair_id', string='Picking Reference')
@@ -160,6 +179,14 @@ class SpareParts(models.Model):
     back_picking_ids = fields.Many2many('stock.picking', 'stock_picking_rel', copy=False, string='Back Order Pickings',
                                         compute='_compute_supply')
     available_qty=fields.Float(string='Available Qty', compute='compute_qty')
+    total=fields.Float(string='Total',compute='compute_total')
+    type=fields.Selection([('spare','Spare'),('lube','Lubricants')],string='Spare Type',default='spare')
+
+    @api.depends('delivered_qty', 'price')
+    def compute_total(self):
+        for line in self:
+            line.total = line.delivered_qty * line.price
+
 
     @api.depends('spare')
     def compute_qty(self):
@@ -218,6 +245,7 @@ class Picking(models.Model):
     _inherit = 'stock.picking'
 
     repair_id = fields.Many2one('repair', 'Repair Reference', readonly=True)
+    insurance_id  = fields.Many2one('insurance.service', 'Insurance Reference', readonly=True)
 
 
 class StockMoveLine(models.Model):
@@ -235,5 +263,10 @@ class Requisition(models.Model):
     _inherit = "purchase.requisition"
 
     repair_id = fields.Many2one('repair', 'Repair Reference')
+
+class Workshops(models.Model):
+    _name='res.workshop'
+    name = fields.Char('Name')
+    sequence=fields.Integer('Sequence')
 
 

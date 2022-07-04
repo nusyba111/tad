@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         
+    <record id="report_maintainance" model="ir.actions.report">
+        <field name="name">Repair and Maintainance</field>
+        <field name="model">repair</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fleet_srcs.report_repair_maintainance</field>
+        <field name="report_file">fleet_srcs.report_repair_maintainance</field>
+        <field name="binding_model_id" ref="model_repair"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_fuel_fuel" model="ir.actions.report">
+        <field name="name">Fuel Issuance Ticket</field>
+        <field name="model">fuel.service</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fleet_srcs.fueling_issuance_report</field>
+        <field name="report_file">fleet_srcs.fueling_issuance_report</field>
+        <field name="binding_model_id" ref="model_fuel_service"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
