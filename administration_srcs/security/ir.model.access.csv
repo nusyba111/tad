@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+exit,exit.permission,model_exit_permission,hr.group_hr_manager,1,1,1,1
+maintainance,maintainance.request,model_maintainance_request,hr.group_hr_manager,1,1,1,1
+spare,required.spare,model_required_spare,hr.group_hr_manager,1,1,1,1
+service,required.service,model_required_service,hr.group_hr_manager,1,1,1,1
+lease,office.lease,model_office_lease,hr.group_hr_manager,1,1,1,1
+lease_line,lease.detail,model_lease_detail,hr.group_hr_manager,1,1,1,1

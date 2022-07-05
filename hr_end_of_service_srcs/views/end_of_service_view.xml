@@ -8,10 +8,51 @@
         <field name="arch" type="xml">
             <form string="End of Service">
                 <header>
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,hr_approve,hr_manager,secretary,cancel,finance" optional="show"
+                    />
+                   <button
+                            name="to_hr"
+                            states="draft"
+                            string="Send to Hr Officer"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                    <button
+                            name="to_hr_manager"
+                            states="hr_approve"
+                            string="Send to Hr Manager"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="to_secretary"
+                            states="hr_manager"
+                            string="Send to Hr Manager"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_done"
+                            states="secretary"
+                            string="To Finance"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_cancel"
+                            states="hr_approve"
+                            string="Cancel"
+                            type="object"
+                            class="oe_highlight"
+                    />
                     <button name="action_compute"
                             class="oe_highlight"
+                            states="draft"
                             type="object"
                             string="Compute"/>
+
                 </header>
                 <sheet>
 
@@ -32,7 +73,8 @@
                             <field name="date_of_hiring_date"/>
                             <field name="end_of_service_date"/>
                             <field name="working_years"/>
-
+                            <field name="finance_approve_id"/>
+                            <field name="paid_amount"/>
                         </group>
                     </group>
                     <group>
@@ -91,6 +133,14 @@
                                 <field name="total_deduction"/>
                             </group>
                         </page>
+                        <page string="Accounting">
+                            <group col="4">
+                                <field name="account"/>
+                                <field name="project"/>
+                                <field name="activity"/>
+                                <field name="donor"/>
+                            </group>
+                        </page>
                     </notebook>
 
 
@@ -141,6 +191,7 @@
     <menuitem id="menu_end_of_service_categ"
               name="End Of Service"
               parent="hr.menu_hr_root"
+              groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
     />
 
     <menuitem id="menu_end_of_service_view"
