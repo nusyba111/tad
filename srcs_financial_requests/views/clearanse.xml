@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="custody_clearance_view_form" model="ir.ui.view">
+        <field name="name">custody.clearance.view.form</field>
+        <field name="model">custody.clearance</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Clear Amount" name="clear" type="object" class="oe_highlight" attrs="{'invisible':[('move_id','=',True)]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="clearance_no"/>
+                        <h1>
+                            <field name="clearance_no" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="requester" />
+                            <field name="is_branch_loans" invisible="1"/>
+                            <field name="payment_request_id" attrs="{'invisible':[('is_branch_loans','=',True)]}"/>
+                            <field name="branch_laons_id" attrs="{'invisible':[('is_branch_loans','!=',True)]}"/>
+                            <field name="reason" />
+                        </group>
+                        <group>
+                            <field name="cc_date" />
+                            <field name="clearance_currency" />
+                            <field name="requested_amount" force_save="1"/>
+
+                        </group>
+                        
+                        <!-- <group>
+                           
+                        </group> -->
+                    </group>
+                    <group col="4">
+                        <field name="journal_id" />
+                        <field name="clearance_journal_id" attrs="{'invisible':[('is_branch_loans','!=',True)]}"/>
+                        <field name="cr_account" attrs="{'invisible':[('is_branch_loans','=',True)]}"/>
+                        <field name="pay_from" attrs="{'invisible':[('is_branch_loans','=',True)]}"/>
+                    </group>
+                    <notebook>
+                        <page string="Cleared Amount">
+                            <group col="4">
+                                <field name="un_cleared_amount" force_save="1"/>
+                                <field name="clearance_amount" />
+                                <field name="move_id" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_action_payment_clearance" model="ir.actions.act_window">
+        <field name="name">Payment Clearance</field>
+        <field name="res_model">custody.clearance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_branch_loans','=',False)]</field>
+        <!-- <field name="context">{'default_is_branch_loans':True}</field> -->
+    </record>
+    <record id="action_action_loan_clearance" model="ir.actions.act_window">
+        <field name="name">Branch Loan Clearance</field>
+        <field name="res_model">custody.clearance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_branch_loans','=',True)]</field>
+        <field name="context">{'default_is_branch_loans':True}</field>
+
+    </record>
+    <menuitem
+        id="Clearanse_menu"
+        name="Clearanse"
+        parent="account_accountant.menu_accounting"
+        sequence="8"/>
+
+    <menuitem
+        id="payment_clearanse_menu"
+        name="Payment Clearanse"
+        action="action_action_payment_clearance"
+        parent="Clearanse_menu"
+        sequence="1"/>
+
+    <menuitem
+        id="loan_clearanse_menu"
+        name="Branch Loan Clearanse"
+        action="action_action_loan_clearance"
+        parent="Clearanse_menu"
+        sequence="2"/>
+</odoo>

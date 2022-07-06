@@ -16,6 +16,7 @@
         'data/seqence.xml',
         'views/cash_request.xml',
         'views/payment_request.xml',
+        'views/clearanse.xml',
         'reports/cash_report.xml',
     ],
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_view_id_srcs_stock_picking" model="ir.ui.view">
+        <field name="name">stock.picking.view.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <group>
+                    <field name="mean_transport" />
+                    <field name="arrival_date" />
+                    <field name="flight_number" />
+                </group>
+                <group>
+                    <field name="bill_leading" />
+                    <field name="vessel" />
+                    <field name="truck_number" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

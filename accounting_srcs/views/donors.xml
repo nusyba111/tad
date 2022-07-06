@@ -9,7 +9,7 @@
             <xpath expr="//field[@name='function']" position="before">
                 <field name="donor_code" />
             </xpath>
-            <xpath expr="//page[@name='internal_notes']" position="after">
+            <!-- <xpath expr="//page[@name='internal_notes']" position="after">
                 <page name="budget_info" string="Budget Information">
                     <group>
                         <group>
@@ -25,7 +25,7 @@
                         </group>
                     </group>  
                 </page>
-            </xpath>
+            </xpath> -->
         </field>
     </record>
     <!-- <record id="inherit_view_id_src_res_users" model="ir.ui.view">

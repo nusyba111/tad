@@ -16,11 +16,10 @@
             <xpath expr="//field[@name='dest_bank']" position="replace">
                 <field name="dest_bank" domain="[('type', 'in', ('bank', 'cash')),('branch_id','=',branch_id)]"/>   
             </xpath>
-            <xpath expr="//page//group//group" position="after">
+            <xpath expr="//page//group" position="after">
                 <group>
                     <field name="branch_id" />
                 </group>
-                
             </xpath>
         </field>
     </record>
@@ -203,7 +202,7 @@
             <field name="model">account.asset</field>
             <field name="inherit_id" ref="asset_srcs.inherit_view_id_account_asset_srcs"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='acquisition_date']" position="after">
+                <xpath expr="//field[@name='location_id']" position="after">
                     <field name="branch_id" />
                 </xpath>
             </field>

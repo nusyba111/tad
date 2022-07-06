@@ -106,13 +106,13 @@ class SrcBudgte(models.Model):
     situation = fields.Char('Situation')
     goal = fields.Char('Goal')
     project_id = fields.Many2one('account.analytic.account',string='Project', required=True, domain="[('type','=','project')]")
-    site_boolean = fields.Boolean(related="donor_id.site")
-    situation_boolean = fields.Boolean(related="donor_id.situation")
-    goal_boolean = fields.Boolean(related="donor_id.goal")
-    unit_of_measure_boolean = fields.Boolean(related="donor_id.unit_m")
-    unit_cost_boolean = fields.Boolean(related="donor_id.unit_cost")
-    frequency_boolean = fields.Boolean(related="donor_id.frequent")
-    quantity_boolean = fields.Boolean(related="donor_id.quantity")
+    site_boolean = fields.Boolean(related="project_id.site")
+    situation_boolean = fields.Boolean(related="project_id.situation")
+    goal_boolean = fields.Boolean(related="project_id.goal")
+    unit_of_measure_boolean = fields.Boolean(related="project_id.unit_m")
+    unit_cost_boolean = fields.Boolean(related="project_id.unit_cost")
+    frequency_boolean = fields.Boolean(related="project_id.frequent")
+    quantity_boolean = fields.Boolean(related="project_id.quantity")
     conversion_count = fields.Float(compute="compute_conversion_count")
 
     def confirm_manager(self):
@@ -299,8 +299,17 @@ class srcAnalyticAccount(models.Model):
     description = fields.Char('Description')
     code = fields.Char('Code')
     type = fields.Selection([
-        ('project', 'Project'),('activity','Activity'),('location','Location')
+        ('project', 'Project'),('activity','Activity'),('location','Location'),('core','Core Activity')
     ], string='Type')
+    core_activity_id = fields.Many2one('account.analytic.account', string='Core Activity',domain="[('type','=','core')]")
+    unit_m = fields.Boolean('Unit of Measure')
+    quantity = fields.Boolean('Quantity')
+    frequent = fields.Boolean('Frequency')
+    unit_cost = fields.Boolean('unit cost')
+    site = fields.Boolean('Site')
+    situation = fields.Boolean('Situation')
+    goal = fields.Boolean('Goal')
+
     
     def name_get(self):
         res = []
@@ -321,13 +330,13 @@ class Donor(models.Model):
     _inherit = "res.partner"
 
     donor_code = fields.Char('Donor Code')
-    unit_m = fields.Boolean('Unit of Measure')
-    quantity = fields.Boolean('Quantity')
-    frequent = fields.Boolean('Frequency')
-    unit_cost = fields.Boolean('unit cost')
-    site = fields.Boolean('Site')
-    situation = fields.Boolean('Situation')
-    goal = fields.Boolean('Goal')
+    # unit_m = fields.Boolean('Unit of Measure')
+    # quantity = fields.Boolean('Quantity')
+    # frequent = fields.Boolean('Frequency')
+    # unit_cost = fields.Boolean('unit cost')
+    # site = fields.Boolean('Site')
+    # situation = fields.Boolean('Situation')
+    # goal = fields.Boolean('Goal')
 
 
 class SrcCurrency(models.Model):
