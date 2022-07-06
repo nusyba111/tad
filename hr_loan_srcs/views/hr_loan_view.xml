@@ -47,6 +47,8 @@
                                 states="wait_hr_approve"
                                 />
                         <button name="action_approve" type="object" string="Finance Manager" class="oe_highlight" groups="account.group_account_manager" states="wait_finance_approve"/>
+
+                        <button name="action_secretary" type="object" string="Secretary Manager" class="oe_highlight" groups="accounting_srcs.group_secretary_general" states="sg_approve"/>
                         
                         <button name="action_confirm" type="object" class="oe_highlight" string="Confirm"
                                 states="draft"/>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="report_contract"
+            string="Contract"
+            model="fleet.vehicle.log.contract"
+            report_type="qweb-pdf"
+            name="fleet_srcs.fueling_contract_reports"
+            file="fleet_srcs.fueling_contract_reports"
+           />
+          <template id="fueling_contract_reports">
+              <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="o">
+                  <div dir="ltr">
+                  <h1 style="font-size:16px;text-align:center;width:80%;" class="col-xs-5 text-center">Contract of Lease</h1>
+                  </div><br/>
+                  <table>
+                      <t t-foreach="docs" t-as="doc">
+<!--                  <td class="text-right" style="width:50%">Contract Date Start: <span t-esc="doc.start_date"/></td>-->
+<!--&lt;!&ndash;                  <td class="text-center" style="width:30%"><span t-esc="doc.start_date"/></td>&ndash;&gt;-->
+<!--                  <td class="text-right" style="width:50%">Contract Date End: <span t-esc="doc.expiration_date"/></td>-->
+<!--                  <td class="text-center" style="width:30%"><span t-esc="doc.expiration_date"/></td>-->
+<!--                          -->
+                               <tr>
+                  <td class="text-right" style="width:30%" scope="col">Contract Date Start:</td>
+                  <td class="text-right" style="width:26%"><span t-esc="doc.start_date"/></td>
+                  <td class="text-right" style="width:30%" scope="col">Contract Date End:</td>
+                      <td class="text-right" style="width:26%"><span t-esc="doc.expiration_date"/></td></tr>
+                          <br/>
+
+<tr>
+                          <td class="text-right" style="width:30%" scope="col">Frist Party:</td>
+                  <td class="text-right" style="width:26%"><span t-esc="doc.company_id.name"/></td>
+                          <td class="text-right" style="width:30%" scope="col">Second Party:</td>
+                  <td class="text-right" style="width:26%"><span t-esc="doc.insurer_id.name"/></td>
+                  </tr></t></table><br/><br/>
+
+<!--                  -->
+<!--                  <h1 style="font-size:16px;text-align:left;" class="col-xs-5 text-left">This Contract concluded as of(from ....................................to)year for months Between ............................and hereby called the(First party).</h1>-->
+<!--                  <h1 style="font-size:16px;text-align:left;" class="col-xs-5 text-left">And</h1>-->
+<!--                  <h1 style="font-size:16px;text-align:left;" class="col-xs-5 text-left">.........................and called the (second party).</h1> <br/>-->
+<!--
+                                                                                                                              <span t-field="o.company_id.partner_id.mobile"/>-->
+<!--                                                                                            <p>Your Label <t t-esc="vehicle_id.license_plate"/> </p>-->
+                    <td class="text-right" style="width:26%">1-The frist party agreed to rent car land cruiser plate No: <t t-esc="o.vehicle_id.license_plate"/>
+                      from the second party.And the tenant agrees to use the first party's car as of month-month and the second party agreed to pay amount per month.</td><br/>
+                  <td class="text-right" style="width:26%">2-The first party agreed to pay for car insurance and license.</td><br/>
+                 <td class="text-right" style="width:26%">3-The first party agreed to pay for car services(lubricants and oil est)</td><br/>
+                  <td class="text-right" style="width:26%">4-The first party agreed to pay for any maintenance uncovered by insurance company such as(Gear box,brake.................................EST).</td><br/>
+                 <td class="text-right" style="width:26%">5-The second party should pay the amount agreed upon monthly to <span t-esc="doc.company_id.name"/></td><br/>
+                  <td class="text-right" style="width:26%">6-The second party agreed upon the above rent to be affected as of date of month month.</td><br/>
+              <br/>
+                 <br/>
+                 <br/>
+                  <table>
+                      <t t-foreach="docs" t-as="doc">
+                  <tr>
+                  <td class="text-right" style="width:20%" scope="col">The frist party:</td>
+                       <td class="text-right" style="width:26%"><span t-esc="doc.company_id.name"/></td>
+<!--                  <td class="text-right" scope="col"></td>-->
+                  <td class="text-right" style="width:20%" scope="col">The second party:</td>
+                      <td class="text-right" style="width:26%"><span t-esc="doc.insurer_id.name"/></td></tr>
+                          <tr>
+                  <td class="text-right" style="width:50%" scope="col">Witnesses:</td>
+                  <td class="text-right" scope="col"></td>
+                  </tr>
+              </t>
+                  </table>
+
+<!--<table class="table table-bordered" style="table-layout: fixed">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th class="text-center" style="width: 20%" rowspan="2" scope="col">#</th>
+                            <th class="text-center" style="width: 20%" colspan="6" scope="col">Journal</th>
+                            <th class="text-center" style="width: 20%" colspan="6" scope="col">First Hash</th>
+                            <th class="text-center" style="width: 20%" rowspan="2" scope="col">#</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center" style="width: 20%" colspan="2" scope="col">First Entry</th>
+                            <th class="text-center" style="width: 20%" colspan="2" scope="col">Last Hash</th>
+                            <th class="text-center" style="width: 20%" colspan="2" scope="col">Last Entry</th>
+                            <th class="text-center" style="width: 20%" colspan="2" scope="col">First Entry</th>
+                            <th class="text-center" style="width: 20%" colspan="2" scope="col">Last Hash</th>
+                            <th class="text-center" style="width: 20%" colspan="2" scope="col">Last Entry</th>
+                        </tr>
+                    </thead>
+                </table>-->
+
+              </t>
+              </t>
+          </template>
+</odoo>

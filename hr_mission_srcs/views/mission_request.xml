@@ -57,16 +57,17 @@
 
                         <button name="action_confirm" type="object" string="Department Manager Approve" states="submit"
                                 groups="hr_mission_srcs.group_hr_mission_manager" class="oe_highlight"/>
-                        <button name="action_gm_approve" type="object" string="General Manager Approve" class="oe_highlight" groups="hr_loan_srcs.group_hr_general_manager" 
-                                states="dept_approve"/>
-                        <button name="action_approve" type="object" string="Approve" states="gm_approve"
+                        <button name="action_approve" type="object" string="HR Manager Approve" states="dept_approve"
                                 groups="hr_mission_srcs.group_hr_mission_manager" class="oe_highlight"/>
 
+                        <button name="action_public_approve" type="object" string="Public Relation Approve" states="public_relation"
+                                groups="hr_mission_srcs.group_hr_mission_manager" class="oe_highlight"/>        
+
                         <button name="%(hr_mission_srcs.action_mission_wizard)d" type="action" context="{'cancel': True,}"
-                                string="Cancel" states="submit,dept_approve,gm_approve"/>
+                                string="Cancel" states="submit,dept_approve"/>
 
                         <button name="action_set_to_draft" type="object" 
-                                string="Set To Draft" states="submit,dept_approve,gm_approve,cancel"/>
+                                string="Set To Draft" states="submit,dept_approve,cancel"/>
 
                         <button string="Stop" name="%(stop_mission_action)d"  type="action" states="approve"/>
 
@@ -104,6 +105,11 @@
                                 <field name="stop_date" attrs="{'invisible':[('state', '!=', 'stop')]}"/>
                                 <field name="stop_reason" attrs="{'invisible':[('state', '!=', 'stop')]}"/>
                                 <field name="purpose"/>
+                                <field name="lodging_type"/>
+                                <field name="type_of_mission"/>
+                                <field name="work_shop" attrs="{'invisible':['|',('type_of_mission','=','internal'),('mission_type','=',False)]}"/>
+                                <field name="rc_meeting" attrs="{'invisible':['|',('type_of_mission','=','internal'),('mission_type','=',False)]}"/>
+                                <field name="attachment"/>
                             </group>
                             <group>
 
@@ -116,6 +122,8 @@
                                 <field name="activity"/>
                                 <field name="location"/>
                                 <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+                                <field name="training" attrs="{'invisible':['|',('type_of_mission','=','internal'),('mission_type','=',False)]}"/>
+                                <field name="conferences" attrs="{'invisible':['|',('type_of_mission','=','internal'),('mission_type','=',False)]}"/>
                             </group>
                         </group>
                         <notebook>
@@ -135,6 +143,30 @@
                                         <field name="total_amount"/>
                                     </tree>
                                 </field>
+                            </page>
+                            <page string="Mission Coverage">
+                                <field name="coverage_ids">
+                                    <tree editable="bottom">
+                                        <field name="product"/>
+                                        <field name="partial_coverage"/>
+                                        <field name="complete_coverage"/>
+                                        <field name="uncoverage"/>
+                                        <field name="amount" attrs="{'readonly':[('uncoverage','=',True)]}"/>
+                                        
+                                    </tree>
+                                </field>
+                                
+                            </page>
+                            <page string="Air Mission Details" attrs="{'invisible':[('state','!=','public_relation')]}">
+                                <group>
+                                    <group>
+                                        <field name="date_from"/>
+                                        <field name="air_company"/>
+                                    </group>
+                                    <group>
+                                        <field name="date_to"/>
+                                    </group>
+                                </group>
                             </page>
                             <page string="Description">
                                 <field name="description"/>

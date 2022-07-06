@@ -20,6 +20,7 @@ from odoo.osv.expression import AND, NEGATIVE_TERM_OPERATORS
 class VehicleRequest(models.Model):
     _name = 'fleet.request'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'request_no'
 
     request_no=fields.Char('Repair No:',readonly=True)
     branch=fields.Many2one('res.branch',string='Branch')
@@ -53,6 +54,10 @@ class VehicleRequest(models.Model):
 
     def to_direct_manager(self):
         self.write({'state': 'direct_manager'})
+        template_rec = self.env.ref('fleet_srcs.new_task')
+        template_rec.write({'email_to': self.driver.email})
+        template_rec.send_mail(self.id, force_send=True)
+
     def to_hr_manager(self):
         self.write({'state': 'hr_manager'})
     def to_fleet(self):

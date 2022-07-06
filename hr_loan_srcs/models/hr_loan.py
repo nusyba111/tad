@@ -78,7 +78,8 @@ class HrLoan(models.Model):
 		('wait_hr_approve', 'HR Manager'),
 		('wait_finance_approve', 'Finance Manager'),
 		# ('wait_finance', 'Waiting Finance Approval'),
-		('approve', 'Secretary General'),
+		('sg_approve', 'Secretary General'),
+		('approve', 'Approved'),
 		('close', 'Close'),
 		('refuse', 'Refused'),
 		('cancel', 'Cancel'),
@@ -335,7 +336,7 @@ class HrLoan(models.Model):
 
 			rec.state = 'cancel'
 
-	def action_approve(self):
+	def action_secretary(self):
 		"""
 		A method to approve loan request.
 		"""
@@ -381,7 +382,11 @@ class HrLoan(models.Model):
 			])
 
 			loan.write({'state': "approve", 'move_id': move_id.id})
-		return True
+		return True		
+
+	def action_approve(self):
+		self.write({'state':'sg_approve'})
+		
 
 	def compute_loan_line(self):
 		"""

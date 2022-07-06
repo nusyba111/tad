@@ -18,7 +18,7 @@
     'website': "http://www.iatl-intellisoft.com",
     'category': 'Human Resource',
 
-    'depends': ['account','hr_payroll'],
+    'depends': ['account','hr_payroll','hr_employee_srcs'],
 
     'data': [
         'security/ir.model.access.csv',

@@ -11,7 +11,7 @@
     'website': "http://www.iatl-sd.com",
     'category': 'Human Resource',
 
-    'depends':['hr','srcs_branch'],
+    'depends':['hr','srcs_branch','hr_contract'],
 
     # always loaded
     'data': [

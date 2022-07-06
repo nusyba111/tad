@@ -28,24 +28,7 @@ class HrLeavePlanning(models.Model):
         result = super(HrLeavePlanning, self).create(vals)
         return result
 
-    # @api.onchange('leaves')
-    # def adjust_leaves(self):
-    #     # print('##################3leaves!')
-    #     for plan in self:
-    #         for leave in plan.leaves:
-    #             # leave.is_plan = True
-    #             leave.holiday_status_id = plan.leave_type.id
-                # leave.employee_id = plan.employee_id.id
-                # leave.state = 'planned'
 
-                # leave.write({'is_plan': True})
-                # print('#################lp',leave.is_plan)
-
-    # @api.onchange('order_line')
-    # def link_leaves_to_planning(self):
-    #     for rec in self:
-    #         for line in rec.order_line:
-    #             line.leave.leave_planning=rec.id
     state = fields.Selection([
         ('draft', 'Submit'),
         ('confirmed', 'Confirmed'),
@@ -72,8 +55,9 @@ class HrLeavePlanning(models.Model):
 
 class HrLeaveType(models.Model):
     _inherit = 'hr.leave.type'
+
     need_planning = fields.Boolean("Need Planning")
-    # notification_days_before_leave = fields.Integer("Notification Days Before Leave")
+    annual_leave = fields.Boolean(string='Annual Leave')
 
 
 class LeaveReportCalendar(models.Model):
@@ -109,10 +93,31 @@ class LeaveReportCalendar(models.Model):
 
 class HrLeave(models.Model):
     _inherit = 'hr.leave'
+
     is_plan = fields.Boolean("Is Plan")
-    # is_plan = fields.Boolean("Is Plan",compute='_compute_is_plan')
-    state = fields.Selection(selection_add=[('planned', 'Planned'),('cancel','Cancel')])
+    state = fields.Selection(selection_add=[('planned', 'Planned'),('finance_approve','Finance Approve'),('cancel','Cancel')])
     linked_leave_planning = fields.Many2one('hr.leave.planning', 'Linked Leave Planning')
+    coverage_ids = fields.One2many('hr.leave.coverage','leave_id',)
+    annual_leave = fields.Boolean(related="holiday_status_id.annual_leave")
+    payment_request_id = fields.Many2one('payment.request')
+    journal_id = fields.Many2one('account.journal')
+
+
+
+    @api.onchange('employee_id')
+    def _get_coverage_ids(self):
+        for coverag in self.employee_id.contract_id.salary_plan:
+            coverag_vals = {
+                'project':coverag.covered_by.id,
+                'activity':coverag.activity.id,
+                'location':coverag.location.id,
+                'doner_id':coverag.doner_id.id,
+                'leave_id':self.id
+            }
+            the_coverage = self.env['hr.leave.coverage'].create(coverag_vals)
+
+
+
 
     @api.constrains('request_date_from', 'request_date_to')
     def _check_rule_date_from(self):
@@ -164,107 +169,14 @@ class HrLeave(models.Model):
                         body="This Leave request planned to start at "+str(leave.request_date_from),
                         channel_ids=channel.ids)
 
-            # rec.message_post(subject="subject", body="body", partner_ids= partner_ids)
-            # self.env['mail.message'].create({'email_from': self.env.user.partner_id.email,
-            #                                  'author_id': self.env.user.partner_id.id,
-            #                                  'model': 'mail.channel',
-            #                                  'subtype_id': self.env.ref('mail.mt_comment').id,
-            #                                  'body': "hgdd",
-            #                                  # 'channel_ids': [(4, self.env.ref(
-            #                                  #     'payment_request.channel_accountant_group').id)],
-            #                                  # 'res_id': self.env.ref(
-            #                                  #     'payment_request.channel_accountant_group').id,
-            #                                  # 'recipient_ids': [(4, 3)]
-            #                                  })
-
-
-
-        # mail_values = {
-        #     'email_from': self.email_from,
-        #     'author_id': self.author_id.id,
-        #     'model': None,
-        #     'res_id': None,
-        #     'subject': "subject",
-        #     'body_html': "body",
-        #     'auto_delete': True,
-        # }
-        # mail_values['recipient_ids'] = [(4, 3)]
-        #
-        # return self.env['mail.mail'].sudo().create(mail_values)
-
-
-
-
-        # for leave in planned_leaves:
-        #     if datetime.now().date() + relativedelta(
-        #             days=leave.holiday_status_id.notification_days_before_leave) >= leave.request_date_from:
-        #         print('###############################partner')
-        #         # partners = []
-        #         # partners.append(leave.employee_id.user_id.partner_id.id)
-        #         # # self.message_post(body="your message", partner_ids=3)
-        #         #
-        #         # self.message_post(
-        #         #     body=(_("E-Invoice is generated on %s by %s") % (fields.Datetime.now(), leave.employee_id.user_id.display_name))
-        #         # )
-        #         partner_ids = self.env['res.partner'].search([('id','=',leave.employee_id.user_id.partner_id.id)]).ids
-        #         self.message_post(subject="subject", body="body", partner_ids=[(4, [partner_ids])])
-                # @api.model
-    # def _get_default_holiday_status(self):
-    #     print(self.linked_leave_planning.id,'#######################gf')
-    #     if self.linked_leave_planning:
-    #         print('#######################gf22')
-    #
-    #         return self.linked_leave_planning.leave_type
-
-    # state = fields.Selection([
-    #     ('draft', 'To Submit'),
-    #     ('planned', 'Planned'),
-    #     ('cancel', 'Cancelled'),  # YTI This state seems to be unused. To remove
-    #     ('confirm', 'To Approve'),
-    #     ('refuse', 'Refused'),
-    #     ('validate1', 'Second Approval'),
-    #     ('validate', 'Approved')
-    # ], string='Status', compute='_compute_state', store=True, tracking=True, copy=False, readonly=False,
-    #     help="The status is set to 'To Submit', when a time off request is created." +
-    #          "\nThe status is 'To Approve', when time off request is confirmed by user." +
-    #          "\nThe status is 'Refused', when time off request is refused by manager." +
-    #          "\nThe status is 'Approved', when time off request is approved by manager.")
-
-    # leave_planning = fields.Many2one('hr.leave.planning', 'Leave Planning')
-    # holiday_status_id = fields.Many2one(
-    #     "hr.leave.type", compute='_compute_from_employee_id', store=True, string="Time Off Type", required=True,
-    #     readonly=False,
-    #     default=_get_default_holiday_status,
-    #     states={'cancel': [('readonly', True)], 'refuse': [('readonly', True)], 'validate1': [('readonly', True)],
-    #             'validate': [('readonly', True)]},
-    #     domain=[('valid', '=', True)])
-    # line_id = fields.Many2one('hr.leave.planning.line', 'Leave Planning Line')
-
-    # leave_line = fields.One2many('hr.leave.planning.line', 'leave')
-
-    # @api.model
-    # def create(self, vals):
-    #     # linked_order_line=self.env['hr.leave.planning.line'].search([('leave.id', '=', vals['line_id'])])
-    #     # print(vals,self._context.get('active'),'################################vals')
-    #     result = super(HrLeave, self).create(vals)
-    #     return result
+            
 
     def action_show_leave(self):
-        # action = self.env.ref('hr_holiday_planning.hr_leave_planning_action_window2').read()[0]
-        # action['domain'] = [('id', '=', self.id)]
-        # # print(self.id,'###################################id')
-        # action['context'] = {
-        #     'active_id': self._context.get('active'),
-        #     'active_model': 'hr.leave',
-        # }
-        # return action
-
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'hr.leave',
             'view_type': 'form',
             'view_mode': 'form',
-            # 'views': [(view_id, 'form')],
             'target': 'current',
             'res_id': self.id,
             'context': dict(self._context),
@@ -278,12 +190,7 @@ class HrLeave(models.Model):
 
     def action_replan(self):
         action = self.env.ref('hr_holiday_planning_srcs.hr_leave_planning_action_window21').read()[0]
-        # action['domain'] = [('id', '=', self.leave.id)]
-        # print(self.date_from, '################df')
-        # linked_line = self.env['hr.leave.planning.line'].search([('leave.id', '=', self.id)])
-        # print(linked_line.id,'#############################id')
         action['context'] = {
-            # 'active_id': self._context.get('active'),
             'active_model': 'hr.leave',
             'default_linked_leave_planning': self.linked_leave_planning.id,
 
@@ -295,13 +202,9 @@ class HrLeave(models.Model):
             'default_employee_id': self.employee_id.id,
             'default_request_date_from': self.date_from,
             'default_request_date_to': self.date_to,
-            # 'default_leave_planning': vals['order_id'],
-            # 'default_state': 'planned',
-            # 'default_line_id': linked_line.id,
 
         }
         self.state = 'cancel'
-        # self.unlink()
         return action
 
     def action_confirm(self):
@@ -316,6 +219,29 @@ class HrLeave(models.Model):
             holidays.sudo().action_validate()
         self.activity_update()
         return True
+
+        
+
+    def action_finance_approval(self):
+        self.write({'state':'finance_approve'})
+        line_list = []
+        for line in self.coverage_ids:
+            request_line = {
+              'project_id':line.project.id,
+              'analytic_activity_id':line.activity.id,
+              'donor_id':line.doner_id.id,
+              'request_amount':self.employee_id.level_id.leave_allowance,
+            }
+            line_list.append((0, 0, request_line))
+        payment_request = self.env['payment.request'].create({
+            'journal_id':self.journal_id.id,
+            'total_amount':self.employee_id.level_id.leave_allowance,
+            'Check_no':'',
+            'check_date':fields.Date.today(),
+            'reason':'Annual Leave Allowance',
+            'budget_line_ids':line_list
+            })
+        self.payment_request_id = payment_request.id     
 
     def unlink(self):
         for rec in self:
@@ -332,69 +258,6 @@ class HrLeave(models.Model):
                 raise UserError(error_message % (state_description_values.get(holiday.state),))
         return super(HrLeave, self.with_context(leave_skip_date_check=True, unlink=True)).unlink()
 
-    '''
-    @api.depends('holiday_type')
-    def _compute_from_holiday_type(self):
-        for holiday in self:
-            # if holiday.linked_leave_planning:
-            #     holiday.employee_id = holiday.linked_leave_planning.employee_id.id
-            #     continue
-            if holiday.holiday_type == 'employee':
-                if not holiday.employee_id:
-                    holiday.employee_id = self.env.user.employee_id
-                holiday.mode_company_id = False
-                holiday.category_id = False
-            elif holiday.holiday_type == 'company':
-                holiday.employee_id = False
-                if not holiday.mode_company_id:
-                    holiday.mode_company_id = self.env.company.id
-                holiday.category_id = False
-            elif holiday.holiday_type == 'department':
-                holiday.employee_id = False
-                holiday.mode_company_id = False
-                holiday.category_id = False
-            elif holiday.holiday_type == 'category':
-                holiday.employee_id = False
-                holiday.mode_company_id = False
-            else:
-                holiday.employee_id = self.env.context.get('default_employee_id') or self.env.user.employee_id
-    '''
-
-    '''
-    @api.depends('employee_id')
-    def _compute_from_employee_id(self):
-        for holiday in self:
-            # if holiday.linked_leave_planning:
-            #     holiday.holiday_status_id = holiday.linked_leave_planning.leave_type.id
-            #     continue
-            holiday.manager_id = holiday.employee_id.parent_id.id
-            if holiday.employee_id.user_id != self.env.user and self._origin.employee_id != holiday.employee_id:
-                holiday.holiday_status_id = False
-    '''
-
-    # @api.depends('holiday_status_id')
-    # def _compute_state(self):
-    #     # print('############0')
-    #     for holiday in self:
-    #         # print('############1')
-    #         if holiday.linked_leave_planning:
-    #             # print('############2')
-    #
-    #             holiday.state = 'planned'
-    #             continue
-    #         if self.env.context.get('unlink') and holiday.state == 'draft':
-    #             # Otherwise the record in draft with validation_type in (hr, manager, both) will be set to confirm
-    #             # and a simple internal user will not be able to delete his own draft record
-    #             holiday.state = 'draft'
-    #         else:
-    #             holiday.state = 'confirm' if holiday.validation_type != 'no_validation' else 'draft'
-    #
-    # def _compute_is_plan(self):
-    #     for holiday in self:
-    #         if holiday.linked_leave_planning:
-    #             holiday.is_plan = True
-    #         else:
-    #             holiday.is_plan = False
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -430,8 +293,6 @@ class HrLeave(models.Model):
                     self._check_double_validation_rules(employee_id, values.get('state', False))
                 if values.get('linked_leave_planning'):
                     values['state'] = 'planned'
-                    # type_id = self.env['hr.leave.planning'].search([('id','=',values.get('linked_leave_planning'))]).leave_type.id
-                    # values['holiday_status_id'] = type_id
         holidays = super(HrLeave, self.with_context(mail_create_nosubscribe=True)).create(vals_list)
 
         for holiday in holidays:
@@ -456,112 +317,13 @@ class HrLeave(models.Model):
         return holidays
 
 
+class LeaveCoverage(models.Model):
+    _name = 'hr.leave.coverage'
 
-class HrLeaveType(models.Model):
-    _inherit = 'hr.leave.type'
+    leave_id = fields.Many2one('hr.leave',string="Leave")
+    project = fields.Many2one('account.analytic.account',string="Project",domain="[('type','=','project')]")
+    activity = fields.Many2one('account.analytic.account',domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',domain="[('type','=','location')]",string="Location")    
+    doner_id = fields.Many2one('res.partner',string="Doner")
+
     
-    annual_leave = fields.Boolean(string='Annual Leave')        
-
-
-
-#
-# class HrLeavePlanningLine(models.Model):
-#     _name = 'hr.leave.planning.line'
-#     _description = 'Hr Leave Planning Line'
-#
-#     date_from = fields.Datetime(
-#         'Start Date', store=True, readonly=False, copy=False,
-#         required=True, )
-#     date_to = fields.Datetime(
-#         'End Date', store=True, readonly=False, copy=False, required=True,
-#
-#     )
-#     number_of_days = fields.Float(
-#         'Duration (Days)', store=True, readonly=False, copy=False,related="leave.number_of_days"
-#     )
-#
-#     name = fields.Text(string='Description')
-#     # leave = fields.Many2one('hr.leave', string='Leave',ondelete='cascade')
-#     leave = fields.Many2one('hr.leave', string='Leave')
-#     order_id = fields.Many2one('hr.leave.planning', string='Order Reference', index=True, required=True,
-#                                ondelete='cascade')
-#     def unlink(self):
-#         if self.leave:
-#             self.leave.unlink()
-#
-#         return super(HrLeavePlanningLine, self).unlink()
-#     # @api.constrains('date_from', 'date_to')
-#     # def _check_rule_date_from(self):
-#     #     print('############################3crdf')
-#     #
-#     #     if any(applicability for applicability in self
-#     #            if applicability.date_to and applicability.date_from
-#     #               and applicability.date_to < applicability.date_from):
-#     #         raise ValidationError(_('The start date must be before the end date'))
-#     @api.depends('leave')
-#     def recalculate_leave(self):
-#         print('#####################depends')
-#         for rec in self:
-#             if not rec.leave:
-#                 linked_leave = self.env['hr.leave'].search([('line_id.id', '=', rec.id)])
-#                 rec.leave=linked_leave.id
-#
-#     @api.onchange('date_from', 'date_to')
-#     def link_leaves_to_planning(self):
-#         # print('############################3')
-#
-#         # for line in self:
-#         if self.date_to and self.date_from and self.date_to < self.date_from:
-#             raise ValidationError(_('The start date must be before the end date'))
-#         self.leave.date_from = self.date_from
-#         self.leave.date_to = self.date_to
-#         # print('#################dft', self.date_from, self.date_to)
-#
-#     @api.model
-#     def create(self, vals):
-#         # print(vals, '###########################')
-#         #
-#         # vals_array = []
-#         # vals_array.append((0, 0, {
-#         #     'date_from': self.date_from,
-#         #     'date_to': self.date_to,
-#         # }))
-#         # print(vals['date_from'],'###################')
-#         # print(self.date_from,'###################')
-#         # print(self.date_from,'###################')
-#         linked_order=self.env['hr.leave.planning'].search([('id', '=', vals['order_id'])])
-#         leave_1 = self.env['hr.leave'].create({
-#             'name': 'Doctor Appointment',
-#             'employee_id': self.env.user.employee_id.id,
-#             'date_from': vals['date_from'],
-#             'request_date_from': vals['date_from'],
-#             'date_to': vals['date_to'],
-#             'request_date_to': vals['date_to'],
-#             'leave_planning': vals['order_id'],
-#             'is_plan': True,
-#             'state': 'planned',
-#             'holiday_status_id': linked_order.leave_type.id,
-#
-#             # 'number_of_days': 1,
-#         })
-#         # vals['number_of_days']= 8
-#         vals['leave'] = leave_1.id
-#         # print(leave_1.leave_planning.name, '################l')
-#         result = super(HrLeavePlanningLine, self).create(vals)
-#
-#         # result.update({'leave': (0, 0, {
-#         #     'date_from': self.date_from,
-#         #     'date_to': self.date_to,
-#         # })})
-#         return result
-#
-#     def action_show_leave(self):
-#         action = self.env.ref('hr_holiday_planning.hr_leave_planning_action_window2').read()[0]
-#         action['domain'] = [('id', '=', self.leave.id)]
-#         # print(self.id,'###################################id')
-#         action['context'] = {
-#             'active_id': self._context.get('active'),
-#             'active_model': 'hr.leave',
-#         }
-#         return action
-#

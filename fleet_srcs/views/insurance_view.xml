@@ -9,7 +9,7 @@
         </record>
 
          <record id="action_invoice_insurance_tree" model="ir.actions.act_window">
-            <field name="name"> Fuel Invoices</field>
+            <field name="name"> Insurance Invoices</field>
             <field name="res_model">account.move</field>
             <field name="type">ir.actions.act_window</field>
              <field name="domain">[('insurance_id', '=', active_id)]</field>
@@ -52,6 +52,11 @@
                            widget="statusbar"
                            statusbar_visible="requester,finance,cancel" optional="show"
                     />
+                        <button type="action"
+                            name="%(fleet_srcs.action_change_insurance)d"
+                            string="New Insurance Price"
+                            attrs="{'invisible': [('state','in',['requester'])]}">
+                         </button>
                     <button
                             name="to_finance"
                             states="requester"
@@ -63,7 +68,7 @@
                             name="action_cancel"
                             string="Cancel"
                             type="object"
-                            attrs="{'visible':[('state','in',['draft'])]}"/>
+                            attrs="{'visible':[('state','in',['requester'])]}"/>
                     </header>
                     <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -71,7 +76,7 @@
                             name="%(fleet_srcs.action_invoice_insurance_tree)d"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible': [('state', '!=', 'finance')]}">
+                            attrs="{'invisible': [('invoice_count', '=', 0)]}">
                         <field name="invoice_count" widget="statinfo" string="Invoices"/>
                          </button>
                         </div>
@@ -89,18 +94,15 @@
                         </group>
                          <label for="service" string ='Service Description' style="font-size:200%;font-weight: bold;"/>
                         <field name="service" class="oe_inline" invisible="1"/>
-                        <group>
+                        <group col="4" colspan="4">
                             <field name="insurance_request" width="80%"/>
                             <field name="full_insurance"/>
-                            <field name="current_price"/>
-                            <field name="price_change"/>
                         </group>
                         <group col="4" colspan="4">
+                            <field name="vehicle"/>
+                            <field name="service"/>
                             <field name="license_plate"/>
                             <field name="chassis_no"/>
-                        </group>
-                        <group>
-                            <field name="other_service"/>
                         </group>
                         <label for="cost" string ='Work Time and Estimated Cost' style="font-size:200%;font-weight: bold;"/>
                         <field name="cost" class="oe_inline" invisible="1"/>

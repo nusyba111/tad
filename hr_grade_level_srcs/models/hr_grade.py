@@ -40,6 +40,8 @@ class HrGrade(models.Model):#
         for rec in self:
             level_sequence = 1
             name = 'A'
+            # character_list = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'
+            # ,'O','P','Q','R','S','T','U','V','W','X','Y','Z']
             # wage = rec.initial_wage
             lines = [(0, False, {'name': name + str(level_sequence), 'grade_id': rec.id})]
             degrees_no = rec.degrees_no

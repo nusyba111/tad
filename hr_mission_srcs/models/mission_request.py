@@ -17,6 +17,7 @@ class HrMission(models.Model):
 
 	name = fields.Char(string='Number', required=True, readonly=True, copy=False, default='/')
 	mission_type = fields.Many2one('hr.mission.type', required=True)
+	type_of_mission = fields.Selection(related="mission_type.type")
 	mission_country = fields.Many2one('res.country',required=True)
 	mission_city = fields.Many2one('res.city',string="City")
 	start_date = fields.Date(string='Start Date', required=True)
@@ -28,9 +29,9 @@ class HrMission(models.Model):
 	state = fields.Selection([
 		('draft', 'Draft'),
 		('submit', 'Waiting Department Manager approval'),
-		('dept_approve', 'Waiting GM approval'),
-		('gm_approve', 'GM approval'),
+		('dept_approve', 'Waiting HR approval'),
 		('approve', 'Approved'),
+		('public_relation','Public Relation'),
 		('canceled', 'Canceled'),
 		('stop', 'Stoped'),
 	], default='draft',
@@ -47,12 +48,21 @@ class HrMission(models.Model):
 	travel_by = fields.Selection([('air','Air'),('car','Car')])
 	stop_reason = fields.Char()
 	purpose = fields.Char()
+	lodging_type = fields.Selection([('special','Special'),('hotel','Hotel'),('host','Host')])
 	stop_date = fields.Date()
 	doner = fields.Many2one('res.partner',string="Doner",required=True)
 	project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
 	activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
 	location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
-
+	coverage_ids = fields.One2many('hr.mission.coverage','mission_id')
+	work_shop = fields.Boolean(string="Work Shop")
+	training = fields.Boolean(string="Training")
+	conferences = fields.Boolean(string="Conferences")
+	rc_meeting = fields.Boolean(string="RC/RC Movement Meeting")
+	attachment = fields.Binary(string="Attachment", required=True)
+	air_company = fields.Many2one('res.partner',string="Air Company")
+	date_from = fields.Date(string="Date From")
+	date_to = fields.Date(string="Date To")
 
 	@api.onchange('mission_type')
 	def _get_currency(self):
@@ -67,7 +77,7 @@ class HrMission(models.Model):
 				date2 = datetime.strptime(str(mission.end_date), "%Y-%m-%d")
 				date3 = date2 - date1
 				date = int(date3.days)
-				mission.mission_days = date + 1
+				mission.mission_days = date
 			return mission.mission_days
 
 	@api.onchange('start_date', 'end_date')
@@ -81,13 +91,16 @@ class HrMission(models.Model):
 		self.write({'state': "submit"})
 
 	def action_confirm(self):
-		self.write({'state': "dept_approve"})
+		if self.travel_by == 'air':
+			self.write({'state':'public_relation'})
+		else:
+			self.write({'state': "dept_approve"})
 
-	def action_gm_approve(self):
-		self.write({'state': 'gm_approve'})
+	def action_public_approve(self):
+	    self.write({'state':'dept_approve'})		
 
 	def action_approve(self):
-		self._create_move()
+		# self._create_move()
 		self.write({'state': "approve"})
 
 	@api.model
@@ -228,3 +241,19 @@ class StopMission(models.TransientModel):
 				'stop_reason':self.stop_reason,
 				'state': 'stop',
 			})
+
+
+class MissionCoverage(models.Model):
+	_name = 'hr.mission.coverage'
+
+	mission_id = fields.Many2one('hr.mission')
+	product = fields.Many2one('product.product',string="Service",domain="[('type','=','service')]")
+	partial_coverage = fields.Boolean(string="Partial Coverage")
+	complete_coverage = fields.Boolean(string="Completely Coverage")
+	uncoverage = fields.Boolean(string="UnCoverage")
+	amount = fields.Float(string="Amount")
+
+
+
+
+

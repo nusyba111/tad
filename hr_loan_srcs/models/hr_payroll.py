@@ -33,7 +33,7 @@ class HrPayslip(models.Model):
 		A method to get posted and approved employee's loan
 		"""
 		for rec in self:
-			# array = []
+			array = []
 			rec.loan_ids.write({'payslip_id': False})
 			loan_ids = self.env['hr.loan.line'].search([('employee_id', '=', rec.employee_id.id),
 														('paid', '=', False), ('paid_date', '>=', rec.date_from),

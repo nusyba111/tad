@@ -46,9 +46,9 @@
                           </group>
                           <group>
                             <field name="date_to"/>
-                              <field name="manger_user"/>
-                            <field name="hr_manger"/>
-                            <field name="general_manger" />
+                              <field name="manger_user" invisible="1"/>
+                            <field name="hr_manger" invisible="1"/>
+                            <field name="general_manger" invisible="1"/>
 
                           </group>
                         </group>
@@ -62,6 +62,10 @@
                                         <field name="job_id" optional="show"/>
                                         <field name="current_number" optional="show"/>
                                         <field name="required_number" optional="show"/>
+                                        <field name="doner" optional="show"/>
+                                        <field name="project" optional="show"/>
+                                        <field name="activity" optional="show"/>
+                                        <field name="location" optional="show"/>
                                         <field name="division" optional="show"/>
                                         <field name="department" optional="hide"/>
                                         <field name="section" optional="hide"/>

@@ -153,6 +153,7 @@
                    <header>
                       <button name="action_plan" id="action_plan" string="plan" attrs="{'invisible': [('state' ,'!=','draft')]}" type="object" />
                     <button name="action_confirm" id="action_confirm" string="Confirm"   attrs="{'invisible': [('state' ,'!=','planned')]}" type="object" />
+                    <button name="action_sg_execute" id="action_sg_execute" string="Secratry Approve"  attrs="{'invisible': [('state' ,'!=','confirmed')]}" groups="accounting_srcs.group_secretary_general" class="btn-primary" type="object"/>
                     <!-- groups="hr_custom.group_hr_department_manager" -->
 <!--                    <button name="action_execute" id="action_execute" string="Execute"  attrs="{'invisible': [('state' ,'!=','confirmed')]}" groups="hr.group_hr_user"    class="btn-primary" type="object"/>-->
                     <button name="action_cancel"  type="object" string="Cancel" attrs="{'invisible': ['|',('state' ,'=','draft'),('state','=','cancel')]}"  class="btn-danger" />
@@ -161,6 +162,11 @@
                        <field name="state" widget="statusbar"  />
                     </header>
                     <sheet>
+                        <div class="oe_button_box">
+                            <button name="open_execute" type="object" class="oe_stat_button" string="Execution"
+                                    icon="fa-bars" widget="statinfo">
+                            </button>
+                        </div>
                         <group col-span="2">
                             <group col-span="1">
                                 <field name="department" />

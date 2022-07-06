@@ -28,6 +28,7 @@ class HrWageProcess(models.Model):
                               ('approve', 'HR Approve'),
                               ('finance_approve','Finance Approve'),
                               ('hr_approve','HR Approve'),
+                              ('done','Done'),
                               ('refused', 'Refused')], default='draft', track_visibility='onchange')
 
     current_grade = fields.Many2one('hr.grade', string="Current Grade")
@@ -44,7 +45,6 @@ class HrWageProcess(models.Model):
     project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
     activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
     location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
-    payment_method = fields.Many2one('account.payment.method',string="Payment Method")
 
 
     def action_set_to_confirm(self):
@@ -54,6 +54,22 @@ class HrWageProcess(models.Model):
         self.state = 'confirm'
 
     def action_set_to_approve(self):
+        self.write({'state': 'approve'})
+
+    def action_set_to_refused(self):
+        """
+        A method to refuse wage.
+        """
+        self.state = 'refused'
+
+
+    def action_hr_approve(self):
+        self.write({'state':'finance_approve'})
+
+    def action_finance_approve(self):
+        self.write({'state':'hr_approve'})
+
+    def action_another_hr_approve(self):  
         """
         A method to approve wage.
         """
@@ -74,15 +90,10 @@ class HrWageProcess(models.Model):
 
             seq = self.env['ir.sequence'].next_by_code('wage.process.increment')
             self.employee_id.write({'level_id': self.level_id.id})
-            self.contract_id.write({'level_id': self.level_id.id})
+            self.contract_id.write({'level_id': self.level_id.id}) 
 
-        self.write({'state': 'approve', 'name': seq})
-
-    def action_set_to_refused(self):
-        """
-        A method to refuse wage.
-        """
-        self.state = 'refused'
+        self.write({'state': 'done', 'name': seq})         
+            
 
     def action_set_to_draft(self):
         """

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="seq_office_lease" model="ir.sequence">
+            <field name="name">Office Lease No.</field>
+            <field name="code">lease.no</field>
+            <field name="prefix">Lease/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <record id="office_lease_view_tree" model="ir.ui.view">
+            <field name="name">lease.view.tree</field>
+            <field name="model">office.lease</field>
+            <field name="arch" type="xml">
+                <tree>
+                <field name="sequence"/>
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="start_date"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <record id="office_lease_view_form" model="ir.ui.view">
+            <field name="name">lease.view.form</field>
+            <field name="model">office.lease</field>
+            <field name="arch" type="xml">
+                <form string="Office Lease">
+                    <header>
+                  <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,admin,cancel,done" optional="show"
+                    />
+                   <button
+                            name="to_admin"
+                            states="draft"
+                            string="Send to Admin"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_done"
+                            states="admin"
+                            string="Done"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_cancel"
+                            states="admin"
+                            string="Cancel"
+                            type="object"
+                            class="oe_highlight"
+                    />
+
+                    </header>
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="sequence"/>
+                            <field name="date"/>
+                            <field name="partner_id"/>
+                            <field name="start_date"/>
+                            <field name="location"/>
+                            <field name="total_amount"/>
+                        </group>
+                        <notebook>
+                            <page string="Lease Details" name="lease" >
+                                <field name="lease_details" >
+                                    <tree>
+                                        <field name="item"/>
+                                        <field name="cost"/>
+                                    </tree>
+                                </field>
+                            </page>
+                    </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
+
+            </field>
+        </record>
+        <record id="action_office_lease" model="ir.actions.act_window">
+            <field name="name">Office Lease</field>
+            <field name="res_model">office.lease</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="office_lease"
+                name="Office Lease"
+                sequence="2"
+                parent="menu_admin"
+                action='action_office_lease'
+        />
+
+    </data>
+</odoo>

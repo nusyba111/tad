@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+
+    <record id="view_wizard_insurance" model="ir.ui.view">
+      <field name="name">wizard.insurance.price.change</field>
+      <field name="model">insurance.price.change</field>
+      <field name="arch" type="xml">
+        <form string="Insurance Price Change">
+
+			<group>
+                <field name="new_price"/>
+              <field name="date"/>
+             </group>
+
+          <footer>
+            <button name = "create_invoice"  string="Create Invoice"  type="object" class="oe_highlight"/> or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+
+
+    <record id="action_change_insurance" model="ir.actions.act_window">
+      <field name="name">Insurance Change Price</field>
+      <field name="res_model">insurance.price.change</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_wizard_insurance"/>
+      <field name="target">new</field>
+    </record>
+
+
+
+  </data>
+</openerp>

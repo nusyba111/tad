@@ -46,7 +46,7 @@ class EndOfService(models.Model):
     work_days_paid_with_salary_deduction = fields.Float(string="Work days paid with salary", required=False, )
     violations_and_fines_deduction = fields.Float(string="Violations and fines", required=False, )
     grants_and_incentives_deduction = fields.Float(string="Grants and incentives", required=False, )
-    total_deduction = fields.Float(string="Total Deduction", required=False, )
+    total_deduction = fields.Float(string="Total Deduction", required=False,compute='sum_total_deduction' )
 
     # Check Invisible
     pay_for_working_days_boolean = fields.Boolean(string="Pay For Working Days", required=False
@@ -73,6 +73,64 @@ class EndOfService(models.Model):
                                           )
 
     total_benefits = fields.Float(string="Total Benefits", required=False, readonly=True)
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('hr_approve', 'HR Officer Approve'),
+        ('hr_manager','HR Manager Approve'),
+        ('secretary','Secretary Genral'),
+        ('cancel', 'Cancel'),
+        ('finance', 'Finance')], string='Status', index=True, readonly=True, default='draft',
+        track_visibility='onchange', copy=False)
+    finance_approve_id=fields.Many2one('payment.request',readonly=True)
+    paid_amount=fields.Float(string='Net Paid Amount',compute='net_amount',store=True)
+    donor = fields.Many2one('res.partner', string='Donor', required=True)
+    project = fields.Many2one('account.analytic.account', string='Project', domain="[('type','=','project')]")
+    account = fields.Many2one('account.account', string='Account',required=True)
+    activity = fields.Many2one('account.analytic.account', 'Activity',
+                                           domain="[('type','=','activity')]")
+
+    @api.depends('total_benefits', 'total_deduction')
+    def sum_total_deduction(self):
+        for rec in self:
+            rec.total_deduction=rec.month_of_warning+rec.loan_deduction+rec.violations_and_fines_deduction+rec.absence_deduction +\
+            rec.work_days_paid_with_salary_deduction + rec.grants_and_incentives_deduction
+
+    @api.depends('total_benefits','total_deduction')
+    def net_amount(self):
+        for rec in self:
+            rec.paid_amount=rec.total_benefits - rec.total_deduction
+
+    def to_hr(self):
+        self.write({'state': 'hr_approve'})
+
+    def to_hr_manager(self):
+        self.write({'state': 'hr_manager'})
+
+    def to_secretary(self):
+        self.write({'state': 'secretary'})
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+
+    def action_done(self):
+        self.write({'state': 'finance'})
+        payment_request_vals = {
+            'payment_method': 'cash',
+            'user_id': self.env.user.partner_id.id,
+            'reason': self.reason
+        }
+        finance_approve_id = self.env['payment.request'].create(payment_request_vals)
+        payment_request_lines_vals = {
+            'payment_request_id':finance_approve_id.id,
+            'account_id': self.account.id,
+            'donor_id': self.donor.id,
+            'project_id': self.project.id,
+            'analytic_activity_id': self.activity.id,
+            'request_amount':self.paid_amount,
+
+        }
+        self.env['payment.request.lines'].create(payment_request_lines_vals)
+        self.finance_approve_id = finance_approve_id
 
     @api.onchange('employee_id')
     def get_employee_data(self):

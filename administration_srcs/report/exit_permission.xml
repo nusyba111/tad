@@ -1,0 +1,52 @@
+<odoo>
+    <record id="administration_srcs_exit_permission_report" model="ir.actions.report">
+        <field name="name">Gate Pass</field>
+        <field name="model">exit.permission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">administration_srcs.exit_permission_template</field>
+        <field name="report_file">administration_srcs.exit_permission_template</field>
+        <field name="binding_model_id" ref="model_exit_permission"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="exit_permission_template">
+        <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <div style="border:black solid 2px ; margin:10px">
+            <div class="article mt0 o_report_layout_standard" dir="rtl">
+            <p style="font-size:20px;text-align:right;"> التاريخ :<span t-field="o.date"/></p>
+            <br/><br/><br/>
+            <p style="font-size:20px;text-align:center;" dir="rtl">إذن خروج أغراض </p><br/>
+<!--            <p style="font-size:20px;text-align:right;"> معنون إلي :<span t-field="o.address_to"/></p>-->
+    <table>
+    <t t-foreach="docs" t-as="doc">
+      <tr>
+      <td class="text-right" style="width:20%">معنون إلي :<span t-esc="doc.address_to.name"/></td>
+      </tr><tr></tr><tr></tr>
+        <tr>
+            <td class="text-right" style="width:20%">الاسم :<span t-esc="doc.employee_id.name"/></td>
+            <td class="text-right" style="width:20%">اﻹدارة :<span t-esc="doc.department.name"/></td>
+      </tr><tr></tr><tr></tr>
+        <tr>
+         <td class="text-right" style="width:20%">نوع الغرض :<span t-esc="doc.asset.name"/></td>
+        </tr><tr></tr><tr></tr>
+        <tr>
+            <td class="text-right" style="width:20%">وارد(من/إلي) :<span t-esc="doc.from_dept.name"/></td>
+<!--            department_id-->
+            <td class="text-right" style="width:20%">صادر(من/إلي) :<span t-esc="doc.to_dept.name"/></td>
+      </tr><tr></tr><tr></tr>
+             <tr>
+         <td class="text-right" style="width:20%">تعليق الجهة المسئولة من الغرض :<span t-esc="doc.responsible_comment"/></td>
+        </tr><tr></tr><tr></tr>
+             <tr>
+         <td class="text-right" style="width:20%">تعليق رئيس الشئون اﻹدارية:</td>
+        </tr><tr></tr><tr></tr>
+             <tr>
+         <td class="text-right" style="width:20%">ملحوظة مسئول الاستقبال:</td>
+        </tr><tr></tr><tr></tr>
+    </t>
+    </table>
+            </div></div>
+        </t>
+        </t>
+    </template>
+</odoo>

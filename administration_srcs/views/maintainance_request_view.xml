@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="seq_maintainance_request" model="ir.sequence">
+            <field name="name">Maintainance Request No.</field>
+            <field name="code">maintainance.no</field>
+            <field name="prefix">Maintainance/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <record id="maintainance_request_view_tree" model="ir.ui.view">
+            <field name="name">maintainance.view.tree</field>
+            <field name="model">maintainance.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                <field name="date"/>
+                <field name="address_to"/>
+                <field name="employee_id"/>
+                <field name="asset"/>
+                </tree>
+
+            </field>
+        </record>
+
+        <record id="maintainance_request_view_form" model="ir.ui.view">
+            <field name="name">maintainance.view.form</field>
+            <field name="model">maintainance.request</field>
+            <field name="arch" type="xml">
+                <form string="Maintainance Request">
+                    <header>
+                  <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,admin,cancel,done" optional="show"
+                    />
+                   <button
+                            name="to_admin"
+                            states="draft"
+                            string="Send to Admin"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_done"
+                            states="admin"
+                            string="Done"
+                            type="object"
+                            class="oe_highlight"
+                    />
+                     <button
+                            name="action_cancel"
+                            states="admin"
+                            string="Cancel"
+                            type="object"
+                            class="oe_highlight"
+                    />
+
+                    </header>
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="sequence"/>
+                            <field name="date"/>
+                            <field name="address_to"/>
+                            <field name="employee_id"/>
+                            <field name="department"/>
+                            <field name="asset"/>
+                            <field name="report_type"/>
+                            <field name="complain_summary"/>
+                            <field name="admin_comment"/>
+                        </group>
+                        <group>
+                            <field name="service_comment" />
+                            <field name="receipt_date" />
+                        </group>
+                        <notebook>
+                            <page string="Spare Parts" name="spare" attrs="{'invisible':[('state','=','draft')]}">
+                            <field name="required_spares" >
+                            <tree>
+                                <field name="product_id"/>
+                                <field name="qty"/>
+                            </tree>
+                            </field>
+                                 <button name="generate_requisition" type="object"
+                                        string="Requisition" confirm="Are you sure?"
+                                        class="oe_highlight"
+                                      />
+
+                            </page>
+                            <page string="Services" name="services" attrs="{'invisible':[('state','=','draft')]}">
+                                <field name="required_service">
+                                    <tree>
+                                        <field name="service_id"/>
+                                        <field name="technition_name"/>
+                                        <field name="price"/>
+                                    </tree>
+                                </field>
+
+                                <button name="generate_requisition_invoice" type="object"
+                                        string="Generate Requisition" confirm="Are you sure?"
+                                        class="oe_highlight"
+                                      />
+
+                            </page>
+                </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+                </form>
+
+            </field>
+        </record>
+        <record id="action_maintainance_request" model="ir.actions.act_window">
+            <field name="name">Maintainance Request</field>
+            <field name="res_model">maintainance.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="maintainance_request"
+                name="Maintainance Request"
+                sequence="2"
+                parent="menu_admin"
+                action='action_maintainance_request'
+        />
+
+    </data>
+</odoo>

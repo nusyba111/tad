@@ -73,7 +73,7 @@
                       <group>
                         <group>
                           <label for="vendor" string="Training Center"/>
-                          <field name="vendor" domain="[('is_training_center','=',True)]" required="1" nolabel="1"/>
+                          <field name="vendor" domain="[('is_training_center','=',True)]" required="0" nolabel="1"/>
                         </group>
                         <group>
                         </group>

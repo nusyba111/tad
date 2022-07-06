@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="report_fuel_fuel"
+            string=" Insurance Section"
+            model="insurance.service"
+            report_type="qweb-pdf"
+            name="fleet_srcs.fueling_servises_reports"
+            file="fleet_srcs.fueling_servises_reports"
+           />
+    <template id="fueling_servises_reports">
+        <t t-call="web.html_container">
+            <div dir="ltr">
+         <table t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <tr>
+                <td class="text-center" style="float:center">WORK ORDER</td>
+                    </tr>
+                <td class="text-center" style="float:center">Serial No:  <span t-esc="doc.serial_no"/></td>
+                </t>
+         </table></div><br/>
+            <table dir="ltr">
+                <t t-foreach="docs" t-as="doc">
+                    <tr>
+                        <td class="text-right" style="width: 40%" scope="col">Date:<span t-esc="doc.date"/></td>
+                        <td class="text-right" style="width: 40%" scope="col">Supplier/provider: <span t-esc="doc.supplier.name"/></td>
+                        <td class="text-center" style="width: 40%" scope="col">Order/contract:<span t-esc="doc.requester.name"/></td>
+                    </tr>
+                </t>
+            </table><br/>
+           <span dir="ltr" class="text-left" style="float:left">ORDER/Contract Title: </span><t t-esc="order_title"/>
+            <br/>
+            <br/>
+            <table dir="ltr">
+                <t t-foreach="docs" t-as="doc">
+                 <td class="text-left" style="width: 40%">Requested by(Name): <span t-esc="doc.requester.name"/></td>
+                 <td class="text-left" style="width: 35%">Signature:</td>
+                 <td class="text-left" style="width: 40%">Department:<span t-esc="doc.department.name"/></td>
+            </t>
+            </table>
+                <br/>
+                <u dir="ltr" style="font-size:20px;text-align:left;">Service Description</u>
+            <hr style="border:black solid 2px"/>
+                 <table dir="ltr">
+                     <t t-foreach="docs" t-as="doc">
+                        <tr>
+                     <td class="text-left" style="width: 40%">1-Third Party Insurance request   <span t-esc="doc.insurance_request"/></td>
+                     </tr> <tr>
+                     <td class="text-left" style="width: 40%">2-Full Insurance (comprehensive)request    <span t-esc="doc.insurance_request"/></td><br/>
+                         </tr>
+                     </t>
+                 </table>
+            <br/><br/>
+                <table>
+                    <t t-foreach="docs" t-as="doc">
+                        <td class="text-left" style="width: 50%">Plate No: <span t-esc="doc.license_plate"/></td>
+                        <td class="text-left" style="width: 50%">Chassis No: <span t-esc="doc.chassis_no"/></td>
+                   </t>
+                </table>
+                <br/>
+                 <div style="border:black solid 2px ; margin:10px">
+                     <u class="text-center" style="width: 50%">5-Other Servies(To Be Mentioned Here):</u><t t-esc="other_service"/>
+                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                 </div>
+            <table>
+                    <t t-foreach="docs" t-as="doc">
+                        <u>Work Time Estimated cost:</u><br/>
+                        <td class="text-left" style="width: 40%"> Start: <span t-esc="doc.start"/></td>
+                        <td class="text-left" style="width: 40%">Finish: <span t-esc="doc.finish"/></td>
+                        <td class="text-left" style="width: 40%">Estimated cost(SDG): <span t-esc="doc.cost"/></td>
+                   </t>
+            </table>
+                <table>
+                    <t t-foreach="docs" t-as="doc">
+                        <td class="text-left">Approved By Name</td>
+                        <td class="text-left" style="width: 30%"></td>
+                        <td class="text-left" style="float:left">Date</td>
+                        <td class="text-left" style="width: 40%"></td>
+                        <td class="text-left" style="float:left">Signature</td>
+                      <td class="text-left" style="width: 40%"></td>
+                   </t>
+                </table>
+            <br/>
+                  <strong>Attachments</strong>
+            <br/>
+            <br/>
+            <table>
+                <strong>Confirmed By Contractor:</strong><br/><br/>
+                <td class="text-left" style="float:left">Name</td>
+                <td class="text-left" style="width: 50%"></td>
+                <td class="text-left" style="float:left">Signature</td>
+                <td class="text-left" style="width: 50%"></td>
+            </table>
+         </t>
+    </template>
+</odoo>
