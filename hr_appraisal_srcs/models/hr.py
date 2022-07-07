@@ -25,7 +25,10 @@ class HRApprsial(models.Model):
             'res_model': 'hr.incentive',
             'target': 'new',
             'type': 'ir.actions.act_window',
-            'context': {'default_request_id': self.env.user.id},
+            'context': {
+            'default_request_id': self.env.user.id,
+            'default_types':'employee',
+            'default_employee_id':self.employee_id.id},
             }
                 
 

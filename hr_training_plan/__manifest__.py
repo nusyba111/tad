@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr_training', 'survey','account'],#'hr_custom'
+    'depends': ['base','hr_training', 'survey','account','accounting_srcs'],#'hr_custom'
 
     # always loaded
     'data': [

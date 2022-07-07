@@ -12,6 +12,39 @@
                         <field name='level_id'/>
                     </group>
                 </group>
+                 <xpath expr="//group[@name='salary']" position="after">
+                    <group>
+                      <field name="forgin_currency_id"/>
+                      <field name="wage_per_hour" invisible="1"/>
+                       <label for="s_insurance"/>
+                          <div class="o_row" name="s_insurance">
+                              <field name="s_insurance" nolabel="1"/>
+                          </div>
+                       <label for="h_insurance"/>
+                          <div class="o_row" name="h_insurance">
+                              <field name="h_insurance" nolabel="1"/>
+                          </div> 
+
+                        <label for="a_s_b"/>
+                          <div class="o_row" name="a_s_b">
+                              <field name="a_s_b" nolabel="1"/>
+                          </div>  
+
+                             
+                          
+                    </group>
+                </xpath>
+                <xpath expr="//div[@name='wage']" position="after">
+                    <label for="leave_allowance"/>
+                          <div class="o_row" name="leave_allowance">
+                              <field name="leave_allowance" nolabel="1"/>
+                          </div>  
+                          
+                        <label for="eid_bonus"/>
+                          <div class="o_row" name="eid_bonus">
+                              <field name="eid_bonus" nolabel="1"/>
+                          </div>  
+                </xpath>
             </field>
         </record>
 

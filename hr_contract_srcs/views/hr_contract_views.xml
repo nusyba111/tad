@@ -15,22 +15,17 @@
            <field name="struct_id"/>
         </xpath>
 
-        <xpath expr="//group[@name='salary']" position="after">
-          <group>
-          <field name="forgin_currency_id"/>
-          <field name="wage_per_hour" invisible="1"/>
-        </group>
-        </xpath>
+       
 
-        <xpath expr="//page[@name='information']" position="inside">
-          <field name="rule_ids">
-            <tree>
-              <field name="name"/>
-              <field name="code"/>
-              <field name="amount_python_compute"/>
+        <!-- <xpath expr="//field[@name='wage']" position="after"> -->
+          
+          
+          <!-- <field name="rule_ids">
+            <tree editable="buttom">
+              <field name="basic"/>
             </tree>
-          </field>
-        </xpath>
+          </field> -->
+        <!-- </xpath> -->
 
         <xpath expr="//page[@name='information']" position="after">
           <page string="Salary Plan" name="plan">

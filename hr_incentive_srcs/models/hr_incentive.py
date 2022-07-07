@@ -26,6 +26,7 @@ class HrIncentiveType(models.Model):
         ('hours', 'Hours'), ], string='Payments By', default='fix',
     )
     journal_id = fields.Many2one('account.journal', string="Journal", domain=[('type', '=', 'purchase')],company_dependent=True)
+    by_project = fields.Boolean(string="By Project")
 
 class HrIncentive(models.Model):
     _name = 'hr.incentive'
