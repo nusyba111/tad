@@ -32,7 +32,16 @@ class SrcsPaymentRequest(models.Model):
     tot_cleared_amount = fields.Float(string="Cleared Amount", required=False, readonly=True, copy=False)
     un_cleared_amount = fields.Float(string="Uncleared Amount", required=False, compute='compute_un_cleared_amount',copy=False)
     is_cleared = fields.Boolean(string="Cleared", readonly=True, copy=False)
-
+    
+    requested_by = fields.Many2one("res.users", string="Requested By", tracking=True, readonly=True)
+    requested_by_date = fields.Date("Requested Date", tracking=True, readonly=True)
+    authorisation_by = fields.Many2one("res.users", string="Authorisation", tracking=True, readonly=True)
+    authorisation_by_date = fields.Date("Authorisation Date", tracking=True, readonly=True)
+    reviwed_by_user = fields.Many2one("res.users", string="Reviewed by", tracking=True, readonly=True)
+    reviwed_by_date = fields.Date("Reviewed Date", tracking=True, readonly=True)
+    final_approval = fields.Many2one("res.users", string="Final Approval", tracking=True, readonly=True)
+    final_approval_date = fields.Date("Final Approval Date", tracking=True, readonly=True)
+    
     @api.depends('budget_line_ids', 'tot_cleared_amount')
     def compute_un_cleared_amount(self):
         for rec in self:
@@ -81,10 +90,16 @@ class SrcsPaymentRequest(models.Model):
             print('__________',float(approval_amount))
         else:
             self.fn_req_sg_dp_approval_amount = 0
-        self.state = 'department'
+        self.write({'requested_by': self.env.user.id,
+                    'requested_by_date': fields.Date.today(),
+                    'state': 'department'})
+        # self.state = 'department'
 
     def action_finance(self):
-        self.state = 'finance'
+        self.write({'authorisation_by': self.env.user.id,
+                    'authorisation_by_date': fields.Date.today(),
+                    'state': 'finance'})
+        # self.state = 'finance'
 
     def move(self):
         entrys = []
@@ -198,7 +213,10 @@ class SrcsPaymentRequest(models.Model):
                 internal_auditor_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.internal_auditor_approval')
                 print('_______________internal_auditor_approval',internal_auditor_approval)
                 if internal_auditor_approval:
-                    self.state = 'internal'
+                    self.write({'reviwed_by_user': self.env.user.id,
+                                'reviwed_by_date': fields.Date.today(),
+                                'state': 'internal'})
+                    # self.state = 'internal'
                     print('___________________________________internal',self.state)
                 else:
                     print('___________________notinternal')
@@ -219,7 +237,10 @@ class SrcsPaymentRequest(models.Model):
                 secerteray_general_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_approval')
                 print('_______________secerteray_general_approval',secerteray_general_approval)
                 if secerteray_general_approval:
-                    self.state = 'secretary'
+                    self.write({'final_approval': self.env.user.id,
+                                'final_approval_date': fields.Date.today(),
+                                'state': 'secretary'})
+                    # self.state = 'secretary'
                     print('___________________________________secretary',self.state)
                 else:
                     print('___________________notsecretary')
