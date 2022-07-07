@@ -14,7 +14,7 @@
     'category': 'Human Resource',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'fleet', 'hr_fleet','stock','purchase_requisition','srcs_branch'],
+    'depends': ['base','hr_fleet', 'fleet','stock','purchase_requisition','srcs_branch','account'],
 
     # always loaded
     'data': [
@@ -40,6 +40,7 @@
         'wizard/new_vehicle.xml',
         'wizard/fuel_tracking_view.xml',
         'wizard/insurance_price_change_view.xml',
+        'wizard/excel_maintainance_view.xml',
 
     ],
     'installable': True,

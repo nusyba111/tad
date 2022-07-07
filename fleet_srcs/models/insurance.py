@@ -46,7 +46,7 @@ class Insurance(models.Model):
     def _compute_invoices_ids(self):
         for rec in self:
             invoice_ids = self.env['account.move'].search([('insurance_id', '=', self.id)])
-            print('ttttt',invoice_ids)
+            print('ttttt')
             rec.invoice_count = len(invoice_ids)
 
     def to_finance(self):

@@ -30,7 +30,7 @@
                         <group>
                             <field name="date" />
                             <field name="request_currency" />
-                            <field name="journal_id"/>
+                            <field name="journal_id" attrs="{'required':[('state','=','finance')]}"/>
                             <field name="total_amount" />
                         </group>
                     </group>
@@ -54,7 +54,8 @@
                                 <group>
                                     <field name="is_working_addvance" />
                                     <field name="pay_to" attrs="{'invisible':[('is_working_addvance','=',False)],'required':[('is_working_addvance','=',True)]}"/>
-                                    <field name="debit_account_id" attrs="{'invisible':[('is_working_addvance','=',True)],'required':[('is_working_addvance','=',False)]}"/>
+                                    <field name="is_cleared" attrs="{'invisible':[('is_working_addvance','=',False)]}" />
+                                    <!-- <field name="debit_account_id" attrs="{'invisible':[('is_working_addvance','=',True)],'required':[('is_working_addvance','=',False)]}"/> -->
                                 </group>
                                 <group>
                                     <field name="move_id" />

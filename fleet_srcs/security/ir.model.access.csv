@@ -23,4 +23,7 @@ maintainance_report_excel,maintainance.report.excel,model_maintainance_report_ex
 fuel_tracking,fuel.tracking.report,model_fuel_tracking_report,fleet.fleet_group_manager,1,1,1,1
 fuel_tracking_excel,fuel.tracking.report.excel,model_fuel_tracking_report_excel,fleet.fleet_group_manager,1,1,1,1
 insurance_price_change,insurance.price.change,model_insurance_price_change,fleet.fleet_group_manager,1,1,1,1
+job_reason,job.reason,model_job_reason,fleet.fleet_group_manager,1,1,1,1
+matric,vehicle.matriculation.report,model_vehicle_matriculation_report,fleet.fleet_group_manager,1,1,1,1
+matric_excel,fleet.vehicle.matriculation.report.excel,model_fleet_vehicle_matriculation_report_excel,fleet.fleet_group_manager,1,1,1,1
 

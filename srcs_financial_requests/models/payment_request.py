@@ -3,13 +3,14 @@ from odoo.exceptions import ValidationError, UserError, Warning
 
 
 class SrcsPaymentRequest(models.Model):
-    _rec_name = 'sequence'
     _name = "payment.request"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'sequence'
 
     sequence = fields.Char(string='Sequence', readonly=True, copy=False, index=True, default=lambda self: 'New Payment Request')
     date = fields.Date('Request Date',default=fields.Date.today(), required=True)
     user_id = fields.Many2one('res.users', string='Requestor', default=lambda self: self.env.user)
-    journal_id = fields.Many2one('account.journal', string='Journal', required=True)
+    journal_id = fields.Many2one('account.journal', string='Journal')
     move_id = fields.Many2one('account.move', 'Journal Entry', readonly=True)
     pay_to = fields.Many2one('res.partner', string='Pay To')
     is_working_addvance = fields.Boolean('Is Working Advance')
@@ -23,11 +24,23 @@ class SrcsPaymentRequest(models.Model):
     reason = fields.Char('Request Reason', required=True)
     fn_req_sg_dp_approval_amount = fields.Float(string="Maximum Amount", required=False, readonly=False)
     budget_line_ids = fields.One2many('payment.request.lines', 'payment_request_id', string='Budget Lines')
-    debit_account_id = fields.Many2one('account.account', string='Expensses Account')
+    # debit_account_id = fields.Many2one('account.account', string='Expensses Account')
     state = fields.Selection([
         ('draft','Draft'),('department', 'Department/Partner'),('finance','Finance Approval'),('internal','Internal Auditor'),
         ('secretary','Secretary General'),('payment','Payment'),('cleared', 'Cleared'),
     ], default='draft', string='State')
+    tot_cleared_amount = fields.Float(string="Cleared Amount", required=False, readonly=True, copy=False)
+    un_cleared_amount = fields.Float(string="Uncleared Amount", required=False, compute='compute_un_cleared_amount',copy=False)
+    is_cleared = fields.Boolean(string="Cleared", readonly=True, copy=False)
+
+    @api.depends('budget_line_ids', 'tot_cleared_amount')
+    def compute_un_cleared_amount(self):
+        for rec in self:
+            rec.un_cleared_amount = rec.total_amount - rec.tot_cleared_amount
+            if rec.un_cleared_amount < 0:
+                rec.un_cleared_amount = 0
+            if rec.un_cleared_amount == 0:
+                rec.is_cleared = True
 
     @api.constrains('total_amount','budget_line_ids')
     def total_amount_validation(self):
@@ -75,52 +88,93 @@ class SrcsPaymentRequest(models.Model):
 
     def move(self):
         entrys = []
-        total = 0.0
         credit_account = self.journal_id.default_account_id.id
-        if self.is_working_addvance:
-            dedit_account = self.pay_to.property_account_receivable_id.id   
-        else:
-            dedit_account = self.debit_account_id.id
         if self.budget_line_ids:
-            if self.payment_method == 'check':
-                debit_val = {
-                    'name': self.reason,
-                    # 'partner_id': self.partner_id.id,
-                    'account_id': dedit_account,
-                    'debit': self.total_amount,
-                    'Check_no':self.Check_no,
-                    # 'analytic_account_id': line1.analytic_account_id.id,
-                    # 'company_id': self.company_id.id,
-                }
-                entrys.append((0, 0, debit_val))
-                credit_vals = {
-                    'name': self.reason,
-                    # 'partner_id': False,
-                    'account_id': credit_account,
-                    'credit':  self.total_amount,
-                    'Check_no':self.Check_no,
-                    # 'company_id': self.company_id.id,
-                }
-                entrys.append((0, 0, credit_vals))
-            
+            if self.is_working_addvance:
+                dedit_account = self.pay_to.property_account_receivable_id.id 
+                if self.payment_method == 'check':
+                    debit_val = {
+                        'name': self.reason,
+                        # 'partner_id': self.partner_id.id,
+                        'account_id': dedit_account,
+                        'debit': self.total_amount,
+                        'Check_no':self.Check_no,
+                        # 'analytic_account_id': line1.analytic_account_id.id,
+                        # 'company_id': self.company_id.id,
+                    }
+                    entrys.append((0, 0, debit_val))
+                    credit_vals = {
+                        'name': self.reason,
+                        # 'partner_id': False,
+                        'account_id': credit_account,
+                        'credit':  self.total_amount,
+                        'Check_no':self.Check_no,
+                        # 'company_id': self.company_id.id,
+                    }
+                    entrys.append((0, 0, credit_vals))
+                
+                else:
+                    debit_val = {
+                        'name': self.reason,
+                        # 'partner_id': self.partner_id.id,
+                        'account_id': dedit_account,
+                        'debit': self.total_amount,
+                        # 'analytic_account_id': line1.analytic_account_id.id,
+                        # 'company_id': self.company_id.id,
+                    }
+                    entrys.append((0, 0, debit_val))
+                    credit_vals = {
+                        'name': self.reason,
+                        # 'partner_id': False,
+                        'account_id': credit_account,
+                        'credit':  self.total_amount,
+                        # 'company_id': self.company_id.id,
+                    }
+                    entrys.append((0, 0, credit_vals))  
+
             else:
-                debit_val = {
-                    'name': self.reason,
-                    # 'partner_id': self.partner_id.id,
-                    'account_id': dedit_account,
-                    'debit': self.total_amount,
-                    # 'analytic_account_id': line1.analytic_account_id.id,
-                    # 'company_id': self.company_id.id,
-                }
-                entrys.append((0, 0, debit_val))
-                credit_vals = {
-                    'name': self.reason,
-                    # 'partner_id': False,
-                    'account_id': credit_account,
-                    'credit':  self.total_amount,
-                    # 'company_id': self.company_id.id,
-                }
-                entrys.append((0, 0, credit_vals))
+                if self.payment_method == 'check':
+                    for line in self.budget_line_ids: 
+                        debit_val = {
+                            'name': self.reason,
+                            # 'partner_id': self.partner_id.id,
+                            'account_id':  line.account_id.id ,
+                            'debit': line.request_amount,
+                            'Check_no':self.Check_no,
+                            # 'analytic_account_id': line1.analytic_account_id.id,
+                            # 'company_id': self.company_id.id,
+                        }
+                        entrys.append((0, 0, debit_val))
+                    credit_vals = {
+                        'name': self.reason,
+                        # 'partner_id': False,
+                        'account_id': credit_account,
+                        'credit':  self.total_amount,
+                        'Check_no':self.Check_no,
+                        # 'company_id': self.company_id.id,
+                    }
+                    entrys.append((0, 0, credit_vals))
+                
+                else:
+                    for line in self.budget_line_ids: 
+                        debit_val = {
+                            'name': self.reason,
+                            # 'partner_id': self.partner_id.id,
+                            'account_id':  line.account_id.id ,
+                            'debit': line.request_amount,
+                            # 'analytic_account_id': line1.analytic_account_id.id,
+                            # 'company_id': self.company_id.id,
+                        }
+                        entrys.append((0, 0, debit_val))
+                    credit_vals = {
+                        'name': self.reason,
+                        # 'partner_id': False,
+                        'account_id': credit_account,
+                        'credit':  self.total_amount,
+                        # 'company_id': self.company_id.id,
+                    }
+                    entrys.append((0, 0, credit_vals))
+                
             vals = {
                 'journal_id': self.journal_id.id,
                 'date': self.date,
@@ -138,47 +192,58 @@ class SrcsPaymentRequest(models.Model):
     def action_internal(self):
         approval_amount = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_dp_approval_amount')
         print('_______________approval_amount',approval_amount)
-        if self.total_amount > float(approval_amount):
-            internal_auditor_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.internal_auditor_approval')
-            print('_______________internal_auditor_approval',internal_auditor_approval)
-            if internal_auditor_approval:
-                self.state = 'internal'
-                print('___________________________________internal',self.state)
+        if self.user_has_groups('accounting_srcs.group_internal_auditor'):
+            if self.total_amount > float(approval_amount):
+                
+                internal_auditor_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.internal_auditor_approval')
+                print('_______________internal_auditor_approval',internal_auditor_approval)
+                if internal_auditor_approval:
+                    self.state = 'internal'
+                    print('___________________________________internal',self.state)
+                else:
+                    print('___________________notinternal')
+                    raise ValidationError(_('Internal Auditor Approval Required')) 
             else:
-                print('___________________notinternal')
-                raise ValidationError(_('Internal Auditor Approval Required')) 
+                self.move()
+                self.state = 'payment'
+                print('___________________________________paymentsss',self.state)
         else:
-            self.move()
-            self.state = 'payment'
-            print('___________________________________paymentsss',self.state)
-       
+            raise ValidationError(_('Internal Auditor must confirm'))
+        
     def action_secretary(self):
         approval_amount = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_dp_approval_amount')
         print('_______________approval_amount',approval_amount)
-        if self.total_amount > float(approval_amount):
-            secerteray_general_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_approval')
-            print('_______________secerteray_general_approval',secerteray_general_approval)
-            if secerteray_general_approval:
-                self.state = 'secretary'
-                print('___________________________________secretary',self.state)
+        if self.user_has_groups('accounting_srcs.group_secretary_general'):
+            if self.total_amount > float(approval_amount):
+                
+                secerteray_general_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_approval')
+                print('_______________secerteray_general_approval',secerteray_general_approval)
+                if secerteray_general_approval:
+                    self.state = 'secretary'
+                    print('___________________________________secretary',self.state)
+                else:
+                    print('___________________notsecretary')
+                    raise ValidationError(_('Secretary General Approval Required'))
             else:
-                print('___________________notsecretary')
-                raise ValidationError(_('Secretary General Approval Required'))
+                self.move()
+                self.state = 'payment'
+                print('___________________________________paymentpppp',self.state)
         else:
-            self.move()
-            self.state = 'payment'
-            print('___________________________________paymentpppp',self.state)
-        
+            raise ValidationError(_('Secretary General must confirm'))
+            
     def action_payment(self):
         secerteray_general_approval = self.env['ir.config_parameter'].get_param('srcs_financial_requests.fn_req_sg_approval')
         print('_______________secerteray_general_approval',secerteray_general_approval)
-        if secerteray_general_approval:
-            self.move()
-            self.state = 'payment'
-            print('___________________________________paymentoooo',self.state)
+        if self.user_has_groups('accounting_srcs.group_secretary_general'):
+            if secerteray_general_approval:
+                self.move()
+                self.state = 'payment'
+                print('___________________________________paymentoooo',self.state)
+            else:
+                print('___________________notpayment')
+                raise ValidationError(_('SG Approval Required'))
         else:
-            print('___________________notpayment')
-            raise ValidationError(_('SG Approval Required'))
+            raise ValidationError(_('Secretary General must confirm'))
         
     def cancel_button(self):
         self.move_id.button_cancel()
@@ -195,7 +260,7 @@ class SrcsPaymentLines(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency', readonly=True, compute="_compute_buget_balance", store=True)
     donor_id = fields.Many2one('res.partner', string='Donor', required=True)
     project_id = fields.Many2one('account.analytic.account',string='Project', domain="[('type','=','project')]")
-    account_id = fields.Many2one('account.account', string='Account')
+    account_id = fields.Many2one('account.account', string='Account',  domain="[('internal_group','in',['expense','asset'])]")
     analytic_activity_id = fields.Many2one('account.analytic.account', 'Output/Activity', domain="[('type','=','activity')]")
     payment_request_id = fields.Many2one('payment.request', string='Payment Request')
     payment_currency = fields.Many2one(related='payment_request_id.request_currency')

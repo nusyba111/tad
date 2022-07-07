@@ -1,0 +1,1 @@
+from . import srcs_stock

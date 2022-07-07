@@ -4,7 +4,7 @@ class SrcsAsset(models.Model):
     _inherit = "account.asset"
 
     location_id = fields.Many2one('account.analytic.account', string='Location',domain="[('type','=','location')]")
-    owner = fields.Many2one('res.users', string='Owner', default= lambda self: self.env.user)
+    owner = fields.Many2one('res.users', string='User', default= lambda self: self.env.user)
     donor_id = fields.Many2one('res.partner', string='Donor')
     project_id = fields.Many2one('account.analytic.account', string='Project',domain="[('type','=','project')]")
     office = fields.Char('Office')

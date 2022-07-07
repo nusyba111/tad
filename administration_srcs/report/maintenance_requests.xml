@@ -1,0 +1,57 @@
+<odoo>
+    <record id="administration_srcs_maintainance_requestreport" model="ir.actions.report">
+        <field name="name">Maintenance Request</field>
+        <field name="model">maintainance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">administration_srcs.maintainance_request_template</field>
+        <field name="report_file">administration_srcs.maintainance_request_template</field>
+        <field name="binding_model_id" ref="model_maintainance_request"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="maintainance_request_template">
+        <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <div style="border:black solid 2px ; margin:10px">
+             <div class="article mt0 o_report_layout_standard" dir="rtl">
+            <p style="font-size:30px;text-align:center;" dir="rtl">طلب صيانة</p><br/>
+            <table>
+                <t t-foreach="docs" t-as="doc">
+                  <tr>
+                  <td class="text-right" style="font-size:20px;">الاسم:</td>
+                       <td class="text-right"><span t-esc="doc.employee_id.name"/></td>
+                  </tr>
+                    <tr>
+<!--                  <td class="text-right" scope="col"></td>-->
+                  <td class="text-right" style="font-size:20px;">الادارة:</td>
+                      <td class="text-right"><span t-esc="doc.department.name"/></td>
+                  </tr>
+                  <tr>
+                  <td class="text-right" style="font-size:20px;">التاريخ:</td>
+                <td class="text-right"><span t-esc="doc.date"/></td>
+                  </tr>
+                    <tr>
+                  <td class="text-right" style="font-size:20px;" scope="col">نوع البلاغ:</td>
+                <td class="text-right"><span t-esc="doc.report_type"/></td>
+                  </tr><br/>
+                    <br/>
+                    <br/>
+              </t>
+            </table>
+                <p class="text-right" style="width:50%" scope="col">ملخص المشكلة:<span t-esc="o.complain_summary"/></p><br/>
+                <p style="font-size:20px;text-align:right;">التوقيع:</p><br/>
+                <p style="font-size:20px;text-align:right;">تعليق الشئون الادارية:<span t-esc="o.admin_comment"/></p><br/>
+                <p style="font-size:20px;text-align:right;">تعليق الشئون الادارية:<span t-esc="o.service_comment"/></p><br/>
+                <p style="font-size:20px;text-align:right;">تاريخ وزمن الاستلام:<span t-esc="o.receipt_date"/></p><br/>
+                 <t t-foreach="o.required_spares" t-as="lines">
+                <p style="font-size:20px;text-align:right;">مطلوبات الصيانه:<span t-esc="lines.product_id.name"/></p><br/>
+                 </t>
+<!--                   <t t-foreach="doc.fuel_id" t-as="line">-->
+                <t t-foreach="o.required_service" t-as="line">
+                <p style="font-size:20px;text-align:right;">الاجراء الذي تم:-<span t-esc="line.service_id.name"/></p><br/>
+                 </t>
+                <p style="font-size:20px;text-align:right;">التوقيع:</p><br/>
+             </div></div>
+        </t>
+        </t>
+    </template>
+</odoo>

@@ -12,7 +12,7 @@
                     <button string="Confirm Branch Director" name="confirm_branch_dir" type="object" class="oe_highlight" states="branch_finance" groups="accounting_srcs.group_branch_director"/>
                     <button string="Approve Secretary" name="approve_secratry" type="object" class="oe_highlight" states="branch_director" groups="accounting_srcs.group_secretary_general"/>
                     <button string="Confirm Finance Department" name="confirm_finance_department" type="object" class="oe_highlight" states="secratry_general" groups="accounting_srcs.group_finance_department"/>
-                    <button string="Approve Program Department" name="approve_program_department" type="object" class="oe_highlight" states="finance_department" groups="accounting_srcs.group_program_department"/>
+                    <button string="Approve" name="approve_program_department" type="object" class="oe_highlight" states="finance_department" groups="accounting_srcs.group_program_department"/>
                     <button string="Confirm Internal Auditor" name="confirm_internal_auditor" type="object" class="oe_highlight" states="program_department" groups="accounting_srcs.group_internal_auditor"/>
                     <button string="Submit Payment" name="submit_payment" type="object" class="oe_highlight" states="secratry_general_two" groups="accounting_srcs.group_payment"/>
                     <button string="Second Secretary Approval" name="second_approve_secretary" type="object" class="oe_highlight" states="internal_auditor" groups="accounting_srcs.group_secretary_general"/>
@@ -55,12 +55,14 @@
                     
                     <notebook>
                         <page string="Accounting">
-                            <group>
-                                <group>
+                            <!-- <group> -->
+                                <group col="4">
                                     <field name="source_bank" domain="[('type', 'in', ('bank', 'cash'))]"/>
                                     <field name="dest_bank" domain="[('type', 'in', ('bank', 'cash'))]"/>
+                                    <field name="internal_transfer_id" />
+                                    <field name="is_cleared" />
                                 </group>
-                            </group>
+                            <!-- </group> -->
                         </page>
                         <page string="Description">
                             <field name="description" />

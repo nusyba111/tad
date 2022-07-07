@@ -273,7 +273,14 @@
             <field name="res_model">rent.handover</field>
             <field name="view_mode">tree,form</field>
         </record>
-         <menuitem
+
+        <menuitem
+                id="rent"
+                name="Vehicle Rent"
+                sequence="6"
+                parent="fleet.menu_root"
+        />
+        <menuitem
                 id="rent_handover"
                 name="Rent HandOver"
                 sequence="3"
@@ -287,12 +294,7 @@
                 parent="rent"
                 action='action_rent_policy'
         />
-         <menuitem
-                id="rent"
-                name="Vehicle Rent"
-                sequence="6"
-                parent="fleet.menu_root"
-        />
+
         <menuitem
                 id="rent_request"
                 name="Vehicle Rent Request"

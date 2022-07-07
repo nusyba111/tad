@@ -30,7 +30,7 @@ class Repair(models.Model):
     date=fields.Date(string='Request Date',required=True, tracking=True)
     licence_plate=fields.Char(string='Licence Plate',related='fleet.license_plate',required=True,tracking=True)
     shassis_no=fields.Char(string='Shassis No',related='fleet.vin_sn',required=True,tracking=True)
-    complain=fields.Text(string='Complain',required=True,tracking=True)
+    job_reason=fields.Many2one('job.reason',string='Job Reason',required=True,tracking=True)
     service_id=fields.One2many('services','repair_id')
     hour=fields.Float(string='Working Hour')
     warehouse=fields.Many2one('stock.warehouse',string='Warehouse')
@@ -44,6 +44,8 @@ class Repair(models.Model):
     workshop_id=fields.Many2one('res.workshop',string='Workshop',required=True)
     start_maintainance=fields.Date('Start Maintainance',readonly=True)
     end_maintainance=fields.Date('End Maintainance',readonly=True)
+    invoice_no=fields.Integer('Invoice No:')
+    own=fields.Boolean('Owned?', related='workshop_id.red_own')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('repair','Workshop Admin'),
@@ -53,7 +55,24 @@ class Repair(models.Model):
         ('done', 'Done')], string='Status', index=True, readonly=True, default='draft',
         track_visibility='onchange', copy=False)
     transfer_count=fields.Integer(string='Stock Transfers', compute='_compute_transfers_ids',tracking=True)
+    lubricant_amount = fields.Float(string="Total Lubricant")
+    total_spare_amount = fields.Float(string="Total")
 
+    @api.onchange('spare_id')
+    def call_spare_total(self):
+        sum = 0.0
+        for rec in self.spare_id:
+            sum += rec.total
+            self.total_spare_amount = sum
+
+    @api.onchange('spare_id')
+    def call_lubricant_amount(self):
+        sum = 0.0
+        # spare_id
+        for rec in self.spare_id:
+            if rec.spare.categ_id.lubricant == True :
+                sum += rec.total
+            self.lubricant_amount = sum
 
     @api.constrains('odometer')
     def odometer_constrains(self):
@@ -267,6 +286,20 @@ class Requisition(models.Model):
 class Workshops(models.Model):
     _name='res.workshop'
     name = fields.Char('Name')
+    red_own=fields.Boolean('Red Cresent Owned?',required=True)
     sequence=fields.Integer('Sequence')
+
+class JobReason(models.Model):
+    _name='job.reason'
+
+    name=fields.Char('Name')
+
+class ProductCategory(models.Model):
+    _inherit = "product.category"
+
+    lubricant=fields.Boolean('Lubricants?')
+    spare=fields.Boolean('Spare Part?')
+
+
 
 

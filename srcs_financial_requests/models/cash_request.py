@@ -4,6 +4,7 @@ from odoo.exceptions import UserError, ValidationError
 
 class SrcsCashRequest(models.Model):
     _name = "cash.request"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char('Name', required=True)
     date = fields.Date('Request Date',default=fields.Date.today())
@@ -24,7 +25,8 @@ class SrcsCashRequest(models.Model):
     amount_in_words_sdg = fields.Char('Amount In Words SDG')
     user_lang_id = fields.Selection(related='user_id.lang', string='Lang')
     is_branch_loans = fields.Boolean('Is Branch Loans')
-   
+    internal_transfer_id = fields.Many2one('account.payment', string='Internal Transfer')
+    is_cleared = fields.Boolean(string="Cleared", readonly=True, copy=False)
     
     state = fields.Selection([
         ('draft','Draft'),
@@ -61,7 +63,18 @@ class SrcsCashRequest(models.Model):
     def onchange_budget_line(self):
         self.residual_amount = self.budget_line_id.balance_budget_currency
         self.donor_id = self.budget_line_id.crossovered_budget_id.donor_id.id
-       
+
+    @api.onchange('is_branch_loans','project_id')
+    def _onchange_is_branch_loans(self):
+        # core_budget_line = self.env['crossovered.budget.lines'].search([('crossovered_budget_id.budget_type','=','core')]).ids
+        core_project = self.env['account.analytic.account'].search([('crossovered_budget_line.crossovered_budget_id.budget_type','=','core'),('type','=','project')]).ids
+        if self.is_branch_loans:
+            print('____________core_project',core_project)
+            return{'domain':{'project_id':[('id','in',core_project)]}}
+        else:
+            print('____________xxxxcore_budget_line',core_project)
+            pass 
+
     def confrim_finance(self):
         self.state = "branch_finance"
 
@@ -75,7 +88,12 @@ class SrcsCashRequest(models.Model):
         self.state = "finance_department"
 
     def approve_program_department(self):
-        self.state = "program_department"
+        if not self.is_branch_loans:
+            self.state = "program_department"
+            print('___________self.is_branch_loans',self.is_branch_loans)
+        else:
+            self.state = "internal_auditor"
+            print('___________xxxxself.is_branch_loans',self.is_branch_loans)
 
     def confirm_internal_auditor(self):
         self.state = "internal_auditor"
@@ -98,10 +116,12 @@ class SrcsCashRequest(models.Model):
                     'date':self.date,
                     'currency_id':self.currency_id.id,
                     'ref':self.name,
-                    'branch_id':self.branch_id.id,
+                    'branch_id':self.dest_bank.branch_id.id,
+                    'transfer_to':self.source_bank.branch_id.id,
                 })
             print('_______________________',internal_transfer)
             if internal_transfer:
+                self.internal_transfer_id = internal_transfer.id
                 self.state = "payment"
 
 
