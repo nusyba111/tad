@@ -15,6 +15,14 @@ class Contracts(models.Model):
     level_id = fields.Many2one('hr.level', string='Degree', domain="[('grade_id','=', grade_id)]", store=True,readonly=False,
                                related='employee_id.level_id', ondelete='restrict')
     wage = fields.Monetary(related='level_id.wage', readonly=True, store=True, required=False)
+    s_insurance = fields.Float(string="S. Insurance 17 %",related="level_id.s_insurance")
+    h_insurance = fields.Float(string="H. Insurance",related="level_id.h_insurance")
+    a_s_b = fields.Float(string="A.S.B",related="level_id.a_s_b")
+    leave_allowance = fields.Float(string="Leave allowance",related="level_id.leave_allowance")
+    eid_bonus = fields.Float(string="Eid bonus",related="level_id.eid_bonus")
+
+
+
 
     # @api.onchange('grade_id')
     # def _onchange_grade_id(self):

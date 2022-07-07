@@ -4,6 +4,11 @@ from odoo import models, fields, api
 import time
 from odoo.exceptions import UserError, AccessError, ValidationError
 
+letters = {'2':'B','3':'C','4':'D','5':'E',
+'6':'F','7':'G','8':'H','9':'I','10':'J'
+,'11':'K','12':'L','13':'M','14':'N',
+'15':'O','16':'P','17':'Q','18':'R','19':'S','20':'T',
+'21':'U','22':'V','23':'W','24':'X','25':'Y','26':'Z'}
 
 class HrGrade(models.Model):#
     """"""
@@ -20,6 +25,8 @@ class HrGrade(models.Model):#
     line_ids = fields.One2many('grade.allow.deduct', 'grade_id', string='Grade Allowances', copy=False)
     job_id = fields.Many2one('hr.job',string="Job Position")
     branch_id = fields.Many2one("res.branch",string="Branch",readonly=True,default=lambda self: self.env.user.current_branch)
+    start_character = fields.Char(string="Start Character")
+
 
     @api.constrains('degrees_no', 'sequence')
     def _check_degrees_sequence(self):
@@ -39,23 +46,19 @@ class HrGrade(models.Model):#
         """
         for rec in self:
             level_sequence = 1
-            name = 'A'
-            # character_list = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'
-            # ,'O','P','Q','R','S','T','U','V','W','X','Y','Z']
-            # wage = rec.initial_wage
-            lines = [(0, False, {'name': name + str(level_sequence), 'grade_id': rec.id})]
+            name = self.start_character
+            lines = [(0, False, {'name': name + 'A', 'grade_id': rec.id})]
             degrees_no = rec.degrees_no
-
-            while degrees_no > 1:
-                level_sequence = level_sequence + 1
-                name = 'A' + str(level_sequence)
+            x = 2
+            while x <= degrees_no:
+                name = self.start_character + letters[str(x)]
                 # wage += wage * rec.increment / 100.0
                 lines.append((0, False,
                               {
                                   'name': name,
                                   # 'wage': wage,
                                   'grade_id': rec.id}))
-                degrees_no = degrees_no - 1
+                x = x + 1
 
         self.write({'degree_ids': lines})
 

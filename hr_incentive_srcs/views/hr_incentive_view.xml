@@ -11,13 +11,13 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="payroll"/>
-                                <field name="account_id"
+                                <!-- <field name="payroll"/> -->
+                                <field name="by_project"/>
+                                <field name="account_id" required="1"/>
+                                <!-- <field name="account_id"
                                        attrs="{'required': [('payroll', '=', False )],
-                                       'invisible': [('payroll', '!=', False)]}"/>
-                                <field name="journal_id"
-                                       attrs="{'required': [('payroll', '=', False )],
-                                       'invisible': [('payroll', '!=', False)]}"/>
+                                       'invisible': [('payroll', '!=', False)]}"/> -->
+                                <field name="journal_id"/>
                                 <field name="type_in" required="True"/>
                                 <field name="rule_id"
                                        attrs="{'invisible': [('type_in', '=', 'fix')],
@@ -35,7 +35,8 @@
             <field name="arch" type="xml">
                 <tree string="Incentive Structure">
                     <field name="name"/>
-                    <field name="payroll"/>
+                    <field name="by_project"/>
+                    <!-- <field name="payroll"/> -->
                 </tree>
             </field>
         </record>

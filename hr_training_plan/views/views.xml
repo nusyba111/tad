@@ -33,9 +33,9 @@
           <field name="arch" type="xml">
               <form>
                   <header>
-                      <button name="action_fetch" string="Fetch" class="oe_highlight" type="object"
+                      <!-- <button name="action_fetch" string="Fetch" class="oe_highlight" type="object"
                               groups="hr.group_hr_manager" attrs="{'invisible': [('voucher', '!=', False)]}"
-                              />
+                              /> -->
                               
                       <button name="action_execute" string="Execute" class="oe_highlight" type="object"
                               groups="hr.group_hr_manager" attrs="{'invisible': [('voucher', '!=', False)]}"
@@ -95,6 +95,7 @@
                                      attrs="{'invisible': [('payment_type', '=', 'by_total')]}"/>
                               <field name="total_voucher_amount"
                                      attrs="{'invisible': [('payment_type', '=', 'by_employee')]}"/>
+                              <field name="voucher" invisible="1"/>
 
                           </group>
                           <group>
@@ -120,17 +121,16 @@
                               </field>
                           </page>
                           <page string="Accounting">
-                              <group>
-                                  <group>
-                                      <field name="voucher" readonly="1"/>
-                                  </group>
-                                  <group>
-                                      <field name="account_id" groups="account.group_account_user"/>
-                                        <!-- domain="[('user_type_id','=','Expenses')]" /> -->
-                                      <field name="account_analytic_id" groups="account.group_account_user"/>
-                                  </group>
-
-                              </group>
+                            <field name="execution_coverage">
+                              <tree editable="buttom">
+                                <field name="doner"/>
+                                <!-- <field name="account_id"/> -->
+                                <field name="project"/>
+                                <field name="activity"/>
+                                <field name="location"/>
+                                <field name="amount_of_covering"/>
+                              </tree>
+                            </field>
 
                           </page>
                           <page string="Evaluation">
@@ -161,9 +161,6 @@
                             <div class="col-lg-6 o_setting_box">
                                 <div class="o_setting_right_pane">
                                     <div>
-                                        <span class="o_form_label">Training Analytic Account</span>
-                                        <field name="training_account_analytic_id"/>
-                                        <br/>
                                         <span class="o_form_label">Training Account</span>
                                         <field name="training_account_id" />
                                         <!-- domain="[('user_type_id','=','Expenses')]"  -->

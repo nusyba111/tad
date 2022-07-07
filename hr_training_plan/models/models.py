@@ -33,6 +33,12 @@ class HrTrainingExecution(models.Model):
         ('done','Done')], default='draft')
     employee_evaluation_template = fields.Many2one("survey.survey", string="Employee Evaluation Template")
     manager_evaluation_template = fields.Many2one("survey.survey", string="Manager Evaluation Template")
+    execution_coverage = fields.One2many('training.coverage','execution_id',string="Training Coverage")
+    
+
+
+
+
 
     def action_confirm(self):
         if len(self.line_ids) == 0:
@@ -54,12 +60,12 @@ class HrTrainingExecution(models.Model):
     def action_execute(self):
         if len(self.line_ids) == 0:
             raise ValidationError(_('There are no lines, please fetch it first!!'))
-        for line in self.line_ids:
-            line.action_execute()
+        # for line in self.line_ids:
+        #     line.action_execute()
         if not self.account_id.id and not self.env.company.training_account_id.id:
             raise ValidationError(_('Pleace add accounts!'))
-        if not self.account_analytic_id.id and not self.env.company.training_account_analytic_id.id:
-            raise ValidationError(_('No analytic accounts!'))
+        if not self.project.id and not activity.id and not doner.id:
+            raise ValidationError(_('Please Fill payment request information!'))
 
         amount = 0.0
         if self.payment_type == 'by_total':
@@ -116,12 +122,12 @@ class HrTrainingExecution(models.Model):
                     'res_partner_id': user.partner_id.id})
         
 
-    def action_fetch(self):
-        trainings = self.env['hr.training'].search(
-            [('date_from', '>=', self.start_date), ('date_to', '<=', self.end_date), ('course', '=', self.course.id),
-             ('state', '=', 'confirmed'),('training_execution','=',False)])
-        best_train = self.env['hr.training'].search([])
-        self.write({'line_ids': trainings.ids})
+    # def action_fetch(self):
+    #     trainings = self.env['hr.training'].search(
+    #         [('date_from', '>=', self.start_date), ('date_to', '<=', self.end_date), ('course', '=', self.course.id),
+    #          ('state', '=', 'confirmed'),('training_execution','=',False)])
+    #     best_train = self.env['hr.training'].search([])
+    #     self.write({'line_ids': trainings.ids})
 
     def send_employee_survey(self):
         if not self.employee_evaluation_template:
@@ -305,15 +311,12 @@ class ResPartner(models.Model):
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    training_account_analytic_id = fields.Many2one('account.analytic.account', string='Analytic Account')
     training_account_id = fields.Many2one('account.account', string='Account')
 
 
 class ConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    training_account_analytic_id = fields.Many2one('account.analytic.account', string='Analytic Account',
-                                                   related='company_id.training_account_analytic_id', readonly=False)
     training_account_id = fields.Many2one('account.account', string='Account', related='company_id.training_account_id',
                                           readonly=False)
 
@@ -345,4 +348,15 @@ class hrTrainingInherit(models.Model):
             if not rec.employees:
                 raise UserError('You Can Not Create Training Without At Least One Employee!')
 
-        
+
+
+
+class TrainingCoverage(models.Model):
+    _name = 'training.coverage'
+
+    execution_id = fields.Many2one('hr.training.execution',string="Execution")
+    amount_of_covering = fields.Float(string="Amount Of Covering")
+    project = fields.Many2one('account.analytic.account',domain="[('type','=','project')]",string="Project")
+    activity = fields.Many2one('account.analytic.account',domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',domain="[('type','=','location')]",string="Location")
+    doner = fields.Many2one('res.partner',string="Doner")        
