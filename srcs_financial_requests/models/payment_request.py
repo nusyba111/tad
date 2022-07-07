@@ -16,9 +16,9 @@ class SrcsPaymentRequest(models.Model):
     is_working_addvance = fields.Boolean('Is Working Advance')
     payment_method = fields.Selection([
         ('cash', 'Cash'),('bank','Bank Transfer'),('check','Check'),
-    ], string='Payment Method', required=True)
-    Check_no = fields.Char('Check No', required=True)
-    check_date = fields.Date('Check Date', required=True)
+    ], string='Payment Method')
+    Check_no = fields.Char('Check No')
+    check_date = fields.Date('Check Date')
     request_currency = fields.Many2one('res.currency', 'Currency', default=lambda self: self.env.user.company_id.currency_id)
     total_amount = fields.Float('Total Amount', compute="_compute_total_amount")
     reason = fields.Char('Request Reason', required=True)
