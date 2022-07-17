@@ -130,31 +130,28 @@ class FuelTrack(models.Model):
                 col += 1
                 excel_sheet.write(row, col,total, format)
                 col += 1
-                self._cr.execute('SELECT move.id, ' \
-                                 'move.state, '
-                                 'min(move.state),' \
-                                 'min(move.date) ' \
-                                 'FROM stock_move move ' \
-                                 'where move.product_id = ' + str(self.fuel_type.id) + ' AND move.location_id =' + str(
-                    location_id.id) + ' GROUP BY move.id ' \
-                                      'ORDER BY move.id ASC')
-                move_ids = self._cr.fetchall()
-                move_ids = move_ids and [x[0] for x in move_ids] or []
-                for res in self.env['stock.move'].browse(move_ids):
-                    # print('lllllllllllllllllllllllllllllll',res)
-                    if res.state == 'done' and res.date.strftime(
-                            "%Y-%m") == date and res.location_dest_id.usage in ['customer','internal']:
-                        if res.picking_id.partner_id.id==self.env.user.company_id.id:
-                            total_sales_hq += res.product_uom_qty
-                        else:
-                            total_sales += res.product_uom_qty
-                            customer = res.picking_id.partner_id.name
-
+                fleets = self.env['fuel.service'].search([('date', '=', date)])
+                print('fleeet',fleets,date)
+                for flet in fleets:
+                    if flet.fuel_id.fuel_type.id==self.fuel_type.id:
+                        if flet.request_type != 'hq':
+                            customer += str(flet.partner.name) + ', '
+                            for fuel in flet.fuel_id:
+                                total_sales += fuel.qty
+                        if flet.request_type=="hq":
+                            for fuel in flet.fuel_id:
+                                total_sales_hq += fuel.qty
                 excel_sheet.write(row, col, customer, format)
                 col += 1
                 excel_sheet.write(row, col, total_sales, format)
                 col += 1
                 excel_sheet.write(row, col, total_sales_hq, format)
+                col += 1
+                total_issue=total_sales_hq+total_sales
+                excel_sheet.write(row, col, total_issue, format)
+                col += 1
+                current_stock=quant-total_issue
+                excel_sheet.write(row, col, current_stock, format)
                 col += 1
                 col = 0
                 row += 1

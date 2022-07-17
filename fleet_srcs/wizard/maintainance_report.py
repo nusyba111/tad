@@ -14,6 +14,7 @@ class FuelMileage(models.Model):
 
     from_date=fields.Date('From Date', required=True)
     to_date=fields.Date('To Date' , required=True)
+    vat=fields.Float('VAT %', required=True)
 
 
     def print_report(self):
@@ -129,47 +130,96 @@ class FuelMileage(models.Model):
                     col += 1
                     excel_sheet.write(row, col, rec.end_maintainance.strftime('%Y-%m-%d'), format)
                     col += 1
-                    excel_sheet.write(row, col, rec.odometer, format)
-                    col += 1
-                    excel_sheet.write(row, col, rec.odometer, format)
+                    excel_sheet.write(row, col, rec.invoice_no, format)
                     col += 1
                     excel_sheet.write(row, col, rec.odometer, format)
                     col += 1
                     if rec.spare_id:
-
                         for record in rec.spare_id:
-                            if record.type=='spare':
-                                total_price =+ record.total
-                            if record.type=='lube':
-                                total_lube =+ record.total
-                    excel_sheet.write(row, col,total_price, format)
+                            if record.spare.categ_id.spare ==True:
+                                total_price = + record.total
+                            if record.spare.categ_id.lubricant == True:
+                                total_lube = + record.total
+                    excel_sheet.write(row, col, total_price, format)
                     col += 1
-                    excel_sheet.write(row, col,total_lube, format)
+                    excel_sheet.write(row, col, total_lube, format)
                     col += 1
-                    excel_sheet.write(row, col, '', format)
+                    if rec.service_id:
+                        services=''
+                        for record in rec.service_id:
+                            total_hour_price = + record.hour_price
+                            total_hour = + record.hour
+                            total_labor = + record.service_price
+                            services += str(record.service.name) + ', '
+
+                    excel_sheet.write(row, col,total_hour_price, format)
                     col += 1
                     excel_sheet.write(row, col,'', format)
                     col += 1
-                    if rec.service_id:
-                        total_hour =0.0
-                        total_labor=0.0
-                        for record in rec.service_id:
-                            total_hour =+ record.hour_price
-                            total_labor =+ record.service_price
-                            service = record.service.name
-
                     excel_sheet.write(row, col, total_hour, format)
                     col += 1
-                    excel_sheet.write(row, col, total_labor, format)
+                    excel_sheet.write(row, col,total_labor, format)
+                    col += 1
+                    local_cost=total_labor+total_price+total_lube
+                    excel_sheet.write(row, col, local_cost, format)
                     col += 1
                     excel_sheet.write(row, col, fleet.company_id.currency_id.name, format)
                     col += 1
-                    excel_sheet.write(row, col, rec.complain, format)
+                    excel_sheet.write(row, col, rec.job_reason.name, format)
                     col += 1
-                    excel_sheet.write(row, col, service, format)
+                    excel_sheet.write(row, col, services, format)
                     col += 1
-                    col = 0
-                    row += 1
+            row +=1
+            col = 6
+            excel_sheet.set_column(col, col, 20)
+            excel_sheet.write(row, col, 'VAT', header_format)
+            col += 7
+            repair = self.env['repair'].search([('date', '>=', self.from_date),
+                                                    ('date', '<=', self.to_date)])
+            total = 0.0
+            tot_lube=0.00
+
+            for rec in repair:
+                if rec.service_id:
+                    for record in rec.service_id:
+                        tot_hour_price = + record.hour_price
+                        tot_hour =+ record.hour
+                        tot_labor = + record.service_price
+                if rec.spare_id:
+                    for record in rec.spare_id:
+                        if record.spare.categ_id.spare == True:
+                            tot_spare = + record.total
+                        if record.spare.categ_id.lubricant == True:
+                            tot_lube = + record.total
+                if rec.invoice_no == 0:
+                    if rec.service_id:
+                        for record in rec.service_id:
+                            total = + record.service_price
+                    if rec.spare_id:
+                        for record in rec.spare_id:
+                            total_spare = + record.total
+            print('tttt',total,total_spare)
+            vat=(total+total_spare)*(self.vat/100)
+            tot_local = tot_labor + tot_spare + tot_lube + vat
+            excel_sheet.write(row, col, vat, format)
+            row += 1
+            col = 6
+            excel_sheet.set_column(col, col, 20)
+            excel_sheet.write(row, col, 'Total', header_format)
+            col += 1
+            excel_sheet.write(row, col, tot_spare, format)
+            col +=1
+            excel_sheet.write(row, col, tot_lube, format)
+            col += 1
+            excel_sheet.write(row, col, tot_hour_price, format)
+            col += 1
+            excel_sheet.write(row, col, '', format)
+            col += 1
+            excel_sheet.write(row, col,tot_hour, format)
+            col += 1
+            excel_sheet.write(row, col,tot_labor, format)
+            col += 1
+            excel_sheet.write(row, col,tot_local, format)
 
             workbook.close()
             file_download = base64.b64encode(fp.getvalue())

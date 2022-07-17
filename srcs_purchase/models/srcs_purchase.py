@@ -358,7 +358,7 @@ class PurchaseRequest(models.Model):
                                 'state': 'supply_chain'})
                             print('__________________ddsdssssssssss')
                         # else:
-                            
+                            # partially available 
                         #     raise ValidationError('%s is available in warehouse' % (line.product_id.name))
                     else:
                         

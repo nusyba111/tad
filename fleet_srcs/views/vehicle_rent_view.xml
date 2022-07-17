@@ -192,7 +192,13 @@
                                      </field>
                                  </group>
                              </page>
-
+                            <page string="Accounting" name="account">
+                                <group>
+                                    <field name="project_id"/>
+                                    <field name="analytic_activity_id"/>
+                                    <field name="account_id"/>
+                                </group>
+                            </page>
                          </notebook>
                     </sheet>
                      <div class="oe_chatter">

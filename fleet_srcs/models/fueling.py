@@ -42,6 +42,10 @@ class Fueling(models.Model):
     approve_name_id = fields.Many2one('res.users', string='Manager', readonly=True)
     fleet_user_id = fields.Many2one('res.users', string='HR Admin', readonly=True)
     total_amount = fields.Float(string="Total")
+    analytic_activity_id = fields.Many2one('account.analytic.account', 'Output/Activity',
+                                           domain="[('type','=','activity')]")
+    account_id = fields.Many2one('account.account', string='Account', domain="[('internal_group','in',['expense','asset'])]")
+    project_id = fields.Many2one('account.analytic.account', string='Project', domain="[('type','=','project')]")
 
     @api.onchange('fuel_id')
     def call_total(self):
@@ -92,6 +96,9 @@ class Fueling(models.Model):
                 'move_type':'out_invoice',
                 'invoice_line_ids': [0, 0, {
                     'product_id': self.fuel_type,
+                    'account_id':self.account_id,
+                    'analytic_account_id':self.project_id,
+                    'activity_id':self.analytic_activity_id,
                     'quantity': self.quantity,
                     'price_unit': self.cost,
                 }]

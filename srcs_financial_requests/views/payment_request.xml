@@ -23,6 +23,7 @@
                         <group>
                             <field name="user_id" />
                             <field name="payment_method" />
+                            <field name="pay_to"/>
                             <field name="Check_no" attrs="{'invisible':[('payment_method','!=','check')],'required':[('payment_method','=','check')]}"/>
                             <field name="check_date" attrs="{'invisible':[('payment_method','!=','check')],'required':[('payment_method','=','check')]}"/>
                             <field name="fn_req_sg_dp_approval_amount" />
@@ -49,11 +50,26 @@
                                 </tree>
                             </field> 
                         </page>
+                        <page string="Approval Information">
+                            <group>
+                                <group>
+                                    <field name="requested_by"/>
+                                    <field name="authorisation_by"/>
+                                    <field name="reviwed_by_user"/>
+                                    <field name="final_approval"/>
+                                </group>
+                                <group>
+                                    <field name="requested_by_date"/>
+                                    <field name="authorisation_by_date"/>
+                                    <field name="reviwed_by_date"/>
+                                    <field name="final_approval_date"/>
+                                </group>
+                            </group>
+                        </page>
                         <page string="More Information">
                             <group>
                                 <group>
                                     <field name="is_working_addvance" />
-                                    <field name="pay_to" attrs="{'invisible':[('is_working_addvance','=',False)],'required':[('is_working_addvance','=',True)]}"/>
                                     <field name="is_cleared" attrs="{'invisible':[('is_working_addvance','=',False)]}" />
                                     <!-- <field name="debit_account_id" attrs="{'invisible':[('is_working_addvance','=',True)],'required':[('is_working_addvance','=',False)]}"/> -->
                                 </group>

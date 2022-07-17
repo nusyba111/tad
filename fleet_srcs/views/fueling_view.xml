@@ -120,6 +120,9 @@
                             <field name="vehicle"/>
                             <field name="driver"/>
                             <field name="odo_meter"/>
+                            <field name="project_id" />
+                            <field name="analytic_activity_id" />
+                            <field name="account_id"/>
                             <field name="location" attrs="{'invisible':[('state','=','draft')]}"/>
                         </group>
                         <group>
