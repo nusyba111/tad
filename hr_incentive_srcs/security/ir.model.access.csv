@@ -3,3 +3,5 @@ access_hr_incentive_user,hr.incentive.user,model_hr_incentive,hr.group_hr_manage
 access_hr_incentive_user_config,hr.incentive.user.config,model_hr_incentive_type,hr.group_hr_manager,1,1,1,1
 access_hr_incentive_line,hr.incentive.line,model_hr_incentive_line,hr.group_hr_manager,1,1,1,1
 access_hr_incentive_validation,hr.incentive.validation,model_res_config_settings,hr.group_hr_manager,1,1,1,1
+access_incentive_coverage,incentive.coverage,model_incentive_coverage,hr.group_hr_manager,1,1,1,1
+

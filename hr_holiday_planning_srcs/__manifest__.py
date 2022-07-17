@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         'security/record_rules.xml',
         'views/views.xml',
+        'views/sale_time_off_view.xml',
         'data/holiday_planning_data.xml',
         'views/templates.xml',
         'report/leave_planning_report_view.xml',
