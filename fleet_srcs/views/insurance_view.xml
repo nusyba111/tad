@@ -91,6 +91,9 @@
                             <field name="order_title"/>
                             <field name="requester"/>
                             <field name="department" />
+                            <field name="analytic_activity_id" />
+                            <field name="account_id"/>
+                            <field name="project_id" />
                         </group>
                          <label for="service" string ='Service Description' style="font-size:200%;font-weight: bold;"/>
                         <field name="service" class="oe_inline" invisible="1"/>
