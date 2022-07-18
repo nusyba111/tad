@@ -5,6 +5,13 @@ from odoo.tools.float_utils import float_is_zero
 class SrcsPurchase(models.Model):
     _inherit = "purchase.order"
 
+    account_id = fields.Many2one('account.account', string='Account', domain="[('internal_group','in',['expense','asset'])]")
+    analytic_activity_id = fields.Many2one('account.analytic.account', 'Output/Activity', domain="[('type','=','activity')]")
+    donor_id = fields.Many2one('res.partner', string='Donor')
+    project_id = fields.Many2one('account.analytic.account',string='Project', domain="[('type','=','project')]")
+    budget_line_id = fields.Many2one('crossovered.budget.lines', string='Budget Line', readonly=True, store=True)
+    budget_limit = fields.Monetary('Budget Limit ', currency_field='budget_currency', readonly=True, store=True)
+    budget_currency = fields.Many2one(related='budget_line_id.currency_budget_line')
     # is_single_source = fields.Boolean('Is Single Source Tender')
     gift_certificate = fields.Binary('Gift Certificate')
     way_bill = fields.Binary('Way Bill/Bill of Leading')
@@ -46,6 +53,22 @@ class SrcsPurchase(models.Model):
         ('to invoice', 'Waiting Bills'),
         ('invoiced', 'Fully Billed'),
     ], string='Billing Status', compute='_get_invoiced', store=True, readonly=True, copy=False, default='no')
+
+    @api.onchange('account_id','analytic_activity_id','donor_id','project_id')
+    def _onchange_budget_line_id(self):
+        for rec in self:
+            if rec.account_id and rec.analytic_activity_id and rec.donor_id and rec.project_id:
+                budget_line = self.env['crossovered.budget.lines'].search([('date_from','<=',rec.date_approve),('date_to','>=',rec.date_approve),
+                                        ('crossovered_budget_id.donor_id','=',rec.donor_id.id),('crossovered_budget_id.state','=','validate'),
+                                        ('analytic_activity_id','=',rec.analytic_activity_id.id),('analytic_account_id','=',rec.project_id.id),
+                                        ('general_budget_id.account_ids','in', rec.account_id.id),])
+                print('_________________budget line',budget_line)
+                if budget_line:
+                    # return{'domain':{'budget_line_id':[('id','in',budget_line)]}}
+                    rec.budget_line_id = budget_line.id
+                    rec.budget_limit = budget_line.balance_budget_currency
+                else:
+                    raise ValidationError(_('There is No Budget for this %s and %s and %s and %s')%(rec.account_id.name,rec.project_id.name,rec.analytic_activity_id.name,rec.donor_id.name))
 
     @api.depends('state', 'order_line.qty_to_invoice')
     def _get_invoiced(self):
@@ -351,15 +374,16 @@ class PurchaseRequest(models.Model):
             
             for line in self.purchase_request_line_ids:
                 if line.product_id.detailed_type == 'product':
-                    if line.product_id.qty_available:
-                        if len(self.purchase_request_line_ids) == 1:
-                            self.write({'supply_chain_user': self.env.user.id,
-                                'supply_chain_date': fields.Date.today(),
-                                'state': 'supply_chain'})
-                            print('__________________ddsdssssssssss')
-                        # else:
+                    if line.product_id.qty_available != 0:
+                        if line.product_id.qty_available == line.product_qty:
+                            if len(self.purchase_request_line_ids) == 1:
+                                self.write({'supply_chain_user': self.env.user.id,
+                                    'supply_chain_date': fields.Date.today(),
+                                    'state': 'supply_chain'})
+                                print('__________________ddsdssssssssss')
+                        if line.product_id.qty_available < line.product_qty:
                             # partially available 
-                        #     raise ValidationError('%s is available in warehouse' % (line.product_id.name))
+                            raise ValidationError('%s is available in warehouse' % (line.product_id.name))
                     else:
                         
                         available_products.append(line)
@@ -707,6 +731,8 @@ class PurchaseRequstLine(models.Model):
     # product_uom_category_id = fields.Many2one(related='product_id.uom_id.category_id')
     price_unit = fields.Float(string='Unit Price', required=True, digits='Product Price')
     price_subtotal = fields.Monetary(string='Subtotal', store=True)
+    qty_available = fields.Float('Quantity On Hand', related='product_id.qty_available')
+    
 
     @api.onchange('product_id')
     def get_description(self):

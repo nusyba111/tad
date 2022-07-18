@@ -13,7 +13,18 @@ class SrcsAsset(models.Model):
     serial_num = fields.Char('Serial Number')
     code = fields.Char('Code')
     photo = fields.Binary('Photo')
+    state = fields.Selection([('model', 'Model'), ('draft', 'Draft'), ('open', 'Asset Manager'),('finance','Finance Director'),('sg','Secretary General'),('paused', 'On Hold'), ('close', 'Closed')], 'Status', copy=False, default='draft',
+        help="When an asset is created, the status is 'Draft'.\n"
+            "If the asset is confirmed, the status goes in 'Running' and the depreciation lines can be posted in the accounting.\n"
+            "The 'On Hold' status can be set manually when you want to pause the depreciation of an asset for some time.\n"
+            "You can manually close an asset when the depreciation is over. If the last line of depreciation is posted, the asset automatically goes in that status.")
 
+    def action_finance(self):
+        self.state = 'finance'
+
+    def action_sg(self):
+        self.state = 'sg'
+        
 class SrcsAssetOpertaion(models.Model):
     _name = "asset.opertaion"
 

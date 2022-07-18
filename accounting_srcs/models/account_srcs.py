@@ -69,8 +69,8 @@ class AccountSrcs(models.Model):
 
                             else:
                                 raise ValidationError(_('You have to make currency conversion to cover Expensses.'))
-                    else:
-                        raise ValidationError(_('No budget line found for this move .'))
+                    # else:
+                    #     raise ValidationError(_('No budget line found for this move .'))
 
         return res
         

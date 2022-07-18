@@ -21,20 +21,20 @@
             <xpath expr="//field[@name='state']" position="replace">
                 <field name="state" widget="statusbar" statusbar_visible="draft,confirm,finance_manager,validate,done" />
             </xpath>
-             <xpath expr="//field[@name='user_id']" position="after">
+            <xpath expr="//field[@name='user_id']" position="after">
                 <field name="unit_cost_boolean" invisible="1" />
                 <field name="frequency_boolean" invisible="1" />
                 <field name="quantity_boolean" invisible="1" />
                 <field name="unit_of_measure_boolean" invisible="1" />
-                <field name="budget_type" />
-                <field name="currency_id" required="1"/>
-                <field name="site" attrs="{'invisible':[('site_boolean','!=',True)]}"/>
-                <field name="situation" attrs="{'invisible':[('situation_boolean','!=',True)]}"/>
+                <field name="budget_type" attrs="{'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
+                <field name="currency_id" required="1" attrs="{'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
+                <field name="site" attrs="{'invisible':[('site_boolean','!=',True)],'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
+                <field name="situation" attrs="{'invisible':[('situation_boolean','!=',True)],'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
             </xpath>
             <xpath expr="//group/group/div" position="after">
-                <field name="donor_id" domain="[('customer_rank','=', 1)]"/>
-                <field name="project_id" attrs="{'required':[('budget_type','=','project')]}"/>
-                <field name="goal" attrs="{'invisible':[('goal_boolean','!=',True)]}"/>
+                <field name="donor_id" domain="[('customer_rank','=', 1)]" attrs="{'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
+                <field name="project_id" attrs="{'required':[('budget_type','=','project')],'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
+                <field name="goal" attrs="{'invisible':[('goal_boolean','!=',True)],'readonly':[('state','in',['finance_manager','validate','done'])]}"/>
                 <field name="site_boolean" invisible="1"/>
                 <field name="situation_boolean" invisible="1"/>
                 <field name="goal_boolean" invisible="1"/>
@@ -61,7 +61,7 @@
                 <attribute name="invisible" >1</attribute>
             </xpath>
             <xpath expr="//field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']" position="after">
-                <field name="analytic_activity_id" string="output" domain="[('type','=','activity')]"/>
+                <field name="analytic_activity_id" string="output" domain="[('type','=','activity')]" />
                 <field name="description" />
                 <field name="location_id" />
                 <field name="unit_of_measure" attrs="{'column_invisible':[('parent.unit_of_measure_boolean','!=',True)]}"/>

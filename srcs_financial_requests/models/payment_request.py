@@ -51,10 +51,10 @@ class SrcsPaymentRequest(models.Model):
             if rec.un_cleared_amount == 0:
                 rec.is_cleared = True
 
-    @api.constrains('total_amount','budget_line_ids')
-    def total_amount_validation(self):
-        if self.total_amount == 0:
-            raise ValidationError(_("Request Amount Must be greater than zero!"))
+    # @api.constrains('total_amount','budget_line_ids')
+    # def total_amount_validation(self):
+    #     if self.total_amount == 0:
+    #         raise ValidationError(_("Request Amount Must be greater than zero!"))
 
     @api.model
     def create(self, vals):
