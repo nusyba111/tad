@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
   <data>
-
-
-    <record id="view_wizard_maintainance" model="ir.ui.view">
-      <field name="name">wizard.maintainance.report</field>
-      <field name="model">maintainance.report</field>
+    <record id="view_wizard_custom" model="ir.ui.view">
+      <field name="name">wizard.custom.tracking.report</field>
+      <field name="model">custom.tracking.report</field>
       <field name="arch" type="xml">
-        <form string="Maintainance Report">
+        <form string="Custom Track Report">
 
-			<group>
+			<group col="4" >
                 <field name="from_date" />
                 <field name="to_date" />
-                <field name="vat"/>
              </group>
 
           <footer>
@@ -23,9 +20,9 @@
       </field>
     </record>
 
-      <record model="ir.ui.view" id="view_maintainance_excel">
-            <field name="name">view.maintainance.report.excel</field>
-            <field name="model">maintainance.report.excel</field>
+      <record model="ir.ui.view" id="view_custom_track_excel">
+            <field name="name">view.custom.tracking.report.excel</field>
+            <field name="model">custom.tracking.report.excel</field>
             <field name="arch" type="xml">
                 <form string="File to Downloads">
                         <field name="name" invisible="1"/>
@@ -34,15 +31,15 @@
             </field>
         </record>
 
-    <record id="action_view_maintainance" model="ir.actions.act_window">
-      <field name="name">Maintainance Report</field>
-      <field name="res_model">maintainance.report</field>
+    <record id="action_view_custom" model="ir.actions.act_window">
+      <field name="name">Custom Tracking Report</field>
+      <field name="res_model">custom.tracking.report</field>
       <field name="view_mode">form</field>
-      <field name="view_id" ref="view_wizard_maintainance"/>
+      <field name="view_id" ref="view_wizard_custom"/>
       <field name="target">new</field>
     </record>
 
-     <menuitem action="action_view_maintainance" name="Maintainance Report" id="menu_maintainance_report" parent="fleet.menu_fleet_reporting"/>
+     <menuitem action="action_view_custom" name="Custom Tracking Report" id="menu_custom_track_report" parent="purchase.purchase_report_main"/>
 
 
   </data>

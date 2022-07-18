@@ -58,6 +58,7 @@ class HrLeaveType(models.Model):
 
     need_planning = fields.Boolean("Need Planning")
     annual_leave = fields.Boolean(string='Annual Leave')
+    can_be_sold = fields.Boolean(string="Can Be Sold") 
 
 
 class LeaveReportCalendar(models.Model):
@@ -325,5 +326,22 @@ class LeaveCoverage(models.Model):
     activity = fields.Many2one('account.analytic.account',domain="[('type','=','activity')]",string="Activity")
     location = fields.Many2one('account.analytic.account',domain="[('type','=','location')]",string="Location")    
     doner_id = fields.Many2one('res.partner',string="Doner")
+
+
+class Employees(models.Model):
+    _inherit = 'hr.employee'
+
+    annual_remaining_days = fields.Integer(string="Annual Remaining Days",compute="_calc_remaining_days")
+
+    @api.depends('remaining_leaves')
+    def _calc_remaining_days(self):
+        for rec in self:
+            alloaction = self.env['hr.leave.allocation'].search([('employee_id','=',rec.id),
+                ('holiday_status_id.can_be_sold','=',True)])
+            if alloaction:
+                for alloc in alloaction:
+                    rec.annual_remaining_days += alloc.number_of_days_display - alloc.leaves_taken
+            else:
+                rec.annual_remaining_days = 0.0    
 
     

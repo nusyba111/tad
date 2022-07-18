@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="view_wizard_matriculation_vehicle" model="ir.ui.view">
+      <field name="name">vehicle.matriculation.report</field>
+      <field name="model">vehicle.matriculation.report</field>
+      <field name="arch" type="xml">
+        <form string="matriculation">
+			<group>
+                <field name="from_date" />
+                <field name="to_date" />
+                <field name="vehicle_id" />
+             </group>
+          <footer>
+            <button name = "print_report"  string="Print"  type="object" class="oe_highlight"/> or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="view_vehicle_vehicle_matriculation_excel">
+            <field name="name">Vehicle Matriculation</field>
+            <field name="model">fleet.vehicle.matriculation.report.excel</field>
+            <field name="arch" type="xml">
+                <form string="File to Downloads">
+                        <field name="name" invisible="1"/>
+                        <field name="download_file" filename="name"/>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_view_matriculation_id" model="ir.actions.act_window">
+      <field name="name">matriculation</field>
+      <field name="res_model">vehicle.matriculation.report</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_wizard_matriculation_vehicle"/>
+      <field name="target">new</field>
+    </record>
+
+     <menuitem action="action_view_matriculation_id" name="Vehicle Matriculation" id="vehicle_matriculation_report" parent="fleet.menu_fleet_reporting"/>
+
+
+  </data>
+</odoo>

@@ -27,6 +27,7 @@ class HrIncentiveType(models.Model):
     )
     journal_id = fields.Many2one('account.journal', string="Journal", domain=[('type', '=', 'purchase')],company_dependent=True)
     by_project = fields.Boolean(string="By Project")
+    by_coverage = fields.Boolean(string="By Coverage")
 
 class HrIncentive(models.Model):
     _name = 'hr.incentive'
@@ -82,10 +83,13 @@ class HrIncentive(models.Model):
                                             related='company_id.incentive_template_id',
                                             store=True
                                             )
-    project = fields.Many2one('account.analytic.account',required=True, domain="[('type','=','project')]",string="Project")
-    activity = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','activity')]",string="Activity")
-    location = fields.Many2one('account.analytic.account',required=True,domain="[('type','=','location')]",string="Location")
-    donor_id = fields.Many2one('res.partner', string='Donor',required=True)
+    project = fields.Many2one('account.analytic.account', domain="[('type','=','project')]",string="Project")
+    activity = fields.Many2one('account.analytic.account',domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',domain="[('type','=','location')]",string="Location")
+    donor_id = fields.Many2one('res.partner', string='Donor')
+    by_project = fields.Boolean(related="incentive_type_id.by_project")
+    by_coverage = fields.Boolean(related="incentive_type_id.by_coverage")
+    incentive_coverage = fields.One2many('incentive.coverage','incentive_id',string="Coverage")
 
     def action_get_move_ids(self):
         return {
@@ -362,3 +366,15 @@ class HRIncentiveLine(models.Model):
         if self.type_in == 'hours' and self.hours:
             amount = (res * self.hours)
         self.amount = amount
+
+
+class IncentiveCovarge(models.Model):
+    _name = 'incentive.coverage'
+
+    incentive_id = fields.Many2one('hr.incentive',string="Satff Payment")
+    project = fields.Many2one('account.analytic.account',string="Project",domain="[('type','=','project')]")
+    activity = fields.Many2one('account.analytic.account',domain="[('type','=','activity')]",string="Activity")
+    location = fields.Many2one('account.analytic.account',domain="[('type','=','location')]",string="Location")
+    doner_id = fields.Many2one('res.partner',string="Doner")
+    percentage_of_covering = fields.Float(string="Percentage Of Covering")
+

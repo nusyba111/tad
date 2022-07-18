@@ -21,5 +21,8 @@
             'views/finacial_limit.xml',
             # 'views/product.xml',
             'reports/quotation.xml',
+            'wizard/procurment_track_sheet_view.xml',
+            'wizard/procurement_view.xml',
+            'wizard/custom_track_report_view.xml',
     ],
 }

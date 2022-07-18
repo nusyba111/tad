@@ -67,6 +67,11 @@ class VehicleRentRequest(models.Model):
     handover_id=fields.One2many('handover','rent_id',string='Handover')
     service = fields.Many2one('product.product',string='Service',required=True,domain=[('detailed_type','=','service')])
     invoice_reference=fields.Many2one('account.move',string='Invoice Reference')
+    analytic_activity_id = fields.Many2one('account.analytic.account', 'Output/Activity',
+                                           domain="[('type','=','activity')]")
+    account_id = fields.Many2one('account.account', string='Account',
+                                 domain="[('internal_group','in',['expense','asset'])]")
+    project_id = fields.Many2one('account.analytic.account', string='Project', domain="[('type','=','project')]")
 
     @api.depends('kilo_price','new_odometer')
     def compute_total(self):
@@ -125,6 +130,9 @@ class VehicleRentRequest(models.Model):
                     'rent_id': self.id,
                     'invoice_line_ids': [0, 0, {
                         'product_id': self.service,
+                        'account_id': self.account_id,
+                        'analytic_account_id': self.project_id,
+                        'activity_id': self.analytic_activity_id,
                         'quantity': 1,
                         'price_unit': self.invoice_amount,
                     }]
@@ -134,6 +142,7 @@ class VehicleRentRequest(models.Model):
                 self.car_model.write({'on_rent':True})
                 self.write({'state': 'on_rent'})
             else:
+                self.car_model.write({'on_rent': True})
                 self.write({'state': 'on_rent'})
     def handover(self):
         self.write({'state': 'handover'})
@@ -145,6 +154,9 @@ class VehicleRentRequest(models.Model):
             'rent_id': self.id,
             'invoice_line_ids': [0, 0, {
                 'product_id': self.service,
+                'account_id': self.account_id,
+                'analytic_account_id': self.project_id,
+                'activity_id': self.analytic_activity_id,
                 'quantity': 1,
                 'price_unit': self.invoice_amount,
             }]

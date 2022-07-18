@@ -277,7 +277,25 @@
                 <xpath expr="//field[@name='request_unit']" position="after">
                     
                     <field name="annual_leave"/>
+                    <field name="can_be_sold"/>
 
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_employee_form_sell_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.sell.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']/group[1]" position="inside">
+                    <group string="Time Off">
+                        <label for="annual_remaining_days"/>
+                        <div>
+                            <field name="annual_remaining_days" class="oe_inline"/>
+                        </div>
+                    </group>
                 </xpath>
             </field>
         </record>

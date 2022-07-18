@@ -303,6 +303,7 @@ class HrLoan(models.Model):
 		self.journal_id = self.loan_type.journal_id.id
 		self.no_month = self.loan_type.no_month
 		emp_salary = self.emp_salary
+		# emp_salary = self.loan_type.percent_rule_id.compute_rule_amount(self.employee_id)
 		self.loan_amount = self.loan_type.amount
 		if self.loan_type.installment_type == 'depends_on_payroll':
 			self.loan_amount = (emp_salary * self.loan_type.percentage) / 100
@@ -595,7 +596,7 @@ class LoanType(models.Model):
 	need_reason = fields.Boolean(string='Need Reason')
 	company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env.company)
 	number_incerment = fields.Integer(string="Month Number Incerment", default=1)
-
+	# percent_rule_id = fields.Many2one('hr.salary.rule', string='Compute base on')
 
 	@api.constrains('code')
 	def _check_loan_code_unique(self):

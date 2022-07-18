@@ -3,3 +3,4 @@ access_hr_holiday_planning_hr_holiday_planning,hr_holiday_planning_srcs.hr_holid
 access_leave_planning_report,leave.planning.report,model_leave_planning_report,hr.group_hr_manager,1,1,1,1
 access_leave_planning_report_excel,leave.planning.report.excel,model_leave_planning_report_excel,hr.group_hr_manager,1,1,1,1
 access_hr_leave_coverage,hr.leave.coverage,model_hr_leave_coverage,hr.group_hr_manager,1,1,1,1
+access_sell_time_off_holiday_manager,sell.time.off,model_sell_time_off,hr.group_hr_manager,1,1,1,1
