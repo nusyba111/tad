@@ -16,6 +16,9 @@
             'views/srcs_stock.xml',
            
             'views/product.xml',
+            'Report/transfer.xml',
+            'Report/header_footer.xml',
+
             
     ],
 }

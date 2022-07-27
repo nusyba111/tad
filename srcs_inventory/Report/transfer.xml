@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="red_inventory_report"
+            string="Waybill Note"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="srcs_inventory.srcs_stock_reports"
+            file="srcs_inventory.srcs_stock_reports"/>
+
+    <template id="srcs_stock_reports">
+     
+         <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure">
+                        <div class="article mt0 o_report_layout_standard" dir="ltr"> 
+                        <h5 style='text-align:center;weight="30"'> بوليصة الشحن </h5>
+                        <h5 style='text-align:center;'> WAYBILL/DELIVERY NOTE </h5>
+
+                        <table width="100%">
+                            <tr width="100%">
+                                <td width="30%">
+                                  
+                                    <table class="table table-condensed table-bordered">
+                                        <thead>
+                                            <tr>
+                                              <td class="text-right" style="width: 20%;">المكان /Plase </td>
+                                           </tr>
+                                            <tr>
+                                              <td class="text-right"><span t-esc="o.note"/></td>
+                                          </tr>
+
+                                        </thead>
+                                      </table>
+                                </td>
+                                <td width="40%"> 
+                                    &#9;
+                                </td>
+                                <td width="30%">
+                                                            
+                                    <table class="table table-condensed table-bordered">
+                                        <thead>
+                                            <tr>
+                                               <td class="text-right;table table-condensed table-bordered" style="width: 20%;">الرقم المتسلسل</td>
+                                           </tr>
+                                           <tr>
+                                               <td class="text-left">NO:     </td>
+                                           </tr>
+                                        </thead>
+                                    </table>
+                                 
+                             </td>
+                             </tr>
+                         </table>
+
+                        <table class="table table-condensed table-bordered">
+                            <tr t-att-colspan="11">
+                        
+                                        <!-- <td class="text-center" style="width: 10%;"></th></td> -->
+                                        <td  t-att-colspan="3" rowspan="3">الجهة و المستفيدين/Destination and Beneficiaries</td>
+                                        <td  t-att-colspan="6">معلومات عن المرحل/Transport Date</td>
+                                        <td  t-att-colspan="2" rowspan="3">وسيلة النقل/Transport Means</td>
+                                        
+                                    </tr>
+                                    <tr t-att-colspan="9">
+                                        
+                                        <td >ID/رقم الهوية/</td>
+                                        <td t-att-colspan="2">Driver Name/اسم السائق</td>
+                                        <td >Vich No/رقم الشاحنة</td>
+                                        <td t-att-colspan="2">Trans co./اسم الشركة الناقلة</td> 
+                                        
+                                    </tr>
+                                    <tr t-att-colspan="9">
+                                       <!--  <td ></td> -->
+                                        <td ></td>
+                                        <td t-att-colspan="2" ></td>
+                                        <td ></td>
+                                        <td t-att-colspan="2" ></td> 
+                                       <!--  <td ></td> -->
+                                    </tr>
+                        </table>
+                         <table class="table table-condensed table-bordered" style="display:inline-table;width:5em">
+                                    <thead>
+                                        <th class="text-center" style="width: 10%;">أوصاف المادة<br/>ITEM DESCRIPTION</th>
+                                        <th class="text-center" style="width: 10%;">الجهة المانحة/رقم المتابعة<br/>COMMODITY TRACHING No OR DONOR</th>
+                                        <th class="text-center" >عدد الوحدات<br/>No OF UNITS</th>
+                                        <th class="text-center" style="width: 10%;">نوع الوحدة<br/>UNIT TYPE</th>
+                                        <th class="text-center" style="height: 1%;">الوزن (كجم)<br/>WEIGHT(kg)</th>
+                                        <th class="text-center" style="width: 10%;" t-att-colspan="1">الحجم (م3)<br/>VOLUME(м³)</th>
+                                        <th class="text-center" style="width: 10%;">رقم طلب الصرف<br/>REQUESTION No</th>
+                                        <th class="text-center" style="width: 10%;">ملاحظات<br/>REMARKS</th>
+                                    </thead>
+
+                            <!-- <tbody>
+                                <tr t-foreach="o.move_ids_without_package" t-as="line">
+                                   <td class="text-right">
+                                        <span t-esc="line.description_picking"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="line.job_id.name"/>
+                                    </td>
+                                    <td class="text-right"
+                                        ><span t-esc="line.employee_id.department_id.name"/>
+                                    </td>
+                                    <td class="text-right"
+                                        ><span t-esc="signature"/>
+                                    </td>
+                                            
+                                        </tr>
+                                    </tbody> -->
+                                </table>
+                                <table width="100%">
+                                    <tr width="100%">
+                                        <td width="40%">
+                                          
+                                            <table class="table table-condensed table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                      <td class="text-right" style="width: 20%;">sender Comments/ملاحظات الراسل</td>
+                                                   </tr>
+                                                    <tr>
+                                                      <td class="text-right"><span t-esc="o.note"/></td>
+                                                  </tr>
+
+                                                </thead>
+                                              </table>
+                                        </td>
+                                        <td width="20%"> 
+                                            &#9;
+                                        </td>
+                                        <td width="40%">
+                                                                    
+                                            <table class="table table-condensed table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                       <td class="text-right" style="width: 20%;">Receiver Comments/ملاحظات المستلم </td>
+                                                   </tr>
+                                                   <tr>
+                                                       <td class="text-right"><span t-esc="o.note"/></td>
+                                                   </tr>
+                                                </thead>
+                                            </table>
+                                         
+                                     </td>
+                                     </tr>
+                                 </table><br/><br/><br/><br/><br/><br/><br/>
+                                     
+                  
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <th class="text-center" style="width: 10%;"></th>
+                                        <th class="text-center" style="width: 10%;">DATE</th>
+                                        <th class="text-center" style="width: 10%;">Function/الوظيفة</th>
+                                        <th class="text-center" >Name/الاسم</th>
+                                        <th class="text-center" style="width: 10%;">Sig/التوقيع</th>
+                                        <th class="text-center" style="height: 1%;">Location/المكان</th>
+                                        <th class="text-center" style="width: 10%;">Condition/الحالة</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width: 10%;">Warehouse Keeper/أمين المستودع</td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 10%;">Transported By/نقلت بواسطة</td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 10%;">Reception/الاستلام</td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+                                <t t-call="srcs_inventory.custom_header" />
+                                <t t-call="srcs_inventory.custom_footer" />
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+</odoo>    
+       
+    
