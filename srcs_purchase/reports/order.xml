@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="order_purchase_report"
+            string="Certificate of Completion"
+            model="purchase.order"
+            report_type="qweb-pdf"
+            name="srcs_purchase.order_reports"
+            file="srcs_purchase.order_reports"/>
+
+    <template id="order_reports"> 
+         <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure">
+                        <div class="article mt0 o_report_layout_standard" dir="ltr">
+                            
+                            <h3 style='text-align:center;'><strong> SUPPLY CHAIN DEPARTMENT_PROCUREMENT SECTION</strong></h3>
+                            <br></br>
+                            <h5 style='text-align:center;'><strong> CERTIFICATE OF COMPLETION AND ACCEPTANCE</strong></h5>
+                            <br></br>
+                            	<table>
+                            		<tr>
+                            			<td style='text-align:left;'> <strong>Date: </strong><span t-esc="o.date_approve"/></td><br/><br/>
+                            			<td style='text-align:left;'></td>
+                            			<br></br>
+                            			<td style='text-align:left;'> <strong>Department: </strong><span t-esc="o.purchase_request_id.department_id.name"/></td>
+                            		</tr>
+                            	</table>
+                            <h5 
+                            style='text-align:left;'> <strong>Supplier: </strong><span t-esc="o.partner_id.name"/></h5>
+                          <h5
+                            style='text-align:left;'> <strong>Service order #/Frame work agreement #: </strong><span t-esc="o.name"/></h5>
+
+
+                            <h5 style='text-align:left;'> <strong>Service description(Title): </strong></h5>
+                            
+                            <t t-foreach="o.order_line" t-as="line">
+                            	<span t-esc="line.name"/>,
+                            </t>
+<!-- 
+                            <t t-foreach="o.order_line" t-as="line"><strong>Service description(Title):</strong><span t-esc="line.order_line.name"/></t> -->
+                            <!-- <h5
+                            style='text-align:left;'> <strong>Service description(Title): </strong><span t-esc="o.order_line.name"/></h5> -->
+                            <br></br><br></br>
+                            <table class="table table-condensed table-bordered"  style="border: 2px solid Black;">
+                    
+                            			<tr> 
+                            				<td>This is to certify that the service mentioned in the above subject ,has been completely done and it satisfied our requirement.
+                            				</td></tr>
+                            			
+                            			<tr>
+                            			<td> Attached to this certificate is the report from the field supporting the acceptance and the completion of the requested service.</td></tr>
+                            		
+                            	</table>
+                            	<br></br>
+                            	<br></br>
+                            	<br></br>
+                            	<br></br>
+                            	 <table class="table table-condensed table-bordered" style="border: 2px solid Black;">
+                                    <thead>
+                                        <th class="text-center" style="width: 10%;"></th>
+                                        <th class="text-center" style="width: 10%;">Name</th>
+                                        <th class="text-center" style="width: 10%;">Position</th>
+                                        <th class="text-center" >Signature</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width: 10%;"><strong>Prepared By</strong></td>
+                                            <td ><span t-esc="o.purchase_request_id.requester_id.name"/></td>
+                                            <td ><span t-esc="o.purchase_request_id.department_id.name"/></td>
+                                            <td ></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width: 10%;"><strong>Approved by(Department Manager)</strong></td>
+                                            
+                                            <td ><span t-esc="o.purchase_request_id.department_user.name"/></td>
+                                            <td ><span t-esc="o.purchase_request_id.department_id.name"/></td>
+                                            <td ></td>
+                                           
+                                        </tr>
+                                        
+                                    </tbody>
+                            </table>
+                            <t t-call="srcs_purchase.custom_header" />
+                            
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

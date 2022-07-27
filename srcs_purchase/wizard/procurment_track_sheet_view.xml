@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+
+    <record id="view_wizard_procurement" model="ir.ui.view">
+      <field name="name">wizard.procurement.tracking.report</field>
+      <field name="model">procurement.tracking.report</field>
+      <field name="arch" type="xml">
+        <form string="Preventive">
+
+			<group col="4" >
+                <!-- <field name="from_date" /> -->
+                <!-- <field name="to_date" /> -->
+             </group>
+
+          <footer>
+            <button name = "print_report"  string="Print"  type="object" class="oe_highlight"/> or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="view_procurement_track_excel">
+            <field name="name">view.procurement.tracking.report.excel</field>
+            <field name="model">procurement.tracking.report.excel</field>
+            <field name="arch" type="xml">
+                <form string="File to Downloads">
+                        <field name="name" invisible="1"/>
+                        <field name="file_download" filename="name"/>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_view_procurement" model="ir.actions.act_window">
+      <field name="name">Procurement Tracking Sheet</field>
+      <field name="res_model">procurement.tracking.report</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_wizard_procurement"/>
+      <field name="target">new</field>
+    </record>
+
+     <menuitem action="action_view_procurement" name="Procurement Tracking Sheet Report" id="menu_procurement_track_report" parent="purchase.purchase_report_main"/>
+
+
+  </data>
+</openerp>

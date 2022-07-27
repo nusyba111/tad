@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<template id="custom_header">
+    <div class="header">
+          <div class="text-center">
+              <table class="table table-condensed table-white">
+                    <thead>
+                            
+                        <td style="width:100pt;"><img t-att-src="'/srcs_purchase/static/src/img/src.jpeg'" style="height:100pt;" width="250"/></td>
+                           
+                    </thead>
+                     </table>
+
+          </div>
+    </div>
+</template>
+<template id="custom_footer">
+    <div class="footer">
+          <div class="text-left" style="border-top: 1px solid black;">
+              <table class="table table-condensed table-bordered">
+                    <thead>
+                            
+                         <p><strong>Form no SRCS Proc 10 SRCS Procurement committee meeting<span style="font-weight:bold"></span></strong></p>
+                           
+                    </thead>
+                     </table>
+
+          </div>
+    </div>
+<!--    <div class="footer">-->
+<!--        <div class="text-center" style="border-top: 1px solid black;">-->
+<!--             <table class="table table-condensed table-bordered" border="0">-->
+<!--                 <thead>-->
+<!--                     <tr style="height:5pt;">-->
+<!--                        <th class="text-left">The Approval Table</th>-->
+<!--                        <th class="text-left">Name</th>-->
+<!--                        <th class="text-left">Department</th>-->
+<!--                        <th class="text-left">Signature</th>-->
+<!--                        <th class="text-left">Remarks and Comments</th>-->
+<!--                         </tr>-->
+<!--                 </thead>-->
+<!--                     <tbody>-->
+<!--                        <t t-foreach="docs" t-as="doc">-->
+<!--                             <tr style="height:3pt;">-->
+<!--                                 <td class="text-left">Prepared by</td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                            </tr>   <tr style="height:3pt;">-->
+<!--                                 <td class="text-left">Reviewed by</td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                            </tr>   <tr style="height:3pt;">-->
+<!--                                 <td class="text-left">User Department Request Initiator</td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                            </tr>   <tr style="height:3pt;">-->
+<!--                                 <td class="text-left">Approved By</td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                                 <td class="text-left"></td>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--        </div>-->
+<!--    </div>-->
+      </template>
+    </data>
+</odoo>

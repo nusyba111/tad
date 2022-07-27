@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <report id="red_purchase_report"
+            string="Minutes of committee report"
+            model="purchase.requisition"
+            report_type="qweb-pdf"
+            name="srcs_purchase.red_reports"
+            file="srcs_purchase.red_reports"/>
+
+    <template id="red_reports"> 
+         <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure">
+                        <div class="article mt0 o_report_layout_standard" dir="ltr">
+                            
+                            <u><h3 style='text-align:center;'><strong> Minutes of the Procurement committee meeting </strong></h3> </u> 
+                            <br></br>
+                             <u><h3 style='text-align:left;'><strong> <span t-esc="o.ordering_date"/>Date : </strong> </h3></u>
+                    
+                            <u><h3
+                            style='text-align:left;'><strong> Requisition #: </strong> </h3></u>
+                           
+                            <h3 
+                            style='text-align:left;'> <strong>Supplies /service(s) requested: </strong></h3>
+                            <br/>
+                            <h3 style='text-align:left;'><span t-esc="o.donor_id.name"/><strong>Donor: </strong></h3>
+                            <br/>
+                             <u><h3
+                            style='text-align:left;'> <strong>Agenda : </strong></h3></u>
+                            <br/>
+                            <p> 1. Opening the sealed offers received .</p>
+
+                            <p> 2. Selecting the best supplier .</p>
+                            <u><h5
+                            style='text-align:left;'> <strong>Tender method:</strong></h5></u>
+                            <p> In case of the open bids , the committee used advertised method for the tender on daily newspaper of “Newspaper name/ Website   “……………“ , date “………….”<!-- <span style="font-weight:bold" t-esc="o.vendor_id.name"/> -->.</p>
+                            <p> In case of close bidding , the committee has contacted 5 companies to provide their offers, however only the following <span style="font-weight:bold" t-esc="o.order_count"/> companies have submitted their offers with following as :</p>
+                            <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <th class="text-right" style="width: 10%;"><u>No</u></th>
+                                        <th class="text-right" style="width: 10%;"><u>Name</u></th>
+                                        <th class="text-right" style="width: 20%;"><u>Position</u></th>
+                                        <th class="text-right" style="width: 20%;"><u>SRCS Department/PNS</u></th>
+                                        <th class="text-right" style="width: 20%;"><u>Signature</u></th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="i" t-value="1"/>
+                                        <tr t-foreach="o.committee_ids" t-as="line">
+                                            <td class="text-right">
+                                                <span t-esc="i"/>
+                                            </td>
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td class="text-right">
+                                                <span t-esc="line.employee_id.name"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="line.job_id.name"/>
+                                            </td>
+                                            <td class="text-right"
+                                                ><span t-esc="line.employee_id.department_id.name"/>
+                                            </td>
+                                            <td class="text-right"
+                                                ><span t-esc="signature"/>
+                                            </td>
+                                            
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/><br/><br/><br/><br/><br/>
+
+
+
+
+
+
+
+
+
+
+                            <p> So upon that (No of bidders………. ) have collected the tender documents however only the following (Number of bidders respond)  companies have submitted their offers as the follow:</p>
+                            <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <th class="text-center" style="width: 10%;">No</th>
+                                        <th class="text-center" style="width: 10%;">Name of Bidders</th>
+                                        <th class="text-center" style="width: 20%;">CV</th>
+                                        <th class="text-center" style="width: 20%;">Registration Certificate </th>
+                                        <th class="text-center" style="width: 20%;">Tax ,zakat certificates </th>
+                                        <th class="text-center" style="width: 20%;">Experience</th>
+                                        <th class="text-center" style="width: 20%;">Insurance cheque</th>
+                                        <th class="text-center" style="width: 20%;">Total Financial  offer </th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="i" t-value="1"/>
+                                        <tr t-foreach="o.purchase_ids" t-as="line">
+                                            <td class="text-right">
+                                                <span t-esc="i"/>
+                                            </td>
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td class="text-right">
+                                                <span t-esc="line.partner_id.name"/>
+                                            </td>
+                                            <t t-if="line.cv">
+                                                <td class="text-right">
+                                                   Yes
+                                                </td>
+                                            </t>
+                                            <t t-else="else">
+                                                <td class="text-right">
+                                                   No
+                                                </td>
+                                            </t>
+                                            <t t-if="line.regestration_certificate">
+                                                <td class="text-right">
+                                                   Yes
+                                                </td>
+                                            </t>
+                                            <t t-else="else">
+                                                <td class="text-right">
+                                                   No
+                                                </td>
+                                            </t>
+                                            <t t-if="line.tax_regs_no">
+                                                <td class="text-right">
+                                                   Yes
+                                                </td>
+                                            </t>
+                                            <t t-else="else">
+                                                <td class="text-right">
+                                                   No
+                                                </td>
+                                            </t>
+                                            <t t-if="line.expereince">
+                                                <td class="text-right">
+                                                   Yes
+                                                </td>
+                                            </t>
+                                            <t t-else="else">
+                                                <td class="text-right">
+                                                   No
+                                                </td>
+                                            </t>
+                                            <t t-if="line.insurance">
+                                                <td class="text-right">
+                                                   Yes
+                                                </td>
+                                            </t>
+                                            <t t-else="else">
+                                                <td class="text-right">
+                                                   No
+                                                </td>
+                                            </t>
+                                            <td class="text-right">
+                                                <span t-esc="line.amount_total"/>
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                            <table class="table table-condensed table-bordered">
+                                <thead>
+                                    <th class="text-center" style="width: 10%;"><strong>Name</strong></th>
+                                    <th class="text-center" style="width: 10%;"><strong>Final  offer value (Vat included)</strong></th>
+                                    <th class="text-center" style="width: 20%;"><span style="font-weight: bold;"><strong>Currency</strong></span></th>
+                                </thead>
+                            </table>
+                            <p> The committee reviewed and analysed the offers provided by the above-mentioned companies in terms of prices and requested the logistics to do the CBA and stated down all the terms and conditions given in the offers for the participating companies in bid .</p>
+                            <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <th class="text-right" style="width: 10%;"><u>No</u></th>
+                                        <th class="text-right" style="width: 10%;"><u>Name</u></th>
+                                        <th class="text-right" style="width: 20%;"><u>Position</u></th>
+                                        <th class="text-right" style="width: 20%;"><u>SRCS Department/PNS</u></th>
+                                        <th class="text-right" style="width: 20%;"><u>Signature</u></th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="i" t-value="1"/>
+                                        <tr t-foreach="o.committee_ids" t-as="line">
+                                            <td class="text-right">
+                                                <span t-esc="i"/>
+                                            </td>
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td class="text-right">
+                                                <span t-esc="line.employee_id.name"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="line.job_id.name"/>
+                                            </td>
+                                            <td class="text-right"
+                                                ><span t-esc="line.employee_id.department_id.name"/>
+                                            </td>
+                                            <td class="text-right"
+                                                ><span t-esc="signature"/>
+                                            </td>
+                                            
+                                        </tr>
+                                    </tbody>
+
+                            </table>
+                            <h5
+                        style='text-align:left;'> <span style="font-weight:bold"><strong>The committee decision:</strong></span></h5>
+                            <p>The committee recommended <span style="font-weight:bold" t-esc="o.vendor_id.name"/> as the successful bidder for the best (The selection based on it ).</p>
+                            <t t-call="srcs_purchase.custom_header" />
+                            <t t-call="srcs_purchase.custom_footer" />
+
+
+                            
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+
+</odoo>
+<!-- <span style="color:blue;font-weight:bold"> -->
+<!-- <img alt="client" class="rounded-circle" src="/theme_tutorial/static/src/img/client_3.jpg"/> -->
+<!-- display: inline-block; -->
+<!-- <template id="custom_external_layout"> -->
+    <!-- Multicompany -->
+    <!-- <t t-if="not o and doc">
+        <t t-set="o" t-value="doc"/>
+    </t>
+    <t t-if="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id"></t>
+    </t>
+    <t t-if="not o or not 'company_id' in o">
+        <t t-set="company" t-value="res_company"></t>
+    </t>
+
+    <t t-call="my_module.custom_external_layout_header" />
+    <t t-raw="0" />
+    <t t-call="my_module.custom_external_layout_footer" /> -->
+<!-- </template> -->
+
+<!-- 
+<template id="custom_footer">
+            <div class="footer">
+                  <div>
+                      <table class="table table-condensed table-bordered">
+                            
+                                    
+                                <p>Form no SRCS Proc 10 SRCS Procurement committee meeting </p>
+                                   
+                           
+                             </table>
+
+                  </div>
+            </div> -->
