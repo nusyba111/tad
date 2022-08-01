@@ -1,0 +1,1881 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* kambal_document
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-17 16:00+0000\n"
+"PO-Revision-Date: 2022-06-17 16:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: kambal_document
+#: model:ir.actions.report,print_report_name:kambal_document.action_report_auditing_plan
+msgid "'Auditing Plan - %s' % (object.doc_no)"
+msgstr "خطة المراجعة"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.report_auditing_plan_document
+msgid "<span>Auditing Plan</span>"
+msgstr "خطة المراجعة"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.report_auditing_plan_document
+msgid "<strong>Date:</strong>"
+msgstr "تاريخ"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.report_auditing_plan_document
+msgid "<strong>Doc Number:</strong>"
+msgstr "رقم الوثيقة:"
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_description__setting__accept_risk
+msgid "Accept Risk"
+msgstr "تقبل المخاطر"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_needaction
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_needaction
+msgid "Action Needed"
+msgstr "الإجراءات اللازمة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_ids
+msgid "Activities"
+msgstr "أنشطة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_exception_decoration
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_state
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_type_icon
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "رمز نوع النشاط"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__actual_execution_time
+msgid "Actual execution time"
+msgstr "وقت التنفيذ الفعلي"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__additional_information
+msgid "Additional Information"
+msgstr "معلومات إضافية"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Additional information"
+msgstr "معلومات إضافية"
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__quality_plan__state__approve
+msgid "Approve"
+msgstr "وافق"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Attach a file"
+msgstr "إرفاق ملف"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_attachment_count
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__audit_id
+msgid "Audit"
+msgstr "المراجعة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__audit_line
+msgid "Audit Line"
+msgstr "خط المراجعة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__audit_no
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__audit_no
+msgid "Audit No."
+msgstr "رقم المراجعة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__audit_time_id
+msgid "Audit Time"
+msgstr "وقت المراجعة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__audit_time_line
+msgid "Audit Time Line"
+msgstr "خط وقت المراجعة"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_form
+msgid "Audit Timetable"
+msgstr "الجدول الزمني للتدقيق"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__auditing_on
+msgid "Auditing On"
+msgstr "التدقيق على"
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_auditing_plan
+#: model:ir.actions.report,name:kambal_document.action_report_auditing_plan
+#: model:ir.ui.menu,name:kambal_document.menu_auditing_plan_action
+#: model:ir.ui.menu,name:kambal_document.menu_auditing_plan_action_child
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_tree
+msgid "Auditing Plan"
+msgstr "خطة المراجعة"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_form
+msgid "Auditing Plan Information"
+msgstr "معلومات خطة المراجعة"
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_auditing_procedure
+#: model:ir.ui.menu,name:kambal_document.menu_action_auditing_procedure
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_tree
+msgid "Auditing Procedure"
+msgstr "إجراءات المراجعة"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__auditor
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__auditor
+msgid "Auditor"
+msgstr "المدقق"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__auditor_name
+msgid "Auditor Name"
+msgstr "اسم المدقق"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__auditor_rank
+msgid "Auditor Rank"
+msgstr "رتبة المدقق"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_search
+msgid "Audoting Procedure"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_form
+msgid "Audoting Procedure Information"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__benefits
+msgid "Benefits From Aim"
+msgstr ""
+
+#. module: kambal_document
+#: model:documents.tag,name:kambal_document.documents_internal_status_cancel
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__request_type__cancel
+msgid "Cancel"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__quality_plan__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__chance_improvement
+msgid "Chance of Improvement"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_description__setting__change_risk
+msgid "Change Risk"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__internal_auditors_accredited_line__auditor_rank__cheif
+msgid "Cheif"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__closing_date
+msgid "Closing Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__company_id
+msgid "Company"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions_request__non_conformity_due__complaint
+msgid "Complaint"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__complaint_date
+msgid "Complaint Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__completion_date
+msgid "Completion Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_config
+#: model:ir.ui.menu,name:kambal_document.menu_action_config
+msgid "Configuration"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__state__confirm
+#: model:ir.model.fields.selection,name:kambal_document.selection__quality_plan__state__confirm
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Confirm"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__corrective_id
+msgid "Corrective"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__corrective_action
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__corrective_action
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "Corrective Action"
+msgstr "اجراء تصحيحي"
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "Corrective Action Follow up This Part Filled by Follow up Responsible"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid ""
+"Corrective Action was not Implemented in Time and following will proceed"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_corrective_actions
+#: model:ir.ui.menu,name:kambal_document.menu_action_corrective_actions
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_tree
+msgid "Corrective Actions"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_form
+msgid "Corrective Actions Information"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__corrective_actions_line
+msgid "Corrective Actions Line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_corrective_request_actions
+#: model:ir.ui.menu,name:kambal_document.menu_action_corrective_actions_request
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_tree
+msgid "Corrective Actions Request"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__create_uid
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__create_date
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__date_part
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__date
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__date
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditor_search
+msgid "Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_plan__ac_exe_time__days
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_plan__exe_time__days
+msgid "Days"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_description__setting__decrease_risk
+msgid "Decrease Risk"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__department
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__department
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__department
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__department
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__department
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__department
+#: model_terms:ir.ui.view,arch_db:kambal_document.report_auditing_plan_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+msgid "Department"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__department
+msgid "Department Audit"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__state__department_manager
+msgid "Department Manager"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+msgid "Departments"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__display_name
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__doc_no
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__doc_no
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditor_search
+msgid "Doc No."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_documents_document
+#: model:ir.model.fields,field_description:kambal_document.field_documents_document__request_id
+msgid "Document"
+msgstr "المستند"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__document_from_attach
+msgid "Document Form Attachment"
+msgstr "نموذج وثيقة مرفق"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__document_name
+msgid "Document Name"
+msgstr "اسم المستند"
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_document_request
+#: model:ir.ui.menu,name:kambal_document.menu_document_request_action
+#: model:ir.ui.menu,name:kambal_document.menu_document_request_root
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_tree
+msgid "Document Request"
+msgstr "طلب المستند"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__document_number
+msgid "Document Verison Number"
+msgstr "رقم إصدار المستند"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__doc_name
+msgid "Document name"
+msgstr "اسم المستند"
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__done
+msgid "Done"
+msgstr "تم"
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_procedure__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions_request__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__internal_audit__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__internal_auditors_trained_accredited__state__draft
+#: model:ir.model.fields.selection,name:kambal_document.selection__quality_plan__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__effect
+msgid "Effect P"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_hr_employee
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__employee
+msgid "Employee"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__adjustment_evaluation
+msgid "Evaluate the effectiveness of the adjustment"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__start_date
+msgid "Execution Start Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__execution_time
+msgid "Execution time"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__Expiry_Standard
+msgid "Expiry Standard"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__field
+msgid "Field"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__first_follow_up
+msgid "First Follow up"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_follower_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_partner_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_document_request__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__activity_type_icon
+#: model:ir.model.fields,help:kambal_document.field_risk_management__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan__state__gm
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__state__gm
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_form
+msgid "GM / Executive Manager"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditor_search
+msgid "Group By"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__has_message
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__id
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__id
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__id
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__id
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__id
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__id
+msgid "ID"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_exception_icon
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_document_request__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__activity_exception_icon
+#: model:ir.model.fields,help:kambal_document.field_risk_management__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_unread
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_unread
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_unread
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_unread
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_unread
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_unread
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_unread
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_unread
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_unread
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_unread
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_needaction
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_has_sms_error
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_has_error
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__implementation_date
+msgid "Implementation Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__aim_subject
+msgid "Improving Subject(Aim)"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_internal_audit
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions_request__non_conformity_due__internal_audit
+#: model:ir.ui.menu,name:kambal_document.menu_action_internal_audit
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_tree
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_tree
+msgid "Internal Audit"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__internal_audit_line
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__internal_audit_line
+msgid "Internal Audit Line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__internal_audit_no
+msgid "Internal Audit No."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_internal_audit_report
+#: model:ir.ui.menu,name:kambal_document.menu_action_internal_audit_report
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_search
+msgid "Internal Audit Report"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__internal_auditor_id
+msgid "Internal Auditor"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditors_form
+msgid "Internal Auditor Information"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditor_search
+msgid "Internal Auditors"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_internal_auditors
+#: model:ir.ui.menu,name:kambal_document.menu_action_internal_auditors
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditor_tree
+msgid "Internal Auditors Trained Accredited"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_hr_employee__is_audit
+msgid "Is Audit"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_is_follower
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__issue_date
+msgid "Issue Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__issue_number
+msgid "Issue Number"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__job
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__job_title
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__job_title
+msgid "Job Title"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_document_request____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan____last_update
+#: model:ir.model.fields,field_description:kambal_document.field_year_month____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__write_uid
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__write_date
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__location
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__location
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__location
+msgid "Location"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_main_attachment_id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__internal_auditors_accredited_line__auditor_rank__member
+msgid "Member"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_has_error
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Modify Document Information"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__year_month
+#: model:ir.model.fields,field_description:kambal_document.field_year_month__name
+msgid "Month"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__months
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_plan__ac_exe_time__months
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_plan__exe_time__months
+#: model:ir.ui.menu,name:kambal_document.menu_year_month
+msgid "Months"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__my_activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__emp_name
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__name
+msgid "Name"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__request_type__new
+msgid "New"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "New Document Information"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_date_deadline
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_summary
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_type_id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_procedure_line__done__no
+msgid "No"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions_request__non_conformity_due__non_conformity
+msgid "Non Conformity"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__non_conformity_due
+msgid "Non Conformity Due"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__non_conformity_found
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_form
+msgid "Non Conformity Found"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__notes
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__notes
+msgid "Notes"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__notes_about_risks_and_opportunities
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_form
+msgid "Notes about Risks and Opportunities"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_needaction_counter
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_has_error_counter
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_needaction_counter
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_has_error_counter
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_document_request__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__message_unread_counter
+#: model:ir.model.fields,help:kambal_document.field_risk_management__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__plan_id
+msgid "Plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__postpone_to
+msgid "Postpone To"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__prepare_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__prepare_date
+msgid "Preparation Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__prepared_by
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__prepared_by
+msgid "Prepared By"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__probability
+msgid "Probability C"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__problem_description
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "Problem Description"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__procedure
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__procedure_id
+msgid "Procedure"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__procedure_line
+msgid "Procedure Line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity
+msgid "Process/Activity"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__processing_plan
+msgid "Processing Plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__proposed_corrective_actions
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_report_form
+msgid "Proposed Corrective Actions"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__proposed_modifications
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Proposed Modifications"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_line__purpose
+msgid "Purpose"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__quality_department_decision
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Quality Department Decision"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan__state__quality_manager
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_procedure__state__quality_manager
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions__state__quality_manager
+#: model:ir.model.fields.selection,name:kambal_document.selection__corrective_actions_request__state__quality_manager
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__state__quality_manager
+#: model:ir.model.fields.selection,name:kambal_document.selection__internal_audit__state__quality_manager
+#: model:ir.model.fields.selection,name:kambal_document.selection__internal_auditors_trained_accredited__state__quality_manager
+msgid "Quality Manager"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditors_form
+msgid "Quality Manager Approve"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_quality_plan
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_quality_plan_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_quality_plan_tree
+msgid "Quality Plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.ui.menu,name:kambal_document.menu_quality_plans_action
+msgid "Quality Plans"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__reasons_justifications
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+msgid "Reasons and Justifications"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_description__setting__remove_risk
+msgid "Remove Risk"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__report_no
+msgid "Report No."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__request_date
+msgid "Request Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__request_no
+msgid "Request No."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__request_type
+msgid "Request Type"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__requester
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+msgid "Requester"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__req_resource_ids
+msgid "Required Resource"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__responsibe
+msgid "Responsibe"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__responsible
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__responsible
+msgid "Responsible"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__activity_user_id
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__icons
+msgid "Result"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__reviewed_by
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__reviewed_by
+msgid "Reviewed By"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__review_date
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__review_date
+msgid "Reviewing Date"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_risk_assessment
+#: model:ir.ui.menu,name:kambal_document.menu_risk_assessment_action
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_risk_assessment_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_risk_assessment_tree
+msgid "Risk Assessment"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__risk_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__risk_description
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__risk_id
+msgid "Risk Description"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_risk_management
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__risk_management_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__risk_management_id
+#: model:ir.ui.menu,name:kambal_document.menu_risk_management_action
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_risk_management_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_risk_management_tree
+msgid "Risk Management"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "Root Cause Problem"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__root_cause_problem
+msgid "Root Cause of Problem"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_has_sms_error
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__second_follow_up
+msgid "Second Follow up"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "Send To for Follow up"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditors_form
+msgid "Set To Draft"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__setting
+msgid "Setting"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__standard_used
+msgid "Standard Used"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__state
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__state
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__state
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__state
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__state
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__state
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__state
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__state
+msgid "State"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_plan_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_auditing_procedure_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_document_request_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_audit_search
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_internal_auditor_search
+msgid "Status"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__activity_state
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__activity_state
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__activity_state
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__activity_state
+#: model:ir.model.fields,help:kambal_document.field_document_request__activity_state
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__activity_state
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__activity_state
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__activity_state
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__activity_state
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__activity_state
+#: model:ir.model.fields,help:kambal_document.field_risk_management__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__corrective_action_implemeted
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "The following Corrective Actions was implemented"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_line__third_follow_up
+msgid "Third Follow up"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_corrective_actions_request_form
+msgid "This Part Filled by Problem Responsible Auditee"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_audit_timetable__time
+msgid "Time"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_description__setting__transfer_risk
+msgid "Transfer Risk"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure_line__type
+msgid "Type"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_document_request__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__activity_exception_decoration
+#: model:ir.model.fields,help:kambal_document.field_risk_management__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_unread
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__message_unread_counter
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: kambal_document
+#: model:documents.tag,name:kambal_document.documents_internal_status_update
+#: model:ir.model.fields.selection,name:kambal_document.selection__document_request__request_type__update
+msgid "Update"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_documents_document__version_number
+msgid "Version Number"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_procedure__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_corrective_actions_request__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_audit_report__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_trained_accredited__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_assessment__website_message_ids
+#: model:ir.model.fields,field_description:kambal_document.field_risk_management__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,help:kambal_document.field_auditing_plan__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_auditing_procedure__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_corrective_actions_request__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_document_request__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_internal_audit__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_internal_audit_report__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_internal_auditors_trained_accredited__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_quality_plan__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_risk_assessment__website_message_ids
+#: model:ir.model.fields,help:kambal_document.field_risk_management__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_auditing_plan_line__month_week
+msgid "Week"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_quality_plan__work_plan_ids
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__quality_plan_id
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_quality_plan_form
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_risk_assessment_form
+msgid "Work Plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_document_request__folder_id
+msgid "Work Space"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_internal_auditors_accredited_line__working_department
+msgid "Working Department"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.actions.act_window,name:kambal_document.action_year_month
+#: model_terms:ir.ui.view,arch_db:kambal_document.view_year_month_tree
+msgid "Year Month"
+msgstr ""
+
+#. module: kambal_document
+#: model_terms:ir.ui.view,arch_db:kambal_document.report_auditing_plan_document
+msgid "Year Months"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_plan__ac_exe_time__year
+#: model:ir.model.fields.selection,name:kambal_document.selection__risk_plan__exe_time__year
+msgid "Years"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_procedure_line__done__yes
+msgid "Yes"
+msgstr ""
+
+#. module: kambal_document
+#: code:addons/kambal_document/models/document_request.py:0
+#: code:addons/kambal_document/models/document_request.py:0
+#, python-format
+msgid "You want to upload the document"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_description__assessment
+msgid "assessment P*C"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_audit_timetable
+msgid "audit.timetable"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_auditing_plan
+msgid "auditing.plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_auditing_plan_line
+msgid "auditing.plan.line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_auditing_procedure
+msgid "auditing.procedure"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_auditing_procedure_line
+msgid "auditing.procedure.line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_corrective_actions
+msgid "corrective.actions"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_corrective_actions_line
+msgid "corrective.actions.line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_corrective_actions_request
+msgid "corrective.actions.request"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_document_request
+msgid "document.request"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_internal_audit
+msgid "internal.audit"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_internal_audit_line
+msgid "internal.audit.line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_internal_audit_report
+msgid "internal.audit.report"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_internal_auditors_accredited_line
+msgid "internal.auditors.accredited.line"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_internal_auditors_trained_accredited
+msgid "internal.auditors.trained.accredited"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__ac_exe_time
+#: model:ir.model.fields,field_description:kambal_document.field_risk_plan__exe_time
+msgid "period"
+msgstr ""
+
+#. module: kambal_document
+#: code:addons/kambal_document/models/risk_assessment.py:0
+#, python-format
+msgid "probability and effect must be greater than 1 and less than 5 !"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_quality_plan
+msgid "quality.plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_resource_name__resource_name
+msgid "resource name"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_resource_name
+msgid "resource.name"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_risk_assessment
+msgid "risk.assessment"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_risk_description
+msgid "risk.description"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_risk_management
+msgid "risk.management"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_risk_plan
+msgid "risk.plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields,field_description:kambal_document.field_work_plan__step
+msgid "step"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_work_plan
+msgid "work.plan"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model,name:kambal_document.model_year_month
+msgid "year.month"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan_line__icons__1
+msgid "تدقيق داخلي مخطط له"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan_line__icons__2
+msgid "تدقيق داخلي منفذ - لا توجد حالات عدم مطابقة"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan_line__icons__3
+msgid "تدقيق داخلي منفذ - هنالك حالات عدم مطابقة , ولم تتم معالجتها"
+msgstr ""
+
+#. module: kambal_document
+#: model:ir.model.fields.selection,name:kambal_document.selection__auditing_plan_line__icons__4
+msgid "تدقيق داخلي منفذ - هنالك حالات عدم مطابقة ولكن تمت معالجتها"
+msgstr ""
