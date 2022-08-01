@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--        <data noupdate="1">-->
+
+    <record id="car_att_sequence" model="ir.sequence">
+        <field name="name">contract</field>
+        <field name="code">car.att</field>
+        <field name="prefix">CA</field>
+        <field name="padding">3</field>
+    </record>
+    <record id="contract_sequence" model="ir.sequence">
+        <field name="name">contract</field>
+        <field name="code">car.contract.seq</field>
+        <field name="prefix">C</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--    car.fuel.seq-->
+    <record id="fuel_sequence" model="ir.sequence">
+        <field name="name">fuel</field>
+        <field name="code">car.fuel.seq</field>
+        <field name="prefix">F</field>
+        <field name="padding">3</field>
+    </record>
+    <!--    Sequences for Loans-->
+    <record id="loans_sequence" model="ir.sequence">
+        <field name="name">Loan</field>
+        <field name="code">loan.seq</field>
+        <field name="prefix">L</field>
+        <field name="padding">3</field>
+    </record>
+    <!-- Sequences for Stop Loans -->
+    <record id="stop_loans_sequence" model="ir.sequence">
+        <field name="name">Stop Loans</field>
+        <field name="code">stop.loan.seq</field>
+        <field name="prefix">SL</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!-- Sequences for clearance Loans -->
+    <record id="clear_loans_sequence" model="ir.sequence">
+        <field name="name">Loans Clearance</field>
+        <field name="code">loan.clearance.seq</field>
+        <field name="prefix">LC</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--    car monthly fees seq-->
+
+    <record id="car_monthly_sequence" model="ir.sequence">
+        <field name="name">car monthly fees</field>
+        <field name="code">car.monthly.seq</field>
+        <field name="prefix">C</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--    clean follow seq-->
+    <record id="clean_follow_sequence" model="ir.sequence">
+        <field name="name">Clean Follow</field>
+        <field name="code">clean.follow.seq</field>
+        <field name="prefix">C</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--    sanitation follow seq-->
+    <record id="sani_follow_sequence" model="ir.sequence">
+        <field name="name">Sanitation Follow</field>
+        <field name="code">sanitation.follow.seq</field>
+        <field name="prefix">S</field>
+        <field name="padding">3</field>
+    </record>
+    <!--   sanitation calculation seq-->
+    <record id="san_cal_sequence" model="ir.sequence">
+        <field name="name">sanitation calculation</field>
+        <field name="code">sanitation.calculation.seq</field>
+        <field name="prefix">C</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--    garbage follow seq-->
+    <record id="gar_follow_sequence" model="ir.sequence">
+        <field name="name">Garbage Follow</field>
+        <field name="code">garbage.follow.seq</field>
+        <field name="prefix">G</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--    Garbage Calculation -->
+    <record id="gar_cal_sequence" model="ir.sequence">
+        <field name="name">Garbage Calculation</field>
+        <field name="code">garbage.calculation.seq</field>
+        <field name="prefix">GC</field>
+        <field name="padding">3</field>
+    </record>
+
+
+    <!--worker meal seq-->
+    <record id="wo_meal_sequence" model="ir.sequence">
+        <field name="name">worker meal</field>
+        <field name="code">worker.meal.seq</field>
+        <field name="prefix">WM</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--worker meal subsidy seq-->
+    <record id="wo_meal_sub_sequence" model="ir.sequence">
+        <field name="name">worker meal subsidy</field>
+        <field name="code">worker.meal.subsidy.seq</field>
+        <field name="prefix">MS</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--worker meal cancel subsidy seq-->
+    <record id="wo_meal_cancel_sequence" model="ir.sequence">
+        <field name="name">worker meal cancel subsidy</field>
+        <field name="code">worker.meal.cancel.subsidy.seq</field>
+        <field name="prefix">CM</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--worker meal cost seq-->
+    <record id="wo_cost_sequence" model="ir.sequence">
+        <field name="name">worker meal cost</field>
+        <field name="code">worker.meal.cost.seq</field>
+        <field name="prefix">WMC</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--employee meal cost seq-->
+    <record id="emp_meal_sequence" model="ir.sequence">
+        <field name="name">employee meal cost</field>
+        <field name="code">employee.meal.cost.seq</field>
+        <field name="prefix">EM</field>
+        <field name="padding">3</field>
+    </record>
+
+    <!--meal cost cal seq-->
+    <record id="meal_cost_cal_sequence" model="ir.sequence">
+        <field name="name">meal cost calculation</field>
+        <field name="code">meal.cost.cal.seq</field>
+        <field name="prefix">MC</field>
+        <field name="padding">3</field>
+    </record>
+
+
+    <!--SIM Card seq-->
+    <record id="sim_card_sequence" model="ir.sequence">
+        <field name="name">SIM Card</field>
+        <field name="code">sim.card.seq</field>
+        <field name="prefix">SIM</field>
+        <field name="padding">3</field>
+    </record>
+
+    <record id="apr_rent_sequence" model="ir.sequence">
+        <field name="name">Apartment Rent</field>
+        <field name="code">apr.rent.seq</field>
+        <field name="prefix">AR</field>
+        <field name="padding">3</field>
+    </record>
+
+    <record id="pro_health_sequence" model="ir.sequence">
+        <field name="name">product health</field>
+        <field name="code">product.health.seq</field>
+        <field name="prefix">PH</field>
+        <field name="padding">3</field>
+    </record>
+
+
+</odoo>

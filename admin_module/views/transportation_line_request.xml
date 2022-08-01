@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="transportation_line_request_sequence" model="ir.sequence">
+            <field name="name">sequence_name</field>
+            <field name="code">transportation.line.request</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="view_transportation_line_request_form" model="ir.ui.view">
+            <field name="name">transportation.line.request.form</field>
+            <field name="model">transportation.line.request</field>
+            <field name="arch" type="xml">
+                <form string="Transportation Line Request">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_approve2" string="Approve" type="object" states="approve"
+                                class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2"
+                                class="btn-primary"
+                                groups="admin_module.group_executive_manager"/>
+                        <button name="action_cancel" states="confirm,approve,approve2,done" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,approve2,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num"/>
+                                <field name="requester"/>
+                                <field name="line_type"/>
+                                <field name="new_destination"
+                                       attrs="{'invisible': [ ('line_type','!=','extension')]}"/>
+                            </group>
+                            <group>
+                                <field name="date_time"/>
+                                <field name="department"/>
+                                <field name="destination" attrs="{'invisible': [ ('line_type','!=','new')]}"/>
+                                <field name="current_destination"
+                                       attrs="{'invisible': [ ('line_type','!=','extension')], 'readonly': [('line_type','!=','extension'),]}"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Employee Transport List" name="employee_transport_list">
+                                <field name="employee_transport_list_ids" nolabel="1">
+                                    <tree editable="top" create="1" delete="1" multi_edit="1" string="Employees">
+                                        <field name="employee" required="1"/>
+                                        <field name="department" required="1"/>
+                                        <field name="position" required="1"/>
+                                        <field name="address" required="1"/>
+                                        <field name="phone_number" required="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_transportation_line_request_tree" model="ir.ui.view">
+            <field name="name">transportation.line.request.tree</field>
+            <field name="model">transportation.line.request</field>
+            <field name="arch" type="xml">
+                <tree string="Transportation Line Request">
+                    <field name="doc_num"/>
+                    <field name="destination"/>
+                    <field name="requester"/>
+                    <field name="department"/>
+
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        <record id="transportation_cars_sequence" model="ir.sequence">-->
+        <!--            <field name="name">sequence_name</field>-->
+        <!--            <field name="code">transportation.cars.attendance</field>-->
+        <!--            <field name="padding">4</field>-->
+        <!--        </record>-->
+        <record id="view_transportation_cars_attendance_form" model="ir.ui.view">
+            <field name="name">transportation.cars.attendance.form</field>
+            <field name="model">transportation.cars.attendance</field>
+            <field name="arch" type="xml">
+                <form string="Transportation Cars Attendance">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_cancel" states="confirm,approve" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="doc_num"/>
+                            <field name="date"/>
+                            <!--                            <field name="is_driver" invisible="1"/>-->
+                            <!--                            <field name="is_owner" invisible="1"/>-->
+                        </group>
+                        <notebook>
+                            <page string="Line" name="car_transport_list">
+                                <field name="cars_transport_list_ids" nolabel="1">
+                                    <tree editable="top" create="1" delete="1" multi_edit="1" string="line">
+                                        <field name="car_no" required="1"/>
+                                        <field name="is_driver" invisible="1"/>
+                                        <field name="is_owner" invisible="1"/>
+                                        <field name="driver_name"
+                                               attrs="{'invisible':[('is_driver', '!=', True)]}"/>
+                                        <field name="car_owner"
+                                               attrs="{'invisible': [ ('is_driver','!=',False)]}"/>
+                                        <field name="absent_reasons"/>
+                                        <field name="transport_line_id" required="1"/>
+                                        <field name="attend_time" required="1" widget="float_time"/>
+                                        <field name="leave_time" required="1" widget="float_time"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_transportation_cars_attendance_tree" model="ir.ui.view">
+            <field name="name">transportation.cars.attendance.tree</field>
+            <field name="model">transportation.cars.attendance</field>
+            <field name="arch" type="xml">
+                <tree string="Transportation Cars Attendance">
+                    <field name="doc_num"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        inherit fleet vehicle-->
+        <record id="view_fleet" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <field name="employee_id" position="replace">
+                    <field name="employee_id" required="0" attrs="{'invisible': [('is_outsource_car', '=', True)]}"/>
+                </field>
+                <xpath expr="//field[@name='tag_ids']"
+                       position="after">
+                    <group col="2">
+                        <field name="is_company_car"/>
+                        <field name="is_outsource_car"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']"
+                       position="after">
+                    <field name="car_owner" attrs="{'invisible': [ ('is_outsource_car','!=',True)]}"/>
+                </xpath>
+            </field>
+        </record>
+        <!--        inherit res partner-->
+        <record id="view_vendor" model="ir.ui.view">
+            <field name="name">inherit.res.partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']"
+                       position="before">
+                    <group col="2">
+                        <field name="is_car_owner"/>
+                        <field name="is_contractor"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

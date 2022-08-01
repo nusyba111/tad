@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--      SIM increase request tree view-->
+        <record id="sim_card_tree_view" model="ir.ui.view">
+            <field name="name">sim.card.tree</field>
+            <field name="model">sim.card</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!--        sim card form view-->
+        <record id="sim_card_form_view" model="ir.ui.view">
+            <field name="name">sim.card.form</field>
+            <field name="model">sim.card</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_approve2" string="Approve" type="object" states="approve"
+                                class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2" class="btn-primary"
+                                groups="admin_module.group_executive_manager"/>
+                        <button name="action_cancel" states="confirm,approve,approve2,done" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,approve2,done"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="doc_num" readonly="1"/>
+                            <field name="date"/>
+                            <field name="requester"/>
+                            <field name="requester_dep"/>
+
+                            <field name="new_date_inc"/>
+                        </group>
+                        <notebook>
+                            <page name="sim card info" string="SIM Cards">
+                                <field name="sim_info_ids">
+                                    <tree editable="bottom">
+                                        <field name="emp_name"/>
+                                        <field name="dep"/>
+                                        <field name="sim_card_type"/>
+                                        <field name="comp_name"/>
+                                        <field name="phone_num"/>
+                                        <field name="cur_cred_giga"/>
+                                        <field name="pro_cred_giga"/>
+                                        <field name="app_cred_giga"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="emp_name"/>
+                                            <field name="dep"/>
+                                            <field name="sim_card_type"/>
+                                            <field name="comp_name"/>
+                                            <field name="phone_num"/>
+                                            <field name="cur_cred_giga"/>
+                                            <field name="pro_cred_giga"/>
+                                            <field name="app_cred_giga"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group col="2">
+                            <field name="reasons"/>
+                            <field name="mang_dec"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

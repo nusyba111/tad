@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <data>-->
+<!--        <record id="view_wizard_car" model="ir.ui.view">-->
+<!--            <field name="name">car.report.xls1.main.report</field>-->
+<!--            <field name="model">car.report.xls1.main</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Car">-->
+<!--                    <group>-->
+<!--                        <field name="from_date"/>-->
+<!--                        <field name="to_date"/>-->
+<!--                        <field name="car"/>-->
+<!--                    </group>-->
+<!--                    <footer>-->
+<!--                        <button name="print_report" string="print" type="object" class="oe_highlight"/>-->
+<!--                        or-->
+<!--                        <button string="Cancel" class="oe_link" special="cancel"/>-->
+<!--                    </footer>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record model="ir.ui.view" id="view_car_excel">-->
+<!--            <field name="name">xlsx.wizard</field>-->
+<!--            <field name="model">xlsx.wizard</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="File to Downloads">-->
+<!--                    <field name="name" invisible="1"/>-->
+<!--                    <field name="download_file" filename="name"/>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="action_view_car_id" model="ir.actions.act_window">-->
+<!--            <field name="name">Car Attendance</field>-->
+<!--            <field name="res_model">car.report.xls1.main</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="view_id" ref="view_wizard_car"/>-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+
+<!--        <menuitem action="action_view_car_id" name="Car Attendance XLS" id="car_report"-->
+<!--                  parent="report_root"/>-->
+
+
+<!--    </data>-->
+</odoo>

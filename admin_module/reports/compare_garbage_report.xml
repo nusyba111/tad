@@ -1,0 +1,109 @@
+<odoo>
+    <record id="report_compare_all_garbage" model="ir.actions.report">
+        <field name="name">Compare Garbage Report From Action</field>
+        <field name="model">report.admin_module.template_report_compare_garbage</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">admin_module.template_report_compare_garbage</field>
+        <field name="report_file">admin_module.template_report_compare_garbage</field>
+    </record>
+
+    <template id="template_report_compare_garbage">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h3 align="center">الشؤون الادارية</h3>
+                            </strong>
+                            <strong>
+                                <h4 align="center">قسم الخدمات</h4>
+                            </strong>
+                            <strong>
+                                <h4>مقارنة متابعة النفايات</h4>
+                            </strong>
+                            <strong>
+                                <h5>للعام</h5>
+                                <span t-esc="info['f_year']"/>
+                            </strong>
+                        </div>
+                        <br/>
+                    </div>
+                    <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <thead style="display:table-header-group">
+                            <tr style="text-align: center;">
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">الشهر
+                                </td>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">عدد الادوار المتفق عليها
+                                </td>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">قيمة الدور
+                                </td>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">الاجمالي
+                                </td>
+                            </tr>
+                        </thead>
+                        <t t-set="total_count" t-value="0"/>
+                        <t t-set="total_cost" t-value="0"/>
+                        <t t-set="total_all" t-value="0"/>
+                        <t t-foreach="get_compare_garbage_details" t-as="obj">
+                            <tr style=" border: 1px solid black;text-align: center;" width="15%">
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    t-esc="obj['month']"/>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    t-esc="obj['total_count']"/>
+                                <t t-set="total_count" t-value="total_count + obj['total_count']"/>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    t-esc="obj['total_cost']"/>
+                                <t t-set="total_cost" t-value="total_cost + obj['total_cost']"/>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    t-esc="obj['total_all']"/>
+                                <t t-set="total_all" t-value="total_all + obj['total_all']"/>
+                            </tr>
+                        </t>
+                        <td style=" border: 1px solid black;text-align: center;" width="15%">
+                            الإجمالي
+                        </td>
+                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                            <t t-esc="total_count"/>
+                        </td>
+                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                            <t t-esc="total_cost"/>
+                        </td>
+                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                            <t t-esc="total_all"/>
+                        </td>
+                        <br/>
+                        <br/>
+                        <table dir="rtl" class="table" style="margin-top: 30%">
+                            <tr class="text-right">
+                                <td colspan="3"></td>
+                                <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                                <td colspan="3">مدير الشؤون الادارية</td>
+                            </tr>
+                            <tr class="text-right">
+                                <td colspan="3">الاسم</td>
+                                <td colspan="3">
+                                    .............................
+                                </td>
+                                <td colspan="3">
+                                    .............................
+                                </td>
+                            </tr>
+                            <tr class="text-right">
+                                <td colspan="3">التوقيع</td>
+                                <td colspan="3">.............................</td>
+                                <td colspan="3">.............................</td>
+                            </tr>
+                        </table>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

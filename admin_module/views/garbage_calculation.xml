@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--     Garbage calculation tree view-->
+    <record id="gar_cal_tree_view" model="ir.ui.view">
+        <field name="name">garbage.calculation.tree</field>
+        <field name="model">garbage.calculation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="doc_num"/>
+            </tree>
+        </field>
+    </record>
+    <!--                Garbage calculation form view-->
+    <record id="gar_cal_form_view" model="ir.ui.view">
+        <field name="name">garbage.calculation.form</field>
+        <field name="model">garbage.calculation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" states="draft"
+                            class="btn-primary" groups="admin_module.group_service_section_head"/>
+                    <button name="action_approve" string="Approve" type="object" states="confirm"
+                            class="btn-primary"
+                            groups="admin_module.group_admin_manager"/>
+                    <button name="action_approve2" string="Approve" type="object" states="approve"
+                            class="btn-primary"
+                            groups="admin_module.group_executive_manager"/>
+                    <button name="action_done" string="Approve" type="object" states="approve2"
+                            class="btn-primary"
+                            groups="admin_module.group_finance_manager"/>
+                    <button name="action_cancel" states="confirm,approve,approve2,done" type="object" string="Cancel"
+                            class="btn-primary"/>
+                    <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirm,approve,approve2,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="doc_num" readonly="1"/>
+                            <field name="date_from"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Garbage Total" string="Garbage Total">
+                            <field name="gar_info_ids">
+                                <tree editable="bottom">
+                                    <field name="contractor"/>
+                                    <field name="total"/>
+                                    <field name="agreed_count"/>
+                                    <field name="additional_count"/>
+                                    <field name="cost"/>
+                                    <field name="total_cost"/>
+                                    <field name="notes"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="contractor"/>
+                                        <field name="total"/>
+                                        <field name="agreed_count"/>
+                                        <field name="additional_count"/>
+                                        <field name="cost"/>
+                                        <field name="total_cost"/>
+                                        <field name="notes"/>
+
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group col="4">
+                        <field name="total_cost_total"/>
+                        <!--                        <field name="total_agreed_report"/>-->
+                        <!--                        <field name="total_cost_report"/>-->
+                        <!--                        <field name="total_allreport"/>-->
+                        <field name="payment_number"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

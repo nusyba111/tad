@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--      loan car request tree view-->
+        <record id="loan_car_tree_view" model="ir.ui.view">
+            <field name="name">loan.car.tree</field>
+            <field name="model">loan.car</field>
+            <field name="arch" type="xml">
+                <tree string="Loan Car ">
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        loan car request form view-->
+        <record id="loan_car_form_view" model="ir.ui.view">
+            <field name="name">loan.car.form</field>
+            <field name="model">loan.car</field>
+            <field name="arch" type="xml">
+                <form string="Loan Car">
+                    <header>
+                        <button name="action_compute_deduction" string="Compute Deduction"
+                                class="oe_highlight" type="object"/>
+                        <!--                                groups="admin_module.group_admin_manager"/>-->
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_approve2" string="Approve" type="object" states="approve"
+                                class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2"
+                                class="btn-primary"
+                                groups="admin_module.group_executive_manager"/>
+                        <button name="action_cancel" states="confirm,approve,approve2,done" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,approve2,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                <field name="car_no"/>
+                                <field name="line"/>
+                                <label for="deduction_period"/>
+                                <div class="o_row">
+                                    <field name="deduction_period"/>
+                                    <span>month</span>
+                                </div>
+                                <field name="ded_start_date"/>
+
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="loan_type" required="1"/>
+                                <field name="contractor"
+                                       attrs="{'invisible': [('loan_type','!=','contractor')] }"/>
+                                <field name="driver_name" attrs="{'invisible': [('loan_type','!=','driver')] }"/>
+                                <field name="loan_amount"/>
+                                <field name="loan_reasons" required="1"/>
+
+                            </group>
+                        </group>
+                        <!--                        groups="admin_module.group_admin_manager"-->
+                        <notebook>
+                            <page name="Deduction Details" string="Deduction Details">
+                                <field name="loan_car_ids">
+                                    <tree editable="bottom">
+                                        <field name="date"/>
+                                        <field name="amount"/>
+                                        <field name="paid"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="date"/>
+                                            <field name="amount"/>
+                                            <field name="paid"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+<!--                        <group>-->
+<!--                            <field name="loan_reasons"/>-->
+<!--                        </group>-->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

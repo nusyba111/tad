@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    <report-->
+    <!--            id="car_report_xls"-->
+    <!--            string="Car Attendance Excel"-->
+    <!--            model="transportation.cars.attendance"-->
+    <!--            report_type="xlsx"-->
+    <!--            name="admin_module.report_car_att"-->
+    <!--            file="admin_module.report_car_att"-->
+    <!--    />-->
+</odoo>

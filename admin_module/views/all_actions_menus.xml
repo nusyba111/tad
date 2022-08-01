@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--######################    Cars Actions-->
+    <!--    transport line request -->
+    <record id="action_transportation_line_request" model="ir.actions.act_window">
+        <field name="name">Transportation Line Request</field>
+        <field name="res_model">transportation.line.request</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <record id="action_worker_transport_line_request" model="ir.actions.act_window">
+        <field name="name">Adding Worker to Transport Line</field>
+        <field name="res_model">adding.worker.to.transport.line</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--car warning-->
+    <record id="action_cars_warning" model="ir.actions.act_window">
+        <field name="name">Cars Warning</field>
+        <field name="res_model">cars.warning</field>
+        <field name="view_mode">tree,pivot,form</field>
+    </record>
+
+
+    <!--      car monthly fees action-->
+    <record id="car_fees_action" model="ir.actions.act_window">
+        <field name="name">Car Monthly Fees</field>
+        <field name="res_model">car.monthly.fees</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--    car_fuel_action-->
+    <record id="car_fuel_action" model="ir.actions.act_window">
+        <field name="name">Car Fuel</field>
+        <field name="res_model">car.fuel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--    car_fuel_calculation_action-->
+    <record id="car_fuel_calculation_action" model="ir.actions.act_window">
+        <field name="name">Car Fuel Calculation</field>
+        <field name="res_model">car.fuel.calculation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <record id="contract_action" model="ir.actions.act_window">
+        <field name="name">Car Contract</field>
+        <field name="res_model">car.contract</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--    car attendance-->
+    <record id="action_transportation_cars_attendance" model="ir.actions.act_window">
+        <field name="name">Transportation Cars Attendance</field>
+        <field name="res_model">transportation.cars.attendance</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--    ##############    Loans action-->
+    <record id="loan_action" model="ir.actions.act_window">
+        <field name="name">Loans</field>
+        <field name="res_model">loan.car</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--    loan_stop_action-->
+    <record id="loan_stop_action" model="ir.actions.act_window">
+        <field name="name">Stop Loans</field>
+        <field name="res_model">loan.car.stop</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--    clearance Loans action-->
+    <record id="clearance_loan_action" model="ir.actions.act_window">
+        <field name="name">Loans for car clearance</field>
+        <field name="res_model">loan.car.clearance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--        ############# worker action-->
+    <!--     worker meal action-->
+    <record id="worker_meal_action" model="ir.actions.act_window">
+        <field name="name">Worker Meals</field>
+        <field name="res_model">worker.meal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--      worker meal subsidy action-->
+    <record id="worker_meal_sub_action" model="ir.actions.act_window">
+        <field name="name">Worker Meals Subsidy</field>
+        <field name="res_model">worker.meal.subsidy</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--      worker meal cancel subsidy action-->
+    <record id="worker_meal_cancel_action" model="ir.actions.act_window">
+        <field name="name">Worker Meals Cancel Subsidy</field>
+        <field name="res_model">worker.meal.cancel.subsidy</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--      worker meal cost action-->
+    <record id="worker_meal_cost_action" model="ir.actions.act_window">
+        <field name="name">Worker Meals Cost Calculation</field>
+        <field name="res_model">worker.meal.cost</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--      employee meal cost action-->
+    <record id="emp_meal_cost_action" model="ir.actions.act_window">
+        <field name="name">Employee Meals Cost Calculation</field>
+        <field name="res_model">employee.meal.cost</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--  meal cost cal action-->
+    <record id="meal_cost_cal_action" model="ir.actions.act_window">
+        <field name="name">Meals Cost Calculation</field>
+        <field name="res_model">meal.cost.cal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--     ################   cleaning Menu-->
+    <!--clean follow action-->
+    <record id="clean_follow_action" model="ir.actions.act_window">
+        <field name="name">Cleaning Follow Up</field>
+        <field name="res_model">clean.follow</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--Sanitation Follow Up action-->
+    <record id="san_follow_action" model="ir.actions.act_window">
+        <field name="name">Sanitation Follow Up</field>
+        <field name="res_model">sanitation.follow</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <!--Sanitation calculation action-->
+    <record id="san_cal_action" model="ir.actions.act_window">
+        <field name="name">Sanitation calculation</field>
+        <field name="res_model">sanitation.calculation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--garbage calculation action-->
+    <record id="gar_cal_action" model="ir.actions.act_window">
+        <field name="name">Garbage Calculation</field>
+        <field name="res_model">garbage.calculation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--garbage follow action-->
+    <record id="gar_follow_action" model="ir.actions.act_window">
+        <field name="name">Garbage Follow Up</field>
+        <field name="res_model">garbage.follow</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <!--SIM Card action-->
+    <record id="sim_card_action" model="ir.actions.act_window">
+        <field name="name">SIM Card</field>
+        <field name="res_model">sim.card</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--destination.name-->
+    <record id="destination_name_action" model="ir.actions.act_window">
+        <field name="name">destination Name</field>
+        <field name="res_model">destination.name</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--clean_tool_action-->
+    <record id="clean_tool_action" model="ir.actions.act_window">
+        <field name="name">Cleaning Tools</field>
+        <field name="res_model">clean.tools</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--item_tool_action-->
+    <record id="item_tool_action" model="ir.actions.act_window">
+        <field name="name">Meal Items</field>
+        <field name="res_model">meal.item</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--     <!-hall_name_action&ndash;&gt;-->
+    <record id="hall_name_action" model="ir.actions.act_window">
+        <field name="name">Hall Name</field>
+        <field name="res_model">hall.name</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--car_status_action-->
+    <record id="car_status_action" model="ir.actions.act_window">
+        <field name="name">Car Status</field>
+        <field name="res_model">car.status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--car_status_action-->
+    <record id="loan_reasons_action" model="ir.actions.act_window">
+        <field name="name">Loan Reasons</field>
+        <field name="res_model">loan.reasons</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+    <!--apr_rent_action-->
+    <record id="apr_rent_action" model="ir.actions.act_window">
+        <field name="name">Apartment Rent Request</field>
+        <field name="res_model">apartment.rent</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--product_health_action-->
+    <record id="pro_health_action" model="ir.actions.act_window">
+        <field name="name">Product Health Licence</field>
+        <field name="res_model">product.health</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="help" type="html">
+            <p calass="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--Garbage Report_action-->
+    <record id="garbage_report_action" model="ir.actions.act_window">
+        <field name="name">Garbage Report</field>
+        <field name="res_model">garbage.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!--Garbage Report_action-->
+    <record id="garbage_follow_action" model="ir.actions.act_window">
+        <field name="name">Compare Garbage Report</field>
+        <field name="res_model">garbage.follow.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--car_loan_report_action-->
+    <record id="car_loan_report_action" model="ir.actions.act_window">
+        <field name="name">Cars Loans Report</field>
+        <field name="res_model">loan.car.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--car_att_abs_action-->
+    <!--    <record id="car_att_abs_action" model="ir.actions.act_window">-->
+    <!--        <field name="name">Car Attendance Absent</field>-->
+    <!--        <field name="res_model">car.att.abs</field>-->
+    <!--        <field name="type">ir.actions.act_window</field>-->
+    <!--        <field name="view_mode">form</field>-->
+    <!--        <field name="target">new</field>-->
+    <!--    </record>-->
+    <!--car move report action-->
+    <record id="car_move_action" model="ir.actions.act_window">
+        <field name="name">Cars Move Report</field>
+        <field name="res_model">car.move.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <!--total car move report action-->
+    <record id="total_car_move_action" model="ir.actions.act_window">
+        <field name="name">Total Cars Move Report</field>
+        <field name="res_model">total.car.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <!--total_tanker_report_action-->
+    <record id="total_tanker_report_action" model="ir.actions.act_window">
+        <field name="name">Total Tanker Report</field>
+        <field name="res_model">total.tanker.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!--sanitation_follow_action-->
+    <record id="compare_sanitation_action" model="ir.actions.act_window">
+        <field name="name">Compare Sanitation Report</field>
+        <field name="res_model">compare.sanitation.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--    inventory_scrap_action-->
+
+    <record id="inventory_scrap_action" model="ir.actions.act_window">
+        <field name="name">Inventory Scrap Report</field>
+        <field name="res_model">inventory.scrap.wiz</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--        ############### Main Menus     #############-->
+    <menuitem id="main_root" name="Administration" sequence="1"/>
+    <!--    cars menu-->
+    <menuitem id="car_menu" name="Cars" sequence="2" parent="main_root"/>
+    <menuitem id="menu_transportation_line_request"
+              name="Transportation Line Request"
+              parent="car_menu"
+              action="action_transportation_line_request"
+              sequence="1"/>
+    <menuitem id="menu_worker_transport_line_request"
+              name="Adding Worker to Transport Line"
+              parent="car_menu"
+              action="action_worker_transport_line_request"
+              sequence="2"/>
+
+
+    <menuitem id="menu_transportation_cars_attendance"
+              name="Transportation Cars Attendance"
+              parent="car_menu"
+              action="action_transportation_cars_attendance"
+              sequence="3"/>
+
+
+    <menuitem id="car_contract" name="Car Contract" action="contract_action" parent="car_menu" sequence="4"/>
+    <menuitem id="car_fees_menu" sequence="5"
+              name="Car Monthly Fees" parent="car_menu"
+              action="car_fees_action"/>
+    <menuitem id="car_fuel_menu" sequence="7"
+              name="Car Fuel  Deductions" parent="car_menu"
+              action="car_fuel_action"/>
+    <!--    car.fuel.calculation-->
+    <menuitem id="car_fuel_calculation_menu" sequence="7"
+              name="Car Fuel  Calculation" parent="car_menu"
+              action="car_fuel_calculation_action"/>
+
+
+    <menuitem id="menu_cars_warning"
+              name="Cars Warning"
+              parent="car_menu"
+              action="action_cars_warning"
+              sequence="5"/>
+
+
+    <!--    Loan Menu -->
+    <menuitem id="loan_sub_root" sequence="3"
+              name="Loans" parent="main_root"/>
+    <menuitem id="loan_req_menu" sequence="1"
+              name="Loan Car Request" parent="loan_sub_root"
+              action="loan_action"/>
+    <menuitem id="loan_car_stop" sequence="2"
+              name="Stop Loan Car Request" parent="loan_sub_root"
+              action="loan_stop_action"/>
+    <menuitem id="clearance_loan_menu" sequence="3"
+              name="Loans For Car Clearance" parent="loan_sub_root"
+              action="clearance_loan_action"/>
+
+
+    <!--############## worker Menu -->
+    <menuitem id="worker_sub_root" sequence="4"
+              name="Worker" parent="main_root"/>
+    <menuitem id="worker_meal_menu" sequence="3"
+              name="Worker Meals" parent="worker_sub_root"
+              action="worker_meal_action"/>
+    <menuitem id="worker_meal_sub_menu" sequence="3"
+              name="Worker Meals Subsidy" parent="worker_sub_root"
+              action="worker_meal_sub_action"/>
+    <menuitem id="worker_meal_cancel_menu" sequence="3"
+              name="Worker Meals Cancel Subsidy" parent="worker_sub_root"
+              action="worker_meal_cancel_action"/>
+    <menuitem id="worker_meal_cost_menu" sequence="3"
+              name="Worker Meal Cost" parent="worker_sub_root"
+              action="worker_meal_cost_action"/>
+    <menuitem id="emp_meal_cost_menu" sequence="3"
+              name="Employee Meal Cost" parent="worker_sub_root"
+              action="emp_meal_cost_action"/>
+    <menuitem id="meal_cost_cal_menu" sequence="3"
+              name="Meal Cost Calculations" parent="worker_sub_root"
+              action="meal_cost_cal_action"/>
+
+
+    <!-- ############ cleaning Menu-->
+    <menuitem id="clean_sub_root" sequence="5"
+              name="Cleaning" parent="main_root"/>
+    <menuitem id="cleaning_follow_menu" sequence="3"
+              name="Cleaning Follow-Up" parent="clean_sub_root"
+              action="clean_follow_action"/>
+    <menuitem id="san_follow_menu" sequence="3"
+              name="Sanitation Follow-Up" parent="clean_sub_root"
+              action="san_follow_action"/>
+    <menuitem id="san_cal_menu" sequence="3"
+              name="Sanitation Calculation" parent="clean_sub_root"
+              action="san_cal_action"/>
+    <menuitem id="gar_follow_menu" sequence="3"
+              name="Garbage Follow-Up" parent="clean_sub_root"
+              action="gar_follow_action"/>
+    <menuitem id="gar_cal_menu" sequence="3"
+              name="Garbage Calculation" parent="clean_sub_root"
+              action="gar_cal_action"/>
+    <menuitem id="misc_sub_root" sequence="7"
+              name="Miscellaneous" parent="main_root"/>
+
+    <!--  misc menu-->
+    <menuitem id="sim_card_menu" sequence="3"
+              name="SIM Card Ceiling Increase Request" parent="misc_sub_root"
+              action="sim_card_action"/>
+    <!--aprt rent-->
+    <menuitem id="apr_rent_menu" sequence="3"
+              name="Apartment Rent Request " parent="misc_sub_root"
+              action="apr_rent_action"/>
+    <!--    product health-->
+    <menuitem id="pro_health_menu" sequence="3"
+              name="Product Health Licence" parent="misc_sub_root"
+              action="pro_health_action"/>
+
+    <!--    configuration menu-->
+    <menuitem id="conf_sub_root" sequence="8"
+              name="Configuration" parent="main_root"/>
+    <menuitem id="destination_name_menu" sequence="1" name="Destination Name" parent="conf_sub_root"
+              action="destination_name_action"/>
+    <menuitem id="cleaning_item_menu" sequence="3"
+              name="Cleaning Tools" parent="conf_sub_root"
+              action="clean_tool_action"/>
+    <menuitem id="meal_item_menu" sequence="3"
+              name="Meal Items " parent="conf_sub_root"
+              action="item_tool_action"/>
+    <menuitem id="hall_name_menu" sequence="3"
+              name="Hall Name " parent="conf_sub_root"
+              action="hall_name_action"/>
+    <menuitem id="car_status_menu" sequence="3"
+              name="Car Status " parent="conf_sub_root"
+              action="car_status_action"/>
+
+    <menuitem id="reason_loan_menu" sequence="3"
+              name="Loan Reasons " parent="conf_sub_root"
+              action="loan_reasons_action"/>
+    <!--    reports menu-->
+    <menuitem id="report_root" sequence="9"
+              name="Reports" parent="main_root"/>
+    <menuitem id="total_car_move_menu" sequence="3"
+              name="Total Car Move Report" parent="report_root"
+              action="total_car_move_action"/>
+
+    <!--    <menuitem id="car_att_abs_excel" sequence="3"-->
+    <!--              name="Car Absent Report" parent="report_root"-->
+    <!--              action="car_att_abs_action"/>-->
+
+    <menuitem id="car_loan_report" sequence="3"
+              name="Car Loans Report" parent="report_root"
+              action="car_loan_report_action"/>
+    <menuitem id="car_move_report" sequence="3"
+              name="Car Move Report" parent="report_root"
+              action="car_move_action"/>
+
+
+    <menuitem id="total_tanker_report" sequence="3"
+              name="Total Tanker Report" parent="report_root"
+              action="total_tanker_report_action"/>
+
+    <menuitem id="garbage_report" sequence="3"
+              name="Garbage Report" parent="report_root"
+              action="garbage_report_action"/>
+
+    <menuitem id="garbage_follow_report" sequence="3"
+              name="Compare Garbage Report" parent="report_root"
+              action="garbage_follow_action"/>
+
+    <menuitem id="compare_sanitation_report" sequence="3"
+              name="Compare Sanitation Report" parent="report_root"
+              action="compare_sanitation_action"/>
+
+    <menuitem id="inventory_scrap_report" sequence="3"
+              name="Inventory Scrap Report" parent="report_root"
+              action="inventory_scrap_action"/>
+
+
+</odoo>

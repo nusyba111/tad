@@ -1,0 +1,65 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+    <data>
+        <!--    Sanitation Follow Up tree view-->
+        <record id="sani_follow_tree_view" model="ir.ui.view">
+            <field name="name">sanitation.follow.tree</field>
+            <field name="model">sanitation.follow</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+        <!--        Sanitation Follow Up form view-->
+        <record id="sani_follow_form_view" model="ir.ui.view">
+            <field name="name">sanitation.follow.form</field>
+            <field name="model">sanitation.follow</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_security"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2" class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_cancel" states="confirm,approve,done" type="object" string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                <field name="type_of_well"/>
+                                <!--                                <field name="total_commercial"/>-->
+                                <!--                                <field name="total_company"/>-->
+                                <!--                                <field name="total"/>-->
+                                <field name="car_no"
+                                       attrs="{'invisible': [('tanker_type','!=','company')] }"/>
+                                <field name="receipt_no"
+                                       attrs="{'invisible': [('tanker_type','!=','commercial')] }"/>
+                                <field name="time_in" widget="float_time"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="tanker_type"/>
+                                <field name="driver_name"/>
+                                <field name="time_out" widget="float_time"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

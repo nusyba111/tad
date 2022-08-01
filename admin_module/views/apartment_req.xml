@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--     apartment rent tree view-->
+        <record id="apr_rent_tree_view" model="ir.ui.view">
+            <field name="name">apartment.rent.tree</field>
+            <field name="model">apartment.rent</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+        <!--        apartment rent form view-->
+        <record id="apr_rent_form_view" model="ir.ui.view">
+            <field name="name">apartment.rent.form</field>
+            <field name="model">apartment.rent</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary" groups="admin_module.group_executive_manager"/>
+                        <!--                        <button name="action_done" string="Approve" type="object" states="approve"-->
+                        <!--                                class="btn-primary"-->
+                        <!--                                groups="admin_module.group_executive_manager"/>-->
+                        <button name="action_cancel" states="confirm,approve," type="object" string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                <field name="requester"/>
+                                <field name="priority" widget="priority"/>
+                                <field name="rent_for"/>
+                                <field name="first_date"/>
+                                <label for="days"/>
+                                <div class="o_row">
+                                    <field name="days"/>
+                                    <span>days</span>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="requester_dep"/>
+                                <field name="rent_type"/>
+                                <field name="sec_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="employee/guest info" string="Employee/Guest information">
+                                <field name="emp_guest_ids">
+                                    <tree editable="bottom">
+                                        <field name="rent_for" required="1"/>
+                                        <field name="guest" attrs="{'invisible': [('rent_for','!=','guest')] }"/>
+                                        <field name="employee" attrs="{'invisible': [('rent_for','!=','employee')] }"/>
+                                        <field name="dep" attrs="{'invisible': [('rent_for','!=','employee')] }"/>
+                                        <field name="job_position"
+                                               attrs="{'invisible': [('rent_for','!=','employee')] }"/>
+                                        <field name="address"/>
+                                        <field name="phone_num"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="rent_for" required="1"/>
+                                            <field name="guest" attrs="{'invisible': [('rent_for','!=','guest')] }"/>
+                                            <field name="employee"
+                                                   attrs="{'invisible': [('rent_for','!=','employee')] }"/>
+                                            <field name="dep" attrs="{'invisible': [('rent_for','!=','employee')] }"/>
+                                            <field name="job_position"
+                                                   attrs="{'invisible': [('rent_for','!=','employee')] }"/>
+                                            <field name="address"/>
+                                            <field name="phone_num"/>
+                                            <field name="notes"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="purpose"/>
+                        </group>
+                        <group>
+                            <!--                    groups="admin_module.group_admin_manager">-->
+                            <group>
+                                <field name="owner_name"/>
+                                <field name="address"/>
+                                <field name="payment_date"/>
+                            </group>
+                            <group>
+                                <field name="owner_phone"/>
+                                <label for="payment_method"/>
+                                <div class="o_row">
+                                    <field name="payment_method"/>
+                                    <span>month</span>
+                                </div>
+                                <field name="next_payment_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

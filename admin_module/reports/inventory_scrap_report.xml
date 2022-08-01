@@ -1,0 +1,146 @@
+<odoo>
+    <record id="report_inventory_scrap" model="ir.actions.report">
+        <field name="name">Scrap Report From Action</field>
+        <field name="model">report.admin_module.template_report_scrap_ids</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">admin_module.template_report_scrap_ids</field>
+        <field name="report_file">admin_module.template_report_scrap_ids</field>
+    </record>
+
+
+    <template id="template_report_scrap_ids">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h3 align="center">الشؤون الادارية</h3>
+                            </strong>
+                            <strong>
+                                <h4 align="center">قسم الخدمات</h4>
+                            </strong>
+                            <strong>
+                                <h4>التخلص من الفائض</h4>
+                            </strong>
+                        </div>
+                        <h5>
+                            تقرير استخراج بقايا مواد التصنيع (scrap)
+                        </h5>
+                        <t t-if="info['from_date']">
+                            <strong>للفترة من:</strong>
+                            <span t-esc="info['from_date']"/>
+                        </t>
+                        <t t-if="info['to_date']">
+                            <strong>إلي:</strong>
+                            <span t-esc="info['to_date']"/>
+                        </t>
+                        <div>
+                            <t t-if="info['product']">
+                                <strong>للمنتج</strong>
+                                <span t-esc="info['product']"/>
+                            </t>
+                        </div>
+                        <br/>
+                    </div>
+                    <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <thead style="display:table-header-group">
+                            <tr style="text-align: center;">
+                                <td t-if="not info['product']" style=" border: 1px solid black;text-align: center;"
+                                    width="5%" class="text-center">
+                                    م
+                                </td>
+                                <td t-if="info['product']" style=" border: 1px solid black;text-align: center;"
+                                    width="15%"
+                                    class="text-center">التاريخ
+                                </td>
+                                <td t-if="not info['product']" style=" border: 1px solid black;text-align: center;"
+                                    width="15%"
+                                    class="text-center">المواد المستخرجة(الصنف)
+                                </td>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">وحدة القياس
+                                </td>
+<!--                                <td style=" border: 1px solid black;text-align: center;" width="15%"-->
+<!--                                    class="text-center">التجميع-->
+<!--                                </td>-->
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">الكمية
+                                </td>
+<!--                                <td style=" border: 1px solid black;text-align: center;" width="15%"-->
+<!--                                    class="text-center">النقل-->
+<!--                                </td>-->
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">ملاحظات
+                                </td>
+                            </tr>
+                        </thead>
+                        <t t-set="no" t-value="1"/>
+                        <t t-foreach="get_scrap" t-as="obj">
+                            <tr style="background-color:white;color:black;text-align: center;">
+                                <td t-if="not info['product']"
+                                    style="border: 1px solid black;position:relative;text-align:center">
+                                    <t t-esc="no"/>
+                                    <t t-set="no" t-value="no+1"/>
+                                </td>
+                                <td t-if="info['product']" style=" border: 1px solid black;text-align: center;"
+                                    class="text-center">
+                                    <t t-esc="obj['date_order']"/>
+                                </td>
+                                <td t-if=" not info['product']" style=" border: 1px solid black;text-align: center;"
+                                    class="text-center">
+                                    <t t-esc="obj['product']"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                    <t t-esc="obj['unit_product']"/>
+                                </td>
+<!--                                <td style=" border: 1px solid black;text-align: center;" class="text-center">-->
+<!--                                    &lt;!&ndash;                                    <t t-esc="obj['loan_amount']"/>&ndash;&gt;-->
+<!--                                </td>-->
+                                <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                    <t t-esc="obj['qty_product']"/>
+                                </td>
+<!--                                <td style=" border: 1px solid black;text-align: center;" class="text-center">-->
+<!--                                    &lt;!&ndash;                                    <t t-esc="obj['loan_type']"/>&ndash;&gt;-->
+<!--                                </td>-->
+                                <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                    <t t-esc="obj['note']"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <table dir="rtl" class="table" style="margin-top: 30%">
+                        <tr class="text-right">
+                            <td colspan="3"></td>
+                            <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                            <td colspan="3">مدير الشؤون الادارية</td>
+                        </tr>
+                        <tr class="text-right">
+                            <td colspan="3">الاسم</td>
+                            <td colspan="3">
+                                .............................
+                            </td>
+                            <td colspan="3">
+                                .............................
+                            </td>
+                        </tr>
+                        <tr class="text-right">
+                            <td colspan="3">التوقيع</td>
+                            <td colspan="3">.............................</td>
+                            <td colspan="3">.............................</td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+
+
+

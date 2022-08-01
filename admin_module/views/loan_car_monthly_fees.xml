@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--     car monthly fees tree view-->
+        <record id="car_fees_tree_view" model="ir.ui.view">
+            <field name="name">car.monthly.fees.tree</field>
+            <field name="model">car.monthly.fees</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+        <!--        car monthly fees form view-->
+        <record id="car_fees_form_view" model="ir.ui.view">
+            <field name="name">car.monthly.fees.form</field>
+            <field name="model">car.monthly.fees</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_approve2" string="Approve" type="object" states="approve"
+                                class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2"
+                                class="btn-primary"
+                                groups="admin_module.group_executive_manager"/>
+                        <button name="action_cancel" states="confirm,approve,approve2,done" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,approve2,done"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="doc_num" readonly="1"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <notebook>
+                            <page name="car monthly fees info" string="Car Monthly Fees Details">
+                                <field name="car_fees_ids">
+                                    <tree editable="bottom">
+                                        <field name="car_no"/>
+                                        <field name="total_contract"/>
+                                        <field name="warning_deduction"/>
+                                        <field name="Loans_deduction"/>
+                                        <field name="fuel_deduction"/>
+                                        <field name="other_deduction"/>
+                                        <field name="other_addition"/>
+                                        <field name="total_to_pay"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="car_no"/>
+                                            <div class="o_row">
+                                                <field name="total_contract"/>
+                                                <span>جنيه</span>
+                                            </div>
+                                            <field name="total_contract"/>
+                                            <field name="warning_deduction"/>
+                                            <field name="Loans_deduction"/>
+                                            <field name="fuel_deduction"/>
+                                            <field name="other_deduction"/>
+                                            <field name="other_addition"/>
+                                            <field name="total_to_pay"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

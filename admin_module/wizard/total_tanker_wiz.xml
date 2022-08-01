@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    total tanker wizard form view-->
+    <record id="total_tanker_wiz_view" model="ir.ui.view">
+        <field name="name">total.tanker.wiz.new</field>
+        <field name="model">total.tanker.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="tanker_type"/>
+                    <field name="contractor"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" class="btn-primary" type="object"
+                            data-hotkey="2"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="2"/>
+                </footer>
+            </form>
+
+        </field>
+    </record>
+</odoo>

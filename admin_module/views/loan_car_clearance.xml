@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    clearance_loan_car request tree view-->
+        <record id="clearance_loan_car_tree" model="ir.ui.view">
+            <field name="name">loan.car.clearance.tree</field>
+            <field name="model">loan.car.clearance</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--      clearance loan car form view-->
+        <record id="clearance_loan_car_form_view" model="ir.ui.view">
+            <field name="name">loan.car.clearance.form</field>
+            <field name="model">loan.car.clearance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_compute_deduction" string="Compute Deduction"
+                                class="oe_highlight" type="object"/>
+                        <!--                                groups="admin_module.group_admin_manager"/>-->
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_approve2" string="Approve" type="object" states="approve"
+                                class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2"
+                                class="btn-primary"
+                                groups="admin_module.group_executive_manager"/>
+                        <button name="action_cancel" states="confirm,approve,approve2,done" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,approve2,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                   <field name="car_no"/>
+                                <field name="loan_no"/>
+                                <field name="line"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="driver_contractor"/>
+                                <!--                                <field name="driver_name"/>-->
+                                <!--                                <field name="contractor"-->
+                                <!--                                       attrs="{'invisible': [('driver_name', '=', 'driver_name')]}"/>-->
+                            </group>
+                        </group>
+                        <group>
+                            <!--                            groups="admin_module.group_service_section_head"-->
+                            <group>
+                                <field name="loan_no"/>
+                                <field name="clearance_type" required="1"/>
+                                <field name="amount_to_cleared"
+                                       attrs="{'readonly':[('clearance_type','!=','partial')]}" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="loan_amount"/>
+                                <field name="remain_loan_amount"/>
+                                <field name="rem_amount_after_ded"
+                                       attrs="{'invisible':[('clearance_type','!=','partial')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <!--                            groups="admin_module.group_admin_manager"-->
+                            <page name="Deduction Details" string="Deduction Details">
+                                <field name="car_clear_ids">
+                                    <tree editable="bottom">
+                                        <field name="date"/>
+                                        <field name="amount"/>
+                                        <field name="paid"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="date"/>
+                                            <field name="amount"/>
+                                            <field name="paid"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

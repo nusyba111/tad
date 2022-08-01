@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--   compare sanitation form view-->
+    <record id="compare_sanitation_wiz_view" model="ir.ui.view">
+        <field name="name">compare.sanitation.wiz.new</field>
+        <field name="model">compare.sanitation.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="tanker_type"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" class="btn-primary" type="object"
+                            data-hotkey="2"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="2"/>
+                </footer>
+            </form>
+
+        </field>
+    </record>
+</odoo>

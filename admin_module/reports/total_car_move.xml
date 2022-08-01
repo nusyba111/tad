@@ -1,0 +1,118 @@
+<odoo>
+    <record id="report_total_cars_move" model="ir.actions.report">
+        <field name="name">Report Total Car move</field>
+        <field name="model">report.admin_module.template_total_cars_move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">admin_module.template_total_cars_move</field>
+        <field name="report_file">admin_module.template_total_cars_move</field>
+    </record>
+
+    <template id="template_total_cars_move">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h3 align="center">الشؤون الادارية</h3>
+                            </strong>
+                            <strong>
+                                <h4 align="center">قسم الخدمات</h4>
+                            </strong>
+
+                            <strong>
+                                <h4>اجمالي حركة العربات</h4>
+                            </strong>
+                        </div>
+                        <t t-if="info['from_date']">
+                            <strong>للفترة من:</strong>
+                            <span t-esc="info['from_date']"/>
+                        </t>
+                        <t t-if="info['to_date']">
+                            <strong>إلي:</strong>
+                            <span t-esc="info['to_date']"/>
+                        </t>
+                        <br/>
+                    </div>
+
+                    <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <thead style="display:table-header-group">
+                            <tr style="text-align: center;">
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">اجمالي الحضور
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">اجمالي الغياب
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">اجمالي السلفيات
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                    class="text-center">اجمالي الانذارات
+                                </td>
+                            </tr>
+                        </thead>
+                        <t t-if="info['car'] == False"/>
+                        <t t-foreach="get_total_car_move" t-as="obj">
+                            <td style="background-color:white;color:black;text-align: center;">
+                                <!--                            <tr style=" border: 1px solid black;text-align: center;" class="text-center">-->
+
+                                <tr>
+                                    <t t-esc="obj['att_count']"/>
+                                </tr>
+                                <!--                            </tr>-->
+                                <!--                            </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td style=" border: 1px solid black;text-align: center;" class="text-center">-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                                <!--                                <td style=" border: 1px solid black;text-align: center;" class="text-center">-->
+                                <!--                                </td>-->
+                                <tr style=" border: 1px solid black;text-align: center;" class="text-center">
+<!--                                    <td>-->
+<!--                                        <t t-esc="obj['total_warning']"/>-->
+<!--                                    </td>-->
+                                </tr>
+                            </td>
+                        </t>
+                        <br/>
+                        <br/>
+                        <table dir="rtl" class="table" style="margin-top: 30%">
+                            <tr class="text-right">
+                                <td colspan="3"></td>
+                                <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                                <td colspan="3">مدير الشؤون الادارية</td>
+                            </tr>
+                            <tr class="text-right">
+                                <td colspan="3">الاسم</td>
+                                <td colspan="3">
+                                    .............................
+                                </td>
+                                <td colspan="3">
+                                    .............................
+                                </td>
+                            </tr>
+                            <tr class="text-right">
+                                <td colspan="3">التوقيع</td>
+                                <td colspan="3">.............................</td>
+                                <td colspan="3">.............................</td>
+                            </tr>
+                        </table>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+
+
+

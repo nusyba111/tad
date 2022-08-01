@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="adding_worker_transport_line_sequence" model="ir.sequence">
+            <field name="name">sequence_name</field>
+            <field name="code">adding.worker.to.transport.line</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="worker_transport_line_request_form" model="ir.ui.view">
+            <field name="name">adding.worker.to.transport.line.form</field>
+            <field name="model">adding.worker.to.transport.line</field>
+            <field name="arch" type="xml">
+                <form string="Adding Worker to Transport Line">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_done" string="Approve" type="object" states="approve" class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_cancel" states="confirm,done" type="object" string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num"/>
+                                <field name="requester"/>
+                                <field name="addition_type"/>
+                                <field name="previous_address"
+                                       attrs="{'invisible': [ ('addition_type','!=','change_address')]}"/>
+                            </group>
+                            <group>
+                                <field name="date_time"/>
+                                <field name="department"/>
+                                <field name="line_name" attrs="{'invisible': [ ('addition_type','!=','new_worker')]}"/>
+                                <field name="line_select"
+                                       attrs="{'invisible': [ ('addition_type','!=','change_address')]}"/>
+                                <field name="current_address"
+                                       attrs="{'invisible': [ ('addition_type','!=','change_address')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Employee Transport List" name="employee_transport_list">
+                                <field name="adding_transport_list_ids" nolabel="1">
+                                    <tree editable="top" create="1" delete="1" multi_edit="1" string="Injured Workers">
+                                        <field name="employee" required="1"/>
+                                        <field name="department" required="1"/>
+                                        <field name="position" required="1"/>
+                                        <field name="address" required="1"/>
+                                        <field name="phone_number" required="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="transportation_line_request_tree" model="ir.ui.view">
+            <field name="name">adding.worker.to.transport.line.tree</field>
+            <field name="model">adding.worker.to.transport.line</field>
+            <field name="arch" type="xml">
+                <tree string="Adding Worker to Transport Line">
+                    <field name="doc_num"/>
+                    <field name="requester"/>
+                    <field name="department"/>
+                    <field name="addition_type"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

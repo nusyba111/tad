@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <record id="view_wizard_ledgers_report" model="ir.ui.view">
+      <field name="name">ledger</field>
+      <field name="model">ledger.report</field>
+      <field name="arch" type="xml">
+        <form>
+			<group>
+                <field name="from_date" />
+                <field name="to_date" />
+             </group>
+          <footer>
+            <button name = "print_report"  string="Print"  type="object" class="oe_highlight"/> or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="view_ledger_report_excel">
+            <field name="name">view.ledger.report.excel</field>
+            <field name="model">ledger.report.excel</field>
+            <field name="arch" type="xml">
+                <form string="File to Downloads">
+                        <field name="name" invisible="1"/>
+                        <field name="file_download" filename="name"/>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_view_ledger_reports" model="ir.actions.act_window">
+      <field name="name">Ledger</field>
+      <field name="res_model">ledger.report</field>
+<!--      <field name="view_type">form</field>-->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_wizard_ledgers_report"/>
+      <field name="target">new</field>
+    </record>
+
+     <menuitem action="action_view_ledger_reports" name="Ledger Report" id="menu_action_view_ledger_report_report" parent="report_root"/>
+  </data>
+</openerp>

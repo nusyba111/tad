@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--     Loan Car Request Report-->
+    <report
+            id="report_loan_car_request"
+            model="loan.car"
+            report_type="qweb-pdf"
+            string="Loan Car Request Report"
+            name="admin_module.template_loan_car_request"
+            file="admin_module.template_loan_car_request"/>
+
+    <template id="template_loan_car_request">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h2 align="center">الشؤون الادارية</h2>
+                            </strong>
+                            <strong>
+                                <h3 align="center">قسم الخدمات</h3>
+                            </strong>
+
+                            <strong>
+                                <h4>طلب سلفية عربة</h4>
+                            </strong>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div>
+                    <table dir="rtl" width="100%">
+                        <tr style="text-align: center;">
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">رقم التسلسل:
+                                <td style="text-align: right;" width="15%" colspan="1">
+                                    <t t-esc="docs.doc_num"/>
+                                </td>
+                            </td>
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">
+                                <font color="#FFFFFF">dsdsjkkkjljhzlkjxchkjlhlckjlhvsdv</font>
+                            </td>
+                            <td style="text-align: right;" width="15%"
+                                class="text-right">التاريخ:
+                                <td style="text-align: left;" width="15%">
+                                    <t t-esc="docs.date"/>
+                                </td>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    </br>
+                </div>
+                <br>
+                </br>
+                <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                    <thead style="display:table-header-group">
+                        <tr style="text-align: center;">
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">رقم العربة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">نوع السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">إسم السائق/المتعاقد
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">جهة الترحيل
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">مدة الخصم
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">مبلغ السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">سبب السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="35%"
+                                class="text-center">تاريخ بدء الخصم
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <t t-foreach="docs" t-as="doc">
+                            <!--                            <t t-foreach="doc.employee_transport_list_ids" t-as="line">-->
+                            <tr>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.car_no.name"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_type"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.contractor.name"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.line.destination"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.deduction_period"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_amount"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_reasons.loan_reasons"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="35%"
+                                    class="text-center">
+                                    <t t-esc="doc.ded_start_date"/>
+                                </td>
+                            </tr>
+                            <!--                            </t>-->
+                        </t>
+                    </tbody>
+                </table>
+                <table dir="rtl" class="table" style="margin-top: 30%">
+                    <tr class="text-right">
+                        <td colspan="3"></td>
+                        <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                        <td colspan="3">مدير الشؤون الادارية</td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">الاسم</td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">التوقيع</td>
+                        <td colspan="3">.............................</td>
+                        <td colspan="3">.............................</td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+<!--   Stop Loan Car Request Report -->
+    <report
+            id="report_stop_loan_car_request"
+            model="loan.car.stop"
+            report_type="qweb-pdf"
+            string="Stop Loan Car Request Report"
+            name="admin_module.template_stop_loan_car_request"
+            file="admin_module.template_stop_loan_car_request"/>
+
+    <template id="template_stop_loan_car_request">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h2 align="center">الشؤون الادارية</h2>
+                            </strong>
+                            <strong>
+                                <h3 align="center">قسم الخدمات</h3>
+                            </strong>
+
+                            <strong>
+                                <h4>طلب إيقاف سلفية عربة</h4>
+                            </strong>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div>
+                    <table dir="rtl" width="100%">
+                        <tr style="text-align: center;">
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">رقم التسلسل:
+                                <td style="text-align: right;" width="15%" colspan="1">
+                                    <t t-esc="docs.doc_num"/>
+                                </td>
+                            </td>
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">
+                                <font color="#FFFFFF">dsdsjkkkjljhzlkjxchkjlhlckjlhvsdv</font>
+                            </td>
+                            <td style="text-align: right;" width="15%"
+                                class="text-right">التاريخ:
+                                <td style="text-align: left;" width="15%">
+                                    <t t-esc="docs.date"/>
+                                </td>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    </br>
+                </div>
+                <br>
+                </br>
+                <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                    <thead style="display:table-header-group">
+                        <tr style="text-align: center;">
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">رقم السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">رقم العربة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">إسم السائق/المتعاقد
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">جهة الترحيل
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">مبلغ السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">الاستقطاع الشهري
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">المبلغ المتبقي
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">أسباب إيقاف السلفية
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <t t-foreach="docs" t-as="doc">
+                            <!--                            <t t-foreach="doc.employee_transport_list_ids" t-as="line">-->
+                            <tr>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_no.doc_num"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.car_no.name"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.driver_contractor"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.line.destination"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_amount_stop"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.monthly_ded"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.amount_after_stop"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.stop_loan_reason"/>
+                                </td>
+                            </tr>
+                            <!--                            </t>-->
+                        </t>
+                    </tbody>
+                </table>
+                <table dir="rtl" class="table" style="margin-top: 30%">
+                    <tr class="text-right">
+                        <td colspan="3"></td>
+                        <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                        <td colspan="3">مدير الشؤون الادارية</td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">الاسم</td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">التوقيع</td>
+                        <td colspan="3">.............................</td>
+                        <td colspan="3">.............................</td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+<!--    Loan Car Clearance Report-->
+    <report
+            id="report_clearance_loan_car_request"
+            model="loan.car.clearance"
+            report_type="qweb-pdf"
+            string="Loan Car Clearance Report"
+            name="admin_module.template_clearance_loan_car_request"
+            file="admin_module.template_clearance_loan_car_request"/>
+
+    <template id="template_clearance_loan_car_request">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h2 align="center">الشؤون الادارية</h2>
+                            </strong>
+                            <strong>
+                                <h3 align="center">قسم الخدمات</h3>
+                            </strong>
+
+                            <strong>
+                                <h4>تصفية سلفية عربة</h4>
+                            </strong>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div>
+                    <table dir="rtl" width="100%">
+                        <tr style="text-align: center;">
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">رقم التسلسل:
+                                <td style="text-align: right;" width="15%" colspan="1">
+                                    <t t-esc="docs.doc_num"/>
+                                </td>
+                            </td>
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">
+                                <font color="#FFFFFF">dsdsjkkkjljhzlkjxchkjlhlckjlhvsdv</font>
+                            </td>
+                            <td style="text-align: left;" width="15%"
+                                class="text-left">التاريخ:
+                                <td style="text-align: right;" width="15%">
+                                    <t t-esc="docs.date"/>
+                                </td>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    </br>
+                </div>
+                <br>
+                </br>
+                <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                    <thead style="display:table-header-group">
+                        <tr style="text-align: center;">
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">رقم السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">رقم العربة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">إسم السائق/المتعاقد
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">جهة الترحيل
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">مبلغ السلفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">نوع التصفية
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">المبلغ المتبقي
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">المبلغ المراد تصفيته
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">المبلغ المتبقي بعد الخصم
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <t t-foreach="docs" t-as="doc">
+                            <!--                            <t t-foreach="doc.employee_transport_list_ids" t-as="line">-->
+                            <tr>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_no.doc_num"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.car_no.name"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.driver_contractor"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.line.destination"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.loan_amount"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.clearance_type"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.remain_loan_amount"/>
+                                </td>
+                                <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.amount_to_cleared"/>
+                                </td>
+                                 <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                    class="text-center">
+                                    <t t-esc="doc.rem_amount_after_ded"/>
+                                </td>
+                            </tr>
+                            <!--                            </t>-->
+                        </t>
+                    </tbody>
+                </table>
+                <table dir="rtl" class="table" style="margin-top: 30%">
+                    <tr class="text-right">
+                        <td colspan="3"></td>
+                        <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                        <td colspan="3">مدير الشؤون الادارية</td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">الاسم</td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">التوقيع</td>
+                        <td colspan="3">.............................</td>
+                        <td colspan="3">.............................</td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+</odoo>

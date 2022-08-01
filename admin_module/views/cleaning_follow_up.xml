@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--      cleaning follow up tree view-->
+        <record id="clean_follow_tree_view" model="ir.ui.view">
+            <field name="name">clean.follow.tree</field>
+            <field name="model">clean.follow</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+        <!--        cleaning follow up form view-->
+        <record id="clean_follow_form_view" model="ir.ui.view">
+            <field name="name">clean.follow.form</field>
+            <field name="model">clean.follow</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_security"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_cancel" states="confirm,approve,done" type="object" string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                <field name="time" widget="float_time"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="cleaning follow up info" string="Cleaning Follow Information">
+                                <field name="clean_info_ids">
+                                    <tree editable="bottom">
+                                        <field name="dep_area"/>
+                                        <field name="tools_used" widget="many2many_tags"/>
+                                        <field name="rec_bin_emp"/>
+                                        <field name="res_of_clean"/>
+                                        <field name="res_follow_up"/>
+                                        <field name="note"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="dep_area"/>
+                                            <field name="tools_used"/>
+                                            <field name="rec_bin_emp"/>
+                                            <field name="res_of_clean"/>
+                                            <field name="res_follow_up"/>
+                                            <field name="note"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="car_contract_tree" model="ir.ui.view">
+            <field name="name">car.contract.tree</field>
+            <field name="model">car.contract</field>
+            <field name="arch" type="xml">
+                <tree string="Car Contract">
+                    <field name="doc_num"/>
+                    <!--                    <field name="date"/>-->
+                </tree>
+            </field>
+        </record>
+
+        car contract form view
+        <record id="car_contract_form" model="ir.ui.view">
+            <field name="name">car.contract.form</field>
+            <field name="model">car.contract</field>
+            <field name="arch" type="xml">
+                <form string="Stop Loan Car">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_done" string="Approve" type="object" states="approve" class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_cancel" states="confirm,approve,done" type="object" string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                <field name="car_no"/>
+                                <field name="line"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="driver_name"/>
+                                <field name="monthly_fees"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

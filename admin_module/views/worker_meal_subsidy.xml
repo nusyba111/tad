@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    worker meal subsidy tree view-->
+        <record id="worker_meal_subsidy_tree" model="ir.ui.view">
+            <field name="name">worker.meal.subsidy.tree</field>
+            <field name="model">worker.meal.subsidy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_num"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--       worker meal subsidy form view-->
+        <record id="worker_meal_subsidy_form" model="ir.ui.view">
+            <field name="name">worker.meal.subsidy.form</field>
+            <field name="model">worker.meal.subsidy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft"
+                                class="btn-primary"
+                                groups="admin_module.group_dep_S_H"/>
+                        <button name="action_approve" string="Approve" type="object" states="confirm"
+                                class="btn-primary"
+                                groups="admin_module.group_service_section_head"/>
+                        <button name="action_approve2" string="Approve" type="object" states="approve"
+                                class="btn-primary"
+                                groups="admin_module.group_admin_manager"/>
+                        <button name="action_done" string="Approve" type="object" states="approve2" class="btn-primary"
+                                groups="admin_module.group_executive_manager"/>
+                        <button name="action_cancel" states="confirm,approve,approve2,done" type="object"
+                                string="Cancel"
+                                class="btn-primary"/>
+                        <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                                class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,approve2,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doc_num" readonly="1"/>
+                                <field name="requester"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="req_department"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="Subsidy Meal Info" string="Workers Meal Subsidy list">
+                                <field name="subsidy_meal_info_ids">
+                                    <tree editable="bottom">
+                                        <field name="employee"/>
+                                        <field name="dep"/>
+                                        <field name="job_position"/>
+                                        <field name="subsidy_amount"
+                                               groups="admin_module.group_service_section_head"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="employee"/>
+                                            <field name="dep"/>
+                                            <field name="job_position"/>
+                                            <group>
+                                                <field name="subsidy_amount"
+                                                       groups="admin_module.group_service_section_head"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer oe_right" col="2">
+                            <div class="oe_subtotal_footer_separator oe_inline">
+                                <label for="subsidy_total"/>
+                            </div>
+                            <field name="subsidy_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                   widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="reasons"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

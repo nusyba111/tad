@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--      cleaning follow up tree view-->
+        <record id="clean_tool_tree_view" model="ir.ui.view">
+            <field name="name">clean.tools</field>
+            <field name="model">clean.tools</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tool"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

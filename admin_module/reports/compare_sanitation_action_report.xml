@@ -1,0 +1,160 @@
+<odoo>
+    <record id="report_sanitation_id" model="ir.actions.report">
+        <field name="name">Sanitation Report From Action</field>
+        <field name="model">report.admin_module.template_report_sanitation_ids</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">admin_module.template_report_sanitation_ids</field>
+        <field name="report_file">admin_module.template_report_sanitation_ids</field>
+    </record>
+    <template id="template_report_sanitation_ids">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h3 align="center">الشؤون الادارية</h3>
+                            </strong>
+                            <strong>
+                                <h4 align="center">قسم الخدمات</h4>
+                            </strong>
+
+                            <strong>
+                                <h4>مقارنة متابعة الصرف الصحي</h4>
+                            </strong>
+                            <strong>
+                                <h4>بالشهور</h4>
+                            </strong>
+                        </div>
+                        <!--                        <t t-if="info['from_date']">-->
+                        <!--                            <strong>من :</strong>-->
+                        <!--                            <span t-esc="info['month']"/>-->
+                        <!--                        </t>-->
+                        <!--                        <t t-if="info['to_date']">-->
+                        <!--                            <strong>إلى :</strong>-->
+                        <!--                            <span t-esc="info['f_month']"/>-->
+                        <!--            </t>-->
+                        <br/>
+                    </div>
+                    <br>
+                    </br>
+                    <br>
+                    </br>
+                    <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <t t-set="i" t-value="0"/>
+                        <thead style="display:table-header-group">
+                            <tr style="text-align: center;">
+                                <td style=" border: 1px solid black;text-align: center;" rowspan="2"
+                                    width="15%"
+                                    class="text-center">البلاغات
+                                </td>
+                                <td style=" border: 1px solid black;text-align: center;" width="15%" colspan="100">
+                                    الشهور
+                                </td>
+                                <tr>
+                                    <t t-foreach="get_months" t-as="month">
+                                        <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                            t-esc="month"/>
+                                    </t>
+                                </tr>
+
+                            </tr>
+                        </thead>
+                        <!-- ############################### for company only-->
+                        <tbody>
+                            <t t-if="info['tanker_type'] == 'company'">
+                                <tr>
+                                    <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                        خاص بالشركة
+                                        <t t-esc="info['tanker_type']"/>
+                                    </td>
+                                    <t t-foreach="get_sanitation_company" t-as="obj">
+                                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                            <t t-esc="obj['total_company']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                            <!-- ############################### for commercial only-->
+                            <t t-if="info['tanker_type'] == 'commercial'">
+                                <tr>
+                                    <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                        تجاري
+                                        <t t-esc="info['tanker_type']"/>
+                                    </td>
+                                    <t t-foreach="get_sanitation_commercial" t-as="obj">
+                                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                            <t t-esc="obj['total_commercial']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                            <!-- ############################### for all -->
+                            <t t-if="info['tanker_type'] == False">
+                                <tr>
+                                    <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                        خاص بالشركة
+                                    </td>
+                                    <t t-foreach="get_sanitation_company" t-as="obj">
+                                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                            <t t-esc="obj['total_company']"/>
+                                        </td>
+                                    </t>
+                                    <tr>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                        تجاري
+                                    </td>
+                                    <t t-foreach="get_sanitation_commercial" t-as="obj">
+                                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                            <t t-esc="obj['total_commercial']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                        الإجمالي
+                                    </td>
+                                    <t t-foreach="get_total" t-as="obj">
+                                        <td style=" border: 1px solid black;text-align: center;" class="text-center">
+                                            <t t-esc="obj['total']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <table dir="rtl" class="table" style="margin-top: 30%">
+                        <tr class="text-right">
+                            <td colspan="3"></td>
+                            <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                            <td colspan="3">مدير الشؤون الادارية</td>
+                        </tr>
+                        <tr class="text-right">
+                            <td colspan="3">الاسم</td>
+                            <td colspan="3">
+                                .............................
+                            </td>
+                            <td colspan="3">
+                                .............................
+                            </td>
+                        </tr>
+                        <tr class="text-right">
+                            <td colspan="3">التوقيع</td>
+                            <td colspan="3">.............................</td>
+                            <td colspan="3">.............................</td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+
+
+

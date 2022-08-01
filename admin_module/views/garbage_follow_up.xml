@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--     Garbage follow-up tree view-->
+    <record id="gar_follow_tree_view" model="ir.ui.view">
+        <field name="name">garbage.follow.tree</field>
+        <field name="model">garbage.follow</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="doc_num"/>
+            </tree>
+        </field>
+    </record>
+    <!--        Garbage follow_up form view-->
+    <record id="gar_follow_form_view" model="ir.ui.view">
+        <field name="name">garbage.follow.form</field>
+        <field name="model">garbage.follow</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" states="draft"
+                            class="btn-primary"/>
+                    <button name="action_approve" string="Approve" type="object" states="confirm"
+                            class="btn-primary"
+                            groups="admin_module.group_service_section_head"/>
+                    <button name="action_cancel" states="confirm,approve" type="object"
+                            string="Cancel"
+                            class="btn-primary"/>
+                    <button name="action_draft" states="cancel" type="object" string="Set to Draft"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="doc_num" readonly="1"/>
+                            <field name="collection_date"/>
+                            <field name="car_no"/>
+                            <field name="time_in" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="collection_count"/>
+                            <field name="driver_name"/>
+                            <field name="time_out" widget="float_time"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

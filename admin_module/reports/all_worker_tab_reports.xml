@@ -1,0 +1,282 @@
+<odoo>
+
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+    <!--   worker meal Report-->
+    <report
+            id="report_worker_meals_request"
+            model="worker.meal"
+            report_type="qweb-pdf"
+            string="Worker Meal Report"
+            name="admin_module.template_worker_meals"
+            file="admin_module.template_worker_meals"/>
+
+    <template id="template_worker_meals">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h2 align="center">الشؤون الادارية</h2>
+                            </strong>
+                            <strong>
+                                <h3 align="center">قسم الخدمات</h3>
+                            </strong>
+
+                            <strong>
+                                <h4>تقرير وجبات العمال</h4>
+                            </strong>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div>
+                    <table dir="rtl" width="100%">
+                        <tr style="text-align: center;">
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">رقم التسلسل:
+                                <td style="text-align: right;" width="15%" colspan="1">
+                                    <t t-esc="docs.doc_num"/>
+                                </td>
+                            </td>
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">
+                                <font color="#FFFFFF">dsdsjkkkjljhzlkjxchkjlhlckjlhvsdv</font>
+                            </td>
+                            <td style="text-align: left;" width="15%"
+                                class="text-left">التاريخ:
+                                <td style="text-align: right;" width="15%">
+                                    <t t-esc="docs.date"/>
+                                </td>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    </br>
+                </div>
+                <br>
+                </br>
+                <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                    <thead style="display:table-header-group">
+                        <tr style="text-align: center;">
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">القسم
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">العمالة الثابتة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">العمالة المؤقتة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">الإجمالي الكلي
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">ملاحظات
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody dir="rtl" width="100%" style=" border: 1px solid black; ">
+                        <t t-foreach="docs" t-as="doc">
+                            <t t-foreach="doc.worker_meal_ids" t-as="line">
+                                <tr>
+                                    <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                        class="text-center">
+                                        <t t-esc="line.dep"/>
+                                    </td>
+                                    <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                        class="text-center">
+                                        <t t-esc="line.total_per"/>
+                                    </td>
+                                    <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                        class="text-center">
+                                        <t t-esc="line.total_temp"/>
+                                    </td>
+                                    <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                        class="text-center">
+                                        <t t-esc="line.total_worker"/>
+                                    </td>
+                                    <td style=" border: 1px solid black;text-align: right;" width="15%"
+                                        class="text-center">
+                                        <t t-esc="line.notes"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+                <table dir="rtl" class="table" style="margin-top: 30%">
+                    <tr class="text-right">
+                        <td colspan="3"></td>
+                        <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                        <td colspan="3">مدير الشؤون الادارية</td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">الاسم</td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">التوقيع</td>
+                        <td colspan="3">.............................</td>
+                        <td colspan="3">.............................</td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+    <!--    #################################################################################################-->
+    <!--   worker meal subsidy Report-->
+    <report
+            id="report_worker_meals_subsidy"
+            model="worker.meal.subsidy"
+            report_type="qweb-pdf"
+            string="Worker Meal Report"
+            name="admin_module.template_worker_meals_subsidy"
+            file="admin_module.template_worker_meals_subsidy"/>
+
+    <template id="template_worker_meals_subsidy">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-0.1%">
+                    <br/>
+                    <div style="text-align:center">
+                        <t t-set="info" t-value="get_header_info"/>
+                        <div>
+                            <strong>
+                                <h2 align="center">الشؤون الادارية</h2>
+                            </strong>
+                            <strong>
+                                <h3 align="center">قسم الخدمات</h3>
+                            </strong>
+
+                            <strong>
+                                <h4>تقرير دعم وجبات العمال</h4>
+                            </strong>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div>
+                    <table dir="rtl" width="100%">
+                        <tr style="text-align: center;">
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">رقم التسلسل:
+                                <td style="text-align: right;" width="15%" colspan="1">
+                                    <t t-esc="docs.doc_num"/>
+                                </td>
+                            </td>
+                            <td style="text-align: center;" width="15%"
+                                class="text-center">
+                                <font color="#FFFFFF">dsdsjkkkjljhzlkjxchkjlhlckjlhvsdv</font>
+                            </td>
+                            <td style="text-align: left;" width="15%"
+                                class="text-left">التاريخ:
+                                <td style="text-align: right;" width="15%">
+                                    <t t-esc="docs.date"/>
+                                </td>
+                            </td>
+                            <td style="text-align: left;" width="15%"
+                                class="text-left">مقدم الطلب:
+                                <td style="text-align: right;" width="15%">
+                                    <t t-esc="docs.requester"/>
+                                </td>
+                            </td>
+                            <td style="text-align: left;" width="15%"
+                                class="text-left">اﻹدارة الطالبة:
+                                <td style="text-align: right;" width="15%">
+                                    <t t-esc="docs.req_department"/>
+                                </td>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    </br>
+                </div>
+                <br>
+                </br>
+                <table dir="rtl" width="100%" style=" border: 1px solid black; ">
+                    <thead style="display:table-header-group">
+                        <tr style="text-align: center;">
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">القسم
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">العمالة الثابتة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">العمالة المؤقتة
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">الإجمالي الكلي
+                            </td>
+                            <td style=" border: 1px solid black;text-align: center;" width="15%"
+                                class="text-center">ملاحظات
+                            </td>
+                        </tr>
+                    </thead>
+<!--                    <tbody dir="rtl" width="100%" style=" border: 1px solid black; ">-->
+<!--                        <t t-foreach="docs" t-as="doc">-->
+<!--                            <t t-foreach="doc.worker_meal_ids" t-as="line">-->
+<!--                                <tr>-->
+<!--                                    <td style=" border: 1px solid black;text-align: right;" width="15%"-->
+<!--                                        class="text-center">-->
+<!--                                        <t t-esc="line.dep"/>-->
+<!--                                    </td>-->
+<!--                                    <td style=" border: 1px solid black;text-align: right;" width="15%"-->
+<!--                                        class="text-center">-->
+<!--                                        <t t-esc="line.total_per"/>-->
+<!--                                    </td>-->
+<!--                                    <td style=" border: 1px solid black;text-align: right;" width="15%"-->
+<!--                                        class="text-center">-->
+<!--                                        <t t-esc="line.total_temp"/>-->
+<!--                                    </td>-->
+<!--                                    <td style=" border: 1px solid black;text-align: right;" width="15%"-->
+<!--                                        class="text-center">-->
+<!--                                        <t t-esc="line.total_worker"/>-->
+<!--                                    </td>-->
+<!--                                    <td style=" border: 1px solid black;text-align: right;" width="15%"-->
+<!--                                        class="text-center">-->
+<!--                                        <t t-esc="line.notes"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+<!--                        </t>-->
+<!--                    </tbody>-->
+                </table>
+                <table dir="rtl" class="table" style="margin-top: 30%">
+                    <tr class="text-right">
+                        <td colspan="3"></td>
+                        <td colspan="3">المشرف الاداري (رئيس قسم الخدمات)</td>
+                        <td colspan="3">مدير الشؤون الادارية</td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">الاسم</td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                        <td colspan="3">
+                            .............................
+                        </td>
+                    </tr>
+                    <tr class="text-right">
+                        <td colspan="3">التوقيع</td>
+                        <td colspan="3">.............................</td>
+                        <td colspan="3">.............................</td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+</odoo>

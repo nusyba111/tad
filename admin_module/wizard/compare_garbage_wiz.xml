@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--   garbage.follow.wiz wizard form view-->
+    <record id="garbage_follow_wiz_view" model="ir.ui.view">
+        <field name="name">garbage.follow.wiz.new</field>
+        <field name="model">garbage.follow.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="2">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" class="btn-primary" type="object"
+                            data-hotkey="2"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="2"/>
+                </footer>
+            </form>
+
+        </field>
+    </record>
+</odoo>
