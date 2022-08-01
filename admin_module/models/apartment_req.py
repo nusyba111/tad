@@ -11,7 +11,7 @@ class ApartRentReq(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', ]
 
     doc_num = fields.Char(string='Doc No', )
-    date = fields.Date(string='Date')
+    date = fields.Date(string='Dat')
     requester = fields.Many2one('hr.employee', string='requester')
     requester_dep = fields.Char(string='Requester Department',
                                 related='requester.department_id.name')
